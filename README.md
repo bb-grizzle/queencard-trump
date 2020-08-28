@@ -6,7 +6,6 @@
   - [x] global style
   - [x] theme
   - [x] media
-- [ ] favicon
+- [x] favicon
 - [ ] head / meta
-- [ ] page setting
 - [x] 404
