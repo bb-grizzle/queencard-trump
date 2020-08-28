@@ -2,7 +2,8 @@ import baseStyled, { css, ThemedStyledInterface } from "styled-components";
 
 const color = {
 	black: "black",
-	white: "white"
+	white: "white",
+	bg: "F5F5F4"
 };
 
 const theme = {

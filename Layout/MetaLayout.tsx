@@ -5,7 +5,7 @@ const HeadComponent: React.FC = ({ children }) => {
 	return (
 		<>
 			<Head>
-				<title>타이틀</title>
+				<title>Seohee An</title>
 				<meta name="description" content={headData.description} />
 
 				<meta property="og:title" content={headData.title} />

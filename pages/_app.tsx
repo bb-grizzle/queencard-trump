@@ -1,17 +1,20 @@
 import { AppProps } from "next/app";
-import HeadComponent from "../src/Layout/HeadLayout";
-import GlobalStyles from "../src/Styles/global-styles";
+import MetaLayout from "../Layout/MetaLayout";
+import GlobalStyles from "../Styles/global-styles";
 import { ThemeProvider } from "styled-components";
-import theme from "../src/Styles/theme";
+import theme from "../Styles/theme";
+import HeaderLayout from "../Layout/HeaderLayout";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
-		<HeadComponent>
+		<MetaLayout>
 			<GlobalStyles />
 			<ThemeProvider theme={theme}>
-				<Component {...pageProps} />
+				<HeaderLayout>
+					<Component {...pageProps} />
+				</HeaderLayout>
 			</ThemeProvider>
-		</HeadComponent>
+		</MetaLayout>
 	);
 }
 
