@@ -1,20 +1,21 @@
 {
-  "name": "seoseohee-front",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "next": "9.5.2",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
-  },
-  "devDependencies": {
-    "@types/node": "^14.6.1",
-    "@types/react": "^16.9.48",
-    "typescript": "^4.0.2"
-  }
+	"name": "seoseohee-front",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "cross-env NODE_PATH=src next dev",
+		"build": "cross-env NODE_PATH=src next build",
+		"start": "next start"
+	},
+	"dependencies": {
+		"next": "9.5.2",
+		"react": "16.13.1",
+		"react-dom": "16.13.1",
+		"styled-components": "^5.1.1"
+	},
+	"devDependencies": {
+		"@types/node": "^14.6.1",
+		"@types/react": "^16.9.48",
+		"typescript": "^4.0.2"
+	}
 }
