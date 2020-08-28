@@ -2,11 +2,11 @@
 
 ## todo
 
-- [ ] styled component
-  - [ ] global style
-  - [ ] theme
-  - [ ] media
+- [x] styled component
+  - [x] global style
+  - [x] theme
+  - [x] media
 - [ ] favicon
 - [ ] head / meta
 - [ ] page setting
-- [ ] 404
+- [x] 404

@@ -1,6 +1,15 @@
+import styled from "styled-components";
+
+const Test = styled.p`
+	color: red;
+	background-color: black;
+	width: 400px;
+	height: 400px;
+`;
+
 const test = (props) => {
 	console.log(props);
-	return <>test</>;
+	return <Test>test</Test>;
 };
 
 export const getStaticProps = () => {
