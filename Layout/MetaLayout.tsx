@@ -7,7 +7,7 @@ const HeadComponent: React.FC = ({ children }) => {
 			<Head>
 				<title>Seohee An</title>
 				<meta name="description" content={headData.description} />
-				<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet"></link>
+				<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet"></link>
 
 				<meta property="og:title" content={headData.title} />
 				<meta property="og:site_name" content={headData.title} />

@@ -1,5 +1,5 @@
-const index = () => {
-	return <>home</>;
+const work = () => {
+	return <>work</>;
 };
 
-export default index;
+export default work;
