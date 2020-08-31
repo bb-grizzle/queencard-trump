@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>icon/arrow/left</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon/arrow/left" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M10.017767,12 L16.6338835,5.95097918 C17.1220388,5.5046657 17.1220388,4.78104858 16.6338835,4.33473511 C16.1457281,3.88842163 15.3542719,3.88842163 14.8661165,4.33473511 L7.36611652,11.191878 C6.87796116,11.6381914 6.87796116,12.3618086 7.36611652,12.808122 L14.8661165,19.6652649 C15.3542719,20.1115784 16.1457281,20.1115784 16.6338835,19.6652649 C17.1220388,19.2189514 17.1220388,18.4953343 16.6338835,18.0490208 L10.017767,12 Z" id="Path" fill="#686868"></path>
+    </g>
+</svg>
