@@ -11,9 +11,7 @@
 		"next": "9.5.2",
 		"react": "16.13.1",
 		"react-dom": "16.13.1",
-		"react-measure": "^2.3.0",
 		"react-motion": "^0.5.2",
-		"react-sizeme": "^2.6.12",
 		"styled-components": "^5.1.1"
 	},
 	"devDependencies": {

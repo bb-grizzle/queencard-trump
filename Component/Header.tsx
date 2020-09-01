@@ -5,9 +5,15 @@ import { menu } from "../Data/menu";
 import Link from "next/link";
 import { useRouter } from "next/dist/client/router";
 import { useEffect, useState } from "react";
+import media from "../Styles/media";
+import useSize from "../Hook/useSize";
 
 const HeaderWrapper = styled.header`
 	height: 120px;
+
+	@media ${media.tablet} {
+		height: 60px;
+	}
 `;
 
 const Inner = styled.div`
@@ -16,7 +22,7 @@ const Inner = styled.div`
 	height: 100%;
 `;
 
-const Gnb = styled.ul`
+const Gnb = styled.ul<{ isMenuClick: boolean }>`
 	height: 100%;
 	display: flex;
 	position: absolute;
@@ -30,6 +36,21 @@ const Gnb = styled.ul`
 
 	clip-path: polygon(0 0, 0 0, 0px 100%, 0 100%);
 	transition: ${(props) => props.theme.transition.default};
+
+	@media ${media.tablet} {
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 100%;
+		flex-direction: column;
+		align-items: flex-start;
+		padding-top: 4rem;
+		font-size: 24px;
+		transform: ${(props) => (!props.isMenuClick ? "translateY(-100%);" : "translateY(0%);")};
+		transition-duration: 0.8s;
+		transition-timing-function: cubic-bezier(0.75, -0.04, 0.14, 0.99);
+	}
 `;
 
 const GnbWrapper = styled.div`
@@ -42,11 +63,17 @@ const GnbWrapper = styled.div`
 	${(props) => props.theme.div.left()};
 	font-weight: 300;
 
-	&:hover {
-		${Gnb} {
-			/* opacity: 0; */
-			clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+	@media ${media.hover} {
+		&:hover {
+			${Gnb} {
+				clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+			}
 		}
+	}
+
+	@media ${media.tablet} {
+		margin-left: 14px;
+		font-size: 16px;
 	}
 `;
 
@@ -54,6 +81,10 @@ const NowGnb = styled.div`
 	padding: 0 16px;
 	text-transform: capitalize;
 	cursor: pointer;
+
+	@media ${media.tablet} {
+		padding: 14px;
+	}
 `;
 
 const GnbList = styled.li<{ active: boolean }>`
@@ -68,11 +99,22 @@ const GnbList = styled.li<{ active: boolean }>`
 		display: inline-block;
 		padding: 0 12px;
 	}
+
+	@media ${media.tablet} {
+		margin-bottom: 1rem;
+		border-bottom: 1px solid white;
+	}
 `;
 
 const Header = () => {
 	const { pathname } = useRouter();
 	const [nowGnb, setNowGnb] = useState("");
+	const [isMenuClick, setIsMenuClick] = useState(true);
+	const { isTablet } = useSize();
+
+	useEffect(() => {
+		setIsMenuClick(false);
+	}, [isTablet]);
 
 	useEffect(() => {
 		if (pathname) {
@@ -84,16 +126,28 @@ const Header = () => {
 		}
 	}, [pathname]);
 
+	const handleGnbClick = () => {
+		if (isTablet) {
+			setIsMenuClick((n) => !n);
+		}
+	};
+
 	return (
 		<HeaderWrapper>
 			<ContainerLayout>
 				<Inner>
-					<Logo />
+					<Logo size={isTablet && 16} />
 
 					<GnbWrapper>
-						<NowGnb>{nowGnb}</NowGnb>
+						<NowGnb onClick={handleGnbClick}>{nowGnb}</NowGnb>
 
-						<Gnb>
+						<Gnb
+							isMenuClick={isTablet && isMenuClick}
+							onClick={() => {
+								console.log("gnb click");
+								setIsMenuClick(false);
+							}}
+						>
 							{menu.map((el) => {
 								return (
 									<GnbList key={el.id} active={pathname === el.href ? true : false}>

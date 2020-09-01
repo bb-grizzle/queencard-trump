@@ -5,6 +5,9 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyles = createGlobalStyle`
   ${reset};
 
+  html{
+    
+  }
   body{
     background-color: ${Theme.color.bg};
     font-family: 'Noto Sans KR', sans-serif;
