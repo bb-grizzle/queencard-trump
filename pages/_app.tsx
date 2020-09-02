@@ -5,17 +5,28 @@ import { ThemeProvider } from "styled-components";
 import theme from "../Styles/theme";
 import HeaderLayout from "../Layout/HeaderLayout";
 
-function MyApp({ Component, pageProps }: AppProps) {
+import withApollo from "next-with-apollo";
+import { ApolloProvider } from "@apollo/react-hooks";
+import ApolloClient, { InMemoryCache } from "apollo-boost";
+import Client from "../Apollo/Client";
+
+interface MyAppProps extends AppProps {
+	apollo: any;
+}
+
+function MyApp({ Component, pageProps, apollo }: MyAppProps) {
 	return (
-		<MetaLayout>
-			<GlobalStyles />
-			<ThemeProvider theme={theme}>
-				<HeaderLayout>
-					<Component {...pageProps} />
-				</HeaderLayout>
-			</ThemeProvider>
-		</MetaLayout>
+		<ApolloProvider client={apollo}>
+			<MetaLayout>
+				<GlobalStyles />
+				<ThemeProvider theme={theme}>
+					<HeaderLayout>
+						<Component {...pageProps} />
+					</HeaderLayout>
+				</ThemeProvider>
+			</MetaLayout>
+		</ApolloProvider>
 	);
 }
 
-export default MyApp;
+export default withApollo(() => Client)(MyApp);
