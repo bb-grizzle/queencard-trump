@@ -8,9 +8,6 @@ const useSize = () => {
 		isTablet: false
 	});
 
-	useEffect(() => {
-		console.log(size);
-	}, [size]);
 	useLayoutEffect(() => {
 		const changeMediaState = () => {
 			setSize({

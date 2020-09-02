@@ -7,6 +7,7 @@ import { useRouter } from "next/dist/client/router";
 import { useEffect, useState } from "react";
 import media from "../Styles/media";
 import useSize from "../Hook/useSize";
+import { isTouchDevice } from "../util/isTouchDevice";
 
 const HeaderWrapper = styled.header`
 	height: 120px;
@@ -36,6 +37,15 @@ const Gnb = styled.ul<{ isMenuClick: boolean }>`
 
 	clip-path: polygon(0 0, 0 0, 0px 100%, 0 100%);
 	transition: ${(props) => props.theme.transition.default};
+
+	@media ${media.touch} {
+		${(props) => {
+			console.log("props.isMenuClick");
+			console.log(props.isMenuClick);
+			return "";
+		}};
+		clip-path: ${(props) => (props.isMenuClick ? `polygon(0 0, 100% 0, 100% 100%, 0 100%)` : `polygon(0 0, 0 0, 0px 100%, 0 100%)`)};
+	}
 
 	@media ${media.tablet} {
 		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
@@ -127,7 +137,7 @@ const Header = () => {
 	}, [pathname]);
 
 	const handleGnbClick = () => {
-		if (isTablet) {
+		if (isTablet || isTouchDevice()) {
 			setIsMenuClick((n) => !n);
 		}
 	};
@@ -142,9 +152,8 @@ const Header = () => {
 						<NowGnb onClick={handleGnbClick}>{nowGnb}</NowGnb>
 
 						<Gnb
-							isMenuClick={isTablet && isMenuClick}
+							isMenuClick={isMenuClick}
 							onClick={() => {
-								console.log("gnb click");
 								setIsMenuClick(false);
 							}}
 						>

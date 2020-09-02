@@ -12,7 +12,8 @@ const media = {
 	mobile: `screen and (max-width: ${BREAKPOINT_MOBILE}px)`,
 	tablet: `screen and (max-width: ${BREAKPOINT_TABLET}px)`,
 	desktop: `screen and (max-width: ${BREAKPOINT_DESKTOP}px)`,
-	hover: `screen and (hover: hover)`
+	hover: `screen and (hover: hover)`,
+	touch: `(hover: none) and (pointer: coarse)`
 };
 
 export default media;
