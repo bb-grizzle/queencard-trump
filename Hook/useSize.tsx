@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
 import { BREAKPOINT_TABLET } from "../Styles/media";
 
 const useSize = () => {
@@ -8,6 +8,9 @@ const useSize = () => {
 		isTablet: false
 	});
 
+	useEffect(() => {
+		console.log(size);
+	}, [size]);
 	useLayoutEffect(() => {
 		const changeMediaState = () => {
 			setSize({

@@ -136,7 +136,7 @@ const Header = () => {
 		<HeaderWrapper>
 			<ContainerLayout>
 				<Inner>
-					<Logo size={isTablet && 16} />
+					<Logo size={isTablet ? 16 : null} />
 
 					<GnbWrapper>
 						<NowGnb onClick={handleGnbClick}>{nowGnb}</NowGnb>
