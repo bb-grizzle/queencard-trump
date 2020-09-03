@@ -37,7 +37,6 @@ const CoverContainer = styled(ContainerLayout)`
 
 const Cover = styled.div`
 	padding-top: calc(100% / 3);
-	/* background-color: ${(props) => props.theme.color.load}; */
 	${(props) => props.theme.layout.full_image("/image/cover_01.jpg")}
 `;
 
@@ -47,7 +46,10 @@ const InfoContainer = styled(ContainerLayout)`
 
 const InfoWrapper = styled.div`
 	display: flex;
-	flex-wrap: wrap;
+
+	@media ${media.tablet} {
+		flex-wrap: wrap;
+	}
 `;
 
 const InfoCol = styled.div`
@@ -76,7 +78,7 @@ const InfoListCustom = styled(InfoList)`
 	margin-bottom: 6px;
 `;
 
-const index = (props) => {
+const index = () => {
 	const { data, loading, error } = useQuery(EDUCATION_QUERY);
 
 	const [filteredData, setFilteredData] = useState({
@@ -86,28 +88,20 @@ const index = (props) => {
 	});
 
 	useEffect(() => {
-		console.log(props);
-	}, [props]);
-
-	useEffect(() => {
-		console.log("error : ", error);
 		if (!loading) {
-			console.log(data);
-			// alert(loading);
-			// data.getAllInfo.forEach((el) => {
-			// 	const field = el.field;
-			// 	setFilteredData((n) => ({
-			// 		...n,
-			// 		[field]: n[field].concat(el)
-			// 	}));
-			// });
+			data.getAllInfo.forEach((el) => {
+				const field = el.field;
+				setFilteredData((n) => ({
+					...n,
+					[field]: n[field].concat(el)
+				}));
+			});
 		}
 	}, [data, loading, error]);
 
 	return (
 		<Wrapper>
 			<CoverContainer>
-				{data ? `${data}` : `${error}`}
 				<Cover />
 			</CoverContainer>
 
@@ -115,10 +109,10 @@ const index = (props) => {
 				<InfoWrapper>
 					<InfoCol>
 						<Title title={"Bio -"} />
-						{/* <Paragraph text={bio_en} lang={TextLang.EN} /> */}
-						{/* <Paragraph text={bio_kr} lang={TextLang.KR} /> */}
+						<Paragraph text={bio_en} lang={TextLang.EN} />
+						<Paragraph text={bio_kr} lang={TextLang.KR} />
 					</InfoCol>
-					{/* {filteredData && (
+					{filteredData && (
 						<InfoCol>
 							{Object.keys(filteredData).map((key) => {
 								return (
@@ -135,7 +129,7 @@ const index = (props) => {
 								);
 							})}
 						</InfoCol>
-					)} */}
+					)}
 				</InfoWrapper>
 			</InfoContainer>
 		</Wrapper>
