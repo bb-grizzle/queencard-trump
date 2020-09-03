@@ -8,7 +8,7 @@ const useSize = () => {
 		isTablet: false
 	});
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		const changeMediaState = () => {
 			setSize({
 				width: window.innerWidth,

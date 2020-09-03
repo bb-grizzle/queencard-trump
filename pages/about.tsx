@@ -92,6 +92,7 @@ const index = (props) => {
 	useEffect(() => {
 		console.log("error : ", error);
 		if (!loading) {
+			console.log(data);
 			// alert(loading);
 			// data.getAllInfo.forEach((el) => {
 			// 	const field = el.field;
