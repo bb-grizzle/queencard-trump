@@ -39,26 +39,41 @@ const div = {
 };
 
 const transition = {
-	default: `all 0.5s cubic-bezier(0.7, 0, 0.24, 0.99);;`
+	default: `all 0.5s cubic-bezier(0.7, 0, 0.24, 0.99);`
+};
+
+const animation = {
+	default: `
+		animation-duration: 1s;
+		animation-timing-function: cubic-bezier(0.7, 0, 0.24, 0.99);
+	`
 };
 
 const layout = {
+	full_height: `height: calc(var(--vh, 1vh) * 100);`,
 	full_image: (url) => `
-	background-image: url(${url});
-	background-size: cover;
-	background-position: center;`,
+		background-image: url(${url});
+		background-size: cover;
+		background-position: center;`,
 	center_flex: `
-	display: flex;
-	align-items: center;
-	justify-content: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	`
+};
+
+const zIndex = {
+	loading: 50,
+	menu: 100
 };
 
 const theme = {
 	color,
 	div,
 	transition,
-	layout
+	layout,
+	animation,
+	zIndex
 };
 
 export type Theme = typeof theme;

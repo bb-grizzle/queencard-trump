@@ -7,8 +7,9 @@ import HeaderLayout from "../Layout/HeaderLayout";
 
 import withApollo from "next-with-apollo";
 import { ApolloProvider } from "@apollo/react-hooks";
-import ApolloClient, { InMemoryCache } from "apollo-boost";
 import Client from "../Apollo/Client";
+import Loading from "../Component/loading";
+import AppProvider from "../Context/AppProvider";
 
 interface MyAppProps extends AppProps {
 	apollo: any;
@@ -17,14 +18,16 @@ interface MyAppProps extends AppProps {
 function MyApp({ Component, pageProps, apollo }: MyAppProps) {
 	return (
 		<ApolloProvider client={apollo}>
-			<MetaLayout>
-				<GlobalStyles />
-				<ThemeProvider theme={theme}>
-					<HeaderLayout>
-						<Component {...pageProps} />
-					</HeaderLayout>
-				</ThemeProvider>
-			</MetaLayout>
+			<AppProvider>
+				<MetaLayout>
+					<GlobalStyles />
+					<ThemeProvider theme={theme}>
+						<HeaderLayout>
+							<Component {...pageProps} />
+						</HeaderLayout>
+					</ThemeProvider>
+				</MetaLayout>
+			</AppProvider>
 		</ApolloProvider>
 	);
 }

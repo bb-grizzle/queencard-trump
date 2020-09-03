@@ -2,10 +2,19 @@
 
 ## todo
 
-- [x] styled component
-  - [x] global style
-  - [x] theme
-  - [x] media
-- [x] favicon
-- [ ] head / meta
-- [x] 404
+### page
+
+- [x] about
+- [ ] work
+- [ ] insperation
+- [ ] contact
+- [ ] 404
+- [ ] loading
+
+### admin
+
+- [ ] login
+- [ ] about
+- [ ] work
+- [ ] insperation
+- [ ] contact

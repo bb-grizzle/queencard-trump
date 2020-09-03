@@ -10,6 +10,7 @@ import { bio_en, bio_kr } from "../Data/about";
 import { TextLang } from "../Component/text/interface";
 import media from "../Styles/media";
 import Footer from "../Component/Footer";
+import { setLoading } from "../Context/AppProvider";
 
 const EDUCATION_QUERY = gql`
 	{
@@ -81,6 +82,7 @@ const InfoListCustom = styled(InfoList)`
 
 const index = () => {
 	const { data, loading, error } = useQuery(EDUCATION_QUERY);
+	const setGlobalLoading = setLoading();
 
 	const [filteredData, setFilteredData] = useState({
 		EDUCATION: [],
@@ -100,12 +102,15 @@ const index = () => {
 		}
 	}, [data, loading, error]);
 
+	useEffect(() => {
+		setGlobalLoading(loading);
+	}, [loading]);
+
 	return (
 		<Wrapper>
 			<CoverContainer>
 				<Cover />
 			</CoverContainer>
-
 			<InfoContainer>
 				<InfoWrapper>
 					<InfoCol>
@@ -133,7 +138,6 @@ const index = () => {
 					)}
 				</InfoWrapper>
 			</InfoContainer>
-
 			<Footer />
 		</Wrapper>
 	);

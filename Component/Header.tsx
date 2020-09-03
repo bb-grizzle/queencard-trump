@@ -34,6 +34,7 @@ const Gnb = styled.ul<{ isMenuClick: boolean }>`
 	background-color: black;
 	color: ${(props) => props.theme.color.white};
 	overflow: hidden;
+	z-index: ${(props) => props.theme.zIndex.menu};
 
 	clip-path: polygon(0 0, 0 0, 0px 100%, 0 100%);
 	transition: ${(props) => props.theme.transition.default};
@@ -141,7 +142,11 @@ const Header = () => {
 		<HeaderWrapper>
 			<ContainerLayout>
 				<Inner>
-					<Logo size={isTablet ? 16 : null} />
+					<Link href="/">
+						<a>
+							<Logo size={isTablet ? 16 : null} />
+						</a>
+					</Link>
 
 					<GnbWrapper>
 						<NowGnb onClick={handleGnbClick}>{nowGnb}</NowGnb>

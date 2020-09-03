@@ -1,7 +1,12 @@
 import Head from "next/head";
 import { headData } from "../Data/head";
+import { useEffect } from "react";
+import { makeFullHeight } from "../util/fullHeight";
 
 const HeadComponent: React.FC = ({ children }) => {
+	useEffect(() => {
+		makeFullHeight();
+	}, []);
 	return (
 		<>
 			<Head>
