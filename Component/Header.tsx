@@ -39,11 +39,6 @@ const Gnb = styled.ul<{ isMenuClick: boolean }>`
 	transition: ${(props) => props.theme.transition.default};
 
 	@media ${media.touch} {
-		${(props) => {
-			console.log("props.isMenuClick");
-			console.log(props.isMenuClick);
-			return "";
-		}};
 		clip-path: ${(props) => (props.isMenuClick ? `polygon(0 0, 100% 0, 100% 100%, 0 100%)` : `polygon(0 0, 0 0, 0px 100%, 0 100%)`)};
 	}
 
@@ -119,7 +114,7 @@ const GnbList = styled.li<{ active: boolean }>`
 const Header = () => {
 	const { pathname } = useRouter();
 	const [nowGnb, setNowGnb] = useState("");
-	const [isMenuClick, setIsMenuClick] = useState(true);
+	const [isMenuClick, setIsMenuClick] = useState(false);
 	const { isTablet } = useSize();
 
 	useEffect(() => {

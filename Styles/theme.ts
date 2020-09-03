@@ -3,7 +3,11 @@ import baseStyled, { css, ThemedStyledInterface } from "styled-components";
 const color = {
 	black: "black",
 	white: "white",
-	bg: "#F5F5F4"
+	gray: {
+		default: "#686868"
+	},
+	bg: "#F5F5F4",
+	load: "#327CB2"
 };
 
 const div = {
@@ -37,10 +41,18 @@ const transition = {
 	default: `all 0.5s ease-in-out;`
 };
 
+const layout = {
+	full_image: (url) => `
+	background-image: url(${url});
+	background-size: cover;
+	background-position: center;`
+};
+
 const theme = {
 	color,
 	div,
-	transition
+	transition,
+	layout
 };
 
 export type Theme = typeof theme;
