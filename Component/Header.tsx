@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import ContainerLayout from "../Layout/ContainerLayout";
 import Logo from "./Logo";
-import { menu } from "../Data/menu";
+import { MENU, MENU_ADMIN } from "../Data/menu";
 import Link from "next/link";
 import { useRouter } from "next/dist/client/router";
 import { useEffect, useState } from "react";
@@ -114,6 +114,7 @@ const GnbList = styled.li<{ active: boolean }>`
 
 const Header = () => {
 	const { pathname } = useRouter();
+	const [menu, setMenu] = useState(MENU);
 	const [nowGnb, setNowGnb] = useState("");
 	const [isMenuClick, setIsMenuClick] = useState(false);
 	const { isTablet } = useSize();
@@ -128,6 +129,10 @@ const Header = () => {
 				setNowGnb("work");
 			} else {
 				setNowGnb(pathname.split("/")[1]);
+
+				if (pathname.split("/")[1] === "_admin") {
+					setMenu(MENU_ADMIN);
+				}
 			}
 		}
 	}, [pathname]);

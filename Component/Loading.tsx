@@ -21,12 +21,15 @@ const Wrapper = styled.div<{ active: boolean }>`
 	${(props) => props.theme.layout.center_flex};
 	transform: translateY(0);
 	opacity: 1;
-	${(props) => props.theme.animation.default};
-	animation-name: ${slideUp};
-	animation-delay: 1s;
-	animation-play-state: ${(props) => (props.active ? "paused" : "running")};
-	animation-fill-mode: forwards;
 	z-index: ${(props) => props.theme.zIndex.loading};
+
+	
+	display:none;
+	/* animation-name: ${slideUp};
+	${(props) => props.theme.animation.default};
+	animation-delay: 1s;
+	animation-fill-mode: forwards; */
+	/* animation-play-state: ${(props) => (props.active ? "paused" : "running")}; */
 `;
 
 const Text = styled.p`

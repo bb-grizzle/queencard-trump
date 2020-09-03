@@ -3,7 +3,7 @@ interface Menu {
 	href: string;
 }
 
-export const menu: Menu[] = [
+export const MENU: Menu[] = [
 	{
 		id: "work",
 		href: "/"
@@ -19,5 +19,20 @@ export const menu: Menu[] = [
 	{
 		id: "contact",
 		href: "/contact"
+	}
+];
+
+export const MENU_ADMIN: Menu[] = [
+	{
+		id: "work",
+		href: "/_admin/work"
+	},
+	{
+		id: "about",
+		href: "/_admin/about"
+	},
+	{
+		id: "insperation",
+		href: "/_admin/insperation"
 	}
 ];

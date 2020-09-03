@@ -6,7 +6,7 @@ export const AppContext = createContext({
 });
 
 const AppProvider = ({ children }) => {
-	const [globalLoading, setGlobalLoading] = useState(false);
+	const [globalLoading, setGlobalLoading] = useState(true);
 
 	const setLoading = (bol) => {
 		setGlobalLoading(bol);
