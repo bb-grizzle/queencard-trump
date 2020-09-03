@@ -7,7 +7,8 @@ const color = {
 		default: "#686868"
 	},
 	bg: "#F5F5F4",
-	load: "#327CB2"
+	load: "#327CB2",
+	hover: "rgba(0,0,0,0.2)"
 };
 
 const div = {
@@ -38,14 +39,19 @@ const div = {
 };
 
 const transition = {
-	default: `all 0.5s ease-in-out;`
+	default: `all 0.5s cubic-bezier(0.7, 0, 0.24, 0.99);;`
 };
 
 const layout = {
 	full_image: (url) => `
 	background-image: url(${url});
 	background-size: cover;
-	background-position: center;`
+	background-position: center;`,
+	center_flex: `
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	`
 };
 
 const theme = {

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { bio_en, bio_kr } from "../Data/about";
 import { TextLang } from "../Component/text/interface";
 import media from "../Styles/media";
+import Footer from "../Component/Footer";
 
 const EDUCATION_QUERY = gql`
 	{
@@ -132,6 +133,8 @@ const index = () => {
 					)}
 				</InfoWrapper>
 			</InfoContainer>
+
+			<Footer />
 		</Wrapper>
 	);
 };
