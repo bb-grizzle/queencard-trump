@@ -69,7 +69,7 @@ const HoverLink = styled.div`
 	left: 0;
 	top: 0;
 	border-radius: 100%;
-	background: ${(props) => props.theme.color.load};
+	background: ${(props) => props.theme.color.black};
 
 	clip-path: circle(50% at 50% 160%);
 	transition: ${(props) => props.theme.transition.default};
@@ -82,6 +82,12 @@ const LinkComp = styled.a`
 	${(props) => props.theme.layout.center_flex};
 	border-radius: 20px;
 	position: relative;
+	margin-left: 4px;
+
+	@media ${media.tablet} {
+		margin-left: 0;
+		margin-right: 4px;
+	}
 
 	@media ${media.hover} {
 		&:hover {
