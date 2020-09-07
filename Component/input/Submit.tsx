@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import theme from "../../Styles/theme";
+import media from "../../Styles/media";
 
 interface SubmitProps {
 	value?: string;
@@ -11,8 +12,11 @@ const Wrapper = styled.div`
 	position: relative;
 
 	display: flex;
+	transition: ${(props) => props.theme.transition.default};
 
-	${(props) => props.theme.div.default(theme.color.gray.default, 1)};
+	@media ${media.hover} {
+		${(props) => props.theme.div.default(theme.color.gray.default, 1)};
+	}
 `;
 
 const Input = styled.input`

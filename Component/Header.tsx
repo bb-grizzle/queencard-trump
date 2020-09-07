@@ -8,6 +8,9 @@ import { useEffect, useState } from "react";
 import media from "../Styles/media";
 import useSize from "../Hook/useSize";
 import { isTouchDevice } from "../util/isTouchDevice";
+import { useQuery, useMutation } from "@apollo/client";
+import { LOCAL_LOGOUT_QUERY } from "../Queries/adminQueries";
+import { useisAdminLogin, adminLogin } from "../Context/AdminProvider";
 
 const HeaderWrapper = styled.header`
 	height: 120px;
@@ -18,6 +21,13 @@ const HeaderWrapper = styled.header`
 `;
 
 const Inner = styled.div`
+	display: flex;
+	height: 100%;
+	justify-content: space-between;
+	align-items: center;
+`;
+
+const InnerWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	height: 100%;
@@ -112,12 +122,27 @@ const GnbList = styled.li<{ active: boolean }>`
 	}
 `;
 
+const Logout = styled.p`
+	justify-self: end;
+	cursor: pointer;
+	padding: 12px;
+	border-radius: 8px;
+	transition: ${(props) => props.theme.transition.default};
+	&:hover {
+		background-color: ${(props) => props.theme.color.gray.light};
+	}
+`;
+
 const Header = () => {
 	const { pathname } = useRouter();
+	const [isAdmin, setIsAdmin] = useState(false);
 	const [menu, setMenu] = useState(MENU);
 	const [nowGnb, setNowGnb] = useState("");
 	const [isMenuClick, setIsMenuClick] = useState(false);
 	const { isTablet } = useSize();
+	const [localLogoutMutation] = useMutation(LOCAL_LOGOUT_QUERY);
+	const isLogin = useisAdminLogin();
+	const setAdminLogin = adminLogin();
 
 	useEffect(() => {
 		setIsMenuClick(false);
@@ -127,11 +152,15 @@ const Header = () => {
 		if (pathname) {
 			if (pathname === "/") {
 				setNowGnb("work");
+				setIsAdmin(false);
 			} else {
 				setNowGnb(pathname.split("/")[1]);
 
 				if (pathname.split("/")[1] === "_admin") {
 					setMenu(MENU_ADMIN);
+					setIsAdmin(true);
+				} else {
+					setIsAdmin(false);
 				}
 			}
 		}
@@ -143,36 +172,43 @@ const Header = () => {
 		}
 	};
 
+	const handleLogoutClick = () => {
+		localLogoutMutation();
+		setAdminLogin(false);
+	};
+
 	return (
 		<HeaderWrapper>
 			<ContainerLayout>
 				<Inner>
-					<Link href="/">
-						<a>
-							<Logo size={isTablet ? 16 : null} />
-						</a>
-					</Link>
+					<InnerWrapper>
+						<Link href="/">
+							<a>
+								<Logo size={isTablet ? 16 : null} />
+							</a>
+						</Link>
+						<GnbWrapper>
+							<NowGnb onClick={handleGnbClick}>{nowGnb}</NowGnb>
 
-					<GnbWrapper>
-						<NowGnb onClick={handleGnbClick}>{nowGnb}</NowGnb>
-
-						<Gnb
-							isMenuClick={isMenuClick}
-							onClick={() => {
-								setIsMenuClick(false);
-							}}
-						>
-							{menu.map((el) => {
-								return (
-									<GnbList key={el.id} active={pathname === el.href ? true : false}>
-										<Link href={el.href}>
-											<a>{el.id}</a>
-										</Link>
-									</GnbList>
-								);
-							})}
-						</Gnb>
-					</GnbWrapper>
+							<Gnb
+								isMenuClick={isMenuClick}
+								onClick={() => {
+									setIsMenuClick(false);
+								}}
+							>
+								{menu.map((el) => {
+									return (
+										<GnbList key={el.id} active={pathname === el.href ? true : false}>
+											<Link href={el.href}>
+												<a>{el.id}</a>
+											</Link>
+										</GnbList>
+									);
+								})}
+							</Gnb>
+						</GnbWrapper>
+					</InnerWrapper>
+					{isLogin && isAdmin && <Logout onClick={handleLogoutClick}>로그아웃</Logout>}
 				</Inner>
 			</ContainerLayout>
 		</HeaderWrapper>
