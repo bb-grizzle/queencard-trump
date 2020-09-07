@@ -17,6 +17,13 @@ const GlobalStyles = createGlobalStyle`
     text-decoration:none;
     list-style:none;
   }
+
+  input{
+    border:none;
+    border-radius: none;
+    outline:none;
+    border: 0px;
+  }
   
 `;
 

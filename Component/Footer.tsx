@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import ContainerLayout from "../Layout/ContainerLayout";
 import Logo from "./Logo";
-import { menu } from "../Data/menu";
+import { MENU } from "../Data/menu";
 import Link from "next/link";
 import { links } from "../Data/links";
 import Icon from "../Asset/icon";
@@ -109,7 +109,7 @@ const Footer = () => {
 				</Col>
 				<ColLeft>
 					<Menu>
-						{menu.map((el) => {
+						{MENU.map((el) => {
 							return (
 								<Link href={el.href} key={el.id}>
 									<a>{el.id}</a>

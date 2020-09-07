@@ -18,7 +18,7 @@ const div = {
 			content: "";
 			position: absolute;
 			width: 100%;
-			height: ${size ? `${size}px` : `2px`}
+			height: ${size ? `${size}px` : `2px`};
 			top: 0;
 			left: 0;
 			background-color: ${color ? color : theme.color.black};
@@ -51,6 +51,7 @@ const animation = {
 
 const layout = {
 	full_height: `height: calc(var(--vh, 1vh) * 100);`,
+	full_abs: ``,
 	full_image: (url) => `
 		background-image: url(${url});
 		background-size: cover;
@@ -59,6 +60,11 @@ const layout = {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	`,
+	input_default: `
+		padding: 8px 12px;
+		font-size: 16px;
+		position: relative;
 	`
 };
 
@@ -67,13 +73,18 @@ const zIndex = {
 	menu: 100
 };
 
+const size = {
+	height_input: "36px"
+};
+
 const theme = {
 	color,
 	div,
 	transition,
 	layout,
 	animation,
-	zIndex
+	zIndex,
+	size
 };
 
 export type Theme = typeof theme;
