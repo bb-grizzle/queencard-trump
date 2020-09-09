@@ -23,3 +23,9 @@ export const CHECK_TOKEN = gql`
 		checkToken
 	}
 `;
+
+export const ISLOGIN = gql`
+	{
+		isLoggedIn @client
+	}
+`;

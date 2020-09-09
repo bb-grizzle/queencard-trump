@@ -13,11 +13,14 @@ import { LOCAL_LOGOUT_QUERY } from "../Queries/adminQueries";
 import { useisAdminLogin, adminLogin } from "../Context/AdminProvider";
 
 const HeaderWrapper = styled.header`
-	height: 120px;
+	height: ${(props) => props.theme.size.header.pc};
 
 	@media ${media.tablet} {
-		height: 60px;
+		height: ${(props) => props.theme.size.header.mobile};
+		/* height: 60px; */
 	}
+	z-index: ${(props) => props.theme.zIndex.header};
+	position: fixed;
 `;
 
 const Inner = styled.div`

@@ -4,8 +4,9 @@ import media from "../../Styles/media";
 
 interface SubmitProps {
 	value?: string;
+	divColor?: string;
 }
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ divColor?: string }>`
 	height: ${(props) => props.theme.size.height_input};
 	padding-top: 32px;
 	margin-top: 32px;
@@ -13,9 +14,10 @@ const Wrapper = styled.div`
 
 	display: flex;
 	transition: ${(props) => props.theme.transition.default};
+	box-sizing: content-box;
 
 	@media ${media.hover} {
-		${(props) => props.theme.div.default(theme.color.gray.default, 1)};
+		${(props) => props.theme.div.default(`${props.divColor ? props.divColor : theme.color.gray.default}`, 1)};
 	}
 `;
 
@@ -30,9 +32,9 @@ const Input = styled.input`
 	${(props) => props.theme.layout.input_default};
 `;
 
-const Submit: React.FC<SubmitProps> = ({ value = "확인" }) => {
+const Submit: React.FC<SubmitProps> = ({ value = "확인", divColor }) => {
 	return (
-		<Wrapper>
+		<Wrapper divColor={divColor}>
 			<Input type="submit" value={value} />
 		</Wrapper>
 	);

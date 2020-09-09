@@ -69,13 +69,31 @@ const layout = {
 	`
 };
 
+const style = {
+	ratio: (ratio) => `&:after {
+		content: "";
+		padding-top: ${ratio ? ratio : 100}%;
+		display: block;
+	}`
+};
+
 const zIndex = {
 	loading: 50,
-	menu: 100
+	menu: 100,
+	header: 80,
+	adminForm: 60
 };
 
 const size = {
-	height_input: "36px"
+	height_input: "36px",
+	header: {
+		pc: "120px",
+		mobile: "60px"
+	},
+	padding_top_admin: {
+		pc: "200px",
+		mobile: "100px"
+	}
 };
 
 const theme = {
@@ -83,6 +101,7 @@ const theme = {
 	div,
 	transition,
 	layout,
+	style,
 	animation,
 	zIndex,
 	size

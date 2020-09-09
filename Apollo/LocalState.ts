@@ -1,4 +1,5 @@
 export const defaults = {
+	// isLoggedIn: Boolean(localStorage.getItem("token")) !== null ? true : false
 	isLoggedIn: false
 };
 
@@ -15,8 +16,9 @@ export const resolvers = {
 			return null;
 		},
 		logUserOut: () => {
-			console.log("log user in");
+			console.log("log user out");
 			localStorage.removeItem("token");
+			window.location.reload();
 			return null;
 		}
 	}

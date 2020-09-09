@@ -6,6 +6,7 @@ interface InputDefaultProps {
 	label: string;
 	placeholder: string;
 	type?: string;
+	bgColor?: string;
 }
 
 const Wrapper = styled.div`
@@ -25,21 +26,22 @@ const Label = styled.label`
 	font-size: 16px;
 `;
 
-const Input = styled.input`
+const Input = styled.input<{ bgColor?: string }>`
 	flex-grow: 1;
 
 	${(props) => props.theme.layout.input_default};
+	background-color: ${(props) => (!props.bgColor ? "white" : `${props.bgColor}`)};
 
 	&:focus {
 		border: 1px solid black;
 	}
 `;
 
-const InputDefault: React.FC<InputDefaultProps> = ({ value, onChange, label, placeholder, type }) => {
+const InputDefault: React.FC<InputDefaultProps> = ({ value, onChange, label, placeholder, type, bgColor }) => {
 	return (
 		<Wrapper>
 			<Label>{label}</Label>
-			<Input value={value} onChange={onChange} placeholder={placeholder} type={type} />
+			<Input value={value} onChange={onChange} placeholder={placeholder} type={type} bgColor={bgColor} />
 		</Wrapper>
 	);
 };

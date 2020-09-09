@@ -5,16 +5,15 @@ import InputDefault from "../../Component/input/InputDefault";
 import Submit from "../../Component/input/Submit";
 import Form from "../../Component/input/Form";
 import useInput from "../../Hook/useInput";
+import { useMutation, useQuery } from "@apollo/client";
+import { LOGIN_QUERY, LOCAL_LOGIN_QUERY, ISLOGIN } from "../../Queries/adminQueries";
 import { useEffect } from "react";
 import { useRouter } from "next/dist/client/router";
-import { useMutation } from "@apollo/client";
-import { LOGIN_QUERY, LOCAL_LOGIN_QUERY } from "../../Queries/adminQueries";
-import { useisAdminLogin, adminLogin } from "../../Context/AdminProvider";
 
 const Wrapper = styled.div``;
 
 const Container = styled(ContainerAdminLayout)`
-	margin-top: 100px;
+	padding-top: 200px;
 `;
 
 const login = () => {
@@ -28,27 +27,37 @@ const login = () => {
 		}
 	});
 	const [logUserIn] = useMutation(LOCAL_LOGIN_QUERY);
-	const isLogin = useisAdminLogin();
-	const localLogin = adminLogin();
+	const {
+		data: { isLoggedIn }
+	} = useQuery(ISLOGIN);
 
 	useEffect(() => {
-		console.log(isLogin);
-		if (isLogin) {
-			push("/_admin/work");
+		const token = localStorage.getItem("token");
+		if (token !== null) {
+			logUserIn({
+				variables: {
+					token
+				}
+			});
+		} else {
+			return;
 		}
-	}, [isLogin]);
+	}, []);
+
+	useEffect(() => {
+		push("/_admin/work");
+	}, [isLoggedIn]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		try {
 			const {
-				data: { login }
+				data: { login: token }
 			} = await loginMutation();
 
-			if (login) {
-				logUserIn({ variables: { token: login } });
-				localLogin(true);
+			if (token) {
+				logUserIn({ variables: { token } });
 			}
 		} catch (err) {
 			console.log(err);

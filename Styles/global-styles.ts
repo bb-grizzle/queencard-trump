@@ -5,6 +5,10 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyles = createGlobalStyle`
   ${reset};
 
+* {
+  box-sizing: border-box;
+}
+
   body{
     background-color: ${Theme.color.bg};
     font-family: 'Noto Sans KR', sans-serif;
