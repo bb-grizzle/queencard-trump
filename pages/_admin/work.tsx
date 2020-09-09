@@ -3,7 +3,7 @@ import { setAction, ActionType, useAction } from "../../Context/AdminProvider";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_WORK, UPLOAD_WORK, UPDATE_WORK } from "../../Queries/workQueries";
+import { GET_WORK, UPLOAD_WORK, UPDATE_WORK, DELETE_WORK } from "../../Queries/workQueries";
 import ContainerAdminLayout from "../../Layout/ContainerAdminLayout";
 import TitleLg from "../../Component/text/TitleLg";
 import AdminList from "../../Component/admin/AdminList";
@@ -35,7 +35,8 @@ const work = () => {
 	const {
 		data: { isLoggedIn }
 	} = useQuery(ISLOGIN);
-	const [nowId, setNowId] = useState("");
+	const [deleteWorkMutation] = useMutation(DELETE_WORK);
+	const [nowData, setNowData] = useState();
 	const [deleteImage, setDeleteImage] = useState([]);
 
 	const titleInput = useInput("");
@@ -61,8 +62,13 @@ const work = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (!titleInput.value || !dateInput.value || !descriptInput.value || !filesInput.files) {
+		if (!titleInput.value || !dateInput.value || !descriptInput.value) {
 			alert("양식을 모두 채워주세요 😀");
+			return;
+		}
+
+		if (filesInput.files.length === 0) {
+			alert("이미지를 한장 이상 업로드 해주세요. 🖼");
 			return;
 		}
 
@@ -72,7 +78,7 @@ const work = () => {
 		const uploadedImages = await uploadImagesMutation({ variables: { urls: imageNames } });
 		const ids = uploadedImages.data.uploadImage.map((el) => el.id);
 
-		// 02. firebase | 이미지 파일 업로드
+		// 02. firebase | id 이름으로 이미지 파일 업로드
 		const fbUploads = await Promise.all(
 			uploadImages.map((el, index) => {
 				return fbUploadStorage("", ids[index], el.file);
@@ -102,14 +108,18 @@ const work = () => {
 					images: connectedImagesId
 				}
 			});
-			console.log(newData);
 			setClientData((n) => [{ ...newData, images: newImages.data.updateImage }, ...n]);
 		} else if (nowAction === ActionType.EDIT) {
+			// delete images on firebase
+			deleteImage.forEach((el) => {
+				fbDeleteStorage(el);
+			});
+
 			const {
 				data: { updateWork: newData }
 			} = await updateWorkMutation({
 				variables: {
-					id: nowId,
+					id: nowData.id,
 					title: titleInput.value,
 					date: dateInput.value,
 					descript: descriptInput.value,
@@ -118,16 +128,10 @@ const work = () => {
 				}
 			});
 
-			console.log(newData);
-			// setClientData((n) => [{ ...updateData, images: newImages.data.updateImage }, ...n]);
+			setClientData((n) => n.map((el) => (el.id === nowData.id ? newData : el)));
 		}
 		initAdmin();
-		setActionState(ActionType.NULL);
 	};
-
-	useEffect(() => {
-		console.log(deleteImage);
-	}, [deleteImage]);
 
 	const handleThumbnailClick = (data) => {
 		console.log("handleThumbnailClick");
@@ -141,8 +145,8 @@ const work = () => {
 	};
 
 	const handleListClick = (data) => {
+		setNowData(data);
 		setActionState(ActionType.EDIT);
-		setNowId(data.id);
 
 		titleInput.setValue(data.title);
 		dateInput.setValue(data.date);
@@ -162,11 +166,27 @@ const work = () => {
 			descriptInput.setValue("");
 			filesInput.setFiles([]);
 		}, 500);
+		setActionState(ActionType.NULL);
 		setDeleteImage([]);
+		setNowData(null);
 	};
 
-	const handleDeleteClick = (id) => {
+	const handleDeleteClick = async () => {
 		console.log("handleDeleteClick");
+		try {
+			await deleteWorkMutation({
+				variables: {
+					id: nowData.id
+				}
+			});
+			nowData.images.forEach((el) => {
+				fbDeleteStorage(el.id);
+			});
+			setClientData((n) => n.filter((el) => el.id !== nowData.id));
+		} catch (err) {
+			console.log(err);
+		}
+		initAdmin();
 	};
 
 	const formContents: AdminFormContents[] = [
