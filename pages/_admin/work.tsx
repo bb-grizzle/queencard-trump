@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useisAdminLogin, setAction, ActionType, useAction } from "../../Context/AdminProvider";
+import { setAction, ActionType, useAction } from "../../Context/AdminProvider";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import { useQuery, useMutation } from "@apollo/client";
@@ -15,6 +15,7 @@ import useInputFile from "../../Hook/useInputFile";
 import { fbUploadStorage, fbDeleteStorage } from "../../Firebase/firebase";
 
 import { UPLOAD_IMAGES, UPDATE_IMAGE } from "../../Queries/imageQuries";
+import { ISLOGIN } from "../../Queries/adminQueries";
 
 const Wrapper = styled.div`
 	padding-top: ${(props) => props.theme.size.padding_top_admin.pc};
@@ -24,7 +25,6 @@ const Wrapper = styled.div`
 const work = () => {
 	const [clientData, setClientData] = useState([]);
 	const { push } = useRouter();
-	const isLogin = useisAdminLogin();
 	const { data } = useQuery(GET_WORK);
 	const setActionState = setAction();
 	const nowAction = useAction();
@@ -32,6 +32,9 @@ const work = () => {
 	const [updateImageMutation] = useMutation(UPDATE_IMAGE);
 	const [uploadWorkMutation] = useMutation(UPLOAD_WORK);
 	const [updateWorkMutation] = useMutation(UPDATE_WORK);
+	const {
+		data: { isLoggedIn }
+	} = useQuery(ISLOGIN);
 	const [nowId, setNowId] = useState("");
 	const [deleteImage, setDeleteImage] = useState([]);
 
@@ -39,6 +42,12 @@ const work = () => {
 	const dateInput = useInput("");
 	const descriptInput = useInput("");
 	const filesInput = useInputFile();
+
+	useEffect(() => {
+		if (isLoggedIn === false || isLoggedIn === null) {
+			push("/_admin");
+		}
+	}, [isLoggedIn]);
 
 	useEffect(() => {
 		if (data) {

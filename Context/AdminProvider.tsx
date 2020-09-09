@@ -1,8 +1,8 @@
 import { useState, createContext, useEffect, useContext } from "react";
+import { useMutation } from "@apollo/client";
+import { LOGIN_QUERY, LOCAL_LOGIN_QUERY } from "../Queries/adminQueries";
 
 export const AdminContext = createContext({
-	isLogin: false,
-	setIsLogin: null,
 	action: null,
 	setAction: null
 });
@@ -14,29 +14,23 @@ export enum ActionType {
 }
 
 const AdminProvider: React.FC = ({ children }) => {
-	const [isLogin, setIsLogin] = useState(false);
 	const [action, setAction] = useState(ActionType.NULL);
-
-	const checkUserLogin = async () => {
-		const token = Boolean(localStorage.getItem("token"));
-		setIsLogin(token);
-	};
+	const [localLoginQuery] = useMutation(LOCAL_LOGIN_QUERY);
 
 	useEffect(() => {
-		checkUserLogin();
+		const token = localStorage.getItem("token");
+		if (token !== null) {
+			localLoginQuery({
+				variables: {
+					token
+				}
+			});
+		} else {
+			return;
+		}
 	}, []);
 
-	return <AdminContext.Provider value={{ isLogin, setIsLogin, action, setAction }}>{children}</AdminContext.Provider>;
-};
-
-export const useisAdminLogin = () => {
-	const { isLogin } = useContext(AdminContext);
-	return isLogin;
-};
-
-export const adminLogin = () => {
-	const { setIsLogin } = useContext(AdminContext);
-	return setIsLogin;
+	return <AdminContext.Provider value={{ action, setAction }}>{children}</AdminContext.Provider>;
 };
 
 export const useAction = () => {

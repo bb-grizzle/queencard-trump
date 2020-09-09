@@ -9,11 +9,11 @@ import media from "../Styles/media";
 import useSize from "../Hook/useSize";
 import { isTouchDevice } from "../util/isTouchDevice";
 import { useQuery, useMutation } from "@apollo/client";
-import { LOCAL_LOGOUT_QUERY } from "../Queries/adminQueries";
-import { useisAdminLogin, adminLogin } from "../Context/AdminProvider";
+import { LOCAL_LOGOUT_QUERY, ISLOGIN } from "../Queries/adminQueries";
 
 const HeaderWrapper = styled.header`
 	height: ${(props) => props.theme.size.header.pc};
+	width: 100%;
 
 	@media ${media.tablet} {
 		height: ${(props) => props.theme.size.header.mobile};
@@ -144,8 +144,9 @@ const Header = () => {
 	const [isMenuClick, setIsMenuClick] = useState(false);
 	const { isTablet } = useSize();
 	const [localLogoutMutation] = useMutation(LOCAL_LOGOUT_QUERY);
-	const isLogin = useisAdminLogin();
-	const setAdminLogin = adminLogin();
+	const {
+		data: { isLoggedIn }
+	} = useQuery(ISLOGIN);
 
 	useEffect(() => {
 		setIsMenuClick(false);
@@ -177,7 +178,6 @@ const Header = () => {
 
 	const handleLogoutClick = () => {
 		localLogoutMutation();
-		setAdminLogin(false);
 	};
 
 	return (
@@ -211,7 +211,7 @@ const Header = () => {
 							</Gnb>
 						</GnbWrapper>
 					</InnerWrapper>
-					{isLogin && isAdmin && <Logout onClick={handleLogoutClick}>로그아웃</Logout>}
+					{isAdmin && isLoggedIn && <Logout onClick={handleLogoutClick}>로그아웃</Logout>}
 				</Inner>
 			</ContainerLayout>
 		</HeaderWrapper>

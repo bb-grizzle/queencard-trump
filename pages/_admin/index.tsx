@@ -32,20 +32,9 @@ const login = () => {
 	} = useQuery(ISLOGIN);
 
 	useEffect(() => {
-		const token = localStorage.getItem("token");
-		if (token !== null) {
-			logUserIn({
-				variables: {
-					token
-				}
-			});
-		} else {
-			return;
+		if (isLoggedIn) {
+			push("/_admin/work");
 		}
-	}, []);
-
-	useEffect(() => {
-		push("/_admin/work");
 	}, [isLoggedIn]);
 
 	const handleSubmit = async (e) => {
