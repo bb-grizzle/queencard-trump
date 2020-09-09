@@ -1,18 +1,28 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 export const AppContext = createContext({
 	globalLoading: true,
-	setLoading: null
+	setGlobalLoading: null
 });
 
 const AppProvider = ({ children }) => {
-	const [globalLoading, setGlobalLoading] = useState(true);
+	const [globalLoading, setGlobalLoading] = useState(false);
+
+	useEffect(() => {
+		if (globalLoading) {
+			document.body.style.height = "100vh";
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.height = "auto";
+			document.body.style.overflow = "auto";
+		}
+	}, [globalLoading]);
 
 	const setLoading = (bol) => {
 		setGlobalLoading(bol);
 	};
 
-	return <AppContext.Provider value={{ globalLoading, setLoading }}>{children}</AppContext.Provider>;
+	return <AppContext.Provider value={{ globalLoading, setGlobalLoading }}>{children}</AppContext.Provider>;
 };
 
 export const useLoading = () => {
@@ -21,7 +31,7 @@ export const useLoading = () => {
 };
 
 export const setLoading = () => {
-	const set = useContext(AppContext).setLoading;
+	const set = useContext(AppContext).setGlobalLoading;
 	return set;
 };
 

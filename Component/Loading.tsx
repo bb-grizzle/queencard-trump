@@ -19,17 +19,10 @@ const Wrapper = styled.div<{ active: boolean }>`
 	${(props) => props.theme.layout.full_height};
 	background-color: white;
 	${(props) => props.theme.layout.center_flex};
-	transform: translateY(0);
+	transform: ${(props) => (props.active ? "translateY(0)" : "translateY(-100%)")};
 	opacity: 1;
 	z-index: ${(props) => props.theme.zIndex.loading};
-
-	
-	display:none;
-	/* animation-name: ${slideUp};
-	${(props) => props.theme.animation.default};
-	animation-delay: 1s;
-	animation-fill-mode: forwards; */
-	/* animation-play-state: ${(props) => (props.active ? "paused" : "running")}; */
+	transition: ${(props) => props.theme.transition.default};
 `;
 
 const Text = styled.p`

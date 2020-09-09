@@ -16,6 +16,7 @@ import { fbUploadStorage, fbDeleteStorage } from "../../Firebase/firebase";
 
 import { UPLOAD_IMAGES, UPDATE_IMAGE } from "../../Queries/imageQuries";
 import { ISLOGIN } from "../../Queries/adminQueries";
+import { setLoading } from "../../Context/AppProvider";
 
 const Wrapper = styled.div`
 	padding-top: ${(props) => props.theme.size.padding_top_admin.pc};
@@ -43,6 +44,7 @@ const work = () => {
 	const dateInput = useInput("");
 	const descriptInput = useInput("");
 	const filesInput = useInputFile();
+	const setloading = setLoading();
 
 	useEffect(() => {
 		if (isLoggedIn === false || isLoggedIn === null) {
@@ -51,8 +53,13 @@ const work = () => {
 	}, [isLoggedIn]);
 
 	useEffect(() => {
+		setloading(true);
+	}, []);
+
+	useEffect(() => {
 		if (data) {
 			setClientData([...data.getWork]);
+			setloading(false);
 		}
 	}, [data]);
 
@@ -62,6 +69,7 @@ const work = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
 		if (!titleInput.value || !dateInput.value || !descriptInput.value) {
 			alert("양식을 모두 채워주세요 😀");
 			return;
@@ -71,6 +79,8 @@ const work = () => {
 			alert("이미지를 한장 이상 업로드 해주세요. 🖼");
 			return;
 		}
+
+		setloading(true);
 
 		// 01. prisma | 이미지 업로드
 		const uploadImages = filesInput.files.filter((el) => Boolean(el.file));
@@ -166,9 +176,10 @@ const work = () => {
 			descriptInput.setValue("");
 			filesInput.setFiles([]);
 		}, 500);
-		setActionState(ActionType.NULL);
 		setDeleteImage([]);
+		setActionState(ActionType.NULL);
 		setNowData(null);
+		setloading(false);
 	};
 
 	const handleDeleteClick = async () => {

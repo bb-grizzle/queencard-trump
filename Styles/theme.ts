@@ -78,7 +78,7 @@ const style = {
 };
 
 const zIndex = {
-	loading: 50,
+	loading: 100,
 	menu: 100,
 	header: 80,
 	adminForm: 60
