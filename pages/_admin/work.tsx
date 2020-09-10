@@ -84,64 +84,70 @@ const work = () => {
 
 		setloading(true);
 
-		// 01. prisma | 이미지 업로드
-		const uploadImages = filesInput.files.filter((el) => Boolean(el.file));
-		const imageNames = uploadImages.map((el) => el.file.name);
-		const uploadedImages = await uploadImagesMutation({ variables: { urls: imageNames } });
-		const ids = uploadedImages.data.uploadImage.map((el) => el.id);
+		try {
+			// 01. prisma | 이미지 업로드
+			const uploadImages = filesInput.files.filter((el) => Boolean(el.file));
+			const imageNames = uploadImages.map((el) => el.file.name);
+			const uploadedImages = await uploadImagesMutation({ variables: { urls: imageNames } });
+			const ids = uploadedImages.data.uploadImage.map((el) => el.id);
 
-		// 02. firebase | id 이름으로 이미지 파일 업로드
-		const fbUploads = await Promise.all(
-			uploadImages.map((el, index) => {
-				return fbUploadStorage("", ids[index], el.file);
-			})
-		);
-		const urls = fbUploads.map((el) => el.fileUrl);
+			// 02. firebase | id 이름으로 이미지 파일 업로드
+			const fbUploads = await Promise.all(
+				uploadImages.map((el, index) => {
+					return fbUploadStorage("", ids[index], el.file);
+				})
+			);
+			const urls = fbUploads.map((el) => el.fileUrl);
 
-		// 03. update Image
-		const newImages = await updateImageMutation({
-			variables: {
-				ids,
-				urls
+			// 03. update Image
+			const newImages = await updateImageMutation({
+				variables: {
+					ids,
+					urls
+				}
+			});
+
+			// 04. upload work
+			const connectedImagesId = newImages.data.updateImage.map((el) => el.id);
+
+			if (nowAction === ActionType.ADD) {
+				const {
+					data: { uploadWork: newData }
+				} = await uploadWorkMutation({
+					variables: {
+						title: titleInput.value,
+						date: dateInput.value,
+						descript: descriptInput.value,
+						images: connectedImagesId
+					}
+				});
+				setClientData((n) => [{ ...newData, images: newImages.data.updateImage }, ...n]);
+			} else if (nowAction === ActionType.EDIT) {
+				// delete images on firebase
+				deleteImage.forEach((el) => {
+					fbDeleteStorage(el);
+				});
+
+				const {
+					data: { updateWork: newData }
+				} = await updateWorkMutation({
+					variables: {
+						id: nowId,
+						title: titleInput.value,
+						date: dateInput.value,
+						descript: descriptInput.value,
+						deleteImage: deleteImage,
+						addImages: connectedImagesId
+					}
+				});
+
+				setClientData((n) => n.map((el) => (el.id === nowId ? newData : el)));
 			}
-		});
-
-		// 04. upload work
-		const connectedImagesId = newImages.data.updateImage.map((el) => el.id);
-
-		if (nowAction === ActionType.ADD) {
-			const {
-				data: { uploadWork: newData }
-			} = await uploadWorkMutation({
-				variables: {
-					title: titleInput.value,
-					date: dateInput.value,
-					descript: descriptInput.value,
-					images: connectedImagesId
-				}
-			});
-			setClientData((n) => [{ ...newData, images: newImages.data.updateImage }, ...n]);
-		} else if (nowAction === ActionType.EDIT) {
-			// delete images on firebase
-			deleteImage.forEach((el) => {
-				fbDeleteStorage(el);
-			});
-
-			const {
-				data: { updateWork: newData }
-			} = await updateWorkMutation({
-				variables: {
-					id: nowId,
-					title: titleInput.value,
-					date: dateInput.value,
-					descript: descriptInput.value,
-					deleteImage: deleteImage,
-					addImages: connectedImagesId
-				}
-			});
-
-			setClientData((n) => n.map((el) => (el.id === nowId ? newData : el)));
+		} catch (err) {
+			console.log(err);
+			alert("😎 You need to log in!");
 		}
+
 		initAdmin();
 	};
 

@@ -9,6 +9,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { LOGIN_QUERY, LOCAL_LOGIN_QUERY, ISLOGIN } from "../../Queries/adminQueries";
 import { useEffect } from "react";
 import { useRouter } from "next/dist/client/router";
+import { setLoading } from "../../Context/AppProvider";
 
 const Wrapper = styled.div``;
 
@@ -30,6 +31,11 @@ const login = () => {
 	const {
 		data: { isLoggedIn }
 	} = useQuery(ISLOGIN);
+	const setloading = setLoading();
+
+	useEffect(() => {
+		setloading(false);
+	}, []);
 
 	useEffect(() => {
 		if (isLoggedIn) {
@@ -39,7 +45,7 @@ const login = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
+		setloading(true);
 		try {
 			const {
 				data: { login: token }

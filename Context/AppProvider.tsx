@@ -18,10 +18,6 @@ const AppProvider = ({ children }) => {
 		}
 	}, [globalLoading]);
 
-	const setLoading = (bol) => {
-		setGlobalLoading(bol);
-	};
-
 	return <AppContext.Provider value={{ globalLoading, setGlobalLoading }}>{children}</AppContext.Provider>;
 };
 
