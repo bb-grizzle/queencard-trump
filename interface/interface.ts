@@ -9,8 +9,14 @@ export interface AdminFormContents {
 	label: string;
 	type?: string;
 	placeholder?: string;
-	files?: any[];
+	files?: File[] | File;
 	onThumbnailClick?: any;
+	isOneImage?: boolean;
+}
+
+export interface File {
+	file: any;
+	url: string;
 }
 
 export interface WorkData {
@@ -35,4 +41,10 @@ export interface ExhibitionData {
 	link: string;
 	descript: string;
 	images: Image[];
+}
+
+export interface InsperationData {
+	id: string;
+	title: string;
+	thumbnail: Image;
 }

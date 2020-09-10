@@ -2,20 +2,22 @@ import { useState } from "react";
 import checkFile from "../util/filecheck";
 
 const useInputManyFile = () => {
-	const [files, setFiles] = useState<{ file: any; url: string }>();
+	const [files, setFiles] = useState([]);
 
 	const onChange = (e: any) => {
 		if (!checkFile(e.target)) return;
 
-		if (e.target.files && e.target.files[0] !== undefined) {
-			const url = URL.createObjectURL(e.target.files[0]);
-			const file = e.target.files[0];
+		const url = URL.createObjectURL(e.target.files[0]);
 
-			setFiles({
+		const file = e.target.files[0];
+
+		setFiles((n) => [
+			...n,
+			{
 				file,
 				url
-			});
-		}
+			}
+		]);
 	};
 
 	return { files, onChange, setFiles };

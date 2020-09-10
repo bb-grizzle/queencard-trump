@@ -70,7 +70,9 @@ const AdminForm: React.FC<AdminFormProps> = ({ title, contents, titleInput, onSu
 	const renderInput = (el) => {
 		switch (el.type) {
 			case "file":
-				return <InputFile key={el.label} bgColor={theme.color.bg} label={el.label} value="value" onChange={el.onChange} files={el.files} onThumbnailClick={el.onThumbnailClick} />;
+				return (
+					<InputFile key={el.label} bgColor={theme.color.bg} label={el.label} value="value" onChange={el.onChange} files={el.files} onThumbnailClick={el.onThumbnailClick} isOneImage={el.isOneImage} />
+				);
 			case "textarea":
 				return <InputTextArea key={el.label} value={el.value} onChange={el.onChange} label={el.label} placeholder={el.placeholder ? el.placeholder : el.label} bgColor={theme.color.bg} />;
 			default:

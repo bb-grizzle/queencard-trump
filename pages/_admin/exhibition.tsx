@@ -8,7 +8,7 @@ import { ActionType, setAction, useAction } from "../../Context/AdminProvider";
 import AdminForm from "../../Component/admin/AdminForm";
 import useInput from "../../Hook/useInput";
 import { AdminFormContents, ExhibitionData } from "../../interface/interface";
-import useInputFile from "../../Hook/useInputFile";
+import useInputFile from "../../Hook/useInputManyFile";
 import { setLoading } from "../../Context/AppProvider";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_EXHIBITION, UPLOAD_EXHIBITION, UPDATE_EXHIBITION, DELETE_EXHIBITION } from "../../Queries/exhibitionQueries";
@@ -97,7 +97,13 @@ const exhibition = () => {
 		filesInput.setFiles(data.images);
 	};
 
-	const handleThumbnailClick = () => {};
+	const handleThumbnailClick = (data) => {
+		// client
+		filesInput.setFiles((n) => n.filter((el) => el !== data));
+		if (data.id) {
+			setDeleteImage((n) => [...n, data.id]);
+		}
+	};
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();

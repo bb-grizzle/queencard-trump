@@ -8,6 +8,7 @@ interface InputFileProps {
 	bgColor?: string;
 	files: any;
 	onThumbnailClick: any;
+	isOneImage?: boolean;
 }
 
 const Wrapper = styled.div`
@@ -40,9 +41,10 @@ const Col = styled.div`
 	flex-wrap: wrap;
 `;
 
-const FileBtn = styled.label<{ bgColor?: string }>`
+const FileBtn = styled.label<{ bgColor?: string; url?: string }>`
 	position: relative;
 	background-color: ${(props) => `${props.bgColor ? props.bgColor : "white"}`};
+
 	width: 33.3%;
 	${(props) => props.theme.style.ratio()};
 	display: block;
@@ -52,6 +54,8 @@ const FileBtn = styled.label<{ bgColor?: string }>`
 	&:hover {
 		border: 1px solid black;
 	}
+
+	${(props) => props.theme.layout.full_image(props.url ? props.url : "")};
 `;
 
 const BoxInner = styled.div`
@@ -84,31 +88,42 @@ const CloseBtn = styled.div`
 	cursor: pointer;
 `;
 
-const InputFile: React.FC<InputFileProps> = ({ label, onChange, bgColor, files, onThumbnailClick }) => {
+const InputFile: React.FC<InputFileProps> = ({ label, onChange, bgColor, files, onThumbnailClick, isOneImage }) => {
 	return (
 		<Wrapper>
 			<Label>{label}</Label>
-			<Col>
-				{files &&
-					files.map((el, index) => {
-						return (
-							<Thumbnail url={el.url} key={index}>
-								<BoxInnerThumb>
-									<CloseBtn onClick={() => onThumbnailClick(el)}>
-										<Icon name="close" />
-									</CloseBtn>
-								</BoxInnerThumb>
-							</Thumbnail>
-						);
-					})}
+			{!isOneImage ? (
+				<Col>
+					{files &&
+						files.map((el, index) => {
+							return (
+								<Thumbnail url={el.url} key={index}>
+									<BoxInnerThumb>
+										<CloseBtn onClick={() => onThumbnailClick(el)}>
+											<Icon name="close" />
+										</CloseBtn>
+									</BoxInnerThumb>
+								</Thumbnail>
+							);
+						})}
 
-				<FileBtn bgColor={bgColor}>
-					<BoxInnerBtn>
-						<Input type={"file"} onChange={onChange} accept=".gif, .jpg, .png" />
-						<Icon name="plus" />
-					</BoxInnerBtn>
-				</FileBtn>
-			</Col>
+					<FileBtn bgColor={bgColor}>
+						<BoxInnerBtn>
+							<Input type={"file"} onChange={onChange} accept=".gif, .jpg, .png" />
+							<Icon name="plus" />
+						</BoxInnerBtn>
+					</FileBtn>
+				</Col>
+			) : (
+				<Col>
+					<FileBtn bgColor={bgColor} url={files && files.url}>
+						<BoxInnerBtn>
+							<Input type={"file"} onChange={onChange} accept=".gif, .jpg, .png" />
+							<Icon name="plus" />
+						</BoxInnerBtn>
+					</FileBtn>
+				</Col>
+			)}
 		</Wrapper>
 	);
 };

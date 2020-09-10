@@ -9,7 +9,7 @@ import ListWrapper from "../../Component/admin/ListWrapper";
 import AdminForm from "../../Component/admin/AdminForm";
 import { AdminFormContents, WorkData } from "../../interface/interface";
 import useInput from "../../Hook/useInput";
-import useInputFile from "../../Hook/useInputFile";
+import useInputFile from "../../Hook/useInputManyFile";
 import { fbUploadStorage, fbDeleteStorage } from "../../Firebase/firebase";
 import { UPLOAD_IMAGES, UPDATE_IMAGE } from "../../Queries/imageQuries";
 import { ISLOGIN, LOCAL_LOGOUT_QUERY } from "../../Queries/adminQueries";

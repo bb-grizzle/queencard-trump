@@ -24,16 +24,16 @@ export const MENU: Menu[] = [
 
 export const MENU_ADMIN: Menu[] = [
 	{
+		id: "about",
+		href: "/_admin/about"
+	},
+	{
 		id: "work",
 		href: "/_admin/work"
 	},
 	{
 		id: "exhibition",
 		href: "/_admin/exhibition"
-	},
-	{
-		id: "about",
-		href: "/_admin/about"
 	},
 	{
 		id: "insperation",
