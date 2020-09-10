@@ -28,6 +28,10 @@ export const MENU_ADMIN: Menu[] = [
 		href: "/_admin/work"
 	},
 	{
+		id: "exhibition",
+		href: "/_admin/exhibition"
+	},
+	{
 		id: "about",
 		href: "/_admin/about"
 	},

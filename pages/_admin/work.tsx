@@ -15,7 +15,7 @@ import useInputFile from "../../Hook/useInputFile";
 import { fbUploadStorage, fbDeleteStorage } from "../../Firebase/firebase";
 
 import { UPLOAD_IMAGES, UPDATE_IMAGE } from "../../Queries/imageQuries";
-import { ISLOGIN } from "../../Queries/adminQueries";
+import { ISLOGIN, LOCAL_LOGOUT_QUERY } from "../../Queries/adminQueries";
 import { setLoading } from "../../Context/AppProvider";
 
 const Wrapper = styled.div`
@@ -37,6 +37,7 @@ const work = () => {
 	const {
 		data: { isLoggedIn }
 	} = useQuery(ISLOGIN);
+	const [logUserOut] = useMutation(LOCAL_LOGOUT_QUERY);
 	const [deleteWorkMutation] = useMutation(DELETE_WORK);
 	const [nowData, setNowData] = useState<WorkData | null>();
 	const [nowId, setNowId] = useState("");
@@ -146,6 +147,7 @@ const work = () => {
 		} catch (err) {
 			console.log(err);
 			alert("😎 You need to log in!");
+			logUserOut();
 		}
 
 		initAdmin();
