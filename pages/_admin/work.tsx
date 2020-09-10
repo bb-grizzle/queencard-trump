@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { setAction, ActionType, useAction } from "../../Context/AdminProvider";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
@@ -6,23 +5,17 @@ import { useQuery, useMutation } from "@apollo/client";
 import { GET_WORK, UPLOAD_WORK, UPDATE_WORK, DELETE_WORK } from "../../Queries/workQueries";
 import ContainerAdminLayout from "../../Layout/ContainerAdminLayout";
 import TitleLg from "../../Component/text/TitleLg";
-import AdminList from "../../Component/admin/AdminList";
 import ListWrapper from "../../Component/admin/ListWrapper";
 import AdminForm from "../../Component/admin/AdminForm";
 import { AdminFormContents, WorkData } from "../../interface/interface";
 import useInput from "../../Hook/useInput";
 import useInputFile from "../../Hook/useInputFile";
 import { fbUploadStorage, fbDeleteStorage } from "../../Firebase/firebase";
-
+import AdminList from "../../Component/admin/AdminList";
 import { UPLOAD_IMAGES, UPDATE_IMAGE } from "../../Queries/imageQuries";
 import { ISLOGIN, LOCAL_LOGOUT_QUERY } from "../../Queries/adminQueries";
 import { setLoading } from "../../Context/AppProvider";
-
-const Wrapper = styled.div`
-	padding-top: ${(props) => props.theme.size.padding_top_admin.pc};
-	padding-bottom: ${(props) => props.theme.size.padding_bottom_admin.pc};
-	/* padding-top: 40px; */
-`;
+import AdminWrapper from "../../Component/admin/AdminWrapper";
 
 const work = () => {
 	const [clientData, setClientData] = useState([]);
@@ -154,18 +147,14 @@ const work = () => {
 	};
 
 	const handleThumbnailClick = (data) => {
-		console.log("handleThumbnailClick");
-
 		// client
 		filesInput.setFiles((n) => n.filter((el) => el !== data));
-
 		if (data.id) {
 			setDeleteImage((n) => [...n, data.id]);
 		}
 	};
 
 	const handleListClick = (data) => {
-		console.log(data);
 		setNowData(data);
 		setActionState(ActionType.EDIT);
 		setNowId(data.id);
@@ -196,7 +185,10 @@ const work = () => {
 	};
 
 	const handleDeleteClick = async () => {
-		console.log("handleDeleteClick");
+		if (!window.confirm("정말 삭제하시겠습니까? 😩")) {
+			return;
+		}
+		setloading(true);
 		try {
 			await deleteWorkMutation({
 				variables: {
@@ -224,7 +216,7 @@ const work = () => {
 	];
 
 	return (
-		<Wrapper>
+		<AdminWrapper>
 			<ContainerAdminLayout>
 				<TitleLg title="work" icons={[{ icon: "plus", onClick: handleAddClick }]} />
 				<ListWrapper>
@@ -235,8 +227,8 @@ const work = () => {
 				</ListWrapper>
 			</ContainerAdminLayout>
 
-			<AdminForm title={"add work"} titleInput={titleInput} contents={formContents} onSubmit={handleSubmit} onCloseClick={handleCloseClick} onDeleteClilck={handleDeleteClick} />
-		</Wrapper>
+			<AdminForm title={"add work"} titleInput={titleInput} contents={formContents} onSubmit={handleSubmit} onCloseClick={handleCloseClick} onDeleteClilck={nowData && handleDeleteClick} />
+		</AdminWrapper>
 	);
 };
 

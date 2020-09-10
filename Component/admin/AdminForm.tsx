@@ -71,10 +71,14 @@ const AdminForm: React.FC<AdminFormProps> = ({ title, contents, titleInput, onSu
 			<Container>
 				<TitleLg
 					title={title}
-					icons={[
-						{ icon: "delete", onClick: handleDeleteClick },
-						{ icon: "close", onClick: handleCloseClick }
-					]}
+					icons={
+						onDeleteClilck
+							? [
+									{ icon: "delete", onClick: handleDeleteClick },
+									{ icon: "close", onClick: handleCloseClick }
+							  ]
+							: [{ icon: "close", onClick: handleCloseClick }]
+					}
 				/>
 				<FormWrapper onSubmit={onSubmit}>
 					<FormRow>
@@ -83,7 +87,7 @@ const AdminForm: React.FC<AdminFormProps> = ({ title, contents, titleInput, onSu
 					<FormRow>
 						{contents.map((el) => {
 							return el.type === "file" ? (
-								<InputFile key={el.label} bgColor={theme.color.bg} label="label" value="value" onChange={el.onChange} files={el.files} onThumbnailClick={el.onThumbnailClick} />
+								<InputFile key={el.label} bgColor={theme.color.bg} label={el.label} value="value" onChange={el.onChange} files={el.files} onThumbnailClick={el.onThumbnailClick} />
 							) : (
 								<InputDefault
 									key={el.label}

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import TitleMd from "../text/TitleMd";
 
-interface adminListProps {
+interface AdminListProps {
 	id: string;
 	title: string;
 	image: string;
@@ -67,7 +67,7 @@ const Date = styled.p`
 	margin-top: 12px;
 `;
 
-const adminList: React.FC<adminListProps> = ({ id, title, image, date, onClick }) => {
+const AdminList: React.FC<AdminListProps> = ({ id, title, image, date, onClick }) => {
 	return (
 		<Wrapper id={id} onClick={onClick}>
 			<Inner>
@@ -81,4 +81,4 @@ const adminList: React.FC<adminListProps> = ({ id, title, image, date, onClick }
 	);
 };
 
-export default adminList;
+export default AdminList;

@@ -25,3 +25,14 @@ export interface Image {
 	id: string;
 	url: string;
 }
+
+export interface ExhibitionData {
+	id: string;
+	title: string;
+	gallery: string;
+	date: string;
+	location: string;
+	link: string;
+	descript: string;
+	images: Image[];
+}
