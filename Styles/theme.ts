@@ -65,6 +65,7 @@ const layout = {
 	`,
 	input_default: `
 		padding: 8px 12px;
+		line-height: 1.5;
 		font-size: 16px;
 		position: relative;
 	`

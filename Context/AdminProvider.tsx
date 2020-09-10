@@ -1,6 +1,6 @@
 import { useState, createContext, useEffect, useContext } from "react";
 import { useMutation } from "@apollo/client";
-import { LOGIN_QUERY, LOCAL_LOGIN_QUERY } from "../Queries/adminQueries";
+import { LOCAL_LOGIN_QUERY } from "../Queries/adminQueries";
 
 export const AdminContext = createContext({
 	action: null,
@@ -18,15 +18,18 @@ const AdminProvider: React.FC = ({ children }) => {
 	const [localLoginQuery] = useMutation(LOCAL_LOGIN_QUERY);
 
 	useEffect(() => {
-		const token = localStorage.getItem("token");
-		if (token !== null) {
-			localLoginQuery({
-				variables: {
-					token
-				}
-			});
-		} else {
-			return;
+		if (localStorage) {
+			const token = localStorage.getItem("token");
+
+			if (token !== null) {
+				localLoginQuery({
+					variables: {
+						token
+					}
+				});
+			} else {
+				return;
+			}
 		}
 	}, []);
 

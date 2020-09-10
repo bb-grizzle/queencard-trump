@@ -11,11 +11,11 @@ import { AdminFormContents, WorkData } from "../../interface/interface";
 import useInput from "../../Hook/useInput";
 import useInputFile from "../../Hook/useInputFile";
 import { fbUploadStorage, fbDeleteStorage } from "../../Firebase/firebase";
-import AdminList from "../../Component/admin/AdminList";
 import { UPLOAD_IMAGES, UPDATE_IMAGE } from "../../Queries/imageQuries";
 import { ISLOGIN, LOCAL_LOGOUT_QUERY } from "../../Queries/adminQueries";
 import { setLoading } from "../../Context/AppProvider";
 import AdminWrapper from "../../Component/admin/AdminWrapper";
+import AdminList from "../../Component/admin/AdminList";
 
 const work = () => {
 	const [clientData, setClientData] = useState([]);
@@ -92,7 +92,7 @@ const work = () => {
 				})
 			);
 			const urls = fbUploads.map((el) => el.fileUrl);
-			console.log(urls);
+
 			// 03. update Image
 			const newImages = await updateImageMutation({
 				variables: {
@@ -211,7 +211,7 @@ const work = () => {
 
 	const formContents: AdminFormContents[] = [
 		{ ...dateInput, label: "date", placeholder: "2020_09" },
-		{ ...descriptInput, label: "descript" },
+		{ ...descriptInput, label: "descript", type: "textarea" },
 		{ ...filesInput, label: "image", type: "file", onThumbnailClick: handleThumbnailClick }
 	];
 

@@ -7,6 +7,7 @@ import InputFile from "../input/InputFile";
 import theme from "../../Styles/theme";
 import Submit from "../input/Submit";
 import { AdminFormContents } from "../../interface/interface";
+import InputTextArea from "../input/inputTextarea";
 
 interface AdminFormProps {
 	title: string;
@@ -29,6 +30,7 @@ const Wrapper = styled.div<{ active: boolean }>`
 	transform: ${(props) => (props.active ? "translateY(0%);" : "translateY(100%);")};
 	transition: ${(props) => props.theme.transition.default};
 	overflow: scroll;
+	padding-bottom: ${(props) => props.theme.size.padding_bottom_admin.pc};
 `;
 
 const Div = styled.div`
@@ -65,6 +67,19 @@ const AdminForm: React.FC<AdminFormProps> = ({ title, contents, titleInput, onSu
 	};
 	const useaction = useAction();
 
+	const renderInput = (el) => {
+		switch (el.type) {
+			case "file":
+				return <InputFile key={el.label} bgColor={theme.color.bg} label={el.label} value="value" onChange={el.onChange} files={el.files} onThumbnailClick={el.onThumbnailClick} />;
+			case "textarea":
+				return <InputTextArea key={el.label} value={el.value} onChange={el.onChange} label={el.label} placeholder={el.placeholder ? el.placeholder : el.label} bgColor={theme.color.bg} />;
+			default:
+				return (
+					<InputDefault key={el.label} value={el.value} onChange={el.onChange} label={el.label} placeholder={el.placeholder ? el.placeholder : el.label} bgColor={theme.color.bg} type={el.type} />
+				);
+		}
+	};
+
 	return (
 		<Wrapper active={!!useaction}>
 			<Div />
@@ -86,19 +101,7 @@ const AdminForm: React.FC<AdminFormProps> = ({ title, contents, titleInput, onSu
 					</FormRow>
 					<FormRow>
 						{contents.map((el) => {
-							return el.type === "file" ? (
-								<InputFile key={el.label} bgColor={theme.color.bg} label={el.label} value="value" onChange={el.onChange} files={el.files} onThumbnailClick={el.onThumbnailClick} />
-							) : (
-								<InputDefault
-									key={el.label}
-									value={el.value}
-									onChange={el.onChange}
-									label={el.label}
-									placeholder={el.placeholder ? el.placeholder : el.label}
-									bgColor={theme.color.bg}
-									type={el.type}
-								/>
-							);
+							return renderInput(el);
 						})}
 					</FormRow>
 					<Submit value="확인" divColor={theme.color.bg} />

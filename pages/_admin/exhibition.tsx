@@ -220,8 +220,8 @@ const exhibition = () => {
 	};
 
 	const formContents: AdminFormContents[] = [
-		{ ...descriptInput, label: "descript" },
-		{ ...galleryInput, label: "gallery", placeholder: "2020_09" },
+		{ ...descriptInput, label: "descript", type: "textarea" },
+		{ ...galleryInput, label: "gallery" },
 		{ ...dateInput, label: "date", placeholder: "2020.08.05 Wed - 08.30 Sun" },
 		{ ...locationInput, label: "location" },
 		{ ...linkInput, label: "link" },

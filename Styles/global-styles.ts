@@ -28,6 +28,16 @@ const GlobalStyles = createGlobalStyle`
     outline:none;
     border: 0px;
   }
+
+  textarea{
+    border:none;
+    border-radius: none;
+    outline:none;
+    border: 0px;
+    font-family: inherit;
+    resize: none;
+
+  }
   
 `;
 
