@@ -8,6 +8,7 @@ import theme from "../../Styles/theme";
 import Submit from "../input/Submit";
 import { AdminFormContents } from "../../interface/interface";
 import InputTextArea from "../input/inputTextarea";
+import InputDropdown from "../input/inputDrowdown";
 
 interface AdminFormProps {
 	title: string;
@@ -16,6 +17,7 @@ interface AdminFormProps {
 	onSubmit: any;
 	onCloseClick: any;
 	onDeleteClilck?: any;
+	className?: string;
 }
 
 const Wrapper = styled.div<{ active: boolean }>`
@@ -58,7 +60,7 @@ const FormRow = styled.div`
 	}
 `;
 
-const AdminForm: React.FC<AdminFormProps> = ({ title, contents, titleInput, onSubmit, onCloseClick, onDeleteClilck }) => {
+const AdminForm: React.FC<AdminFormProps> = ({ title, contents, titleInput, onSubmit, onCloseClick, onDeleteClilck, className }) => {
 	const handleCloseClick = () => {
 		onCloseClick();
 	};
@@ -75,6 +77,8 @@ const AdminForm: React.FC<AdminFormProps> = ({ title, contents, titleInput, onSu
 				);
 			case "textarea":
 				return <InputTextArea key={el.label} value={el.value} onChange={el.onChange} label={el.label} placeholder={el.placeholder ? el.placeholder : el.label} bgColor={theme.color.bg} />;
+			case "dropdown":
+				return <InputDropdown key={el.label} value={el.value} onChange={el.onChange} label={el.label} placeholder={el.placeholder ? el.placeholder : el.label} bgColor={theme.color.bg} />;
 			default:
 				return (
 					<InputDefault key={el.label} value={el.value} onChange={el.onChange} label={el.label} placeholder={el.placeholder ? el.placeholder : el.label} bgColor={theme.color.bg} type={el.type} />
@@ -83,7 +87,7 @@ const AdminForm: React.FC<AdminFormProps> = ({ title, contents, titleInput, onSu
 	};
 
 	return (
-		<Wrapper active={!!useaction}>
+		<Wrapper active={!!useaction} className={className}>
 			<Div />
 			<Container>
 				<TitleLg

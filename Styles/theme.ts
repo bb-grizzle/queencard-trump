@@ -37,7 +37,19 @@ const div = {
 			left: 0;
 			background-color: ${color ? color : theme.color.black};
 		}
-	`
+	`,
+	right: (color?: string, size?: number) => `
+		
+	&:after {
+		content: "";
+		position: absolute;
+		width: ${size ? `${size}px` : `2px`};
+		height: 100%;
+		top: 0;
+		right: 0;
+		background-color: ${color ? color : theme.color.black};
+	}
+`
 };
 
 const transition = {
@@ -64,7 +76,7 @@ const layout = {
 		justify-content: center;
 	`,
 	input_default: `
-		padding: 8px 12px;
+		padding: 0px 12px;
 		line-height: 1.5;
 		font-size: 16px;
 		position: relative;
@@ -76,7 +88,8 @@ const style = {
 		content: "";
 		padding-top: ${ratio ? ratio : 100}%;
 		display: block;
-	}`
+	}`,
+	border: `1px solid ${color.gray.light}`
 };
 
 const zIndex = {

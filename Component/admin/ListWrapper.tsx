@@ -5,8 +5,12 @@ const Wrapper = styled.ul`
 	flex-wrap: wrap;
 `;
 
-const ListWrapper = ({ children }) => {
-	return <Wrapper>{children}</Wrapper>;
+interface ListWrapperProps {
+	className?: string;
+}
+
+const ListWrapper: React.FC<ListWrapperProps> = ({ children, className }) => {
+	return <Wrapper className={className}>{children}</Wrapper>;
 };
 
 export default ListWrapper;

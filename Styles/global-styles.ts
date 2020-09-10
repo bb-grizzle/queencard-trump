@@ -7,6 +7,8 @@ const GlobalStyles = createGlobalStyle`
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
   body{
@@ -36,7 +38,14 @@ const GlobalStyles = createGlobalStyle`
     border: 0px;
     font-family: inherit;
     resize: none;
+  }
 
+  select, option{
+    border: 0px;
+    font-family: inherit;
+    padding:0;
+    margin:0;
+    outline:none;
   }
   
 `;

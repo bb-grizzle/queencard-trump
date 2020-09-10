@@ -48,3 +48,17 @@ export interface InsperationData {
 	title: string;
 	thumbnail: Image;
 }
+
+export enum InfoFeild {
+	EDUCATION,
+	EXHIBITION,
+	AWARD
+}
+
+export interface InfoData {
+	id: string;
+	year: number;
+	field: InfoFeild;
+	text: string;
+	priority: number;
+}
