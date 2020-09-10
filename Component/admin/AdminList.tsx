@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import TitleMd from "../text/TitleMd";
+import media from "../../Styles/media";
 
 interface AdminListProps {
 	id: string;
@@ -19,6 +20,13 @@ const Wrapper = styled.li`
 		padding-top: 100%;
 		display: block;
 	}
+
+	@media ${media.tablet} {
+		width: calc(50% - 4px);
+		margin-bottom: 8px;
+		/* left: 0; */
+		/* left: 5%; */
+	}
 `;
 
 const Inner = styled.div`
@@ -27,6 +35,13 @@ const Inner = styled.div`
 	width: calc(100% - 16px);
 	top: 8px;
 	left: 8px;
+
+	@media ${media.tablet} {
+		width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
+	}
 `;
 
 const TextWrapper = styled.div`

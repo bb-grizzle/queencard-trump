@@ -15,6 +15,9 @@ const Wrapper = styled.div``;
 
 const Container = styled(ContainerAdminLayout)`
 	padding-top: 200px;
+	@media screen {
+		padding-top: ${(props) => props.theme.size.padding_top_admin.mobile};
+	}
 `;
 
 const login = () => {
@@ -58,6 +61,7 @@ const login = () => {
 			console.log(err);
 			alert("아이디와 비밀번호를 확인해주세요. ");
 		}
+		setloading(false);
 	};
 
 	return (
@@ -66,7 +70,7 @@ const login = () => {
 				<TitleLg title="log in" />
 
 				<Form onSubmit={handleSubmit}>
-					<InputDefault {...emailInput} label="id" placeholder="id" />
+					<InputDefault {...emailInput} label="id" placeholder="id" type="email" />
 					<InputDefault {...pwInput} label="password" placeholder="password" type="password" />
 					<Submit />
 				</Form>

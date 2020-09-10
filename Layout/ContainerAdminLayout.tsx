@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import media from "../Styles/media";
 interface ContainerAdminLayoutProps {
 	className?: string;
 }
@@ -7,6 +8,10 @@ const Wrapper = styled.div`
 	margin: auto;
 	max-width: 90%;
 	height: 100%;
+
+	@media ${media.tablet} {
+		width: 100%;
+	}
 `;
 
 const ContainerAdminLayout: React.FC<ContainerAdminLayoutProps> = ({ children, className }) => {

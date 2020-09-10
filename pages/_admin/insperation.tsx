@@ -15,6 +15,7 @@ import { GET_INSPERATION, UPLOAD_INSPERATION, UPDATE_INSPERATION, DELETE_INSPERA
 import { ISLOGIN } from "../../Queries/adminQueries";
 import { UPLOAD_IMAGES, UPDATE_IMAGE } from "../../Queries/imageQuries";
 import { fbUploadStorage, fbDeleteStorage } from "../../Firebase/firebase";
+import { useRouter } from "next/dist/client/router";
 
 const insperation = () => {
 	const [clientData, setClientData] = useState([]);
@@ -22,6 +23,7 @@ const insperation = () => {
 	const setActionState = setAction();
 	const [deleteImage, setDeleteImage] = useState("");
 	const setloading = setLoading();
+	const { push } = useRouter();
 
 	const titleInput = useInput("");
 	const fileInput = useInputFile();
@@ -37,7 +39,9 @@ const insperation = () => {
 	const [uploadInsperationMutation] = useMutation(UPLOAD_INSPERATION);
 	const [updateInsperationMutation] = useMutation(UPDATE_INSPERATION);
 	const [deleteInsperationMutation] = useMutation(DELETE_INSPERATION);
-
+	useEffect(() => {
+		initAdmin();
+	}, []);
 	useEffect(() => {
 		setloading(loading);
 		if (data) {
@@ -47,7 +51,7 @@ const insperation = () => {
 
 	useEffect(() => {
 		if (isLoggedIn === false || isLoggedIn === null) {
-			// push("/_admin");
+			push("/_admin");
 		}
 	}, [isLoggedIn]);
 

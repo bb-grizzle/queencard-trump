@@ -26,9 +26,12 @@ const GlobalStyles = createGlobalStyle`
 
   input{
     border:none;
-    border-radius: none;
+    border-radius: 0px;
     outline:none;
     border: 0px;
+    -webkit-appearance: none;
+   -webkit-border-radius: 0;
+
   }
 
   textarea{

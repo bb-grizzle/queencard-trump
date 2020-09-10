@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Icon from "../../Asset/icon";
+import Label from "./Label";
+import media from "../../Styles/media";
 
 interface InputFileProps {
 	label: string;
@@ -17,15 +19,10 @@ const Wrapper = styled.div`
 	margin-bottom: 16px;
 
 	position: relative;
-`;
-
-const Label = styled.label`
-	flex-grow: 0;
-	flex-basis: 200px;
-	text-transform: capitalize;
-	line-height: 36px;
-
-	font-size: 16px;
+	@media ${media.tablet} {
+		flex-direction: column;
+		height: auto;
+	}
 `;
 
 const Input = styled.input`
@@ -91,7 +88,7 @@ const CloseBtn = styled.div`
 const InputFile: React.FC<InputFileProps> = ({ label, onChange, bgColor, files, onThumbnailClick, isOneImage }) => {
 	return (
 		<Wrapper>
-			<Label>{label}</Label>
+			<Label label={label} />
 			{!isOneImage ? (
 				<Col>
 					{files &&

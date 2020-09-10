@@ -43,6 +43,10 @@ const work = () => {
 	const setloading = setLoading();
 
 	useEffect(() => {
+		initAdmin();
+	}, []);
+
+	useEffect(() => {
 		if (isLoggedIn === false || isLoggedIn === null) {
 			push("/_admin");
 		}

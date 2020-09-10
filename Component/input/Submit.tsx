@@ -19,6 +19,10 @@ const Wrapper = styled.div<{ divColor?: string }>`
 	@media ${media.hover} {
 		${(props) => props.theme.div.default(`${props.divColor ? props.divColor : theme.color.gray.default}`, 1)};
 	}
+
+	@media ${media.tablet} {
+		height: ${(props) => props.theme.size.height_input_mobile};
+	}
 `;
 
 const Input = styled.input`

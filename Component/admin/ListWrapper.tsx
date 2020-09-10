@@ -1,8 +1,13 @@
 import styled from "styled-components";
+import media from "../../Styles/media";
 
 const Wrapper = styled.ul`
 	display: flex;
 	flex-wrap: wrap;
+
+	@media ${media.tablet} {
+		justify-content: space-between;
+	}
 `;
 
 interface ListWrapperProps {

@@ -10,12 +10,13 @@ import useSize from "../Hook/useSize";
 import { isTouchDevice } from "../util/isTouchDevice";
 import { useQuery, useMutation } from "@apollo/client";
 import { LOCAL_LOGOUT_QUERY, ISLOGIN } from "../Queries/adminQueries";
+import { useAction, ActionType } from "../Context/AdminProvider";
 
-const HeaderWrapper = styled.header`
+const HeaderWrapper = styled.header<{ isWhite: boolean }>`
 	height: ${(props) => props.theme.size.header.pc};
 	width: 100%;
-	background-color: ${(props) => props.theme.color.header};
-	backdrop-filter: blur(12px);
+	background-color: ${(props) => (props.isWhite ? "white" : props.theme.color.bg)};
+	transition: ${(props) => props.theme.transition.default};
 
 	@media ${media.tablet} {
 		height: ${(props) => props.theme.size.header.mobile};
@@ -59,6 +60,7 @@ const Gnb = styled.ul<{ isMenuClick: boolean }>`
 	}
 
 	@media ${media.tablet} {
+		${(props) => props.theme.layout.full_height};
 		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 		position: fixed;
 		left: 0;
@@ -149,6 +151,7 @@ const Header = () => {
 	const {
 		data: { isLoggedIn }
 	} = useQuery(ISLOGIN);
+	const useaction = useAction();
 
 	useEffect(() => {
 		setIsMenuClick(false);
@@ -183,7 +186,7 @@ const Header = () => {
 	};
 
 	return (
-		<HeaderWrapper>
+		<HeaderWrapper isWhite={useaction === ActionType.NULL ? false : true}>
 			<ContainerLayout>
 				<Inner>
 					<InnerWrapper>

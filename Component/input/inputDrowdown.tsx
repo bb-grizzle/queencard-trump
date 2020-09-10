@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import Label from "./Label";
+import media from "../../Styles/media";
 
 interface InputDropdownProps {
 	value: string;
@@ -15,20 +17,15 @@ const Wrapper = styled.div`
 	margin-bottom: 16px;
 	height: ${(props) => props.theme.size.height_input};
 	position: relative;
-`;
 
-const Label = styled.label`
-	flex-grow: 0;
-	flex-basis: 200px;
-	text-transform: capitalize;
-	line-height: 36px;
-
-	font-size: 16px;
+	@media ${media.tablet} {
+		flex-direction: column;
+		height: auto;
+	}
 `;
 
 const Input = styled.div<{ bgColor?: string }>`
 	flex-grow: 1;
-
 	${(props) => props.theme.layout.input_default};
 	background-color: ${(props) => (!props.bgColor ? "white" : `${props.bgColor}`)};
 
@@ -36,6 +33,10 @@ const Input = styled.div<{ bgColor?: string }>`
 
 	&:focus {
 		border: 1px solid black;
+	}
+
+	@media ${media.tablet} {
+		height: ${(props) => props.theme.size.height_input_mobile};
 	}
 `;
 
@@ -52,7 +53,7 @@ const Select = styled.select`
 const InputDropdown: React.FC<InputDropdownProps> = ({ value, onChange, label, bgColor }) => {
 	return (
 		<Wrapper>
-			<Label>{label}</Label>
+			<Label label={label} />
 			<Input bgColor={bgColor}>
 				<Select value={value} onChange={onChange}>
 					<option value="EDUCATION">Education</option>

@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import media from "../../Styles/media";
+import Label from "./Label";
 
 interface InputTextAreaProps {
 	value: string;
@@ -14,15 +16,11 @@ const Wrapper = styled.div`
 	margin-bottom: 16px;
 	height: ${(props) => `calc(${props.theme.size.height_input} * 5)`};
 	position: relative;
-`;
 
-const Label = styled.label`
-	flex-grow: 0;
-	flex-basis: 200px;
-	text-transform: capitalize;
-	line-height: 36px;
-
-	font-size: 16px;
+	@media ${media.tablet} {
+		flex-direction: column;
+		height: auto;
+	}
 `;
 
 const Input = styled.textarea<{ bgColor?: string }>`
@@ -34,12 +32,17 @@ const Input = styled.textarea<{ bgColor?: string }>`
 	&:focus {
 		border: 1px solid black;
 	}
+
+	@media ${media.tablet} {
+		height: ${(props) => `calc(${props.theme.size.height_input_mobile} * 4)`};
+		padding: 8px 12px;
+	}
 `;
 
 const InputTextArea: React.FC<InputTextAreaProps> = ({ value, onChange, label, placeholder, bgColor }) => {
 	return (
 		<Wrapper>
-			<Label>{label}</Label>
+			<Label label={label} />
 			<Input value={value} onChange={onChange} placeholder={placeholder} bgColor={bgColor} />
 		</Wrapper>
 	);

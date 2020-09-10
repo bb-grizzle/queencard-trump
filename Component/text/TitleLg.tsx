@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Icon from "../../Asset/icon";
+import media from "../../Styles/media";
 
 interface IconsProps {
 	icon: string;
@@ -16,6 +17,10 @@ const Wrapper = styled.div`
 	margin-bottom: 40px;
 	display: flex;
 	justify-content: space-between;
+
+	@media ${media.tablet} {
+		margin-bottom: 24px;
+	}
 `;
 
 const Title = styled.h3`

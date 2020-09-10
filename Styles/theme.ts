@@ -101,17 +101,18 @@ const zIndex = {
 
 const size = {
 	height_input: "36px",
+	height_input_mobile: "46px",
 	header: {
 		pc: "120px",
 		mobile: "60px"
 	},
 	padding_top_admin: {
 		pc: "200px",
-		mobile: "100px"
+		mobile: "80px"
 	},
 	padding_bottom_admin: {
-		pc: "200px",
-		mobile: "100px"
+		pc: "100px",
+		mobile: "60px"
 	}
 };
 

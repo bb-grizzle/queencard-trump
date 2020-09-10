@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import media from "../../Styles/media";
+import Label from "./Label";
 
 interface InputDefaultProps {
 	value: string;
@@ -15,15 +17,11 @@ const Wrapper = styled.div`
 	margin-bottom: 16px;
 	height: ${(props) => props.theme.size.height_input};
 	position: relative;
-`;
 
-const Label = styled.label`
-	flex-grow: 0;
-	flex-basis: 200px;
-	text-transform: capitalize;
-	line-height: 36px;
-
-	font-size: 16px;
+	@media ${media.tablet} {
+		flex-direction: column;
+		height: auto;
+	}
 `;
 
 const Input = styled.input<{ bgColor?: string }>`
@@ -35,12 +33,13 @@ const Input = styled.input<{ bgColor?: string }>`
 	&:focus {
 		border: 1px solid black;
 	}
+	height: ${(props) => props.theme.size.height_input_mobile};
 `;
 
 const InputDefault: React.FC<InputDefaultProps> = ({ value, onChange, label, placeholder, type, bgColor }) => {
 	return (
 		<Wrapper>
-			<Label>{label}</Label>
+			<Label label={label} />
 			<Input value={value} onChange={onChange} placeholder={placeholder} type={type} bgColor={bgColor} />
 		</Wrapper>
 	);

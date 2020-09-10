@@ -49,6 +49,9 @@ const exhibition = () => {
 	const [uploadExhibitionMutation] = useMutation(UPLOAD_EXHIBITION);
 	const [updateExhibitionMutation] = useMutation(UPDATE_EXHIBITION);
 	const [deleteExhibitionMutation] = useMutation(DELETE_EXHIBITION);
+	useEffect(() => {
+		initAdmin();
+	}, []);
 
 	useEffect(() => {
 		setloading(loading);
@@ -59,7 +62,7 @@ const exhibition = () => {
 
 	useEffect(() => {
 		if (isLoggedIn === false || isLoggedIn === null) {
-			// push("/_admin");
+			push("/_admin");
 		}
 	}, [isLoggedIn]);
 

@@ -13,6 +13,8 @@ import ListWrapper from "../../Component/admin/ListWrapper";
 import AdminInfoList from "../../Component/admin/AdminInfoList";
 import TitleMd from "../../Component/text/TitleMd";
 import { InfoData } from "../../interface/interface";
+import { ISLOGIN } from "../../Queries/adminQueries";
+import { useRouter } from "next/dist/client/router";
 
 const FieldGroup = styled.div`
 	width: 100%;
@@ -36,12 +38,26 @@ const about = () => {
 	const setloading = setLoading();
 	const nowAction = useAction();
 	const [preField, setPreField] = useState("");
+	const { push } = useRouter();
 
 	// QURIES
 	const [uploadInfoMutation] = useMutation(UPLOAD_INFO);
 	const [updateInfoMutation] = useMutation(UPDATE_INFO);
 	const [deleteInfoMutation] = useMutation(DELETE_INFO);
+	const {
+		data: { isLoggedIn }
+	} = useQuery(ISLOGIN);
 	const { data, loading } = useQuery(GET_ALLINFO);
+
+	useEffect(() => {
+		if (isLoggedIn === false || isLoggedIn === null) {
+			push("/_admin");
+		}
+	}, [isLoggedIn]);
+
+	useEffect(() => {
+		initAdmin();
+	}, []);
 
 	useEffect(() => {
 		setloading(loading);

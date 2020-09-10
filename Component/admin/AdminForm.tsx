@@ -9,6 +9,7 @@ import Submit from "../input/Submit";
 import { AdminFormContents } from "../../interface/interface";
 import InputTextArea from "../input/inputTextarea";
 import InputDropdown from "../input/inputDrowdown";
+import media from "../../Styles/media";
 
 interface AdminFormProps {
 	title: string;
@@ -33,6 +34,11 @@ const Wrapper = styled.div<{ active: boolean }>`
 	transition: ${(props) => props.theme.transition.default};
 	overflow: scroll;
 	padding-bottom: ${(props) => props.theme.size.padding_bottom_admin.pc};
+
+	@media ${media.tablet} {
+		padding-top: ${(props) => props.theme.size.header.mobile};
+		padding-bottom: ${(props) => props.theme.size.padding_bottom_admin.mobile};
+	}
 `;
 
 const Div = styled.div`
@@ -40,6 +46,9 @@ const Div = styled.div`
 	height: 1px;
 	background-color: ${(props) => props.theme.color.gray.light};
 	margin-bottom: 40px;
+	@media ${media.tablet} {
+		margin-bottom: 20px;
+	}
 `;
 
 const FormWrapper = styled.form`
