@@ -104,7 +104,7 @@ const InputFile: React.FC<InputFileProps> = ({ label, onChange, bgColor, files, 
 
 				<FileBtn bgColor={bgColor}>
 					<BoxInnerBtn>
-						<Input type={"file"} onChange={onChange} />
+						<Input type={"file"} onChange={onChange} accept=".gif, .jpg, .png" />
 						<Icon name="plus" />
 					</BoxInnerBtn>
 				</FileBtn>
