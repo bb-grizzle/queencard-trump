@@ -129,8 +129,6 @@ const exhibition = () => {
 			);
 			const urls = fbUploads.map((el) => el.fileUrl);
 
-			console.log(urls);
-
 			// 03. update Image
 			const newImages = await updateImageMutation({
 				variables: {
