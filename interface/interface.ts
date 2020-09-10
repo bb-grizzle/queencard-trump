@@ -12,3 +12,16 @@ export interface AdminFormContents {
 	files?: any[];
 	onThumbnailClick?: any;
 }
+
+export interface WorkData {
+	id: string;
+	title: string;
+	images: Image[];
+	date: string;
+	descript: string;
+}
+
+export interface Image {
+	id: string;
+	url: string;
+}

@@ -1,5 +1,5 @@
 import Header from "../Component/Header";
-import Loading from "../Component/loading";
+import Loading from "../Component/Loading";
 
 const HeaderLayout: React.FC = ({ children }) => {
 	return (

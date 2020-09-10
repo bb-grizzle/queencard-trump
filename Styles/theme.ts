@@ -7,6 +7,7 @@ const color = {
 		default: "#686868",
 		light: "#dddddd"
 	},
+	header: "#f5f5f4a3",
 	bg: "#F5F5F4",
 	load: "#327CB2",
 	hover: "rgba(0,0,0,0.2)"
@@ -91,6 +92,10 @@ const size = {
 		mobile: "60px"
 	},
 	padding_top_admin: {
+		pc: "200px",
+		mobile: "100px"
+	},
+	padding_bottom_admin: {
 		pc: "200px",
 		mobile: "100px"
 	}

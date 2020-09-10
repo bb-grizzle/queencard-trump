@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TextLang } from "./interface";
+import { TextLang } from "../../interface/interface";
 interface ParagraphProps {
 	text: string;
 	className?: string;

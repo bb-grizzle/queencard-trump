@@ -7,7 +7,7 @@ import TitleMd from "../Component/text/TitleMd";
 import Paragraph from "../Component/text/Paragraph";
 import { useEffect, useState } from "react";
 import { bio_en, bio_kr } from "../Data/about";
-import { TextLang } from "../Component/text/interface";
+import { TextLang } from "../interface/interface";
 import media from "../Styles/media";
 import Footer from "../Component/Footer";
 import { setLoading } from "../Context/AppProvider";

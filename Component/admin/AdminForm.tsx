@@ -6,7 +6,7 @@ import InputDefault from "../input/InputDefault";
 import InputFile from "../input/InputFile";
 import theme from "../../Styles/theme";
 import Submit from "../input/Submit";
-import { AdminFormContents } from "../text/interface";
+import { AdminFormContents } from "../../interface/interface";
 
 interface AdminFormProps {
 	title: string;

@@ -9,7 +9,7 @@ import TitleLg from "../../Component/text/TitleLg";
 import AdminList from "../../Component/admin/AdminList";
 import ListWrapper from "../../Component/admin/ListWrapper";
 import AdminForm from "../../Component/admin/AdminForm";
-import { AdminFormContents } from "../../Component/text/interface";
+import { AdminFormContents, WorkData } from "../../interface/interface";
 import useInput from "../../Hook/useInput";
 import useInputFile from "../../Hook/useInputFile";
 import { fbUploadStorage, fbDeleteStorage } from "../../Firebase/firebase";
@@ -20,6 +20,7 @@ import { setLoading } from "../../Context/AppProvider";
 
 const Wrapper = styled.div`
 	padding-top: ${(props) => props.theme.size.padding_top_admin.pc};
+	padding-bottom: ${(props) => props.theme.size.padding_bottom_admin.pc};
 	/* padding-top: 40px; */
 `;
 
@@ -37,7 +38,8 @@ const work = () => {
 		data: { isLoggedIn }
 	} = useQuery(ISLOGIN);
 	const [deleteWorkMutation] = useMutation(DELETE_WORK);
-	const [nowData, setNowData] = useState();
+	const [nowData, setNowData] = useState<WorkData | null>();
+	const [nowId, setNowId] = useState("");
 	const [deleteImage, setDeleteImage] = useState([]);
 
 	const titleInput = useInput("");
@@ -129,7 +131,7 @@ const work = () => {
 				data: { updateWork: newData }
 			} = await updateWorkMutation({
 				variables: {
-					id: nowData.id,
+					id: nowId,
 					title: titleInput.value,
 					date: dateInput.value,
 					descript: descriptInput.value,
@@ -138,7 +140,7 @@ const work = () => {
 				}
 			});
 
-			setClientData((n) => n.map((el) => (el.id === nowData.id ? newData : el)));
+			setClientData((n) => n.map((el) => (el.id === nowId ? newData : el)));
 		}
 		initAdmin();
 	};
@@ -155,8 +157,10 @@ const work = () => {
 	};
 
 	const handleListClick = (data) => {
+		console.log(data);
 		setNowData(data);
 		setActionState(ActionType.EDIT);
+		setNowId(data.id);
 
 		titleInput.setValue(data.title);
 		dateInput.setValue(data.date);
@@ -177,6 +181,7 @@ const work = () => {
 			filesInput.setFiles([]);
 		}, 500);
 		setDeleteImage([]);
+		setNowId("");
 		setActionState(ActionType.NULL);
 		setNowData(null);
 		setloading(false);
@@ -187,12 +192,16 @@ const work = () => {
 		try {
 			await deleteWorkMutation({
 				variables: {
-					id: nowData.id
+					id: nowId
 				}
 			});
-			nowData.images.forEach((el) => {
-				fbDeleteStorage(el.id);
-			});
+
+			if (nowData !== null && nowData !== undefined) {
+				nowData.images.forEach((el) => {
+					fbDeleteStorage(el.id);
+				});
+			}
+
 			setClientData((n) => n.filter((el) => el.id !== nowData.id));
 		} catch (err) {
 			console.log(err);

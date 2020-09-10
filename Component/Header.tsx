@@ -14,6 +14,8 @@ import { LOCAL_LOGOUT_QUERY, ISLOGIN } from "../Queries/adminQueries";
 const HeaderWrapper = styled.header`
 	height: ${(props) => props.theme.size.header.pc};
 	width: 100%;
+	background-color: ${(props) => props.theme.color.header};
+	backdrop-filter: blur(12px);
 
 	@media ${media.tablet} {
 		height: ${(props) => props.theme.size.header.mobile};
