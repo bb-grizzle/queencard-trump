@@ -75,7 +75,7 @@ const about = () => {
 	const initAdmin = () => {
 		setTimeout(() => {
 			yearInput.setValue("");
-			fieldInput.setValue("");
+			fieldInput.setValue("EDUCATION");
 			textInput.setValue("");
 			priorityInput.setValue("");
 		}, 500);
@@ -100,6 +100,8 @@ const about = () => {
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
+
+		console.log(fieldInput.value);
 
 		if (yearInput.value === "" || fieldInput.value === "" || textInput.value === "" || priorityInput.value === "") {
 			alert("양식을 모두 채워주세요 😀");

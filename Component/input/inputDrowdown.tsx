@@ -55,7 +55,7 @@ const InputDropdown: React.FC<InputDropdownProps> = ({ value, onChange, label, b
 		<Wrapper>
 			<Label label={label} />
 			<Input bgColor={bgColor}>
-				<Select value={value} onChange={onChange}>
+				<Select onChange={onChange} value={value}>
 					<option value="EDUCATION">Education</option>
 					<option value="EXHIBITION">Exhibition</option>
 					<option value="AWARD">Award</option>
