@@ -3,29 +3,20 @@ import { useQuery } from "@apollo/client";
 import { GET_EXHIBITION } from "../../Queries/exhibitionQueries";
 import Footer from "../../Component/Footer";
 import PageContainer from "../../Layout/PageContainer";
-import { useEffect } from "react";
 import ExhibitionList from "../../Component/ExhibitionList";
-import ContainerLayout from "../../Layout/ContainerLayout";
+import ContainerSmall from "../../Layout/ContainerSmall";
 
 const Wrapper = styled.div``;
 
 const ListWrapper = styled.ul``;
 
-const Container = styled(ContainerLayout)`
-	width: 600px;
-`;
-
 const exhibition = () => {
 	const { data, loading } = useQuery(GET_EXHIBITION);
-
-	useEffect(() => {
-		console.log(data);
-	}, [data]);
 
 	return (
 		<Wrapper>
 			<PageContainer>
-				<Container>
+				<ContainerSmall>
 					{data && (
 						<ListWrapper>
 							{data.getExhibition.map((el) => {
@@ -33,7 +24,7 @@ const exhibition = () => {
 							})}
 						</ListWrapper>
 					)}
-				</Container>
+				</ContainerSmall>
 			</PageContainer>
 
 			<Footer />

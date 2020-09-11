@@ -63,8 +63,8 @@ const Btn = styled.div`
 `;
 
 const TitleLg: React.FC<TitleLgProps> = ({ title, className, icons }) => (
-	<Wrapper>
-		<Title className={className}>{title}</Title>
+	<Wrapper className={className}>
+		<Title>{title}</Title>
 
 		<BtnWrapper>
 			{icons &&

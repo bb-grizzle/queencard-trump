@@ -26,6 +26,7 @@ const EDUCATION_QUERY = gql`
 	}
 `;
 
+const Wrapper = styled.div``;
 const CoverContainer = styled(ContainerLayout)`
 	@media ${media.tablet} {
 		max-width: 100%;
@@ -76,14 +77,14 @@ const InfoListCustom = styled(InfoList)`
 `;
 
 const index = () => {
-	const { data, loading, error } = useQuery(EDUCATION_QUERY);
+	const { data } = useQuery(EDUCATION_QUERY);
 	const [imageLoaded, setImageLoaded] = useState(false);
 	const setloading = setLoading();
 
 	const [filteredData, setFilteredData] = useState({
-		EDUCATION: [],
-		EXHIBITION: [],
-		AWARD: []
+		EXHIBITION: null,
+		EDUCATION: null,
+		AWARD: null
 	});
 
 	useEffect(() => {
@@ -99,16 +100,22 @@ const index = () => {
 	}, [imageLoaded]);
 
 	useEffect(() => {
-		if (!loading) {
+		if (data) {
 			data.getAllInfo.forEach((el) => {
 				const field = el.field;
 				setFilteredData((n) => ({
 					...n,
-					[field]: n[field].concat(el)
+					[field]: !n[field] ? [el] : n[field].concat(el)
 				}));
 			});
+
+			setFilteredData((n) => ({
+				EXHIBITION: n.EXHIBITION === null ? [] : n.EXHIBITION,
+				EDUCATION: n.EDUCATION === null ? [] : n.EDUCATION,
+				AWARD: n.AWARD === null ? [] : n.AWARD
+			}));
 		}
-	}, [data, loading, error]);
+	}, [data]);
 
 	useEffect(() => {
 		const img = document.createElement("img");
@@ -119,39 +126,45 @@ const index = () => {
 	}, []);
 
 	return (
-		<PageContainer>
-			<CoverContainer>
-				<Cover image={URL} />
-			</CoverContainer>
-			<InfoContainer>
-				<InfoWrapper>
-					<InfoCol>
-						<Title title={"Bio -"} />
-						<Paragraph text={bio_en} lang={TextLang.EN} />
-						<Paragraph text={bio_kr} lang={TextLang.KR} />
-					</InfoCol>
-					{filteredData && (
-						<InfoCol>
-							{Object.keys(filteredData).map((key) => {
-								return (
-									<InfoRow key={key}>
-										<Title title={`${key.toLocaleLowerCase()} -`} />
-										{filteredData[key].map((list) => {
-											return (
-												<ListWrapper key={list.id}>
-													<InfoListCustom year={list.year} text={list.text} />
-												</ListWrapper>
-											);
-										})}
-									</InfoRow>
-								);
-							})}
-						</InfoCol>
-					)}
-				</InfoWrapper>
-			</InfoContainer>
+		<Wrapper>
+			<PageContainer>
+				{filteredData.EXHIBITION && filteredData.EDUCATION && filteredData.AWARD && (
+					<>
+						<CoverContainer>
+							<Cover image={URL} />
+						</CoverContainer>
+						<InfoContainer>
+							<InfoWrapper>
+								<InfoCol>
+									<Title title={"Bio -"} />
+									<Paragraph text={bio_en} lang={TextLang.EN} />
+									<Paragraph text={bio_kr} lang={TextLang.KR} />
+								</InfoCol>
+								<InfoCol>
+									{Object.keys(filteredData).map((key) => {
+										return (
+											<InfoRow key={key}>
+												<Title title={`${key.toLocaleLowerCase()} -`} />
+												{filteredData[key] !== null &&
+													filteredData[key].map((list) => {
+														return (
+															<ListWrapper key={list.id}>
+																<InfoListCustom year={list.year} text={list.text} />
+															</ListWrapper>
+														);
+													})}
+											</InfoRow>
+										);
+									})}
+								</InfoCol>
+							</InfoWrapper>
+						</InfoContainer>
+					</>
+				)}
+			</PageContainer>
+
 			<Footer />
-		</PageContainer>
+		</Wrapper>
 	);
 };
 

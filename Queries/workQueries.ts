@@ -54,3 +54,18 @@ export const DELETE_WORK = gql`
 		}
 	}
 `;
+
+export const GET_WORK_DETAIL = gql`
+	query getWorkDetail($id: String!) {
+		getWorkDetail(id: $id) {
+			id
+			title
+			date
+			descript
+			images {
+				id
+				url
+			}
+		}
+	}
+`;

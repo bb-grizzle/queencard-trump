@@ -60,3 +60,21 @@ export const DELETE_EXHIBITION = gql`
 		}
 	}
 `;
+
+export const GET_EXHIBITION_DETAIL = gql`
+	query getExhibitionDetail($id: String!) {
+		getExhibitionDetail(id: $id) {
+			id
+			title
+			gallery
+			date
+			location
+			link
+			descript
+			images {
+				url
+				id
+			}
+		}
+	}
+`;
