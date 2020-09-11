@@ -10,6 +10,7 @@ import { bio_en, bio_kr } from "../Data/about";
 import { TextLang } from "../interface/interface";
 import media from "../Styles/media";
 import Footer from "../Component/Footer";
+import PageContainer from "../Layout/PageContainer";
 
 const EDUCATION_QUERY = gql`
 	{
@@ -101,7 +102,7 @@ const index = () => {
 	}, [data, loading, error]);
 
 	return (
-		<Wrapper>
+		<PageContainer>
 			<CoverContainer>
 				<Cover />
 			</CoverContainer>
@@ -133,7 +134,7 @@ const index = () => {
 				</InfoWrapper>
 			</InfoContainer>
 			<Footer />
-		</Wrapper>
+		</PageContainer>
 	);
 };
 

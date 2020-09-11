@@ -6,6 +6,7 @@ export const GET_WORK = gql`
 			title
 			date
 			descript
+			double
 			images {
 				id
 				url
@@ -15,11 +16,12 @@ export const GET_WORK = gql`
 `;
 
 export const UPLOAD_WORK = gql`
-	mutation uploadWork($date: String!, $title: String!, $descript: String!, $images: [String!]!) {
-		uploadWork(date: $date, title: $title, descript: $descript, images: $images) {
+	mutation uploadWork($date: String!, $title: String!, $descript: String!, $images: [String!]!, $double: Boolean!) {
+		uploadWork(date: $date, title: $title, descript: $descript, images: $images, double: $double) {
 			id
 			date
 			descript
+			double
 			images {
 				id
 				url
@@ -30,11 +32,12 @@ export const UPLOAD_WORK = gql`
 `;
 
 export const UPDATE_WORK = gql`
-	mutation updateWork($id: String!, $title: String, $date: String, $descript: String, $deleteImage: [String!], $addImages: [String!]) {
-		updateWork(id: $id, title: $title, date: $date, descript: $descript, deleteImage: $deleteImage, addImages: $addImages) {
+	mutation updateWork($id: String!, $title: String, $date: String, $descript: String, $deleteImage: [String!], $addImages: [String!], $double: Boolean!) {
+		updateWork(id: $id, title: $title, date: $date, descript: $descript, deleteImage: $deleteImage, addImages: $addImages, double: $double) {
 			id
 			date
 			descript
+			double
 			images {
 				id
 				url

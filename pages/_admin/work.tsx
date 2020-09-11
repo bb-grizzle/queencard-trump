@@ -16,6 +16,7 @@ import { ISLOGIN, LOCAL_LOGOUT_QUERY } from "../../Queries/adminQueries";
 import { setLoading } from "../../Context/AppProvider";
 import AdminWrapper from "../../Component/admin/AdminWrapper";
 import AdminList from "../../Component/admin/AdminList";
+import useCheck from "../../Hook/useCheck";
 
 const work = () => {
 	const [clientData, setClientData] = useState([]);
@@ -39,8 +40,13 @@ const work = () => {
 	const titleInput = useInput("");
 	const dateInput = useInput("");
 	const descriptInput = useInput("");
+	const doubleInput = useCheck(false);
 	const filesInput = useInputFile();
 	const setloading = setLoading();
+
+	useEffect(() => {
+		console.log(doubleInput);
+	}, []);
 
 	useEffect(() => {
 		initAdmin();
@@ -116,7 +122,8 @@ const work = () => {
 						title: titleInput.value,
 						date: dateInput.value,
 						descript: descriptInput.value,
-						images: connectedImagesId
+						images: connectedImagesId,
+						double: doubleInput.value
 					}
 				});
 				setClientData((n) => [{ ...newData, images: newImages.data.updateImage }, ...n]);
@@ -135,7 +142,8 @@ const work = () => {
 						date: dateInput.value,
 						descript: descriptInput.value,
 						deleteImage: deleteImage,
-						addImages: connectedImagesId
+						addImages: connectedImagesId,
+						double: doubleInput.value
 					}
 				});
 
@@ -167,6 +175,7 @@ const work = () => {
 		dateInput.setValue(data.date);
 		descriptInput.setValue(data.descript);
 		filesInput.setFiles(data.images);
+		doubleInput.setValue(data.double);
 	};
 
 	const handleCloseClick = () => {
@@ -180,6 +189,7 @@ const work = () => {
 			dateInput.setValue("");
 			descriptInput.setValue("");
 			filesInput.setFiles([]);
+			doubleInput.setValue(false);
 		}, 500);
 		setDeleteImage([]);
 		setNowId("");
@@ -216,6 +226,7 @@ const work = () => {
 	const formContents: AdminFormContents[] = [
 		{ ...dateInput, label: "date", placeholder: "2020_09" },
 		{ ...descriptInput, label: "descript", type: "textarea" },
+		{ ...doubleInput, label: "double", type: "check" },
 		{ ...filesInput, label: "image", type: "file", onThumbnailClick: handleThumbnailClick }
 	];
 

@@ -10,6 +10,7 @@ import { AdminFormContents } from "../../interface/interface";
 import InputTextArea from "../input/inputTextarea";
 import InputDropdown from "../input/inputDrowdown";
 import media from "../../Styles/media";
+import InputCheck from "../input/InputCheck";
 
 interface AdminFormProps {
 	title: string;
@@ -88,6 +89,8 @@ const AdminForm: React.FC<AdminFormProps> = ({ title, contents, titleInput, onSu
 				return <InputTextArea key={el.label} value={el.value} onChange={el.onChange} label={el.label} placeholder={el.placeholder ? el.placeholder : el.label} bgColor={theme.color.bg} />;
 			case "dropdown":
 				return <InputDropdown key={el.label} value={el.value} onChange={el.onChange} label={el.label} placeholder={el.placeholder ? el.placeholder : el.label} bgColor={theme.color.bg} />;
+			case "check":
+				return <InputCheck key={el.label} value={el.value} onChange={el.onChange} label={el.label} placeholder={el.placeholder ? el.placeholder : el.label} bgColor={theme.color.bg} />;
 			default:
 				return (
 					<InputDefault key={el.label} value={el.value} onChange={el.onChange} label={el.label} placeholder={el.placeholder ? el.placeholder : el.label} bgColor={theme.color.bg} type={el.type} />

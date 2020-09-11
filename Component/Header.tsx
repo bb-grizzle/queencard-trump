@@ -15,12 +15,13 @@ import { useAction, ActionType } from "../Context/AdminProvider";
 const HeaderWrapper = styled.header<{ isWhite: boolean }>`
 	height: ${(props) => props.theme.size.header.pc};
 	width: 100%;
+	left: 0;
+	top: 0;
 	background-color: ${(props) => (props.isWhite ? "white" : props.theme.color.bg)};
 	transition: ${(props) => props.theme.transition.default};
 
 	@media ${media.tablet} {
 		height: ${(props) => props.theme.size.header.mobile};
-		/* height: 60px; */
 	}
 	z-index: ${(props) => props.theme.zIndex.header};
 	position: fixed;
