@@ -5,12 +5,16 @@ interface Menu {
 
 export const MENU: Menu[] = [
 	{
+		id: "about",
+		href: "/about"
+	},
+	{
 		id: "work",
 		href: "/"
 	},
 	{
-		id: "about",
-		href: "/about"
+		id: "exhibition",
+		href: "/exhibition"
 	},
 	{
 		id: "insperation",

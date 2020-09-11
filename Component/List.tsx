@@ -3,6 +3,7 @@ import TitleMd from "./text/TitleMd";
 import Link from "next/link";
 import Paragraph from "./text/Paragraph";
 import { useEffect, useState } from "react";
+import media from "../Styles/media";
 
 interface ListProps {
 	data: any;
@@ -38,9 +39,11 @@ const WorkList = styled.li<{ ratio: number; active: any; delay?: number; column?
 		}
 	`};
 
-	&:hover {
-		${Blur} {
-			opacity: 1;
+	@media ${media.hover} {
+		&:hover {
+			${Blur} {
+				opacity: 1;
+			}
 		}
 	}
 `;
