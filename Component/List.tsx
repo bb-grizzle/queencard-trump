@@ -2,6 +2,13 @@ import styled from "styled-components";
 import TitleMd from "./text/TitleMd";
 import Link from "next/link";
 import Paragraph from "./text/Paragraph";
+import { useEffect, useState } from "react";
+
+interface ListProps {
+	data: any;
+	router: string;
+	column?: number;
+}
 
 const Blur = styled.div`
 	${(props) => props.theme.layout.full_abs};
@@ -10,8 +17,10 @@ const Blur = styled.div`
 	transition: ${(props) => props.theme.transition.hover};
 `;
 
-const WorkList = styled.li<{ ratio: number; active: any; delay?: number }>`
-	width: calc((100% - 32px) / 3);
+const WorkList = styled.li<{ ratio: number; active: any; delay?: number; column?: number }>`
+	width: ${(props) => `calc((100% - (16px * (${props.column}-1))) / ${props.column});`};
+
+	position: relative;
 	margin-bottom: 16px;
 	${(props) => props.theme.style.ratio(props.ratio)};
 
@@ -22,6 +31,12 @@ const WorkList = styled.li<{ ratio: number; active: any; delay?: number }>`
 		display: block;
 		${(props) => props.theme.layout.full_abs};
 	}
+
+	${(props) => `
+		&:not(:nth-child(${props.column})) {
+			margin-right: 16px;
+		}
+	`};
 
 	&:hover {
 		${Blur} {
@@ -48,13 +63,23 @@ const TextWrapper = styled.div`
 	transition: ${(props) => props.theme.transition.hover};
 `;
 
-const List = ({ data, loaded, router }) => {
+const List: React.FC<ListProps> = ({ data, router, column = 3 }) => {
+	const [loaded, setLoaded] = useState(false);
 	const ratio = data.double === undefined && data.double === null ? 100 : data.double === true ? 133 : 74;
+
+	useEffect(() => {
+		const img = new Image();
+		img.onload = () => {
+			setLoaded(true);
+		};
+		img.src = Array.isArray(data.images) ? data.images[0].url : data.thumbnail.url;
+	}, []);
+
 	return (
-		<WorkList key={data.id} ratio={ratio} delay={loaded && Math.round(Math.random() * 4)} active={loaded ? true : false}>
+		<WorkList column={column} key={data.id} ratio={ratio} delay={loaded && Math.round(Math.random() * 4)} active={loaded}>
 			<Link href={`/${router}/[id]`} as={`/${router}/${data.id}`}>
 				<a>
-					<ListWrapper image={data.images[0].url}>
+					<ListWrapper image={Array.isArray(data.images) ? data.images[0].url : data.thumbnail.url}>
 						<Blur />
 						<TextWrapper>
 							<Title title={data.title} color={"white"} />

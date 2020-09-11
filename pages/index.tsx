@@ -7,26 +7,17 @@ import Footer from "../Component/Footer";
 import ContainerLayout from "../Layout/ContainerLayout";
 import PageContainer from "../Layout/PageContainer";
 import Masonry from "react-masonry-component";
-import Link from "next/link";
-import TitleMd from "../Component/text/TitleMd";
-import Paragraph from "../Component/text/Paragraph";
 import List from "../Component/List";
 
 const masonryOptions = {
-	transitionDuration: 0,
-	gutter: 16
+	transitionDuration: 0
 };
 
 const Wrapper = styled.div``;
 
 const work = () => {
 	const { data, loading } = useQuery(GET_WORK);
-	const [isImageLoaded, setIsImageLoaded] = useState(false);
 	const setloading = setLoading();
-
-	const onImageLoaded = () => {
-		setIsImageLoaded(true);
-	};
 
 	return (
 		<Wrapper>
@@ -39,10 +30,9 @@ const work = () => {
 							options={masonryOptions} // default {}
 							disableImagesLoaded={false} // default false
 							updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
-							onImagesLoaded={onImageLoaded} // default {}
 						>
 							{data.getWork.map((el) => {
-								return <List data={el} loaded={isImageLoaded} router={"work"} />;
+								return <List data={el} router={"work"} key={el.id} />;
 							})}
 						</Masonry>
 					)}
