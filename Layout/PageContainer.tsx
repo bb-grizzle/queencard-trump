@@ -6,6 +6,7 @@ const Wrapper = styled.div`
 	@media ${media.tablet} {
 		padding-top: ${(props) => props.theme.size.header.mobile};
 	}
+	min-height: ${(props) => props.theme.layout.full_height};
 `;
 const PageContainer = ({ children }) => {
 	return <Wrapper>{children}</Wrapper>;

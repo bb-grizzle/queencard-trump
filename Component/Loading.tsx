@@ -16,7 +16,7 @@ const Wrapper = styled.div<{ active: boolean }>`
 	left: 0;
 	top: 0;
 	width: 100%;
-	${(props) => props.theme.layout.full_height};
+	height: ${(props) => props.theme.layout.full_height};
 	background-color: white;
 	${(props) => props.theme.layout.center_flex};
 	transform: ${(props) => (props.active ? "translateY(0)" : "translateY(-100%)")};

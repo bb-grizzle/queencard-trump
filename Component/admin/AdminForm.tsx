@@ -26,7 +26,7 @@ const Wrapper = styled.div<{ active: boolean }>`
 	padding-top: ${(props) => props.theme.size.header.pc};
 	position: fixed;
 	width: 100%;
-	${(props) => props.theme.layout.full_height};
+	height: ${(props) => props.theme.layout.full_height};
 	top: 0;
 	background-color: white;
 	left: 0;

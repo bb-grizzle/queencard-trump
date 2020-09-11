@@ -61,7 +61,7 @@ const Gnb = styled.ul<{ isMenuClick: boolean }>`
 	}
 
 	@media ${media.tablet} {
-		${(props) => props.theme.layout.full_height};
+		height: ${(props) => props.theme.layout.full_height};
 		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 		position: fixed;
 		left: 0;

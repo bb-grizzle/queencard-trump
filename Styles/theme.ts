@@ -26,6 +26,17 @@ const div = {
 			background-color: ${color ? color : theme.color.black};
 		}
 	`,
+	bottom: (color?: string, size?: number, width?: string) => `
+		&:after {
+			content: "";
+			position: absolute;
+			width: ${width ? width : "100%"};
+			height: ${size ? `${size}px` : `2px`};
+			bottom: 0;
+			left: 0;
+			background-color: ${color ? color : theme.color.black};
+		}
+	`,
 	left: (color?: string, size?: number) => `
 		
 		&:after {
@@ -53,7 +64,8 @@ const div = {
 };
 
 const transition = {
-	default: `all 0.5s cubic-bezier(0.7, 0, 0.24, 0.99);`
+	default: `all 0.5s cubic-bezier(0.7, 0, 0.24, 0.99);`,
+	hover: `all .5s cubic-bezier(0.32, 0, 0.64, 0.99)`
 };
 
 const animation = {
@@ -64,8 +76,14 @@ const animation = {
 };
 
 const layout = {
-	full_height: `height: calc(var(--vh, 1vh) * 100);`,
-	full_abs: ``,
+	full_height: `calc(var(--vh, 1vh) * 100);`,
+	full_abs: `
+	position: absolute;
+		left:0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+	`,
 	full_image: (url) => `
 		background-image: url(${url});
 		background-size: cover;
@@ -89,7 +107,8 @@ const style = {
 		padding-top: ${ratio ? ratio : 100}%;
 		display: block;
 	}`,
-	border: `1px solid ${color.gray.light}`
+	border: `1px solid ${color.gray.light}`,
+	hover_effect: ``
 };
 
 const zIndex = {
