@@ -11,7 +11,8 @@ import { TextLang } from "../interface/interface";
 import media from "../Styles/media";
 import Footer from "../Component/Footer";
 import PageContainer from "../Layout/PageContainer";
-
+import { setLoading } from "../Context/AppProvider";
+const URL = "/image/cover_01.jpg";
 const EDUCATION_QUERY = gql`
 	{
 		getAllInfo {
@@ -25,21 +26,15 @@ const EDUCATION_QUERY = gql`
 	}
 `;
 
-const Wrapper = styled.div`
-	@media ${media.tablet} {
-		padding-top: 16px;
-	}
-`;
-
 const CoverContainer = styled(ContainerLayout)`
 	@media ${media.tablet} {
 		max-width: 100%;
 	}
 `;
 
-const Cover = styled.div`
+const Cover = styled.div<{ image: string }>`
 	padding-top: calc(100% / 3);
-	${(props) => props.theme.layout.full_image("/image/cover_01.jpg")}
+	${(props) => props.theme.layout.full_image(props.image)}
 `;
 
 const InfoContainer = styled(ContainerLayout)`
@@ -82,12 +77,26 @@ const InfoListCustom = styled(InfoList)`
 
 const index = () => {
 	const { data, loading, error } = useQuery(EDUCATION_QUERY);
+	const [imageLoaded, setImageLoaded] = useState(false);
+	const setloading = setLoading();
 
 	const [filteredData, setFilteredData] = useState({
 		EDUCATION: [],
 		EXHIBITION: [],
 		AWARD: []
 	});
+
+	useEffect(() => {
+		setloading(true);
+	}, []);
+
+	useEffect(() => {
+		if (imageLoaded) {
+			setTimeout(() => {
+				setloading(false);
+			}, 1000);
+		}
+	}, [imageLoaded]);
 
 	useEffect(() => {
 		if (!loading) {
@@ -101,10 +110,18 @@ const index = () => {
 		}
 	}, [data, loading, error]);
 
+	useEffect(() => {
+		const img = document.createElement("img");
+		img.onload = () => {
+			setImageLoaded(true);
+		};
+		img.src = URL;
+	}, []);
+
 	return (
 		<PageContainer>
 			<CoverContainer>
-				<Cover />
+				<Cover image={URL} />
 			</CoverContainer>
 			<InfoContainer>
 				<InfoWrapper>
