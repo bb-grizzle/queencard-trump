@@ -16,7 +16,7 @@ const masonryOptions = {
 const Wrapper = styled.div``;
 
 const work = () => {
-	const { data, loading } = useQuery(GET_WORK);
+	const { data } = useQuery(GET_WORK);
 
 	return (
 		<Wrapper>

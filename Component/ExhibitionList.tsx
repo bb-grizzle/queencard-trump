@@ -5,6 +5,7 @@ import Paragraph from "./text/Paragraph";
 import ExhibitionInfoList from "./ExhibitionInfoList";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import media from "../Styles/media";
 
 interface ExhibitionListProps {
 	id: string;
@@ -32,6 +33,9 @@ const Wrapper = styled.li<{ active: boolean }>`
 	> a {
 		display: block;
 		display: flex;
+		@media ${media.tablet} {
+			flex-direction: column;
+		}
 	}
 
 	&:hover {
@@ -43,6 +47,10 @@ const Wrapper = styled.li<{ active: boolean }>`
 
 const Col = styled.div`
 	width: 50%;
+
+	@media ${media.tablet} {
+		width: 100%;
+	}
 `;
 const ColRight = styled(Col)`
 	margin-left: 8px;
@@ -53,6 +61,10 @@ const ColLeft = styled(Col)`
 	margin-right: 8px;
 	position: relative;
 	min-height: 215px;
+`;
+
+const Text = styled(Paragraph)`
+	margin-bottom: 8px;
 `;
 
 const Thumbnail = styled.div<{ image: string }>`
@@ -83,7 +95,7 @@ const ExhibitionList: React.FC<ExhibitionListProps> = ({ id, date, gallery, link
 					</ColLeft>
 					<ColRight>
 						<TitleMd title={title} />
-						<Paragraph text={gallery} />
+						<Text text={gallery} />
 
 						<InfoWrapper>
 							<ExhibitionInfoList text={date} icon={"date"} />

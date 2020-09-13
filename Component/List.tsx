@@ -20,7 +20,6 @@ const Blur = styled.div`
 
 const WorkList = styled.li<{ ratio: number; active: any; delay?: number; column?: number }>`
 	width: ${(props) => `calc((100% - (16px * (${props.column}-1))) / ${props.column});`};
-
 	position: relative;
 	margin-bottom: 16px;
 	${(props) => props.theme.style.ratio(props.ratio)};
@@ -46,6 +45,30 @@ const WorkList = styled.li<{ ratio: number; active: any; delay?: number; column?
 			}
 		}
 	}
+
+	@media ${media.tablet} {
+		width: calc(50% - 4px);
+		margin-bottom: 8px;
+
+		${(props) => `
+			&:not(:nth-child(${props.column})) {
+				margin-right: 0px;
+			}
+		`};
+
+		&:nth-child(odd) {
+			margin-right: 4px;
+		}
+		&:nth-child(even) {
+			margin-left: 4px;
+		}
+	}
+
+	@media ${media.mobile} {
+		width: 100%;
+		margin-right: 0 !important;
+		margin-left: 0 !important;
+	}
 `;
 
 const ListWrapper = styled.div<{ image: string }>`
@@ -64,6 +87,10 @@ const TextWrapper = styled.div`
 	${(props) => props.theme.layout.full_abs};
 	padding: 16px;
 	transition: ${(props) => props.theme.transition.hover};
+
+	@media ${media.tablet} {
+		padding: 12px;
+	}
 `;
 
 const List: React.FC<ListProps> = ({ data, router, column = 3 }) => {

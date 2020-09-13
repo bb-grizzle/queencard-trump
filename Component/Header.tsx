@@ -16,7 +16,7 @@ const HeaderWrapper = styled.header<{ isWhite: boolean }>`
 	height: ${(props) => props.theme.size.header.pc};
 	width: 100%;
 	left: 0;
-	top: 0;
+	top: 0px;
 	background-color: ${(props) => (props.isWhite ? "white" : props.theme.color.bg)};
 	transition: ${(props) => props.theme.transition.default};
 
