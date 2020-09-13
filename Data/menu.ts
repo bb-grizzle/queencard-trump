@@ -19,11 +19,11 @@ export const MENU: Menu[] = [
 	{
 		id: "insperation",
 		href: "/insperation"
-	},
-	{
-		id: "contact",
-		href: "/contact"
 	}
+	// {
+	// 	id: "contact",
+	// 	href: "/contact"
+	// }
 ];
 
 export const MENU_ADMIN: Menu[] = [

@@ -4,11 +4,13 @@ import Link from "next/link";
 import Paragraph from "./text/Paragraph";
 import { useEffect, useState } from "react";
 import media from "../Styles/media";
+import { useRouter } from "next/dist/client/router";
 
 interface ListProps {
 	data: any;
 	router: string;
 	column?: number;
+	onClick?: any;
 }
 
 const Blur = styled.div`
@@ -93,9 +95,10 @@ const TextWrapper = styled.div`
 	}
 `;
 
-const List: React.FC<ListProps> = ({ data, router, column = 3 }) => {
+const List: React.FC<ListProps> = ({ data, router, column = 3, onClick }) => {
 	const [loaded, setLoaded] = useState(false);
 	const ratio = data.double === undefined && data.double === null ? 100 : data.double === true ? 133 : 74;
+	const { push } = useRouter();
 
 	useEffect(() => {
 		const img = new Image();
@@ -105,10 +108,20 @@ const List: React.FC<ListProps> = ({ data, router, column = 3 }) => {
 		img.src = Array.isArray(data.images) ? data.images[0].url : data.thumbnail.url;
 	}, []);
 
+	const handleListClick = (e: any) => {
+		if (router === "work" || router === "exhibition") {
+			// push(`/${router}/${data.id}`);
+			return;
+		} else {
+			e.preventDefault();
+			onClick();
+		}
+	};
+
 	return (
 		<WorkList column={column} key={data.id} ratio={ratio} delay={loaded && Math.round(Math.random() * 4)} active={loaded}>
 			<Link href={`/${router}/[id]`} as={`/${router}/${data.id}`}>
-				<a>
+				<a onClick={handleListClick}>
 					<ListWrapper image={Array.isArray(data.images) ? data.images[0].url : data.thumbnail.url}>
 						<Blur />
 						<TextWrapper>

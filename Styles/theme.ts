@@ -115,7 +115,8 @@ const zIndex = {
 	loading: 100,
 	menu: 100,
 	header: 80,
-	adminForm: 60
+	adminForm: 60,
+	insperationDetail: 90
 };
 
 const size = {

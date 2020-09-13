@@ -87,11 +87,9 @@ const GnbWrapper = styled.div`
 	${(props) => props.theme.div.left()};
 	font-weight: 300;
 
-	@media ${media.hover} {
-		&:hover {
-			${Gnb} {
-				clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-			}
+	&:hover {
+		${Gnb} {
+			clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 		}
 	}
 
@@ -206,8 +204,20 @@ const Header = () => {
 								}}
 							>
 								{menu.map((el) => {
+									let route = "";
+									if (pathname === "/" || pathname === "/work/[id]") {
+										route = "work";
+									} else if (pathname === "/about") {
+										route = "about";
+									} else if (pathname === "/exhibition" || pathname === "/exhibition/[id]") {
+										route = "exhibition";
+									} else if (pathname === "/insperation" || pathname === "/insperation/[id]") {
+										route = "insperation";
+									} else if (pathname === "/contact") {
+										route = "contact";
+									}
 									return (
-										<GnbList key={el.id} active={pathname === el.href ? true : false}>
+										<GnbList key={el.id} active={route === el.id ? true : false}>
 											<Link href={el.href}>
 												<a>{el.id}</a>
 											</Link>
