@@ -1,11 +1,17 @@
 import styled from "styled-components";
 import Icon from "../Asset/icon";
 import Paragraph from "./text/Paragraph";
+import media from "../Styles/media";
 const List = styled.li`
 	display: flex;
 	flex-wrap: wrap;
 	padding: 4px 8px;
 	margin-bottom: 4px;
+
+	@media ${media.tablet} {
+		padding-left: 0;
+		padding-right: 4px;
+	}
 `;
 
 const IconWrapper = styled.div`

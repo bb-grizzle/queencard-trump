@@ -1,11 +1,16 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
+import media from "../../Styles/media";
 const Wrapper = styled.div``;
 const Img = styled.img`
 	width: 100%;
 	margin-bottom: 16px;
 	&:last-child {
 		margin-bottom: 0;
+	}
+
+	@media ${media.tablet} {
+		margin-bottom: 4px;
 	}
 `;
 const DetailImages = ({ images, setLoaded }) => {

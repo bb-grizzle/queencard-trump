@@ -1,9 +1,15 @@
 import styled from "styled-components";
 import TitleLg from "../text/TitleLg";
 import Paragraph from "../text/Paragraph";
+import media from "../../Styles/media";
 const Wrapper = styled.div<{ type: string }>`
 	margin-top: 56px;
 	margin-bottom: ${(props) => (props.type === "work" ? "56px" : "32px")};
+
+	@media ${media.tablet} {
+		margin-bottom: ${(props) => (props.type === "work" ? "32px" : "16px")};
+		margin-top: 24px;
+	}
 `;
 
 const Title = styled(TitleLg)`
