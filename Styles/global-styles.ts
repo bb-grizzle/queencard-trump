@@ -13,6 +13,7 @@ const GlobalStyles = createGlobalStyle`
 }
 
   body{
+    position: relative;
     background-color: ${Theme.color.bg};
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;

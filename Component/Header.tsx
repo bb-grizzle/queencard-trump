@@ -13,6 +13,8 @@ import { LOCAL_LOGOUT_QUERY, ISLOGIN } from "../Queries/adminQueries";
 import { useAction, ActionType } from "../Context/AdminProvider";
 
 const HeaderWrapper = styled.header<{ isWhite: boolean }>`
+	position: fixed;
+	z-index: ${(props) => props.theme.zIndex.header};
 	height: ${(props) => props.theme.size.header.pc};
 	width: 100%;
 	left: 0;
@@ -23,8 +25,6 @@ const HeaderWrapper = styled.header<{ isWhite: boolean }>`
 	@media ${media.tablet} {
 		height: ${(props) => props.theme.size.header.mobile};
 	}
-	z-index: ${(props) => props.theme.zIndex.header};
-	position: fixed;
 `;
 
 const Inner = styled.div`

@@ -17,20 +17,20 @@ interface MyAppProps extends AppProps {
 
 function MyApp({ Component, pageProps, apollo }: MyAppProps) {
 	return (
-		<ApolloProvider client={apollo}>
-			<AppProvider>
-				<AdminProvider>
-					<MetaLayout>
+		<MetaLayout>
+			<ApolloProvider client={apollo}>
+				<AppProvider>
+					<AdminProvider>
 						<GlobalStyles />
 						<ThemeProvider theme={theme}>
 							<HeaderLayout>
 								<Component {...pageProps} />
 							</HeaderLayout>
 						</ThemeProvider>
-					</MetaLayout>
-				</AdminProvider>
-			</AppProvider>
-		</ApolloProvider>
+					</AdminProvider>
+				</AppProvider>
+			</ApolloProvider>
+		</MetaLayout>
 	);
 }
 
