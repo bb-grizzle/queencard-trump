@@ -45,10 +45,6 @@ const work = () => {
 	const setloading = setLoading();
 
 	useEffect(() => {
-		console.log(doubleInput);
-	}, []);
-
-	useEffect(() => {
 		initAdmin();
 	}, []);
 
@@ -57,10 +53,6 @@ const work = () => {
 			push("/_admin");
 		}
 	}, [isLoggedIn]);
-
-	useEffect(() => {
-		setloading(true);
-	}, []);
 
 	useEffect(() => {
 		if (data) {
