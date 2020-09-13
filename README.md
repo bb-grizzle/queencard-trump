@@ -5,28 +5,31 @@
 ### page
 
 - [x] about
-- [ ] work
+- [x] work
+- [ ] work detail
+- [x] exhibition
+- [ ] exhibition detail
 - [ ] insperation
 - [ ] contact
 - [ ] 404
-- [ ] loading
+- [x] loading
 
 ### admin
 
 - [x] login
-- [ ] about
-  - [ ] upload
-  - [ ] update
-  - [ ] delete
+- [x] about
+  - [x] upload
+  - [x] update
+  - [x] delete
 - [x] work
   - [x] upload
   - [x] update
   - [x] delete
-- [ ] exhibition
-  - [ ] upload
-  - [ ] update
-  - [ ] delete
-- [ ] insperation
-  - [ ] upload
-  - [ ] update
-  - [ ] delete
+- [x] exhibition
+  - [x] upload
+  - [x] update
+  - [x] delete
+- [x] insperation
+  - [x] upload
+  - [x] update
+  - [x] delete

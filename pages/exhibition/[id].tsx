@@ -7,11 +7,10 @@ import DetailImages from "../../Component/detail/DetailImages";
 import { useQuery } from "@apollo/client";
 
 import { useRouter } from "next/dist/client/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GET_EXHIBITION_DETAIL } from "../../Queries/exhibitionQueries";
 import DetailInfo from "../../Component/detail/DetailInfo";
-
-const Wrapper = styled.div``;
+import DetailWrapper from "../../Layout/DetailWrapper";
 
 const exhibitionDetail = () => {
 	const {
@@ -22,26 +21,21 @@ const exhibitionDetail = () => {
 			id
 		}
 	});
-
-	useEffect(() => {
-		if (data) {
-			console.log(data.getExhibitionDetail);
-		}
-	}, [data]);
+	const [loaded, setLoaded] = useState(false);
 
 	return (
-		<Wrapper>
+		<DetailWrapper loaded={loaded}>
 			<PageContainer>
 				{data && (
 					<ContainerSmall>
 						<DetailText type="exhibition" title={data.getExhibitionDetail.title} text={data.getExhibitionDetail.descript} date={data.getExhibitionDetail.date} />
 						<DetailInfo date={data.getExhibitionDetail.date} location={data.getExhibitionDetail.location} link={data.getExhibitionDetail.link} />
-						<DetailImages images={data.getExhibitionDetail.images} />
+						<DetailImages images={data.getExhibitionDetail.images} setLoaded={setLoaded} />
 					</ContainerSmall>
 				)}
 			</PageContainer>
 			<Footer />
-		</Wrapper>
+		</DetailWrapper>
 	);
 };
 

@@ -1,15 +1,5 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { useLoading } from "../Context/AppProvider";
-
-const slideUp = keyframes`
-	from{
-		transform:  translateY(0);
-	}
-	
-	to{
-		transform: translateY(-100%);
-	}
-`;
 
 const Wrapper = styled.div<{ active: boolean }>`
 	position: fixed;

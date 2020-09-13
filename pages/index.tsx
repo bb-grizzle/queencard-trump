@@ -17,7 +17,6 @@ const Wrapper = styled.div``;
 
 const work = () => {
 	const { data, loading } = useQuery(GET_WORK);
-	const setloading = setLoading();
 
 	return (
 		<Wrapper>

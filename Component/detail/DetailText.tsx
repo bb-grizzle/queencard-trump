@@ -26,7 +26,7 @@ const DetailText = ({ title, text, date, type }) => {
 			<Paragraph text={date} />
 			<DescriptWrapper>
 				{text.split("\n").map((t, index) => {
-					return t ? <Descript key={index} text={t} color="black" /> : <br />;
+					return t ? <Descript key={index} text={t} color="black" /> : <br key={index} />;
 				})}
 			</DescriptWrapper>
 		</Wrapper>

@@ -8,16 +8,6 @@ export const AppContext = createContext({
 const AppProvider = ({ children }) => {
 	const [globalLoading, setGlobalLoading] = useState(false);
 
-	useEffect(() => {
-		if (globalLoading) {
-			document.body.style.height = "100vh";
-			document.body.style.overflow = "hidden";
-		} else {
-			document.body.style.height = "auto";
-			document.body.style.overflow = "auto";
-		}
-	}, [globalLoading]);
-
 	return <AppContext.Provider value={{ globalLoading, setGlobalLoading }}>{children}</AppContext.Provider>;
 };
 
