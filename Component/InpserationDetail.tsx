@@ -31,15 +31,14 @@ const Blur = styled.div`
 const ImageWrapper = styled.div`
 	width: 560px;
 	height: 560px;
-	border: 1px solid white;
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
 	padding: 16px;
 
-	background-color: ${(props) => props.theme.color.bg};
 	@media ${media.tablet} {
+		/* background-color: ${(props) => props.theme.color.bg}; */
 		width: 100%;
 		height: 100%;
 	}
@@ -58,6 +57,7 @@ const BtnWrapper = styled.div`
 	width: 100%;
 	position: absolute;
 	left: 0;
+
 	top: 50%;
 	transform: translateY(-50%);
 `;
@@ -69,7 +69,7 @@ const Container = styled(ContainerLayout)`
 	@media ${media.tablet} {
 		max-width: 100%;
 		width: 100%;
-		padding: 32px;
+		padding: 16px;
 	}
 `;
 const Btn = styled.div`
@@ -78,8 +78,10 @@ const Btn = styled.div`
 	height: 40px;
 	${(props) => props.theme.layout.center_flex};
 	border-radius: 100%;
+
 	cursor: pointer;
 	@media ${media.tablet} {
+		background-color: transparent;
 		width: 28px;
 		height: 28px;
 	}
@@ -91,6 +93,7 @@ const BtnClose = styled(Btn)`
 	right: 0px;
 	top: 0px;
 	transform: initial;
+	background-color: transparent;
 
 	@media ${media.tablet} {
 		right: 16px;
@@ -116,7 +119,7 @@ const InpserationDetail = ({ nowIndex, images, setNowIndex }) => {
 			<Blur />
 			<ImageWrapper>
 				<BtnClose onClick={handleCloseClick}>
-					<Icon name="close" />
+					<Icon name="close" color="white" />
 				</BtnClose>
 				<ImageView image={nowIndex !== null ? images[nowIndex].url : ""} />
 			</ImageWrapper>

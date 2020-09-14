@@ -20,6 +20,7 @@ const ColLeft = styled(Col)`
 
 const Text = styled.p`
 	color: ${(props) => props.theme.color.gray.default};
+	line-height: 1.5;
 `;
 
 const Priority = styled(Text)`
@@ -30,11 +31,14 @@ const Priority = styled(Text)`
 	${(props) => props.theme.div.right(props.theme.color.gray.default, 1)};
 	width: 64px;
 	text-align: center;
+	flex-shrink: 0;
 `;
 
 const Year = styled(Text)`
 	color: black;
 	margin-right: 16px;
+	flex-shrink: 0;
+	width: 40px;
 `;
 
 const BtnDelete = styled.div`
