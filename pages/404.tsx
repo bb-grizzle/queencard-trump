@@ -51,7 +51,6 @@ const Custom404 = () => {
 
 					<RouterWrapper>
 						{MENU.map((el) => {
-							console.log(el);
 							return (
 								<RouterList key={el.id}>
 									<Link href={el.href}>

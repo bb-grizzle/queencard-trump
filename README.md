@@ -37,4 +37,11 @@
 
 ### etc
 
-- [ ] header animation
+- [x] header animation
+- [x] favicon
+- [x] browser check
+  - [x] chrome
+  - [x] edge
+  - [x] safari
+- [x] mobile check
+- [ ] 붙여넣기 부분 확인

@@ -40,8 +40,13 @@ const RadioButton = styled.label<{ active?: boolean }>`
 	${(props) => props.theme.layout.input_default};
 	box-sizing: border-box;
 
-	&:hover {
-		background-color: ${(props) => !props.active && props.theme.color.bg};
+	@media ${media.hover} {
+		&:hover {
+			background-color: ${(props) => !props.active && props.theme.color.bg};
+		}
+	}
+	@media ${media.tablet} {
+		height: ${(props) => props.theme.size.height_input_mobile};
 	}
 `;
 interface InputRadioProps {

@@ -18,6 +18,7 @@ const Wrapper = styled.div``;
 const work = () => {
 	const { data } = useQuery(GET_WORK);
 	const setloading = setLoading();
+
 	useEffect(() => {
 		setloading(true);
 	}, []);

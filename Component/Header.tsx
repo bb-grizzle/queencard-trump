@@ -11,8 +11,10 @@ import { isTouchDevice } from "../util/isTouchDevice";
 import { useQuery, useMutation } from "@apollo/client";
 import { LOCAL_LOGOUT_QUERY, ISLOGIN } from "../Queries/adminQueries";
 import { useAction, ActionType } from "../Context/AdminProvider";
+import { useScrollDirection } from "../Hook/useScrollDirection";
+import { preventScroll, activeScroll } from "../util/preventScroll";
 
-const HeaderWrapper = styled.header<{ isWhite: boolean }>`
+const HeaderWrapper = styled.header<{ isWhite: boolean; hide?: boolean }>`
 	position: fixed;
 	z-index: ${(props) => props.theme.zIndex.header};
 	height: ${(props) => props.theme.size.header.pc};
@@ -21,6 +23,8 @@ const HeaderWrapper = styled.header<{ isWhite: boolean }>`
 	top: 0px;
 	background-color: ${(props) => (props.isWhite ? "white" : props.theme.color.bg)};
 	transition: ${(props) => props.theme.transition.default};
+
+	transform: ${(props) => `translateY(${props.hide ? "-100%" : "0%"});`};
 
 	@media ${media.tablet} {
 		height: ${(props) => props.theme.size.header.mobile};
@@ -151,6 +155,7 @@ const Header = () => {
 		data: { isLoggedIn }
 	} = useQuery(ISLOGIN);
 	const useaction = useAction();
+	const useScroll = useScrollDirection();
 
 	useEffect(() => {
 		setIsMenuClick(false);
@@ -174,6 +179,14 @@ const Header = () => {
 		}
 	}, [pathname]);
 
+	useEffect(() => {
+		if (isMenuClick) {
+			preventScroll();
+		} else {
+			activeScroll();
+		}
+	}, [isMenuClick]);
+
 	const handleGnbClick = () => {
 		if (isTablet || isTouchDevice()) {
 			setIsMenuClick((n) => !n);
@@ -185,7 +198,7 @@ const Header = () => {
 	};
 
 	return (
-		<HeaderWrapper isWhite={useaction === ActionType.NULL ? false : true}>
+		<HeaderWrapper isWhite={useaction === ActionType.NULL ? false : true} hide={useScroll === "down" ? true : false}>
 			<ContainerLayout>
 				<Inner>
 					<InnerWrapper>

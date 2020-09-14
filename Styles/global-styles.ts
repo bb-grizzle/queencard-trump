@@ -43,6 +43,8 @@ const GlobalStyles = createGlobalStyle`
     border: 0px;
     font-family: inherit;
     resize: none;
+    -webkit-appearance: none;
+   -webkit-border-radius: 0;
   }
 
   select, option{
