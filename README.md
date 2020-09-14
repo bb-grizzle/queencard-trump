@@ -44,4 +44,4 @@
   - [x] edge
   - [x] safari
 - [x] mobile check
-- [ ] 붙여넣기 부분 확인
+- [x] 붙여넣기 부분 확인
