@@ -18,10 +18,10 @@ interface MyAppProps extends AppProps {
 function MyApp({ Component, pageProps, apollo }: MyAppProps) {
 	return (
 		<MetaLayout>
+			<GlobalStyles />
 			<ApolloProvider client={apollo}>
 				<AppProvider>
 					<AdminProvider>
-						<GlobalStyles />
 						<ThemeProvider theme={theme}>
 							<HeaderLayout>
 								<Component {...pageProps} />
