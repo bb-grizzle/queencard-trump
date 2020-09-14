@@ -19,7 +19,7 @@ const HeadComponent: React.FC = ({ children }) => {
 					content="height=device-height, 
                       width=device-width, initial-scale=1.0, 
                       minimum-scale=1.0, maximum-scale=1.0, 
-                      user-scalable=no, target-densitydpi=device-dpi"
+                      user-scalable=no"
 				></meta>
 				<meta property="og:title" content={headData.title} />
 				<meta property="og:site_name" content={headData.title} />

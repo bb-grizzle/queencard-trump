@@ -79,25 +79,12 @@ const InfoListCustom = styled(InfoList)`
 const index = () => {
 	const { data } = useQuery(EDUCATION_QUERY);
 	const [imageLoaded, setImageLoaded] = useState(false);
-	const setloading = setLoading();
 
 	const [filteredData, setFilteredData] = useState({
 		EXHIBITION: null,
 		EDUCATION: null,
 		AWARD: null
 	});
-
-	useEffect(() => {
-		setloading(true);
-	}, []);
-
-	useEffect(() => {
-		if (imageLoaded) {
-			setTimeout(() => {
-				setloading(false);
-			}, 1000);
-		}
-	}, [imageLoaded]);
 
 	useEffect(() => {
 		if (data) {

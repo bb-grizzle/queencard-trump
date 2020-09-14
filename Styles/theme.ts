@@ -85,7 +85,7 @@ const layout = {
 		bottom: 0;
 	`,
 	full_image: (url) => `
-		background-image: url(${url});
+		background-image: url("${url}");
 		background-size: cover;
 		background-position: center;`,
 	center_flex: `

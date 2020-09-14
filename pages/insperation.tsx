@@ -5,7 +5,7 @@ import ContainerLayout from "../Layout/ContainerLayout";
 import { useQuery } from "@apollo/client";
 import { GET_INSPERATION } from "../Queries/insperationQuries";
 import List from "../Component/List";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import InpserationDetail from "../Component/InpserationDetail";
 
 const Wrapper = styled.div``;
@@ -16,14 +16,14 @@ const ListWrapper = styled.ul`
 `;
 
 const insperation = () => {
-	const { data, loading } = useQuery(GET_INSPERATION);
+	const { data } = useQuery(GET_INSPERATION);
+	const [clientDate, setClientData] = useState([]);
 	const [imageArr, setImageArr] = useState([]);
-	const [isImageLoaded, setIsImageLoaded] = useState(false);
-	const [nowIndex, setNowIndex] = useState<number>(null);
+	const [nowIndex, setNowIndex] = useState(null);
 
 	useEffect(() => {
 		if (data) {
-			setIsImageLoaded(true);
+			setClientData(data.getInsperation);
 			setImageArr(data.getInsperation.map((el) => el.thumbnail));
 		}
 	}, [data]);
@@ -32,16 +32,17 @@ const insperation = () => {
 		setNowIndex(index);
 	};
 
+	const renderList = useMemo(() => {
+		return clientDate.map((el, index) => {
+			return <List key={el.id} data={el} router={"insperation"} column={4} onClick={() => handleListClick(index)} />;
+		});
+	}, [clientDate]);
+
 	return (
 		<Wrapper>
 			<PageContainer>
 				<ContainerLayout>
-					<ListWrapper>
-						{data &&
-							data.getInsperation.map((el, index) => {
-								return <List key={el.id} data={el} router={"insperation"} column={4} onClick={() => handleListClick(index)} />;
-							})}
-					</ListWrapper>
+					<ListWrapper>{renderList}</ListWrapper>
 				</ContainerLayout>
 			</PageContainer>
 			<InpserationDetail nowIndex={nowIndex} images={imageArr} setNowIndex={setNowIndex} />
