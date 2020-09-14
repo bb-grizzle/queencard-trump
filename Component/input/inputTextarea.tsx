@@ -8,6 +8,7 @@ interface InputTextAreaProps {
 	label: string;
 	placeholder: string;
 	bgColor?: string;
+	name?: string;
 }
 
 const Wrapper = styled.div`
@@ -28,7 +29,7 @@ const Input = styled.textarea<{ bgColor?: string }>`
 
 	${(props) => props.theme.layout.input_default};
 	background-color: ${(props) => (!props.bgColor ? "white" : `${props.bgColor}`)};
-
+	padding-top: 8px;
 	&:focus {
 		border: 1px solid black;
 	}
@@ -39,11 +40,11 @@ const Input = styled.textarea<{ bgColor?: string }>`
 	}
 `;
 
-const InputTextArea: React.FC<InputTextAreaProps> = ({ value, onChange, label, placeholder, bgColor }) => {
+const InputTextArea: React.FC<InputTextAreaProps> = ({ value, onChange, label, placeholder, bgColor, name }) => {
 	return (
 		<Wrapper>
 			<Label label={label} />
-			<Input value={value} onChange={onChange} placeholder={placeholder} bgColor={bgColor} />
+			<Input value={value} name={name} onChange={onChange} placeholder={placeholder} bgColor={bgColor} />
 		</Wrapper>
 	);
 };

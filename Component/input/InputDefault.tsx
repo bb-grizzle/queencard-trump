@@ -9,6 +9,7 @@ interface InputDefaultProps {
 	placeholder: string;
 	type?: string;
 	bgColor?: string;
+	name?: string;
 }
 
 const Wrapper = styled.div`
@@ -39,11 +40,11 @@ const Input = styled.input<{ bgColor?: string }>`
 	}
 `;
 
-const InputDefault: React.FC<InputDefaultProps> = ({ value, onChange, label, placeholder, type, bgColor }) => {
+const InputDefault: React.FC<InputDefaultProps> = ({ value, onChange, label, placeholder, type, bgColor, name }) => {
 	return (
 		<Wrapper>
 			<Label label={label} />
-			<Input value={value} onChange={onChange} placeholder={placeholder} type={type} bgColor={bgColor} />
+			<Input name={name} value={value} onChange={onChange} placeholder={placeholder} type={type} bgColor={bgColor} />
 		</Wrapper>
 	);
 };

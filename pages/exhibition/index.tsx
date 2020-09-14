@@ -27,7 +27,7 @@ const exhibition = () => {
 
 	return (
 		<Wrapper>
-			<PageContainer>
+			<PageContainer paddingTop={true}>
 				<ContainerSmall>
 					{data && (
 						<ListWrapper>
