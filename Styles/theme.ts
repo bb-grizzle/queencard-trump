@@ -108,11 +108,15 @@ const style = {
 		display: block;
 	}`,
 	border: `1px solid ${color.gray.light}`,
+	event_disable: `user-select: none;
+	pointer-events:none;`,
+	event_able: `user-select: auto;
+	pointer-events:auto;`,
 	hover_effect: ``
 };
 
 const zIndex = {
-	loading: 100,
+	loading: 60,
 	menu: 100,
 	header: 80,
 	adminForm: 60,

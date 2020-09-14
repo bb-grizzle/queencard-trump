@@ -10,12 +10,14 @@ import { useRouter } from "next/dist/client/router";
 import { useEffect, useState } from "react";
 import { preventScroll, activeScroll } from "../../util/preventScroll";
 import DetailWrapper from "../../Layout/DetailWrapper";
+import { setLoading } from "../../Context/AppProvider";
 
 const workDetail = () => {
 	const {
 		query: { id }
 	} = useRouter();
-	const [loaded, setLoaded] = useState(false);
+	const setloading = setLoading();
+	const [detailLoaded, setDetailLoaded] = useState(false);
 	const { data } = useQuery(GET_WORK_DETAIL, {
 		variables: {
 			id
@@ -24,23 +26,25 @@ const workDetail = () => {
 
 	useEffect(() => {
 		preventScroll();
+		setloading(true);
 	}, []);
 
 	useEffect(() => {
-		if (loaded) {
+		if (detailLoaded) {
+			setloading(false);
 			setTimeout(() => {
 				activeScroll();
 			}, 1000);
 		}
-	}, [loaded]);
+	}, [detailLoaded]);
 
 	return (
-		<DetailWrapper loaded={loaded}>
+		<DetailWrapper loaded={detailLoaded}>
 			<PageContainer>
 				{data && (
 					<ContainerSmall>
 						<DetailText type="work" title={data.getWorkDetail.title} text={data.getWorkDetail.descript} date={data.getWorkDetail.date} />
-						<DetailImages images={data.getWorkDetail.images} setLoaded={setLoaded} />
+						<DetailImages images={data.getWorkDetail.images} setLoaded={setDetailLoaded} />
 					</ContainerSmall>
 				)}
 			</PageContainer>

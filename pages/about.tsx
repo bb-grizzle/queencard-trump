@@ -26,7 +26,12 @@ const EDUCATION_QUERY = gql`
 	}
 `;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div<{ active: boolean }>`
+	transform: ${(props) => `translateY(${props.active ? "0" : "32px"});`};
+	opacity: ${(props) => (props.active ? "1" : "0")};
+	transition: all 0.8s ease-in-out;
+`;
+
 const CoverContainer = styled(ContainerLayout)`
 	@media ${media.tablet} {
 		max-width: 100%;
@@ -79,12 +84,27 @@ const InfoListCustom = styled(InfoList)`
 const index = () => {
 	const { data } = useQuery(EDUCATION_QUERY);
 	const [imageLoaded, setImageLoaded] = useState(false);
+	const [active, setActive] = useState(false);
+	const setloading = setLoading();
 
 	const [filteredData, setFilteredData] = useState({
 		EXHIBITION: null,
 		EDUCATION: null,
 		AWARD: null
 	});
+
+	useEffect(() => {
+		setloading(true);
+	}, []);
+
+	useEffect(() => {
+		if (imageLoaded && filteredData.EXHIBITION && filteredData.EDUCATION && filteredData.AWARD) {
+			setloading(false);
+			setTimeout(() => {
+				setActive(true);
+			}, 500);
+		}
+	}, [imageLoaded, filteredData]);
 
 	useEffect(() => {
 		if (data) {
@@ -113,7 +133,7 @@ const index = () => {
 	}, []);
 
 	return (
-		<Wrapper>
+		<Wrapper active={active}>
 			<PageContainer>
 				{filteredData.EXHIBITION && filteredData.EDUCATION && filteredData.AWARD && (
 					<>

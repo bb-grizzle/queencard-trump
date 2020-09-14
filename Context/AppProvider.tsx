@@ -1,7 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 
 export const AppContext = createContext({
-	globalLoading: true,
+	globalLoading: false,
 	setGlobalLoading: null
 });
 

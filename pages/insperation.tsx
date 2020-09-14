@@ -7,6 +7,7 @@ import { GET_INSPERATION } from "../Queries/insperationQuries";
 import List from "../Component/List";
 import { useState, useEffect, useMemo } from "react";
 import InpserationDetail from "../Component/InpserationDetail";
+import { setLoading } from "../Context/AppProvider";
 
 const Wrapper = styled.div``;
 
@@ -20,9 +21,15 @@ const insperation = () => {
 	const [clientDate, setClientData] = useState([]);
 	const [imageArr, setImageArr] = useState([]);
 	const [nowIndex, setNowIndex] = useState(null);
+	const setloading = setLoading();
+
+	useEffect(() => {
+		setloading(true);
+	}, []);
 
 	useEffect(() => {
 		if (data) {
+			setloading(false);
 			setClientData(data.getInsperation);
 			setImageArr(data.getInsperation.map((el) => el.thumbnail));
 		}

@@ -5,13 +5,25 @@ import Footer from "../../Component/Footer";
 import PageContainer from "../../Layout/PageContainer";
 import ExhibitionList from "../../Component/ExhibitionList";
 import ContainerSmall from "../../Layout/ContainerSmall";
+import { setLoading } from "../../Context/AppProvider";
+import { useEffect } from "react";
 
 const Wrapper = styled.div``;
 
 const ListWrapper = styled.ul``;
 
 const exhibition = () => {
-	const { data, loading } = useQuery(GET_EXHIBITION);
+	const { data } = useQuery(GET_EXHIBITION);
+	const setloading = setLoading();
+
+	useEffect(() => {
+		setloading(true);
+	}, []);
+	useEffect(() => {
+		if (data) {
+			setloading(false);
+		}
+	}, [data]);
 
 	return (
 		<Wrapper>

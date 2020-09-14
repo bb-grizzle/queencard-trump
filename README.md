@@ -6,10 +6,10 @@
 
 - [x] about
 - [x] work
-- [ ] work detail
+- [x] work detail
 - [x] exhibition
-- [ ] exhibition detail
-- [ ] insperation
+- [x] exhibition detail
+- [x] insperation
 - [ ] contact
 - [ ] 404
 - [x] loading

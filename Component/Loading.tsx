@@ -7,12 +7,13 @@ const Wrapper = styled.div<{ active: boolean }>`
 	top: 0;
 	width: 100%;
 	height: ${(props) => props.theme.layout.full_height};
-	background-color: white;
+	background-color: ${(props) => props.theme.color.bg};
 	${(props) => props.theme.layout.center_flex};
-	transform: ${(props) => (props.active ? "translateY(0)" : "translateY(-100%)")};
-	opacity: 1;
+	opacity: ${(props) => (props.active ? "1" : "0")};
 	z-index: ${(props) => props.theme.zIndex.loading};
 	transition: ${(props) => props.theme.transition.default};
+
+	${(props) => props.theme.style.event_disable};
 `;
 
 const Text = styled.p`
