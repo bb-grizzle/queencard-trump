@@ -120,7 +120,8 @@ const zIndex = {
 	menu: 100,
 	header: 80,
 	adminForm: 60,
-	insperationDetail: 90
+	insperationDetail: 90,
+	supported_browsers: 120
 };
 
 const size = {

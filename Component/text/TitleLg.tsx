@@ -28,6 +28,8 @@ const Title = styled.h3`
 	font-size: 20px;
 	line-height: 1.5;
 	text-transform: capitalize;
+	text-align: inherit;
+	flex-grow: 1;
 `;
 
 const HoverIcon = styled.div`

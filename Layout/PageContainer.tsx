@@ -3,6 +3,7 @@ import media from "../Styles/media";
 
 interface PageContainerProps {
 	paddingTop?: boolean;
+	className?: string;
 }
 
 const Wrapper = styled.div<{ paddingTop?: boolean }>`
@@ -12,8 +13,12 @@ const Wrapper = styled.div<{ paddingTop?: boolean }>`
 	}
 	min-height: ${(props) => props.theme.layout.full_height};
 `;
-const PageContainer: React.FC<PageContainerProps> = ({ children, paddingTop }) => {
-	return <Wrapper paddingTop={paddingTop}>{children}</Wrapper>;
+const PageContainer: React.FC<PageContainerProps> = ({ children, paddingTop, className }) => {
+	return (
+		<Wrapper paddingTop={paddingTop} className={className}>
+			{children}
+		</Wrapper>
+	);
 };
 
 export default PageContainer;

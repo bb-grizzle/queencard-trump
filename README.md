@@ -10,8 +10,9 @@
 - [x] exhibition
 - [x] exhibition detail
 - [x] insperation
-- [ ] contact
-- [ ] 404
+- [x] contact
+- [x] browser support
+- [x] 404
 - [x] loading
 
 ### admin
@@ -33,3 +34,7 @@
   - [x] upload
   - [x] update
   - [x] delete
+
+### etc
+
+- [ ] header animation
