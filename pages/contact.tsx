@@ -8,7 +8,7 @@ import InputTextArea from "../Component/input/inputTextarea";
 import Submit from "../Component/input/Submit";
 import Form from "../Component/input/Form";
 import InputRadio from "../Component/input/InputRadio";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import theme from "../Styles/theme";
 import Footer from "../Component/Footer";
 import emailjs from "emailjs-com";
@@ -16,12 +16,16 @@ import { setLoading } from "../Context/AppProvider";
 
 const EMAILPURPOSE = ["협찬", "전시", "구매", "기타"];
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div<{ active: boolean }>`
+	opacity: ${(props) => (props.active ? 1 : 0)};
+	transition: ${(props) => props.theme.transition.default};
+`;
 
 const contact = () => {
 	const emailInput = useInput("");
 	const textInput = useInput("");
 	const purposeInput = useInput(EMAILPURPOSE[0]);
+	const [pageLoaded, setPageLoaded] = useState(false);
 	const setloading = setLoading();
 
 	const handleSubmit = async (e) => {
@@ -59,11 +63,12 @@ const contact = () => {
 		setloading(true);
 		setTimeout(() => {
 			setloading(false);
+			setPageLoaded(true);
 		}, 500);
 	}, []);
 
 	return (
-		<Wrapper>
+		<Wrapper active={pageLoaded}>
 			<PageContainer paddingTop={true}>
 				<ContainerSmall>
 					<Form onSubmit={handleSubmit}>
