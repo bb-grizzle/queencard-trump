@@ -27,6 +27,8 @@ const HeadComponent: React.FC = ({ children }) => {
 				<meta property="og:description" content={headData.description} />
 				<meta property="og:image" content="/thumbnail.png" />
 				<meta property="og:type" content="website" />
+
+				<link rel="apple-touch-icon" href="/public/favicon.ico"></link>
 			</Head>
 			{children}
 		</>
