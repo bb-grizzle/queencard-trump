@@ -8,6 +8,10 @@ export const AppContext = createContext({
 const AppProvider = ({ children }) => {
 	const [globalLoading, setGlobalLoading] = useState(false);
 
+	useEffect(() => {
+		console.log("globalLoading : ", globalLoading);
+	}, [globalLoading]);
+
 	return <AppContext.Provider value={{ globalLoading, setGlobalLoading }}>{children}</AppContext.Provider>;
 };
 

@@ -13,7 +13,7 @@ import useInputFile from "../../Hook/useInputManyFile";
 import { fbUploadStorage, fbDeleteStorage } from "../../Firebase/firebase";
 import { UPLOAD_IMAGES, UPDATE_IMAGE } from "../../Queries/imageQuries";
 import { ISLOGIN, LOCAL_LOGOUT_QUERY } from "../../Queries/adminQueries";
-import { setLoading } from "../../Context/AppProvider";
+import { setLoading, useLoading } from "../../Context/AppProvider";
 import AdminWrapper from "../../Component/admin/AdminWrapper";
 import AdminList from "../../Component/admin/AdminList";
 import useCheck from "../../Hook/useCheck";
@@ -67,7 +67,6 @@ const work = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
 		if (!titleInput.value || !dateInput.value || !descriptInput.value) {
 			alert("양식을 모두 채워주세요 😀");
 			return;

@@ -119,7 +119,7 @@ const zIndex = {
 	loading: 60,
 	menu: 100,
 	header: 80,
-	adminForm: 60,
+	adminForm: 50,
 	insperationDetail: 90,
 	supported_browsers: 120
 };
