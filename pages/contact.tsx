@@ -36,14 +36,14 @@ const contact = () => {
 
 		try {
 			const sendEmail = await emailjs.send(
-				"seoseohee",
-				"template_h2qxx8q",
+				"service_l8z0la8",
+				"template_3n0cwii",
 				{
 					purpose: purposeInput.value,
 					email: emailInput.value,
 					message: textInput.value.split("\n")
 				},
-				"user_18oiqb0FPbwshjHk7HsGh"
+				"user_ZY7C0K0MLwYfOdxNTcKlv"
 			);
 			if (sendEmail.status === 200) {
 				// OK
@@ -56,6 +56,7 @@ const contact = () => {
 			}
 		} catch (err) {
 			console.log(err);
+			alert("이메일 전송이 실패했습니다. :(");
 		}
 	};
 

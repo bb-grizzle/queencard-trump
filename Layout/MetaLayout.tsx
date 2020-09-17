@@ -29,7 +29,7 @@ const HeadComponent: React.FC = ({ children }) => {
 				<meta property="og:type" content="website" />
 
 				<link rel="apple-touch-icon" href="/forMobile.png"></link>
-				<link rel="shortcut icon" href="/forMobile.png"></link>
+				<link rel="shortcut icon" href="/favicon.ico"></link>
 			</Head>
 			{children}
 		</>
