@@ -19,7 +19,7 @@ const Logo: React.FC<LogoProps> = ({ color = "black", size = 20, className }) =>
 	return (
 		<Wrapper className={className}>
 			<Text color={color} size={size}>
-				Seoohee An
+				Seohee An
 			</Text>
 		</Wrapper>
 	);

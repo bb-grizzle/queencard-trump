@@ -21,7 +21,9 @@ const Blur = styled.div`
 `;
 
 const WorkList = styled.li<{ ratio: number; active: any; delay?: number; column?: number }>`
+	/* border: 1px solid red; */
 	width: ${(props) => `calc((100% - (16px * (${props.column} - 1))) / ${props.column});`};
+
 	position: relative;
 	margin-bottom: 16px;
 	${(props) => props.theme.style.ratio(props.ratio)};
