@@ -25,11 +25,11 @@ const HeadComponent: React.FC = ({ children }) => {
 				<meta property="og:site_name" content={headData.title} />
 				<meta property="og:url" content={headData.url} />
 				<meta property="og:description" content={headData.description} />
-				<meta property="og:image" content="/thumbnail.png" />
+				<meta property="og:image" content="./thumbnail.png" />
 				<meta property="og:type" content="website" />
 
-				<link rel="apple-touch-icon" href="/forMobile.png"></link>
-				<link rel="shortcut icon" href="/favicon.ico"></link>
+				<link rel="apple-touch-icon" href="./forMobile.png"></link>
+				<link rel="shortcut icon" href="./favicon.ico"></link>
 			</Head>
 			{children}
 		</>
