@@ -12,7 +12,7 @@ import media from "../Styles/media";
 import Footer from "../Component/Footer";
 import PageContainer from "../Layout/PageContainer";
 import { setLoading } from "../Context/AppProvider";
-const URL = "/image/cover_01.jpg";
+const URL = "/image/cover_02.jpg";
 const EDUCATION_QUERY = gql`
 	{
 		getAllInfo {
