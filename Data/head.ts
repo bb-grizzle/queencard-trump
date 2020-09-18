@@ -6,6 +6,6 @@ interface headDataType {
 
 export const headData: headDataType = {
 	description: "Seohee An Portfolio",
-	url: "http://localhost:3000/",
+	url: "https://seoheean.com/",
 	title: "Seohee An"
 };
