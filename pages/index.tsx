@@ -6,22 +6,32 @@ import ContainerLayout from "../Layout/ContainerLayout";
 import PageContainer from "../Layout/PageContainer";
 import Masonry from "react-masonry-component";
 import List from "../Component/List";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { setLoading } from "../Context/AppProvider";
-
-const masonryOptions = {
-	transitionDuration: 0
-};
+import useSize from "../Hook/useSize";
 
 const Wrapper = styled.div``;
+
+const MasonryCumstom = styled(Masonry)``;
 
 const work = () => {
 	const { data } = useQuery(GET_WORK);
 	const setloading = setLoading();
+	const [gutter, setGutter] = useState(16);
+	const size = useSize();
 
 	useEffect(() => {
 		setloading(true);
 	}, []);
+
+	useEffect(() => {
+		if (size.isTablet) {
+			setGutter(8);
+		} else {
+			setGutter(16);
+		}
+	}, [size]);
+
 	useEffect(() => {
 		if (data) {
 			setloading(false);
@@ -33,17 +43,17 @@ const work = () => {
 			<PageContainer>
 				<ContainerLayout>
 					{data && (
-						<Masonry
+						<MasonryCumstom
 							className={"my-gallery-class"} // default ''
 							elementType={"ul"} // default 'div'
-							options={masonryOptions} // default {}
+							options={{ gutter }} // default {}
 							disableImagesLoaded={false} // default false
 							updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
 						>
 							{data.getWork.map((el) => {
-								return <List data={el} router={"work"} key={el.id} />;
+								return <List mansonry={true} data={el} router={"work"} key={el.id} />;
 							})}
-						</Masonry>
+						</MasonryCumstom>
 					)}
 				</ContainerLayout>
 			</PageContainer>

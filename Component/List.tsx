@@ -11,6 +11,7 @@ interface ListProps {
 	router: string;
 	column?: number;
 	onClick?: any;
+	mansonry?: boolean;
 }
 
 const Blur = styled.div`
@@ -20,8 +21,7 @@ const Blur = styled.div`
 	transition: ${(props) => props.theme.transition.hover};
 `;
 
-const WorkList = styled.li<{ ratio: number; active: any; delay?: number; column?: number }>`
-	/* border: 1px solid red; */
+const WorkList = styled.li<{ ratio: number; active: any; delay?: number; column?: number; mansonry?: boolean }>`
 	width: ${(props) => `calc((100% - (16px * (${props.column} - 1))) / ${props.column});`};
 
 	position: relative;
@@ -36,8 +36,10 @@ const WorkList = styled.li<{ ratio: number; active: any; delay?: number; column?
 		${(props) => props.theme.layout.full_abs};
 	}
 
-	${(props) => `
-		&:not(:nth-child(${props.column})) {
+	${(props) =>
+		!props.mansonry &&
+		`
+		&:not(:nth-child(${props.column}n)) {
 			margin-right: 16px;
 		}
 	`};
@@ -60,12 +62,14 @@ const WorkList = styled.li<{ ratio: number; active: any; delay?: number; column?
 			}
 		`};
 
-		&:nth-child(odd) {
+		${(props) =>
+			!props.mansonry &&
+			`&:nth-child(odd) {
 			margin-right: 4px;
 		}
 		&:nth-child(even) {
 			margin-left: 4px;
-		}
+		}`};
 	}
 
 	@media ${media.mobile} {
@@ -97,7 +101,7 @@ const TextWrapper = styled.div`
 	}
 `;
 
-const List: React.FC<ListProps> = ({ data, router, column = 3, onClick }) => {
+const List: React.FC<ListProps> = ({ data, router, column = 3, onClick, mansonry }) => {
 	const [loaded, setLoaded] = useState(false);
 	const ratio = data.double === undefined && data.double === null ? 100 : data.double === true ? 133 : 74;
 	const { push } = useRouter();
@@ -121,7 +125,7 @@ const List: React.FC<ListProps> = ({ data, router, column = 3, onClick }) => {
 	};
 
 	return (
-		<WorkList column={column} key={data.id} ratio={ratio} delay={loaded && Math.round(Math.random() * 4)} active={loaded}>
+		<WorkList mansonry={mansonry} column={column} key={data.id} ratio={ratio} delay={loaded && Math.round(Math.random() * 4)} active={loaded}>
 			<Link href={`/${router}/[id]`} as={`/${router}/${data.id}`}>
 				<a onClick={handleListClick}>
 					<ListWrapper image={Array.isArray(data.images) ? data.images[0].url : data.thumbnail.url}>
