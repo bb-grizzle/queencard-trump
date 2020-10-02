@@ -1,11 +1,10 @@
-interface headDataType {
+interface HeadDataProps {
 	description: string;
-	url: string;
 	title: string;
+	url: string;
 }
-
-export const headData: headDataType = {
-	description: "Seohee An Portfolio",
-	url: "https://seoheean.com/",
-	title: "Seohee An"
+export const headData: HeadDataProps = {
+	description: "next.js project with typescript",
+	title: "-",
+	url: "./"
 };

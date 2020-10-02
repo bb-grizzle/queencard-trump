@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import media from "../Styles/media";
-import TitleLg from "../Component/text/TitleLg";
-import Paragraph from "../Component/text/Paragraph";
 
 // FILED
 const BROWSERLIST = [
@@ -45,11 +43,11 @@ const TextWrapper = styled.div`
 	text-align: center;
 	margin-bottom: 2rem;
 `;
-const Title = styled(TitleLg)`
+const Title = styled.h1`
 	text-align: center;
 	margin-bottom: 1rem;
 `;
-const Text = styled(Paragraph)`
+const Text = styled.p`
 	margin-bottom: 0;
 	span {
 		display: block;
@@ -116,9 +114,9 @@ const supported_browsers = () => {
 	return (
 		<Wrapper>
 			<TextWrapper>
-				<Title title={"브라우저 지원 안내"} />
-				<Text text="해당 브라우저는 지원하지 않습니다." />
-				<Text text="아래 브라우저를 이용해 보세요. " />
+				<Title>브라우저 지원 안내 </Title>
+				<Text>해당 브라우저는 지원하지 않습니다.</Text>
+				<Text>아래 브라우저를 이용해 보세요.</Text>
 			</TextWrapper>
 			<BrowserWrapper>
 				{BROWSERLIST.map((el, index) => {

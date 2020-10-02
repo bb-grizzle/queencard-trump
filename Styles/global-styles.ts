@@ -5,19 +5,18 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyles = createGlobalStyle`
   ${reset};
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  list-style:none;
-}
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style:none;
+  }
 
   body{
     position: relative;
-    background-color: ${Theme.color.bg};
+    word-break: keep-all;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
-    word-break: keep-all;
   }
 
   a{

@@ -1,21 +1,12 @@
-import baseStyled, { css, ThemedStyledInterface } from "styled-components";
+import baseStyled, { ThemedStyledInterface } from "styled-components";
 
 const color = {
 	black: "black",
-	white: "white",
-	gray: {
-		default: "#686868",
-		light: "#dddddd"
-	},
-	header: "#f5f5f4a3",
-	bg: "#F5F5F4",
-	load: "#327CB2",
-	hover: "rgba(0,0,0,0.2)"
+	white: "white"
 };
 
 const div = {
-	default: (color?: string, size?: number) => `
-		
+	top: (color?: string, size?: number) => `
 		&:after {
 			content: "";
 			position: absolute;
@@ -64,19 +55,10 @@ const div = {
 };
 
 const transition = {
-	default: `all 0.5s cubic-bezier(0.7, 0, 0.24, 0.99);`,
-	hover: `all .5s cubic-bezier(0.32, 0, 0.64, 0.99)`
-};
-
-const animation = {
-	default: `
-		animation-duration: 1s;
-		animation-timing-function: cubic-bezier(0.7, 0, 0.24, 0.99);
-	`
+	default: `all 0.5s cubic-bezier(0.7, 0, 0.24, 0.99);`
 };
 
 const layout = {
-	full_height: `calc(var(--vh, 1vh) * 100);`,
 	full_abs: `
 	position: absolute;
 		left:0;
@@ -93,12 +75,10 @@ const layout = {
 		align-items: center;
 		justify-content: center;
 	`,
-	input_default: `
-		padding: 0px 12px;
-		line-height: 1.5;
-		font-size: 16px;
-		position: relative;
-	`
+	event_disable: `user-select: none;
+	pointer-events:none;`,
+	event_able: `user-select: auto;
+	pointer-events:auto;`
 };
 
 const style = {
@@ -107,26 +87,20 @@ const style = {
 		padding-top: ${ratio ? ratio : 100}%;
 		display: block;
 	}`,
-	border: `1px solid ${color.gray.light}`,
-	event_disable: `user-select: none;
-	pointer-events:none;`,
-	event_able: `user-select: auto;
-	pointer-events:auto;`,
-	hover_effect: ``
+	border: `1px solid ${color.black}`
 };
 
 const zIndex = {
 	loading: 60,
 	menu: 100,
 	header: 80,
-	adminForm: 50,
-	insperationDetail: 90,
-	supported_browsers: 120
+	adminForm: 50
 };
 
 const size = {
 	height_input: "36px",
-	height_input_mobile: "46px",
+	full_height: `calc(var(--vh, 1vh) * 100);`,
+
 	header: {
 		pc: "120px",
 		mobile: "60px"
@@ -147,7 +121,6 @@ const theme = {
 	transition,
 	layout,
 	style,
-	animation,
 	zIndex,
 	size
 };
