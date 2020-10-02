@@ -10,7 +10,7 @@ const HeadComponent: React.FC = ({ children }) => {
 	return (
 		<>
 			<Head>
-				<title>Seohee An</title>
+				<title>{headData.title}</title>
 				<meta name="description" content={headData.description} />
 				<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet"></link>
 
