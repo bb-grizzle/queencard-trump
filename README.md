@@ -1,12 +1,3 @@
-# Next js Setup
-next js with type script
+# Awesome School
 
 ## todo
-
-- [x] styled component
-  - [x] global style
-  - [x] theme
-  - [x] media
-- [x] favicon
-- [x] head / meta
-- [x] 404
