@@ -1,28 +1,29 @@
 interface Menu {
 	id: string;
 	href: string;
+	name?: string;
 }
 
 export const MENU: Menu[] = [
 	{
+		id: "portfolio",
+		href: "/",
+		name: "포트폴리오"
+	},
+	{
 		id: "about",
-		href: "/about"
+		href: "/about",
+		name: "회사소개"
 	},
 	{
-		id: "work",
-		href: "/"
+		id: "process",
+		href: "/process",
+		name: "사업과정"
 	},
 	{
-		id: "exhibition",
-		href: "/exhibition"
-	},
-	{
-		id: "insperation",
-		href: "/insperation"
-	},
-	{
-		id: "contact",
-		href: "/contact"
+		id: "tutor",
+		href: "/tutor",
+		name: "강사소개"
 	}
 ];
 

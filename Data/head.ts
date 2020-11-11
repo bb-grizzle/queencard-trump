@@ -4,7 +4,7 @@ interface HeadDataProps {
 	url: string;
 }
 export const headData: HeadDataProps = {
-	description: "next.js project with typescript",
-	title: "-",
+	description: "Awesome School",
+	title: "어썸스쿨",
 	url: "./"
 };

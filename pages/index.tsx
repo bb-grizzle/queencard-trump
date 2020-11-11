@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 const Wrapper = styled.div``;
 
-const work = () => {
-	return <Wrapper>index</Wrapper>;
+const Portfolio = () => {
+	return <Wrapper>portfolio</Wrapper>;
 };
 
-export default work;
+export default Portfolio;

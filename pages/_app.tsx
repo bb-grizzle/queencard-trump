@@ -8,6 +8,7 @@ import AppProvider from "../Context/AppProvider";
 import { useEffect } from "react";
 import { checkBrowser } from "../util/checkBrowser";
 import { useRouter } from "next/dist/client/router";
+import HeaderLayout from "../Layout/HeaderLayout";
 
 interface MyAppProps extends AppProps {}
 
@@ -29,7 +30,9 @@ function MyApp({ Component, pageProps }: MyAppProps) {
 			<GlobalStyles />
 			<AppProvider>
 				<ThemeProvider theme={theme}>
-					<Component {...pageProps} />
+					<HeaderLayout>
+						<Component {...pageProps} />
+					</HeaderLayout>
 				</ThemeProvider>
 			</AppProvider>
 		</MetaLayout>
