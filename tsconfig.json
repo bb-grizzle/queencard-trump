@@ -22,7 +22,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    // "Apollo/withApollo.js"
   ],
   "exclude": [
     "node_modules"

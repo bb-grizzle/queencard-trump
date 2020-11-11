@@ -9,9 +9,7 @@ import { useEffect } from "react";
 import { checkBrowser } from "../util/checkBrowser";
 import { useRouter } from "next/dist/client/router";
 
-interface MyAppProps extends AppProps {
-	apollo: any;
-}
+interface MyAppProps extends AppProps {}
 
 function MyApp({ Component, pageProps }: MyAppProps) {
 	const { push } = useRouter();
