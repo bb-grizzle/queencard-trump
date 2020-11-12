@@ -12,6 +12,7 @@ const Wrapper = styled.div<{ paddingTop?: boolean }>`
 		padding-top: ${(props) => props.theme.size.header.mobile};
 	}
 	min-height: ${(props) => props.theme.layout.full_height};
+	height: 300vh;
 `;
 const PageContainer: React.FC<PageContainerProps> = ({ children, paddingTop, className }) => {
 	return (

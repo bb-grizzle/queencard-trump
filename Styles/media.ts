@@ -1,4 +1,4 @@
-export const BREAKPOINT_DESKTOP = 1167;
+export const BREAKPOINT_DESKTOP = 1200;
 export const BREAKPOINT_TABLET = 778;
 export const BREAKPOINT_MOBILE = 576;
 

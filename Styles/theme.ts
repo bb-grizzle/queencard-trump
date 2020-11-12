@@ -1,4 +1,4 @@
-import baseStyled, { ThemedStyledInterface } from "styled-components";
+import baseStyled, { ThemedStyledInterface, css } from "styled-components";
 
 const color = {
 	black: "black",
@@ -79,11 +79,18 @@ const layout = {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	`
+};
+
+const event = {
+	disable: css`
+		user-select: none;
+		pointer-events: none;
 	`,
-	event_disable: `user-select: none;
-	pointer-events:none;`,
-	event_able: `user-select: auto;
-	pointer-events:auto;`
+	active: css`
+		user-select: auto;
+		pointer-events: auto;
+	`
 };
 
 const style = {
@@ -99,7 +106,8 @@ const zIndex = {
 	adminForm: 50,
 	loading: 60,
 	menu: 80,
-	header: 100
+	header: 100,
+	floating: 120
 };
 
 const size = {
@@ -109,6 +117,9 @@ const size = {
 	header: {
 		pc: "140px",
 		mobile: "64px"
+	},
+	offset: {
+		tablet: 16
 	},
 	padding_top_admin: {
 		pc: "200px",
@@ -127,7 +138,8 @@ const theme = {
 	layout,
 	style,
 	zIndex,
-	size
+	size,
+	event
 };
 
 export type Theme = typeof theme;
