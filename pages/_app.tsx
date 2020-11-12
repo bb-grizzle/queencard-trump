@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { checkBrowser } from "../util/checkBrowser";
 import { useRouter } from "next/dist/client/router";
 import HeaderLayout from "../Layout/HeaderLayout";
+import { fbAnalytics } from "../Firebase/firebase";
 
 interface MyAppProps extends AppProps {}
 
@@ -25,9 +26,14 @@ function MyApp({ Component, pageProps }: MyAppProps) {
 		check();
 	}, []);
 
+	useEffect(() => {
+		fbAnalytics();
+	}, []);
+
 	return (
 		<MetaLayout>
 			<GlobalStyles />
+
 			<AppProvider>
 				<ThemeProvider theme={theme}>
 					<HeaderLayout>

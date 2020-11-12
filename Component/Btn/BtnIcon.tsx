@@ -18,7 +18,7 @@ const Icon = styled.img`
 const BtnIcon: React.FC<BtnIconProps> = ({ className, icon, onClick }) => {
 	return (
 		<Wrapper className={className} onClick={onClick}>
-			<Icon src={`image/icon/ic_${icon}.png`} alt={`icon_${icon}`} />
+			<Icon src={`/image/icon/ic_${icon}.png`} alt={`icon_${icon}`} />
 		</Wrapper>
 	);
 };
