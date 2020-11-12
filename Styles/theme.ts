@@ -7,7 +7,8 @@ const color = {
 		dark: "#2E233E"
 	},
 	main: "#45FF7D",
-	placeholder: "#C4C4C4"
+	placeholder: "#C4C4C4",
+	dim: "white"
 };
 
 const div = {

@@ -10,8 +10,9 @@ import { useIsMenuClick } from "../Context/AppProvider";
 const Wrapper = styled.header`
 	width: 100%;
 	height: ${(props) => props.theme.size.header.pc};
-	position: absolute;
+	position: fixed;
 	z-index: ${(props) => props.theme.zIndex.header};
+	background-color: ${(props) => props.theme.color.white};
 
 	@media ${media.tablet} {
 		height: ${(props) => props.theme.size.header.mobile};

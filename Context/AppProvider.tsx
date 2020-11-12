@@ -1,5 +1,6 @@
 import { createContext, useState, useContext, useEffect, SetStateAction, Dispatch } from "react";
 import useSize from "../Hook/useSize";
+import { preventScroll, activeScroll } from "../util/preventScroll";
 
 interface AppContextProps {
 	globalLoading: boolean;
@@ -15,9 +16,19 @@ const AppProvider = ({ children }) => {
 	const [isMenuClick, setIsMenuClick] = useState(false);
 	const { isTablet } = useSize();
 
+	// make ismenuclick false when media changed
 	useEffect(() => {
 		setIsMenuClick(false);
 	}, [isTablet]);
+
+	// prevent scroll when ismenuclick is true
+	useEffect(() => {
+		if (isMenuClick) {
+			preventScroll();
+		} else {
+			activeScroll();
+		}
+	}, [isMenuClick]);
 
 	return <AppContext.Provider value={{ globalLoading, setGlobalLoading, isMenuClick, setIsMenuClick }}>{children}</AppContext.Provider>;
 };
