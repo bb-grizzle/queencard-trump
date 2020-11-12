@@ -126,10 +126,10 @@ const event = {
 
 const zIndex = {
 	adminForm: 50,
-	loading: 60,
 	menu: 80,
-	header: 100,
-	floating: 120
+	header: 90,
+	floating: 120,
+	loading: 150
 };
 
 const size = {

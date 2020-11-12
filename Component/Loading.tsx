@@ -6,18 +6,19 @@ const Wrapper = styled.div<{ active: boolean }>`
 	left: 0;
 	top: 0;
 	width: 100%;
-	height: ${(props) => props.theme.layout.full_height};
-	background-color: ${(props) => props.theme.color.bg};
+	height: ${(props) => props.theme.size.full_height};
+	background-color: ${(props) => props.theme.color.white};
+	background-color: rgba(255, 255, 255, 0.3);
+	backdrop-filter: blur(12px);
 	${(props) => props.theme.layout.center_flex};
 	opacity: ${(props) => (props.active ? "1" : "0")};
 	z-index: ${(props) => props.theme.zIndex.loading};
 	transition: ${(props) => props.theme.transition.default};
-
-	${(props) => props.theme.style.event_disable};
+	${(props) => props.theme.event.disable};
 `;
 
 const Text = styled.p`
-	color: ${(props) => props.theme.color.gray.default};
+	color: ${(props) => props.theme.color.main};
 	font-size: 20px;
 	text-transform: uppercase;
 	font-style: italic;

@@ -3,6 +3,7 @@ import MobileMenu from "../Component/MobileMenu";
 import FloatingBtn from "../Component/FloatingBtn";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import Loading from "../Component/Loading";
 
 const HeaderLayout = ({ children }) => {
 	const router = useRouter();
@@ -21,7 +22,7 @@ const HeaderLayout = ({ children }) => {
 			<Header />
 			<MobileMenu />
 			{isFloating && <FloatingBtn />}
-
+			<Loading />
 			{children}
 		</>
 	);

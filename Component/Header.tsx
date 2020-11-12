@@ -112,6 +112,12 @@ const BtnLogout = styled(BtnText)`
 	font-size: 18px;
 	line-height: 1.44;
 	margin-left: 32px;
+	cursor: pointer;
+	@media ${media.hover} {
+		&:hover {
+			opacity: 0.6;
+		}
+	}
 `;
 
 const Header = () => {
