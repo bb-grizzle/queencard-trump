@@ -24,9 +24,9 @@ const Text = styled.p`
 `;
 
 const Loading: React.FC = () => {
-	const active = useLoading();
+	const { loading } = useLoading();
 	return (
-		<Wrapper active={active}>
+		<Wrapper active={loading}>
 			<Text> loading...</Text>
 		</Wrapper>
 	);

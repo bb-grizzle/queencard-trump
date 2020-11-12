@@ -72,14 +72,21 @@ const layout = {
 		right: 0;
 		bottom: 0;
 	`,
-	full_image: (url) => `
+	full_image: (url) => css`
 		background-image: url("${url}");
 		background-size: cover;
 		background-position: center;`,
-	center_flex: `
+	center_flex: css`
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	`,
+	ratio: (ratio) => css`
+		&:after {
+			content: "";
+			padding-top: ${ratio ? ratio : 100}%;
+			display: block;
+		}
 	`
 };
 
@@ -92,15 +99,6 @@ const event = {
 		user-select: auto;
 		pointer-events: auto;
 	`
-};
-
-const style = {
-	ratio: (ratio) => `&:after {
-		content: "";
-		padding-top: ${ratio ? ratio : 100}%;
-		display: block;
-	}`,
-	border: `1px solid ${color.black}`
 };
 
 const zIndex = {
@@ -137,7 +135,6 @@ const theme = {
 	div,
 	transition,
 	layout,
-	style,
 	zIndex,
 	size,
 	event
