@@ -29,19 +29,18 @@ export const MENU: Menu[] = [
 
 export const MENU_ADMIN: Menu[] = [
 	{
-		id: "about",
-		href: "/_admin/about"
+		id: "admin_portfolio",
+		href: "/_admin/portfolio",
+		name: "포트폴리오"
 	},
 	{
-		id: "work",
-		href: "/_admin/work"
+		id: "admin_about",
+		href: "/_admin/about",
+		name: "회사소개"
 	},
 	{
-		id: "exhibition",
-		href: "/_admin/exhibition"
-	},
-	{
-		id: "insperation",
-		href: "/_admin/insperation"
+		id: "admin_tutor",
+		href: "/_admin/tutor",
+		name: "강사소개"
 	}
 ];

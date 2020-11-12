@@ -9,6 +9,7 @@ interface BtnIconProps {
 const Wrapper = styled.div`
 	width: 32px;
 	height: 32px;
+	cursor: pointer;
 `;
 
 const Icon = styled.img`

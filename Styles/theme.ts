@@ -1,4 +1,5 @@
 import baseStyled, { ThemedStyledInterface, css } from "styled-components";
+import media from "./media";
 
 const color = {
 	black: "black",
@@ -6,6 +7,7 @@ const color = {
 	gray: {
 		dark: "#2E233E"
 	},
+	div: "rgba(0,0,0,0.2)",
 	main: "#45FF7D",
 	placeholder: "#C4C4C4",
 	dim: "white"
@@ -90,6 +92,27 @@ const layout = {
 	`
 };
 
+const style = {
+	input: css`
+		width: 100%;
+		padding: 18px 0;
+		font-size: 18px;
+		line-height: 1.44;
+
+		&:not(:first-child) {
+			margin-top: 27px;
+		}
+
+		@media ${media.tablet} {
+			font-size: 16px;
+			padding: 12px 0;
+			&:not(:first-child) {
+				margin-top: 20px;
+			}
+		}
+	`
+};
+
 const event = {
 	disable: css`
 		user-select: none;
@@ -130,6 +153,19 @@ const size = {
 	}
 };
 
+const text = {
+	title: {
+		lg: 21,
+		md: 18,
+		sm: 18
+	},
+	paragraph: {
+		lg: 18,
+		md: 14,
+		sm: 12
+	}
+};
+
 const theme = {
 	color,
 	div,
@@ -137,7 +173,9 @@ const theme = {
 	layout,
 	zIndex,
 	size,
-	event
+	event,
+	text,
+	style
 };
 
 export type Theme = typeof theme;

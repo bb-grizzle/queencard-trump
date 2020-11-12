@@ -1,6 +1,9 @@
 import PageContainer from "../Layout/PageLayout";
 import styled from "styled-components";
 import ContainerLayout from "../Layout/ContainerLayout";
+import Title, { TitleType } from "../Component/Text/Title";
+import Numbering from "../Component/Numbering";
+import Paragraph, { ParagraphType } from "../Component/Text/Paragraph";
 
 const Cover = styled.div<{ image: string }>`
 	${(props) => props.theme.layout.ratio(34)};

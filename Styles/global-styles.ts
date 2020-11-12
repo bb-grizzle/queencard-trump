@@ -29,7 +29,9 @@ const GlobalStyles = createGlobalStyle`
 
   input{
     border:none;
+    width: 100%;
     border-radius: 0px;
+    font-size: inherit;
     outline:none;
     border: 0px;
     -webkit-appearance: none;

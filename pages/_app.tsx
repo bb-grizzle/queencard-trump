@@ -10,6 +10,7 @@ import { checkBrowser } from "../util/checkBrowser";
 import { useRouter } from "next/dist/client/router";
 import HeaderLayout from "../Layout/HeaderLayout";
 import { fbAnalytics } from "../Firebase/firebase";
+import AdminProvider from "../Context/AdminProvider";
 
 interface MyAppProps extends AppProps {}
 
@@ -35,11 +36,13 @@ function MyApp({ Component, pageProps }: MyAppProps) {
 			<GlobalStyles />
 
 			<AppProvider>
-				<ThemeProvider theme={theme}>
-					<HeaderLayout>
-						<Component {...pageProps} />
-					</HeaderLayout>
-				</ThemeProvider>
+				<AdminProvider>
+					<ThemeProvider theme={theme}>
+						<HeaderLayout>
+							<Component {...pageProps} />
+						</HeaderLayout>
+					</ThemeProvider>
+				</AdminProvider>
 			</AppProvider>
 		</MetaLayout>
 	);
