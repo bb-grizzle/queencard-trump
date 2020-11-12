@@ -1,9 +1,7 @@
-import styled from "styled-components";
-
-const Wrapper = styled.div``;
+import PageContainer from "../Layout/PageLayout";
 
 const Process = () => {
-	return <Wrapper>Process</Wrapper>;
+	return <PageContainer>Process</PageContainer>;
 };
 
 export default Process;

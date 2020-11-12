@@ -1,9 +1,7 @@
-import styled from "styled-components";
-
-const Wrapper = styled.div``;
+import PageContainer from "../Layout/PageLayout";
 
 const Tutor = () => {
-	return <Wrapper>Tutor</Wrapper>;
+	return <PageContainer>Tutor</PageContainer>;
 };
 
 export default Tutor;

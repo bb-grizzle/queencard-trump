@@ -2,7 +2,12 @@ import baseStyled, { ThemedStyledInterface } from "styled-components";
 
 const color = {
 	black: "black",
-	white: "white"
+	white: "white",
+	gray: {
+		dark: "#2E233E"
+	},
+	main: "#45FF7D",
+	placeholder: "#C4C4C4"
 };
 
 const div = {
@@ -91,10 +96,10 @@ const style = {
 };
 
 const zIndex = {
+	adminForm: 50,
 	loading: 60,
-	menu: 100,
-	header: 80,
-	adminForm: 50
+	menu: 80,
+	header: 100
 };
 
 const size = {
@@ -102,8 +107,8 @@ const size = {
 	full_height: `calc(var(--vh, 1vh) * 100);`,
 
 	header: {
-		pc: "120px",
-		mobile: "60px"
+		pc: "140px",
+		mobile: "64px"
 	},
 	padding_top_admin: {
 		pc: "200px",

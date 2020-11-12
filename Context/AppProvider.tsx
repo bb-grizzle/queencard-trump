@@ -1,24 +1,39 @@
-import { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useState, useContext, useEffect, SetStateAction, Dispatch } from "react";
+import useSize from "../Hook/useSize";
 
-export const AppContext = createContext({
-	globalLoading: false,
-	setGlobalLoading: null
-});
+interface AppContextProps {
+	globalLoading: boolean;
+	setGlobalLoading: Dispatch<SetStateAction<boolean>>;
+	isMenuClick: boolean;
+	setIsMenuClick: Dispatch<SetStateAction<boolean>>;
+}
+
+export const AppContext = createContext({} as AppContextProps);
 
 const AppProvider = ({ children }) => {
 	const [globalLoading, setGlobalLoading] = useState(false);
+	const [isMenuClick, setIsMenuClick] = useState(false);
+	const { isTablet } = useSize();
 
-	return <AppContext.Provider value={{ globalLoading, setGlobalLoading }}>{children}</AppContext.Provider>;
+	useEffect(() => {
+		setIsMenuClick(false);
+	}, [isTablet]);
+
+	return <AppContext.Provider value={{ globalLoading, setGlobalLoading, isMenuClick, setIsMenuClick }}>{children}</AppContext.Provider>;
 };
 
 export const useLoading = () => {
 	const loading = useContext(AppContext).globalLoading;
-	return loading;
+	const setLoading = useContext(AppContext).setGlobalLoading;
+
+	return { loading, setLoading };
 };
 
-export const setLoading = () => {
-	const set = useContext(AppContext).setGlobalLoading;
-	return set;
+export const useIsMenuClick = () => {
+	const isMenuClick = useContext(AppContext).isMenuClick;
+	const setIsMenuClick = useContext(AppContext).setIsMenuClick;
+
+	return { isMenuClick, setIsMenuClick };
 };
 
 export default AppProvider;

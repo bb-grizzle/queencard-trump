@@ -1,9 +1,7 @@
-import styled from "styled-components";
-
-const Wrapper = styled.div``;
+import PageContainer from "../Layout/PageLayout";
 
 const Portfolio = () => {
-	return <Wrapper>portfolio</Wrapper>;
+	return <PageContainer>portfolio</PageContainer>;
 };
 
 export default Portfolio;

@@ -1,9 +1,7 @@
-import styled from "styled-components";
-
-const Wrapper = styled.div``;
+import PageContainer from "../Layout/PageLayout";
 
 const index = () => {
-	return <Wrapper>about</Wrapper>;
+	return <PageContainer>about</PageContainer>;
 };
 
 export default index;

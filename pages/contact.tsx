@@ -1,9 +1,7 @@
-import styled from "styled-components";
-
-const Wrapper = styled.div``;
+import PageContainer from "../Layout/PageLayout";
 
 const Contact = () => {
-	return <Wrapper>Contact</Wrapper>;
+	return <PageContainer>Contact</PageContainer>;
 };
 
 export default Contact;

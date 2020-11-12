@@ -10,6 +10,8 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     list-style:none;
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+
   }
 
   body{

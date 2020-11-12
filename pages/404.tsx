@@ -1,11 +1,7 @@
-import styled from "styled-components";
-
-const Wrapper = styled.div`
-	height: 100%;
-`;
+import PageContainer from "../Layout/PageLayout";
 
 const Custom404 = () => {
-	return <Wrapper>404</Wrapper>;
+	return <PageContainer>404</PageContainer>;
 };
 
 export default Custom404;
