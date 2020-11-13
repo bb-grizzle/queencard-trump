@@ -4,6 +4,7 @@ import media from "../../Styles/media";
 interface SubmitProps {
 	value?: string;
 	className?: string;
+	icon: string;
 }
 const Wrapper = styled.div`
 	display: flex;
@@ -36,12 +37,12 @@ const SubmitBtn = styled(BtnIcon)`
 	}
 `;
 
-const Submit: React.FC<SubmitProps> = ({ value = "저장", className }) => {
+const Submit: React.FC<SubmitProps> = ({ value = "저장", className, icon }) => {
 	return (
 		<Wrapper className={className}>
 			<LabelWrapper>
 				<Input type="submit" value={value} />
-				<SubmitBtn icon="arrow_right" />
+				<SubmitBtn icon={icon} />
 			</LabelWrapper>
 		</Wrapper>
 	);

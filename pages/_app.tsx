@@ -12,6 +12,8 @@ import HeaderLayout from "../Layout/HeaderLayout";
 import { fbAnalytics } from "../Firebase/firebase";
 import AdminProvider from "../Context/AdminProvider";
 
+import "react-quill/dist/quill.snow.css";
+
 interface MyAppProps extends AppProps {}
 
 function MyApp({ Component, pageProps }: MyAppProps) {

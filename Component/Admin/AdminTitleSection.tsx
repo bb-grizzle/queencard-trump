@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Title from "../Text/Title";
+import Title, { TitleType } from "../Text/Title";
 import media from "../../Styles/media";
 interface TitleSectionProps {
 	title: string;
@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 		margin-bottom: 20px;
 	}
 `;
-const TitleSection: React.FC<TitleSectionProps> = ({ title }) => {
+const AdminTitleSection: React.FC<TitleSectionProps> = ({ title }) => {
 	return (
 		<Wrapper>
 			<Title title={title} />
@@ -22,4 +22,4 @@ const TitleSection: React.FC<TitleSectionProps> = ({ title }) => {
 	);
 };
 
-export default TitleSection;
+export default AdminTitleSection;

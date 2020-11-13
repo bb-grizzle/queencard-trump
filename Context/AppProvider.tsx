@@ -11,7 +11,7 @@ interface AppContextProps {
 	setIsMenuClick: Dispatch<SetStateAction<boolean>>;
 	isAdmin: boolean;
 	isLoggedIn: boolean;
-	setIsLoggedInt: Dispatch<SetStateAction<boolean>>;
+	setIsLoggedInt: Dispatch<SetStateAction<boolean | null>>;
 }
 
 export const AppContext = createContext({} as AppContextProps);
@@ -22,7 +22,7 @@ const AppProvider = ({ children }) => {
 	const { isTablet } = useSize();
 	const router = useRouter();
 	const [isAdmin, setIsAdmin] = useState(false);
-	const [isLoggedIn, setIsLoggedInt] = useState(false);
+	const [isLoggedIn, setIsLoggedInt] = useState(null);
 
 	useEffect(() => {
 		fbAuthListener(setIsLoggedInt);
@@ -78,7 +78,7 @@ export const useIsLoggedIn = () => {
 	const { push } = useRouter();
 
 	const redirectToLogin = () => {
-		if (!isLoggedIn) {
+		if (isLoggedIn === false) {
 			push("/_admin/signin");
 		}
 	};

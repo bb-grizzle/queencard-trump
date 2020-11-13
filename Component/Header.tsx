@@ -126,7 +126,6 @@ const Header = () => {
 	const { isAdmin } = useIsAdmin();
 	const [hideNav, setHideNav] = useState(false);
 	const { isLoggedIn } = useIsLoggedIn();
-	const { push } = useRouter();
 
 	useEffect(() => {
 		if (isAdmin) {
@@ -137,7 +136,7 @@ const Header = () => {
 	}, [isAdmin]);
 
 	useEffect(() => {
-		if (isAdmin && !isLoggedIn) {
+		if (isAdmin && isLoggedIn === false) {
 			setHideNav(true);
 		} else {
 			setHideNav(false);

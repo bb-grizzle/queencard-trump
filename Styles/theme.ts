@@ -5,7 +5,8 @@ const color = {
 	black: "black",
 	white: "white",
 	gray: {
-		dark: "#2E233E"
+		dark: "#2E233E",
+		light: "rgba(0,0,0,0.05)"
 	},
 	div: "rgba(0,0,0,0.2)",
 	main: "#45FF7D",
@@ -92,22 +93,48 @@ const layout = {
 	`
 };
 
+const text = {
+	title: {
+		lg: 21,
+		md: 18,
+		sm: 18
+	},
+	paragraph: {
+		lg: 18,
+		md: 14,
+		sm: 12
+	},
+	input: {
+		pc: 18,
+		tablet: 16
+	}
+};
+
 const style = {
 	input: css`
 		width: 100%;
 		padding: 18px 0;
-		font-size: 18px;
+		font-size: ${`${text.input.pc}px`};
 		line-height: 1.44;
 
-		&:not(:first-child) {
-			margin-top: 27px;
-		}
-
 		@media ${media.tablet} {
-			font-size: 16px;
-			padding: 12px 0;
-			&:not(:first-child) {
-				margin-top: 20px;
+			font-size: ${`${text.input.tablet}px`};
+			padding: 12px 8px;
+		}
+	`,
+	textarea: css`
+		> textarea {
+			background-color: ${(props) => props.theme.color.gray.light};
+			line-height: 1.6;
+			height: calc(18px * 4 * 1.6);
+			padding: 12px 8px;
+		}
+	`,
+
+	hoverDefault: css`
+		@media ${media.hover} {
+			&:hover {
+				opacity: 0.5;
 			}
 		}
 	`
@@ -150,19 +177,6 @@ const size = {
 	padding_bottom_admin: {
 		pc: "100px",
 		mobile: "60px"
-	}
-};
-
-const text = {
-	title: {
-		lg: 21,
-		md: 18,
-		sm: 18
-	},
-	paragraph: {
-		lg: 18,
-		md: 14,
-		sm: 12
 	}
 };
 

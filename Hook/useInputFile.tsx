@@ -1,8 +1,9 @@
 import { useState } from "react";
 import checkFile from "../util/filecheck";
 
-const useInputManyFile = () => {
-	const [files, setFiles] = useState<{ file: any; url: string }>();
+const useInputFile = () => {
+	const [file, setFile] = useState<any>();
+	const [url, setUrl] = useState("");
 
 	const onChange = (e: any) => {
 		if (!checkFile(e.target)) return;
@@ -11,14 +12,12 @@ const useInputManyFile = () => {
 			const url = URL.createObjectURL(e.target.files[0]);
 			const file = e.target.files[0];
 
-			setFiles({
-				file,
-				url
-			});
+			setFile(file);
+			setUrl(url);
 		}
 	};
 
-	return { files, onChange, setFiles };
+	return { file, url, onChange };
 };
 
-export default useInputManyFile;
+export default useInputFile;

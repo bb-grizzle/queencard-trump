@@ -4,10 +4,16 @@ import ContainerLayout from "../../Layout/ContainerLayout";
 import media from "../../Styles/media";
 import { useAdminAction, AdminActionType } from "../../Context/AdminProvider";
 
+interface AddBtnProps {
+	small?: boolean;
+}
+
 const Container = styled(ContainerLayout)`
 	position: relative;
 	position: fixed;
 	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
 	${(props) => props.theme.event.disable};
 `;
 
@@ -26,13 +32,13 @@ const Btn = styled(BtnIcon)`
 	}
 `;
 
-const AddBtn = () => {
+const AddBtn: React.FC<AddBtnProps> = ({ small = false }) => {
 	const { setAdminAction } = useAdminAction();
 	const handleAddClick = () => {
 		setAdminAction(AdminActionType.ADD);
 	};
 	return (
-		<Container small={true}>
+		<Container small={small}>
 			<Btn icon="pluse" onClick={handleAddClick} />;
 		</Container>
 	);

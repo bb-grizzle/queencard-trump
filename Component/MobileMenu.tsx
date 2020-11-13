@@ -6,6 +6,7 @@ import NavLink from "./NavLink";
 import Dim from "./Dim";
 import { useState, useEffect } from "react";
 import BtnText from "./Btn/BtnText";
+import { fbSignout } from "../Firebase/firebase";
 
 const Wrapper = styled.div`
 	position: fixed;
@@ -64,6 +65,14 @@ const MobileMenu = () => {
 		setIsMenuClick(false);
 	};
 
+	const handleLogout = () => {
+		if (confirm("로그아웃 하시겠습니까?")) {
+			fbSignout();
+			location.reload();
+		} else {
+			return;
+		}
+	};
 	return (
 		<Wrapper>
 			<Dim active={isMenuClick} />
@@ -74,7 +83,7 @@ const MobileMenu = () => {
 							return <MenuList key={menu.id} href={menu.href} name={menu.name} onClick={handleMenuClick} />;
 						})}
 					</Menu>
-					<BtnLogout text="로그아웃" onClick={() => null} />
+					<BtnLogout text="로그아웃" onClick={handleLogout} />
 				</ContainerLayout>
 			</MenuWrapper>
 		</Wrapper>

@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import media from "../../Styles/media";
-
 interface InputDefaultProps {
 	value: string;
 	onChange: any;
 	type?: string;
-	placeholder?: string;
+	placeholder: string;
 }
 const Wrapper = styled.div`
 	width: 100%;

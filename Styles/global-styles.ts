@@ -41,6 +41,8 @@ const GlobalStyles = createGlobalStyle`
 
   textarea{
     border:none;
+    width: 100%;
+    font-size:inherit;
     border-radius: none;
     outline:none;
     border: 0px;

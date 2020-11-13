@@ -1,11 +1,15 @@
 import styled from "styled-components";
+import media from "../../Styles/media";
 interface BtnTextProps {
 	text: string;
 	onClick: () => void;
 	className?: string;
 }
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+	cursor: pointer;
+	${(props) => props.theme.style.hoverDefault};
+`;
 
 const Text = styled.p``;
 
