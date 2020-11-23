@@ -9,7 +9,7 @@ interface SubmitProps {
 const Wrapper = styled.div`
 	display: flex;
 	justify-content: flex-end;
-	margin-top: 24px;
+	margin-top: 56px;
 `;
 
 const Input = styled.input`

@@ -16,8 +16,12 @@ const useInputFile = () => {
 			setUrl(url);
 		}
 	};
+	const init = () => {
+		setFile(null);
+		setUrl(null);
+	};
 
-	return { file, url, onChange };
+	return { file, url, onChange, init };
 };
 
 export default useInputFile;

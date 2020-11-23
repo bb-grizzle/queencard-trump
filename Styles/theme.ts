@@ -6,6 +6,7 @@ const color = {
 	white: "white",
 	gray: {
 		dark: "#2E233E",
+		default: "#878787",
 		light: "rgba(0,0,0,0.05)"
 	},
 	div: "rgba(0,0,0,0.2)",
@@ -137,6 +138,14 @@ const style = {
 				opacity: 0.5;
 			}
 		}
+	`,
+	hideScroll: css`
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+		/* Hide scrollbar for Chrome, Safari and Opera */
+		&::-webkit-scrollbar {
+			display: none;
+		}
 	`
 };
 
@@ -152,11 +161,19 @@ const event = {
 };
 
 const zIndex = {
-	adminForm: 50,
+	adminForm: {
+		pc: 50,
+		tablet: 100
+	},
+	dim: {
+		min: 50,
+		max: 200
+	},
 	menu: 80,
 	header: 90,
 	floating: 120,
-	loading: 150
+	loading: 150,
+	popup: 200
 };
 
 const size = {
@@ -177,6 +194,10 @@ const size = {
 	padding_bottom_admin: {
 		pc: "100px",
 		mobile: "60px"
+	},
+	gap: {
+		list: 30,
+		section: 32
 	}
 };
 

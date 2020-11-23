@@ -16,6 +16,8 @@ const Wrapper = styled.div`
 
 	@media ${media.tablet} {
 		margin-bottom: 20px;
+		height: ${(props) => props.theme.size.header.mobile};
+		align-items: center;
 	}
 `;
 const AdminFormTitle: React.FC<TitleSectionProps> = ({ title }) => {

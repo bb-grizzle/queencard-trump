@@ -13,7 +13,7 @@ export enum TitleType {
 	SM = "sm"
 }
 
-const Text = styled.h1<{ type: TitleType; isRegular: boolean; color?: string }>`
+const Text = styled.h3<{ type: TitleType; isRegular: boolean; color?: string }>`
 	font-size: ${(props) => `${props.theme.text.title[props.type]}px`};
 	font-weight: ${(props) => (props.isRegular ? 400 : 700)};
 	line-height: 1.42;

@@ -13,7 +13,7 @@ export enum AdminActionType {
 }
 
 const AdminProvider = ({ children }) => {
-	const [adminAction, setAdminAction] = useState<AdminActionType>(AdminActionType.ADD);
+	const [adminAction, setAdminAction] = useState<AdminActionType>(null);
 
 	return <AdminContext.Provider value={{ adminAction, setAdminAction }}>{children}</AdminContext.Provider>;
 };

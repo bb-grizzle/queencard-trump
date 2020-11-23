@@ -4,6 +4,7 @@ interface InputDefaultProps {
 	onChange: any;
 	type?: string;
 	placeholder: string;
+	className?: string;
 }
 const Wrapper = styled.div`
 	width: 100%;
@@ -14,9 +15,9 @@ const Wrapper = styled.div`
 
 const Input = styled.input``;
 
-const InputDefault: React.FC<InputDefaultProps> = ({ value, onChange, type = "text", placeholder }) => {
+const InputDefault: React.FC<InputDefaultProps> = ({ value, onChange, type = "text", placeholder, className }) => {
 	return (
-		<Wrapper>
+		<Wrapper className={className}>
 			<Input type={type} value={value} onChange={onChange} placeholder={placeholder} />
 		</Wrapper>
 	);

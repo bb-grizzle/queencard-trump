@@ -7,6 +7,7 @@ interface InputFileProps {
 }
 const Wrapper = styled.div`
 	width: 100%;
+	${(props) => props.theme.style.input};
 `;
 
 const Input = styled.input`
@@ -32,11 +33,10 @@ const Label = styled.label`
 `;
 
 const Text = styled(Paragraph)`
-	/* ${(props) => props.theme.style.input}; */
 	margin-top: 0 !important;
-  line-height: 1.4;
-  position: relative;
-  top: -1px;
+	line-height: 1.4;
+	position: relative;
+	top: -1px;
 `;
 
 const InputFile: React.FC<InputFileProps> = ({ onChange, file }) => {

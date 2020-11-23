@@ -27,7 +27,7 @@ const GlobalStyles = createGlobalStyle`
     list-style:none;
   }
 
-  input{
+  input, select{
     border:none;
     width: 100%;
     border-radius: 0px;
@@ -36,6 +36,11 @@ const GlobalStyles = createGlobalStyle`
     border: 0px;
     -webkit-appearance: none;
    -webkit-border-radius: 0;
+
+   &::placeholder {
+  color: ${Theme.color.gray.default};
+
+}
 
   }
 
