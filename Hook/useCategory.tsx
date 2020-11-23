@@ -15,7 +15,7 @@ const useCategory = () => {
 	useEffect(() => {
 		const get = async () => {
 			try {
-				const res = await fbGetData(COL, "name", "desc");
+				const res = await fbGetData(COL, "name", "asc");
 				setCategory(res);
 			} catch (err) {
 				console.log(err);

@@ -1,6 +1,6 @@
-import { CategoryProps } from "./category";
+import { CategoryDataProps } from "./category";
 export interface PortfolioProps {
-	category: CategoryProps;
+	category: CategoryDataProps;
 	thumbnail: fileProps | null;
 	subTitle: string;
 	title: string;

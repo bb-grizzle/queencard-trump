@@ -41,6 +41,7 @@ const PortfolioContainer = () => {
 
 	const [nowCategory, setNowCategory] = useState<string>(null);
 	const { col } = useCol({ pc: 4 });
+
 	// category
 	const newCategoryName = useInput("");
 	const newCategoryColor = useInput(theme.color.main);
@@ -74,6 +75,10 @@ const PortfolioContainer = () => {
 			detail: detail
 		});
 	}, [detail, titleInput.value, subTitleInput.value, categoryInput.value, thumbnailInput.url]);
+
+	useEffect(() => {
+		console.log(nowCategory);
+	}, [nowCategory]);
 
 	const handleSubmit = async () => {
 		// 기본 정보 확인

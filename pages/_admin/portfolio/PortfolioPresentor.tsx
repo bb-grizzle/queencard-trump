@@ -48,6 +48,7 @@ const CategoryList = styled.li<{ active: boolean }>`
 	@media ${media.hover} {
 		&:hover {
 			cursor: pointer;
+			opacity: 0.5;
 		}
 	}
 `;
@@ -71,14 +72,14 @@ const PortfolioPresentor: React.FC<PortfolioPresentorProps> = ({ category, onSub
 				<AdminTitleSection title="포트폴리오" />
 
 				<Category>
-					<CategoryList active={nowCategory === null}>
-						<CategoryBtn text={"전체"} onClick={() => onCategoryClick(null)} />
+					<CategoryList active={nowCategory === null} onClick={() => onCategoryClick(null)}>
+						<CategoryBtn text={"전체"} />
 					</CategoryList>
 					{category &&
 						Object.keys(category).map((key, index) => {
 							return (
-								<CategoryList key={index} active={nowCategory === category[key].name} onClick={() => onCategoryClick(category[key].name)}>
-									<CategoryBtn text={category[key].name} onClick={() => null} />
+								<CategoryList key={index} active={nowCategory === category[key].id} onClick={() => onCategoryClick(category[key].id)}>
+									<CategoryBtn text={category[key].name} opacityAction={false} />
 									<Count>{category[key].count}</Count>
 								</CategoryList>
 							);
@@ -87,9 +88,11 @@ const PortfolioPresentor: React.FC<PortfolioPresentorProps> = ({ category, onSub
 
 				<ListWrppaer>
 					{data &&
-						data.map((portfolio, index) => {
-							return <PortfolioList key={portfolio.id} data={portfolio} col={listCol} isLast={(index + 1) % listCol === 0} />;
-						})}
+						data
+							.filter((el) => (nowCategory !== null ? el.category.id === nowCategory : el))
+							.map((portfolio, index) => {
+								return <PortfolioList key={portfolio.id} data={portfolio} col={listCol} isLast={(index + 1) % listCol === 0} />;
+							})}
 				</ListWrppaer>
 			</ContainerLayout>
 
