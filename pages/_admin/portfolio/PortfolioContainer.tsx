@@ -46,18 +46,6 @@ const PortfolioContainer = () => {
 	const newCategoryColor = useInput(theme.color.main);
 	const [newCategory, setNewCategory] = useState<CategoryProps | null>(null);
 
-	// useEffect(() => {
-	// 	console.log("test");
-	// 	setNewCategory({
-	// 		name: newCategoryName.value,
-	// 		color: newCategoryColor.value
-	// 	});
-	// }, [newCategoryName.value, newCategoryColor.value]);
-
-	useEffect(() => {
-		console.log(nowCategory);
-	}, [nowCategory]);
-
 	const handleCategoryClick = (index: string | null) => {
 		setNowCategory(index);
 	};
@@ -130,8 +118,7 @@ const PortfolioContainer = () => {
 		if (adminAction === AdminActionType.ADD) {
 			// POST
 			try {
-				const upload = await uploadPortfolio({ ...form, category: categoryId ? categoryId : categoryInput.value }, thumbnailInput);
-				// console.log(upload);
+				await uploadPortfolio({ ...form, category: categoryId ? categoryId : categoryInput.value }, thumbnailInput);
 			} catch (err) {
 				console.log(err);
 			}

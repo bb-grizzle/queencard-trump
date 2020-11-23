@@ -10,7 +10,6 @@ const usePortfolio = () => {
 	const [categoryResult, setCategoryResult] = useState();
 
 	useEffect(() => {
-		console.log("GET PORTFOLIO");
 		const get = async () => {
 			try {
 				const res = await fbGetData(COL, "timeStamp", "desc");
