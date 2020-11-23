@@ -102,22 +102,6 @@ const AdminForm: React.FC<AdminFormProps> = ({ onSubmit, contents, title, formRe
 							</FormSection>
 						);
 					})}
-					{/* <Title title={title} type={TitleType.SM} /> */}
-					{/*<InputDefault {...testInput} placeholder="text" />
-					<InputDefault {...testInput} placeholder="number" type="number" />
-					<InputDefault {...testInput} placeholder="email" type="email" />
-
-					<Title title="text area" type={TitleType.SM} />
-					<TextArea {...textareaInput} placeholder="textarea" />
-
-					<Title title="editor" type={TitleType.SM} />
-					<EditorDefault {...editorInput} />
-
-					<Title title="file" type={TitleType.SM} />
-					<InputFile {...fileInput} />
-
-					<Title title="tag" type={TitleType.SM} />
-					<InputTag {...tagInput} placeholder=", 키를 이용해 태그를 추가하세요." /> */}
 				</FormDefault>
 			</Container>
 		</Wrapper>

@@ -177,9 +177,11 @@ export const fbUploadStorage = async (path, name, file) => {
 		await ref.put(file);
 		const url = await ref.getDownloadURL();
 		const prevUrl = `${path}/${name}`;
+		const fileName = file.name;
 		return {
 			url,
-			prevUrl
+			prevUrl,
+			fileName
 		};
 	} catch (err) {
 		console.log(err);

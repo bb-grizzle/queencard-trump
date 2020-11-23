@@ -1,14 +1,15 @@
 import styled, { css } from "styled-components";
-import { PortfolioProps } from "../Interface/portfolio";
-import Title, { TitleType } from "./Text/Title";
+import { PortfolioDataProps } from "../Interface/portfolio";
+import Title from "./Text/Title";
 import Paragraph, { ParagraphType } from "./Text/Paragraph";
 import useImageLoad from "../Hook/useImageLoad";
 import media from "../Styles/media";
 
 interface PortfolioListProps {
-	data: PortfolioProps;
+	data: PortfolioDataProps;
 	col: number;
 	isLast: boolean;
+	onClick: (id: string) => void;
 }
 
 const Inner = styled.div`
@@ -65,10 +66,10 @@ const BackgroundImage = styled.div<{ bg: string; active: boolean }>`
 			  `};
 `;
 
-const PortfolioList: React.FC<PortfolioListProps> = ({ data, col, isLast }) => {
+const PortfolioList: React.FC<PortfolioListProps> = ({ data, col, isLast, onClick }) => {
 	const { load } = useImageLoad(data.thumbnail.url);
 	return (
-		<Wrapper col={col} isLast={isLast}>
+		<Wrapper col={col} isLast={isLast} onClick={() => onClick(data.id)}>
 			<BackgroundImage bg={data.thumbnail.url} active={load} />
 			<ContentsWrapper>
 				<ColorOverlay />

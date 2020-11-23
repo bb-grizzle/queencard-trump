@@ -20,6 +20,7 @@ interface PortfolioPresentorProps {
 	onCategoryClick: (id: string | null) => void;
 	nowCategory: string | null;
 	listCol: number;
+	handleListClick: (id: string) => void;
 }
 
 const Category = styled.ul`
@@ -65,7 +66,7 @@ const ListWrppaer = styled.ul`
 	flex-wrap: wrap;
 `;
 
-const PortfolioPresentor: React.FC<PortfolioPresentorProps> = ({ category, onSubmit, formContents, formRef, data, nowCategory, onCategoryClick, listCol }) => {
+const PortfolioPresentor: React.FC<PortfolioPresentorProps> = ({ category, onSubmit, formContents, formRef, data, nowCategory, onCategoryClick, listCol, handleListClick }) => {
 	return (
 		<PageContainer>
 			<ContainerLayout>
@@ -91,7 +92,7 @@ const PortfolioPresentor: React.FC<PortfolioPresentorProps> = ({ category, onSub
 						data
 							.filter((el) => (nowCategory !== null ? el.category.id === nowCategory : el))
 							.map((portfolio, index) => {
-								return <PortfolioList key={portfolio.id} data={portfolio} col={listCol} isLast={(index + 1) % listCol === 0} />;
+								return <PortfolioList key={portfolio.id} data={portfolio} col={listCol} isLast={(index + 1) % listCol === 0} onClick={handleListClick} />;
 							})}
 				</ListWrppaer>
 			</ContainerLayout>

@@ -3,7 +3,7 @@ import Paragraph, { ParagraphType } from "../Text/Paragraph";
 import media from "../../Styles/media";
 interface InputFileProps {
 	onChange: any;
-	file: any;
+	fileName: string;
 }
 const Wrapper = styled.div`
 	width: 100%;
@@ -39,12 +39,12 @@ const Text = styled(Paragraph)`
 	top: -1px;
 `;
 
-const InputFile: React.FC<InputFileProps> = ({ onChange, file }) => {
+const InputFile: React.FC<InputFileProps> = ({ onChange, fileName }) => {
 	return (
 		<Wrapper>
 			<Label>
 				<Input type={"file"} onChange={onChange} />
-				<Text text={file ? file.name : "파일첨부"} type={ParagraphType.SM} />
+				<Text text={fileName ? fileName : "파일첨부"} type={ParagraphType.SM} />
 			</Label>
 		</Wrapper>
 	);

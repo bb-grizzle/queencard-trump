@@ -7,7 +7,6 @@ import useInputTag from "../../../Hook/useInputTag";
 import { formCheck } from "../../../util/formCheck";
 import checkFile from "../../../util/filecheck";
 import { PortfolioProps, PortfolioDetailProps } from "../../../Interface/portfolio";
-import { fbUploadData, fbUploadStorage, fbUpdateData, fbGetData } from "../../../Firebase/firebase";
 import usePortfolio from "../../../Hook/usePortfolio";
 import useRidrectToSignin from "../../../Hook/useRidrectToSignin";
 import { AdminFormContents } from "../../../Interface/adminForm";
@@ -18,24 +17,23 @@ import theme from "../../../Styles/theme";
 
 const PortfolioContainer = () => {
 	useRidrectToSignin();
-	const { data, uploadPortfolio, category, uploadCategory } = usePortfolio();
+	const { data, uploadPortfolio, category, uploadCategory, handleNowData, nowData, updatePortfolio } = usePortfolio();
 	const { setAdminAction, adminAction } = useAdminAction();
 	const [form, setForm] = useState<PortfolioProps>();
-	const titleInput = useInput("title test");
-	const subTitleInput = useInput("submit Title test");
 
+	const titleInput = useInput("");
+	const subTitleInput = useInput("");
 	const categoryInput = useInputOption("");
 	const thumbnailInput = useInputFile();
 
 	const [detail, setDetail] = useState<PortfolioDetailProps>();
-
-	const partnerInput = useInput("partner test");
-	const businessInput = useInput("businessInput test");
-	const count_studentInput = useInput(20);
-	const count_schoolInput = useInput(20);
-	const areaInput = useInputTag(["test", "test2", "test3"]);
-	const mediaTextInput = useInput("mediaTextInput test");
-	const mediaLinkInput = useInput("https://naver.com");
+	const partnerInput = useInput("");
+	const businessInput = useInput("");
+	const count_studentInput = useInput("");
+	const count_schoolInput = useInput("");
+	const areaInput = useInputTag();
+	const mediaTextInput = useInput("");
+	const mediaLinkInput = useInput("");
 
 	const formRef = useRef<HTMLFormElement>();
 
@@ -46,10 +44,39 @@ const PortfolioContainer = () => {
 	const newCategoryName = useInput("");
 	const newCategoryColor = useInput(theme.color.main);
 	const [newCategory, setNewCategory] = useState<CategoryProps | null>(null);
+	const [nowId, setNowId] = useState();
 
 	const handleCategoryClick = (index: string | null) => {
 		setNowCategory(index);
 	};
+
+	const handleListClick = (id: string) => {
+		setNowId(id);
+		handleNowData(id);
+	};
+
+	useEffect(() => {
+		if (nowData) {
+			setAdminAction(AdminActionType.EDIT);
+
+			// basic
+			titleInput.setValue(nowData.title);
+			subTitleInput.setValue(nowData.subTitle);
+			categoryInput.setValue(nowData.category.id);
+			thumbnailInput.setValue(nowData.thumbnail.fileName);
+
+			// detail
+			partnerInput.setValue(nowData.detail.partner);
+			businessInput.setValue(nowData.detail.business);
+			count_studentInput.setValue(nowData.detail.count_student);
+			count_schoolInput.setValue(nowData.detail.count_school);
+			areaInput.setValue(nowData.detail.area);
+			mediaTextInput.setValue(nowData.detail.media.title);
+			mediaLinkInput.setValue(nowData.detail.media.link);
+		} else {
+			setAdminAction(null);
+		}
+	}, [nowData]);
 
 	// MEDIA
 	useEffect(() => {
@@ -64,7 +91,7 @@ const PortfolioContainer = () => {
 				link: mediaLinkInput.value
 			}
 		});
-	}, [partnerInput.value, businessInput.value, count_studentInput.value, count_schoolInput.value, areaInput.value]);
+	}, [partnerInput.value, businessInput.value, count_studentInput.value, count_schoolInput.value, areaInput.value, mediaTextInput.value, mediaLinkInput.value]);
 
 	useEffect(() => {
 		setForm({
@@ -76,13 +103,9 @@ const PortfolioContainer = () => {
 		});
 	}, [detail, titleInput.value, subTitleInput.value, categoryInput.value, thumbnailInput.url]);
 
-	useEffect(() => {
-		console.log(nowCategory);
-	}, [nowCategory]);
-
 	const handleSubmit = async () => {
 		// 기본 정보 확인
-		if (!titleInput.value || !subTitleInput.value || !thumbnailInput.file) {
+		if (!titleInput.value || !subTitleInput.value || !thumbnailInput.fileName) {
 			formCheck();
 			return;
 		}
@@ -122,18 +145,32 @@ const PortfolioContainer = () => {
 		// SUBMIT
 		if (adminAction === AdminActionType.ADD) {
 			// POST
+			const postData = { ...form, category: categoryId ? categoryId : categoryInput.value };
 			try {
-				await uploadPortfolio({ ...form, category: categoryId ? categoryId : categoryInput.value }, thumbnailInput);
+				await uploadPortfolio(postData, thumbnailInput);
 			} catch (err) {
 				console.log(err);
 			}
 		} else if (adminAction === AdminActionType.EDIT) {
+			// UPDATE
+			const postData = { ...form, category: categoryId ? categoryId : categoryInput.value };
+			try {
+				await updatePortfolio(postData, thumbnailInput);
+			} catch (err) {
+				console.log(err);
+			}
 			// EDIT
 		}
 
 		// INIT
 		formInit();
 	};
+
+	useEffect(() => {
+		if (adminAction === null) {
+			formInit();
+		}
+	}, [adminAction]);
 
 	const formInit = () => {
 		setAdminAction(null);
@@ -199,6 +236,7 @@ const PortfolioContainer = () => {
 			formRef={formRef}
 			data={data}
 			onCategoryClick={handleCategoryClick}
+			handleListClick={handleListClick}
 			nowCategory={nowCategory}
 			listCol={col}
 		/>

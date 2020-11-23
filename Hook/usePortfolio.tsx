@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { fbGetData, fbUploadData, fbUploadStorage, fbUpdateData } from "../Firebase/firebase";
+import { fbGetData, fbUploadData, fbUploadStorage, fbUpdateData, fbDeleteStorage } from "../Firebase/firebase";
 import useCategory from "./useCategory";
 const COL = "portfolio";
 
 const usePortfolio = () => {
-	const { category, setCategory, uploadCategory, updateCategory, categoryObj, setCateogoryCount, categoryCount } = useCategory();
+	const { category, uploadCategory, updateCategory, categoryObj, setCateogoryCount, categoryCount } = useCategory();
 	const [resData, setResData] = useState();
 	const [data, setData] = useState();
 	const [categoryResult, setCategoryResult] = useState();
+
+	const [nowData, setNowData] = useState();
 
 	useEffect(() => {
 		const get = async () => {
@@ -45,7 +47,6 @@ const usePortfolio = () => {
 	}, [data, categoryObj]);
 
 	useEffect(() => {
-		// result of category data
 		if (category && categoryCount) {
 			setCategoryResult(category.map((el) => ({ ...el, count: categoryCount[el.id] })));
 		}
@@ -67,7 +68,32 @@ const usePortfolio = () => {
 		}
 	};
 
-	return { category: categoryResult, uploadCategory, updateCategory, categoryObj, data, setData, uploadPortfolio };
+	const updatePortfolio = async (data, thumbnailInput) => {
+		const id = nowData.id;
+		let updateData = null;
+		if (thumbnailInput.file) {
+			const thumbnail = await fbUploadStorage(COL, id, thumbnailInput.file);
+			updateData = { ...data, thumbnail };
+			await fbUpdateData(COL, id, { ...data, thumbnail });
+		} else {
+			updateData = { ...data, thumbnail: nowData.thumbnail };
+			await fbUpdateData(COL, id, { ...data, thumbnail: nowData.thumbnail });
+		}
+
+		// state
+		setResData((prev) => prev.map((el) => (el.id === id ? { ...updateData, id } : el)));
+	};
+
+	const handleNowData = (id: string) => {
+		data.some((el) => {
+			if (el.id === id) {
+				setNowData(el);
+				return true;
+			}
+		});
+	};
+
+	return { category: categoryResult, uploadCategory, updateCategory, categoryObj, data, setData, uploadPortfolio, handleNowData, nowData, updatePortfolio };
 };
 
 export default usePortfolio;

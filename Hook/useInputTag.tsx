@@ -17,7 +17,7 @@ const useInputTag = (val?: string[]) => {
 		textInput.init();
 	};
 
-	return { value, onAdd, onDelete, init, textInput };
+	return { value, onAdd, onDelete, init, textInput, setValue };
 };
 
 export default useInputTag;
