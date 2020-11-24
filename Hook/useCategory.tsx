@@ -64,9 +64,15 @@ const useCategory = () => {
 		}
 	};
 
-	const checkCategory = async (prevId, nowId) => {
-		if (categoryCount[prevId] === 1 && prevId !== nowId) {
-			await deleteCategory(prevId);
+	const checkCategory = async (deleteId, nowId) => {
+		if (nowId) {
+			if (categoryCount[deleteId] === 1 && deleteId !== nowId) {
+				await deleteCategory(deleteId);
+			}
+		} else {
+			if (categoryCount[deleteId] === 1) {
+				await deleteCategory(deleteId);
+			}
 		}
 	};
 

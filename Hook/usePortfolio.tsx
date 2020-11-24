@@ -83,7 +83,6 @@ const usePortfolio = () => {
 
 		// state
 		setResData((prev) => prev.map((el) => (el.id === id ? { ...updateData, id } : el)));
-
 		checkCategory(nowData.category.id, data.category);
 	};
 
@@ -91,6 +90,7 @@ const usePortfolio = () => {
 		try {
 			await fbDeleteStorage(nowData.thumbnail.prevUrl);
 			await fbDeleteData(COL, nowData.id);
+			await checkCategory(nowData.category.id, undefined);
 
 			// state
 			setResData((prev) => prev.filter((el) => el.id !== nowData.id));
