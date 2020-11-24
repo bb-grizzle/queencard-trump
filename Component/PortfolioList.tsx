@@ -20,9 +20,9 @@ const Inner = styled.div`
 	color: ${(props) => props.theme.color.white};
 `;
 
-const ColorOverlay = styled.div`
+const ColorOverlay = styled.div<{ color: string }>`
 	${(props) => props.theme.layout.full_abs};
-	background-color: red;
+	background-color: ${(props) => props.color};
 	opacity: 0.6;
 `;
 
@@ -68,11 +68,12 @@ const BackgroundImage = styled.div<{ bg: string; active: boolean }>`
 
 const PortfolioList: React.FC<PortfolioListProps> = ({ data, col, isLast, onClick }) => {
 	const { load } = useImageLoad(data.thumbnail.url);
+
 	return (
 		<Wrapper col={col} isLast={isLast} onClick={() => onClick(data.id)}>
 			<BackgroundImage bg={data.thumbnail.url} active={load} />
 			<ContentsWrapper>
-				<ColorOverlay />
+				<ColorOverlay color={data.category.color} />
 				<Inner>
 					<Paragraph text={data.title} type={ParagraphType.LG} color={"inherit"} />
 					<Title title={data.subTitle} color={"inherit"} />

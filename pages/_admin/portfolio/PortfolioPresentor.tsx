@@ -14,6 +14,7 @@ import PortfolioList from "../../../Component/PortfolioList";
 interface PortfolioPresentorProps {
 	category: string[];
 	onSubmit: () => void;
+	onDelete: () => void;
 	formContents: AdminFormContents[];
 	formRef: MutableRefObject<HTMLFormElement>;
 	data: PortfolioDataProps[];
@@ -66,7 +67,7 @@ const ListWrppaer = styled.ul`
 	flex-wrap: wrap;
 `;
 
-const PortfolioPresentor: React.FC<PortfolioPresentorProps> = ({ category, onSubmit, formContents, formRef, data, nowCategory, onCategoryClick, listCol, handleListClick }) => {
+const PortfolioPresentor: React.FC<PortfolioPresentorProps> = ({ category, onSubmit, formContents, formRef, data, nowCategory, onCategoryClick, listCol, handleListClick, onDelete }) => {
 	return (
 		<PageContainer>
 			<ContainerLayout>
@@ -97,7 +98,7 @@ const PortfolioPresentor: React.FC<PortfolioPresentorProps> = ({ category, onSub
 				</ListWrppaer>
 			</ContainerLayout>
 
-			<AdminForm title={"포트폴리오"} onSubmit={onSubmit} contents={formContents} formRef={formRef} />
+			<AdminForm title={"포트폴리오"} onSubmit={onSubmit} onDelete={onDelete} contents={formContents} formRef={formRef} />
 
 			<AddBtn />
 		</PageContainer>

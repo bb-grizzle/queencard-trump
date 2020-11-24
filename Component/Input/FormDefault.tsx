@@ -1,19 +1,45 @@
 import styled from "styled-components";
 import Submit from "./Submit";
+import BtnIcon from "../Btn/BtnIcon";
+import media from "../../Styles/media";
 interface FormDefaultProps {
 	onSubmit: () => void;
+	onDelete: () => void;
 	icon?: string;
 }
 const Wrapper = styled.form``;
-const FormDefault: React.FC<FormDefaultProps> = ({ children, onSubmit, icon = "arrow_right" }) => {
+
+const BtnWrapper = styled.div`
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 56px;
+`;
+const BtnSubmit = styled(Submit)`
+	margin-left: 16px;
+`;
+
+const BtnDelete = styled(BtnIcon)`
+	@media ${media.hover} {
+		&:hover {
+			transform: scale(1.1);
+		}
+	}
+`;
+const FormDefault: React.FC<FormDefaultProps> = ({ children, onSubmit, onDelete, icon = "arrow_right" }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		onSubmit();
 	};
+	const handleDeleteClick = () => {
+		onDelete();
+	};
 	return (
 		<Wrapper onSubmit={handleSubmit}>
 			{children}
-			<Submit icon={icon} />
+			<BtnWrapper>
+				<BtnDelete icon={"delete"} size={40} onClick={handleDeleteClick} />
+				<BtnSubmit icon={icon} />
+			</BtnWrapper>
 		</Wrapper>
 	);
 };

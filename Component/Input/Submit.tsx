@@ -9,7 +9,6 @@ interface SubmitProps {
 const Wrapper = styled.div`
 	display: flex;
 	justify-content: flex-end;
-	margin-top: 56px;
 `;
 
 const Input = styled.input`
@@ -23,9 +22,6 @@ const LabelWrapper = styled.label`
 `;
 
 const SubmitBtn = styled(BtnIcon)`
-	width: 40px;
-	height: 40px;
-
 	@media ${media.tablet} {
 		width: 32px;
 		height: 32px;
@@ -42,7 +38,7 @@ const Submit: React.FC<SubmitProps> = ({ value = "저장", className, icon }) =>
 		<Wrapper className={className}>
 			<LabelWrapper>
 				<Input type="submit" value={value} />
-				<SubmitBtn icon={icon} />
+				<SubmitBtn icon={icon} size={40} />
 			</LabelWrapper>
 		</Wrapper>
 	);

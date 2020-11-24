@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { fbGetData, fbUploadData, fbUploadStorage, fbUpdateData, fbDeleteStorage } from "../Firebase/firebase";
+import { fbGetData, fbUploadData, fbUploadStorage, fbUpdateData, fbDeleteStorage, fbDeleteData } from "../Firebase/firebase";
 import useCategory from "./useCategory";
 const COL = "portfolio";
 
 const usePortfolio = () => {
-	const { category, uploadCategory, updateCategory, categoryObj, setCateogoryCount, categoryCount } = useCategory();
+	const { category, uploadCategory, updateCategory, categoryObj, setCateogoryCount, categoryCount, checkCategory } = useCategory();
 	const [resData, setResData] = useState();
 	const [data, setData] = useState();
 	const [categoryResult, setCategoryResult] = useState();
@@ -71,6 +71,7 @@ const usePortfolio = () => {
 	const updatePortfolio = async (data, thumbnailInput) => {
 		const id = nowData.id;
 		let updateData = null;
+
 		if (thumbnailInput.file) {
 			const thumbnail = await fbUploadStorage(COL, id, thumbnailInput.file);
 			updateData = { ...data, thumbnail };
@@ -82,18 +83,39 @@ const usePortfolio = () => {
 
 		// state
 		setResData((prev) => prev.map((el) => (el.id === id ? { ...updateData, id } : el)));
+
+		checkCategory(nowData.category.id, data.category);
 	};
 
-	const handleNowData = (id: string) => {
-		data.some((el) => {
-			if (el.id === id) {
-				setNowData(el);
-				return true;
-			}
-		});
+	const deletePortfolio = async () => {
+		try {
+			await fbDeleteStorage(nowData.thumbnail.prevUrl);
+			await fbDeleteData(COL, nowData.id);
+
+			// state
+			setResData((prev) => prev.filter((el) => el.id !== nowData.id));
+
+			return true;
+		} catch (err) {
+			console.log(err);
+			return false;
+		}
 	};
 
-	return { category: categoryResult, uploadCategory, updateCategory, categoryObj, data, setData, uploadPortfolio, handleNowData, nowData, updatePortfolio };
+	const handleNowData = (id: string | null) => {
+		if (id === null) {
+			setNowData(null);
+		} else {
+			data.some((el) => {
+				if (el.id === id) {
+					setNowData(el);
+					return true;
+				}
+			});
+		}
+	};
+
+	return { category: categoryResult, uploadCategory, updateCategory, categoryObj, data, setData, uploadPortfolio, handleNowData, nowData, updatePortfolio, deletePortfolio };
 };
 
 export default usePortfolio;

@@ -4,7 +4,7 @@ import useInput from "../../../Hook/useInput";
 import useInputFile from "../../../Hook/useInputFile";
 import { useState, useEffect, useRef } from "react";
 import useInputTag from "../../../Hook/useInputTag";
-import { formCheck } from "../../../util/formCheck";
+import { formCheck, deleteConfirm } from "../../../util/formCheck";
 import checkFile from "../../../util/filecheck";
 import { PortfolioProps, PortfolioDetailProps } from "../../../Interface/portfolio";
 import usePortfolio from "../../../Hook/usePortfolio";
@@ -17,7 +17,7 @@ import theme from "../../../Styles/theme";
 
 const PortfolioContainer = () => {
 	useRidrectToSignin();
-	const { data, uploadPortfolio, category, uploadCategory, handleNowData, nowData, updatePortfolio } = usePortfolio();
+	const { data, uploadPortfolio, category, uploadCategory, handleNowData, nowData, updatePortfolio, deletePortfolio } = usePortfolio();
 	const { setAdminAction, adminAction } = useAdminAction();
 	const [form, setForm] = useState<PortfolioProps>();
 
@@ -50,7 +50,7 @@ const PortfolioContainer = () => {
 		setNowCategory(index);
 	};
 
-	const handleListClick = (id: string) => {
+	const handleListClick = (id: string | null) => {
 		setNowId(id);
 		handleNowData(id);
 	};
@@ -126,6 +126,7 @@ const PortfolioContainer = () => {
 		let categoryId: string | boolean = null;
 
 		if (newCategory !== null) {
+			// 카테고리 업로드
 			if (newCategory.name === "") {
 				formCheck("카테고리 이름을 작성해주세요. ");
 				return;
@@ -142,10 +143,10 @@ const PortfolioContainer = () => {
 			}
 		}
 
+		const postData = { ...form, category: categoryId ? categoryId : categoryInput.value };
 		// SUBMIT
 		if (adminAction === AdminActionType.ADD) {
 			// POST
-			const postData = { ...form, category: categoryId ? categoryId : categoryInput.value };
 			try {
 				await uploadPortfolio(postData, thumbnailInput);
 			} catch (err) {
@@ -153,17 +154,27 @@ const PortfolioContainer = () => {
 			}
 		} else if (adminAction === AdminActionType.EDIT) {
 			// UPDATE
-			const postData = { ...form, category: categoryId ? categoryId : categoryInput.value };
 			try {
 				await updatePortfolio(postData, thumbnailInput);
 			} catch (err) {
 				console.log(err);
 			}
-			// EDIT
 		}
 
 		// INIT
 		formInit();
+	};
+
+	const handleDelete = async () => {
+		console.log("handleDelete");
+		console.log(nowData.id);
+		if (deleteConfirm()) {
+			console.log("detet");
+			await deletePortfolio();
+			formInit();
+		} else {
+			console.log("CANCLE");
+		}
 	};
 
 	useEffect(() => {
@@ -190,6 +201,7 @@ const PortfolioContainer = () => {
 		newCategoryColor.init();
 
 		setNewCategory(null);
+		handleNowData(null);
 
 		if (formRef !== undefined && formRef.current !== undefined) {
 			formRef.current.scrollTop = 0;
@@ -231,6 +243,7 @@ const PortfolioContainer = () => {
 	return (
 		<PortfolioPresentor
 			category={category}
+			onDelete={handleDelete}
 			onSubmit={handleSubmit}
 			formContents={formContents}
 			formRef={formRef}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fbGetData, fbUploadData, fbUpdateData } from "../Firebase/firebase";
+import { fbGetData, fbUploadData, fbUpdateData, fbDeleteData } from "../Firebase/firebase";
 import { formCheck } from "../util/formCheck";
 const COL = "category";
 
@@ -55,7 +55,22 @@ const useCategory = () => {
 		}
 	};
 
-	return { category, setCategory, uploadCategory, updateCategory, categoryObj, setCateogoryCount, categoryCount };
+	const deleteCategory = async (id: string) => {
+		try {
+			await fbDeleteData(COL, id);
+			setCategory((prev) => prev.filter((el) => el.id !== id));
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const checkCategory = async (prevId, nowId) => {
+		if (categoryCount[prevId] === 1 && prevId !== nowId) {
+			await deleteCategory(prevId);
+		}
+	};
+
+	return { category, setCategory, uploadCategory, updateCategory, categoryObj, setCateogoryCount, categoryCount, checkCategory };
 };
 
 export default useCategory;

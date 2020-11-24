@@ -20,6 +20,7 @@ import FormCategoryInput from "./FormCategoryInput";
 interface AdminFormProps {
 	title: string;
 	onSubmit: () => void;
+	onDelete: () => void;
 	contents: any;
 	formRef: any;
 }
@@ -68,7 +69,7 @@ const FormSection = styled.div`
 	margin-bottom: 24px;
 `;
 
-const AdminForm: React.FC<AdminFormProps> = ({ onSubmit, contents, title, formRef }) => {
+const AdminForm: React.FC<AdminFormProps> = ({ onSubmit, contents, title, formRef, onDelete }) => {
 	const { adminAction } = useAdminAction();
 
 	const handleSubmit = () => {
@@ -80,7 +81,7 @@ const AdminForm: React.FC<AdminFormProps> = ({ onSubmit, contents, title, formRe
 			<Container>
 				<AdminFormTitle title={title} />
 
-				<FormDefault onSubmit={handleSubmit} icon={"check"}>
+				<FormDefault onSubmit={handleSubmit} icon={"check"} onDelete={onDelete}>
 					{contents.map((el, index) => {
 						return (
 							<FormSection key={index}>
