@@ -99,7 +99,7 @@ const PortfolioPresentor: React.FC<PortfolioPresentorProps> = ({ category, onSub
 						data
 							.filter((el) => (nowCategory !== null ? el.category.id === nowCategory : el))
 							.map((portfolio, index) => {
-								return <PortfolioList gap={size * 0.03} key={portfolio.id} data={portfolio} col={listCol} isLast={(index + 1) % listCol === 0} onClick={handleListClick} />;
+								return <PortfolioList key={portfolio.id} data={portfolio} col={listCol} isLast={(index + 1) % listCol === 0} onClick={handleListClick} parentSize={size} />;
 							})}
 				</ListWrppaer>
 			</ContainerLayout>

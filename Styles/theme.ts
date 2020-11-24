@@ -196,7 +196,7 @@ const size = {
 		mobile: "60px"
 	},
 	gap: {
-		list: 3,
+		list: 30,
 		section: 32
 	},
 

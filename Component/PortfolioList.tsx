@@ -4,13 +4,14 @@ import Title from "./Text/Title";
 import Paragraph, { ParagraphType } from "./Text/Paragraph";
 import useImageLoad from "../Hook/useImageLoad";
 import media from "../Styles/media";
+import { useEffect, useState } from "react";
 
 interface PortfolioListProps {
 	data: PortfolioDataProps;
 	col: number;
 	isLast: boolean;
 	onClick: (id: string) => void;
-	gap: number;
+	parentSize: number;
 }
 
 const ContentsWrapper = styled.div`
@@ -67,8 +68,15 @@ const BackgroundImage = styled.div<{ bg: string; active: boolean }>`
 			  `};
 `;
 
-const PortfolioList: React.FC<PortfolioListProps> = ({ data, col, isLast, onClick, gap }) => {
+const PortfolioList: React.FC<PortfolioListProps> = ({ data, col, isLast, onClick, parentSize }) => {
 	const { load } = useImageLoad(data.thumbnail.url);
+	const [gap, setGap] = useState(parentSize * 0.03);
+	useEffect(() => {
+		setGap(parentSize * 0.03);
+	}, [parentSize]);
+	useEffect(() => {
+		console.log(gap);
+	}, [gap]);
 
 	return (
 		<Wrapper col={col} isLast={isLast} onClick={() => onClick(data.id)} gap={gap}>
