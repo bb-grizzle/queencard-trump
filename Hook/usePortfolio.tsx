@@ -52,14 +52,16 @@ const usePortfolio = () => {
 		}
 	}, [category, categoryCount]);
 
-	const uploadPortfolio = async (data, thumbnailInput) => {
+	const uploadPortfolio = async (data, thumbnailInput, cont) => {
 		try {
 			const id = await fbUploadData(COL, { ...data });
-			const thumbnail = await fbUploadStorage(COL, id, thumbnailInput.file);
-			await fbUpdateData(COL, id, { ...data, thumbnail });
+			const thumbnail = await fbUploadStorage(`${COL}/${id}`, "thumbnail", thumbnailInput.file);
+			const contents = await cont.upload(`${COL}/${id}`);
+
+			await fbUpdateData(COL, id, { ...data, thumbnail, contents });
 
 			// state
-			setResData((prev) => [{ ...data, thumbnail, id }, ...prev]);
+			setResData((prev) => [{ ...data, thumbnail, id, contents }, ...prev]);
 
 			return true;
 		} catch (err) {
@@ -68,17 +70,20 @@ const usePortfolio = () => {
 		}
 	};
 
-	const updatePortfolio = async (data, thumbnailInput) => {
+	const updatePortfolio = async (data, thumbnailInput, cont) => {
 		const id = nowData.id;
 		let updateData = null;
 
 		if (thumbnailInput.file) {
 			const thumbnail = await fbUploadStorage(COL, id, thumbnailInput.file);
-			updateData = { ...data, thumbnail };
-			await fbUpdateData(COL, id, { ...data, thumbnail });
+			const contents = await cont.update(`${COL}/${id}`);
+			updateData = { ...data, thumbnail, contents };
+			await fbUpdateData(COL, id, { ...data, thumbnail, contents });
 		} else {
-			updateData = { ...data, thumbnail: nowData.thumbnail };
-			await fbUpdateData(COL, id, { ...data, thumbnail: nowData.thumbnail });
+			const contents = await cont.update(`${COL}/${id}`);
+			updateData = { ...data, thumbnail: nowData.thumbnail, contents };
+
+			await fbUpdateData(COL, id, { ...data, thumbnail: nowData.thumbnail, contents });
 		}
 
 		// state
@@ -86,11 +91,14 @@ const usePortfolio = () => {
 		checkCategory(nowData.category.id, data.category);
 	};
 
-	const deletePortfolio = async () => {
+	const deletePortfolio = async (cont) => {
 		try {
 			await fbDeleteStorage(nowData.thumbnail.prevUrl);
 			await fbDeleteData(COL, nowData.id);
 			await checkCategory(nowData.category.id, undefined);
+			await cont.deleteContents();
+
+			// location.reload();
 
 			// state
 			setResData((prev) => prev.filter((el) => el.id !== nowData.id));

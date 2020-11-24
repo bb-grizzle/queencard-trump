@@ -71,18 +71,16 @@ const BackgroundImage = styled.div<{ bg: string; active: boolean }>`
 const PortfolioList: React.FC<PortfolioListProps> = ({ data, col, isLast, onClick, parentSize }) => {
 	const { load } = useImageLoad(data.thumbnail.url);
 	const [gap, setGap] = useState(parentSize * 0.03);
+
 	useEffect(() => {
 		setGap(parentSize * 0.03);
 	}, [parentSize]);
-	useEffect(() => {
-		console.log(gap);
-	}, [gap]);
 
 	return (
 		<Wrapper col={col} isLast={isLast} onClick={() => onClick(data.id)} gap={gap}>
 			<BackgroundImage bg={data.thumbnail.url} active={load} />
 			<ContentsWrapper>
-				<ColorOverlay color={data.category.color} />
+				{data.category && data.category.color && <ColorOverlay color={data.category.color} />}
 				<Inner>
 					<Paragraph text={data.title} type={ParagraphType.LG} color={"inherit"} />
 					<Title title={data.subTitle} color={"inherit"} />

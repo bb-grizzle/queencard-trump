@@ -15,6 +15,7 @@ import useInputOption from "../../../Hook/useInputOption";
 import { CategoryProps } from "../../../Interface/category";
 import theme from "../../../Styles/theme";
 import useEditor from "../../../Hook/useEditor";
+import useContents from "../../../Hook/useContents";
 
 const PortfolioContainer = () => {
 	useRidrectToSignin();
@@ -22,20 +23,36 @@ const PortfolioContainer = () => {
 	const { setAdminAction, adminAction } = useAdminAction();
 	const [form, setForm] = useState<PortfolioProps>();
 
-	const titleInput = useInput("");
-	const subTitleInput = useInput("");
+	const titleInput = useInput("titleInput");
+	const subTitleInput = useInput("subTitleInput");
 	const categoryInput = useInputOption("");
 	const thumbnailInput = useInputFile();
 
 	const [detail, setDetail] = useState<PortfolioDetailProps>();
-	const partnerInput = useInput("");
-	const businessInput = useInput("");
-	const count_studentInput = useInput("");
-	const count_schoolInput = useInput("");
-	const areaInput = useInputTag();
-	const mediaTextInput = useInput("");
-	const mediaLinkInput = useInput("");
-	const descriptInput = useEditor("");
+	const partnerInput = useInput("partnerInput");
+	const businessInput = useInput("businessInput");
+	const count_studentInput = useInput(123);
+	const count_schoolInput = useInput(123);
+	const areaInput = useInputTag(["areaInput", "areaInput2", "areaInput3"]);
+	const mediaTextInput = useInput("mediaTextInput");
+	const mediaLinkInput = useInput("https://www.youtube.com/");
+	const descriptInput = useEditor("descriptInput");
+	// const titleInput = useInput("");
+	// const subTitleInput = useInput("");
+	// const categoryInput = useInputOption("");
+	// const thumbnailInput = useInputFile();
+
+	// const [detail, setDetail] = useState<PortfolioDetailProps>();
+	// const partnerInput = useInput("");
+	// const businessInput = useInput("");
+	// const count_studentInput = useInput("");
+	// const count_schoolInput = useInput("");
+	// const areaInput = useInputTag();
+	// const mediaTextInput = useInput("");
+	// const mediaLinkInput = useInput("");
+	// const descriptInput = useEditor("");
+
+	const contentsInput = useContents();
 
 	const formRef = useRef<HTMLFormElement>();
 
@@ -74,8 +91,9 @@ const PortfolioContainer = () => {
 			mediaTextInput.setValue(nowData.detail.media.title);
 			mediaLinkInput.setValue(nowData.detail.media.link);
 			descriptInput.setValue(nowData.detail.descript);
-		} else {
-			setAdminAction(null);
+
+			// contents
+			contentsInput.setValue(nowData.contents);
 		}
 	}, [nowData]);
 
@@ -101,9 +119,10 @@ const PortfolioContainer = () => {
 			thumbnail: null,
 			subTitle: subTitleInput.value,
 			title: titleInput.value,
-			detail: detail
+			detail: detail,
+			contents: null
 		});
-	}, [detail, titleInput.value, subTitleInput.value, categoryInput.value, thumbnailInput.url]);
+	}, [detail, titleInput.value, subTitleInput.value, categoryInput.value, contentsInput.value]);
 
 	const handleSubmit = async () => {
 		// 기본 정보 확인
@@ -150,14 +169,14 @@ const PortfolioContainer = () => {
 		if (adminAction === AdminActionType.ADD) {
 			// POST
 			try {
-				await uploadPortfolio(postData, thumbnailInput);
+				await uploadPortfolio(postData, thumbnailInput, contentsInput);
 			} catch (err) {
 				console.log(err);
 			}
 		} else if (adminAction === AdminActionType.EDIT) {
 			// UPDATE
 			try {
-				await updatePortfolio(postData, thumbnailInput);
+				await updatePortfolio(postData, thumbnailInput, contentsInput);
 			} catch (err) {
 				console.log(err);
 			}
@@ -169,7 +188,7 @@ const PortfolioContainer = () => {
 
 	const handleDelete = async () => {
 		if (deleteConfirm()) {
-			await deletePortfolio();
+			await deletePortfolio(contentsInput);
 			formInit();
 		}
 	};
@@ -197,8 +216,10 @@ const PortfolioContainer = () => {
 		newCategoryName.init();
 		newCategoryColor.init();
 		descriptInput.init();
+		contentsInput.init();
 
 		setNewCategory(null);
+		setNowCategory(null);
 		handleNowData(null);
 
 		if (formRef !== undefined && formRef.current !== undefined) {
@@ -235,6 +256,16 @@ const PortfolioContainer = () => {
 				{ ...mediaTextInput, placeholder: "언론보도 제목" },
 				{ ...mediaLinkInput, placeholder: "언론보도 링크" },
 				{ ...descriptInput, placeholder: "상세 설명", type: "editor" }
+			]
+		},
+		{
+			title: "컨텐츠 정보",
+			inputs: [
+				{
+					...contentsInput,
+					placeholder: "컨텐츠",
+					type: "contents"
+				}
 			]
 		}
 	];

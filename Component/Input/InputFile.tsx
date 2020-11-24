@@ -4,6 +4,7 @@ import media from "../../Styles/media";
 interface InputFileProps {
 	onChange: any;
 	fileName: string;
+	className?: string;
 }
 const Wrapper = styled.div`
 	width: 100%;
@@ -39,9 +40,9 @@ const Text = styled(Paragraph)`
 	top: -1px;
 `;
 
-const InputFile: React.FC<InputFileProps> = ({ onChange, fileName }) => {
+const InputFile: React.FC<InputFileProps> = ({ onChange, fileName, className }) => {
 	return (
-		<Wrapper>
+		<Wrapper className={className}>
 			<Label>
 				<Input type={"file"} onChange={onChange} />
 				<Text text={fileName ? fileName : "파일첨부"} type={ParagraphType.SM} />

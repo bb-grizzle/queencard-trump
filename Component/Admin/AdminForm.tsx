@@ -12,6 +12,7 @@ import InputOption from "../Input/InputOption";
 import FormCategoryInput from "./FormCategoryInput";
 import InputColor from "../Input/InputColor";
 import EditorDefault from "../Editor/EditorDefault";
+import InputContents from "../Input/InputContents";
 
 interface AdminFormProps {
 	title: string;
@@ -87,6 +88,8 @@ const AdminForm: React.FC<AdminFormProps> = ({ onSubmit, contents, title, formRe
 									switch (input.type) {
 										case "color":
 											return <InputColor {...input} key={i} />;
+										case "contents":
+											return <InputContents {...input} key={i} />;
 										case "file":
 											return <InputFile {...input} key={i} />;
 										case "tag":

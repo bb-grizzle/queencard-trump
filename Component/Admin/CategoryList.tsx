@@ -37,7 +37,7 @@ const Color = styled.div<{ color: string }>`
 const CategoryList: React.FC<CategoryListProps> = ({ name, color, col, onClick }) => {
 	return (
 		<Wrapper width={100 / col} color={color} onClick={onClick}>
-			<Color color={color} />
+			<Color color={color ? color : "black"} />
 			<Paragraph text={name} />
 		</Wrapper>
 	);

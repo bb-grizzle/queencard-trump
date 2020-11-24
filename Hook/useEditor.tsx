@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const useEditor = (initVal) => {
 	const [value, setValue] = useState(initVal ? initVal : "");

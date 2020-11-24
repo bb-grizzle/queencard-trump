@@ -197,7 +197,8 @@ const size = {
 	},
 	gap: {
 		list: 30,
-		section: 32
+		section: 32,
+		contents: 16
 	},
 
 	margin: {
