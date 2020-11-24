@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fbGetData, fbUploadData, fbUpdateData, fbDeleteData } from "../Firebase/firebase";
 import { formCheck } from "../util/formCheck";
+import { useAdminAction, AdminActionType } from "../Context/AdminProvider";
 const COL = "category";
 
 export interface categoryProps {
@@ -11,6 +12,8 @@ const useCategory = () => {
 	const [category, setCategory] = useState();
 	const [categoryObj, setCategoryObj] = useState();
 	const [categoryCount, setCateogoryCount] = useState();
+	const [nowCategory, setNowCategory] = useState();
+	const { setAdminAction } = useAdminAction();
 
 	useEffect(() => {
 		const get = async () => {
@@ -34,6 +37,21 @@ const useCategory = () => {
 		}
 	}, [category]);
 
+	const handleNowCategory = (id: string | null) => {
+		if (id === null) {
+			setNowCategory(null);
+			setAdminAction(null);
+		} else {
+			setAdminAction(AdminActionType.EDIT);
+			category.some((el) => {
+				if (el.id === id) {
+					setNowCategory(el);
+					return true;
+				}
+			});
+		}
+	};
+
 	const uploadCategory = async (data) => {
 		const isExist = category.some((el) => el.name === data.name);
 		if (!isExist) {
@@ -50,6 +68,7 @@ const useCategory = () => {
 	const updateCategory = async (id, data) => {
 		try {
 			await fbUpdateData(COL, id, data);
+			setCategory((prev) => prev.map((el) => (el.id === id ? { id, ...data } : el)));
 		} catch (err) {
 			console.log(err);
 		}
@@ -76,7 +95,7 @@ const useCategory = () => {
 		}
 	};
 
-	return { category, setCategory, uploadCategory, updateCategory, categoryObj, setCateogoryCount, categoryCount, checkCategory };
+	return { category, setCategory, uploadCategory, updateCategory, categoryObj, setCateogoryCount, categoryCount, checkCategory, handleNowCategory, nowCategory };
 };
 
 export default useCategory;

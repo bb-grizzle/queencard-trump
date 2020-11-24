@@ -44,14 +44,12 @@ const PortfolioContainer = () => {
 	const newCategoryName = useInput("");
 	const newCategoryColor = useInput(theme.color.main);
 	const [newCategory, setNewCategory] = useState<CategoryProps | null>(null);
-	const [nowId, setNowId] = useState();
 
 	const handleCategoryClick = (index: string | null) => {
 		setNowCategory(index);
 	};
 
 	const handleListClick = (id: string | null) => {
-		setNowId(id);
 		handleNowData(id);
 	};
 

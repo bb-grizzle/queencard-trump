@@ -3,26 +3,22 @@ import media from "../../Styles/media";
 import ContainerLayout from "../../Layout/ContainerLayout";
 import AdminFormTitle from "./AdminFormTitle";
 import { useAdminAction } from "../../Context/AdminProvider";
-import useInput from "../../Hook/useInput";
 import InputDefault from "../Input/InputDefault";
 import Title, { TitleType } from "../Text/Title";
-import TextArea from "../Input/TextArea";
 import FormDefault from "../Input/FormDefault";
-import EditorDefault from "../Editor/EditorDefault";
-import useEditor from "../../Hook/useEditor";
-import useInputFile from "../../Hook/useInputFile";
 import InputFile from "../Input/inputFile";
-import useInputTag from "../../Hook/useInputTag";
 import InputTag from "../Input/InputTag";
 import InputOption from "../Input/InputOption";
 import FormCategoryInput from "./FormCategoryInput";
+import InputColor from "../Input/InputColor";
 
 interface AdminFormProps {
 	title: string;
 	onSubmit: () => void;
-	onDelete: () => void;
+	onDelete?: () => void;
 	contents: any;
 	formRef: any;
+	deleteDisable?: boolean;
 }
 
 const Wrapper = styled.div<{ active: boolean }>`
@@ -69,7 +65,7 @@ const FormSection = styled.div`
 	margin-bottom: 24px;
 `;
 
-const AdminForm: React.FC<AdminFormProps> = ({ onSubmit, contents, title, formRef, onDelete }) => {
+const AdminForm: React.FC<AdminFormProps> = ({ onSubmit, contents, title, formRef, onDelete, deleteDisable = false }) => {
 	const { adminAction } = useAdminAction();
 
 	const handleSubmit = () => {
@@ -81,13 +77,15 @@ const AdminForm: React.FC<AdminFormProps> = ({ onSubmit, contents, title, formRe
 			<Container>
 				<AdminFormTitle title={title} />
 
-				<FormDefault onSubmit={handleSubmit} icon={"check"} onDelete={onDelete}>
+				<FormDefault onSubmit={handleSubmit} icon={"check"} onDelete={onDelete} deleteDisable={deleteDisable}>
 					{contents.map((el, index) => {
 						return (
 							<FormSection key={index}>
 								<Title title={el.title} type={TitleType.SM} />
 								{el.inputs.map((input, i) => {
 									switch (input.type) {
+										case "color":
+											return <InputColor {...input} key={i} />;
 										case "file":
 											return <InputFile {...input} key={i} />;
 										case "tag":

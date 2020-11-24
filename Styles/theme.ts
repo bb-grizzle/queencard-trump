@@ -198,6 +198,10 @@ const size = {
 	gap: {
 		list: 30,
 		section: 32
+	},
+
+	margin: {
+		submit_top: 56
 	}
 };
 

@@ -7,7 +7,7 @@ import AdminForm from "../../../Component/Admin/AdminForm";
 import BtnText from "../../../Component/Btn/BtnText";
 import { AdminFormContents } from "../../../Interface/adminForm";
 import { MutableRefObject } from "react";
-import { PortfolioProps, PortfolioDataProps } from "../../../Interface/portfolio";
+import { PortfolioDataProps } from "../../../Interface/portfolio";
 import media from "../../../Styles/media";
 import PortfolioList from "../../../Component/PortfolioList";
 
