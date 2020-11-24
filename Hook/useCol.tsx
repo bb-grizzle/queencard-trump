@@ -11,10 +11,10 @@ const useCol = ({ pc, tablet, mobile }: useColProps) => {
 	const { width } = useSize();
 
 	useEffect(() => {
-		if (width < BREAKPOINT_TABLET && tablet) {
-			setCol(tablet);
-		} else if (width < BREAKPOINT_MOBILE && mobile) {
+		if (width < BREAKPOINT_MOBILE && !!mobile) {
 			setCol(mobile);
+		} else if (width < BREAKPOINT_TABLET && !!tablet) {
+			setCol(tablet);
 		} else {
 			setCol(pc);
 		}

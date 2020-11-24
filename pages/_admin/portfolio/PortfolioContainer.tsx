@@ -38,7 +38,7 @@ const PortfolioContainer = () => {
 	const formRef = useRef<HTMLFormElement>();
 
 	const [nowCategory, setNowCategory] = useState<string>(null);
-	const { col } = useCol({ pc: 4 });
+	const { col } = useCol({ pc: 4, tablet: 3, mobile: 2 });
 
 	// category
 	const newCategoryName = useInput("");
@@ -164,14 +164,9 @@ const PortfolioContainer = () => {
 	};
 
 	const handleDelete = async () => {
-		console.log("handleDelete");
-		console.log(nowData.id);
 		if (deleteConfirm()) {
-			console.log("detet");
 			await deletePortfolio();
 			formInit();
-		} else {
-			console.log("CANCLE");
 		}
 	};
 

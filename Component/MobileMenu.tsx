@@ -15,6 +15,7 @@ const Wrapper = styled.div`
 	width: 100%;
 	height: 100%;
 	${(props) => props.theme.event.disable};
+	z-index: ${(props) => props.theme.zIndex.menu};
 `;
 const MenuWrapper = styled.div<{ active: boolean }>`
 	position: absolute;

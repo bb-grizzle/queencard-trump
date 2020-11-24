@@ -10,7 +10,31 @@ interface PortfolioListProps {
 	col: number;
 	isLast: boolean;
 	onClick: (id: string) => void;
+	gap: number;
 }
+
+const ContentsWrapper = styled.div`
+	opacity: 0;
+	transition: ${(props) => props.theme.transition.default};
+	transition-property: opacity;
+`;
+
+const Wrapper = styled.li<{ col: number; isLast: boolean; gap: number }>`
+	width: ${(props) => `calc((100% - ${props.gap * (props.col - 1)}px) / ${props.col})`};
+	${(props) => props.theme.layout.ratio(100)};
+	position: relative;
+	margin-right: ${(props) => `${props.isLast ? 0 : props.gap}px`};
+	margin-bottom: ${(props) => `${props.gap}px`};
+	cursor: pointer;
+
+	@media ${media.hover} {
+		&:hover {
+			${ContentsWrapper} {
+				opacity: 1;
+			}
+		}
+	}
+`;
 
 const Inner = styled.div`
 	${(props) => props.theme.layout.full_abs};
@@ -24,29 +48,6 @@ const ColorOverlay = styled.div<{ color: string }>`
 	${(props) => props.theme.layout.full_abs};
 	background-color: ${(props) => props.color};
 	opacity: 0.6;
-`;
-
-const ContentsWrapper = styled.div`
-	opacity: 0;
-	transition: ${(props) => props.theme.transition.default};
-	transition-property: opacity;
-`;
-
-const Wrapper = styled.li<{ col: number; isLast: boolean }>`
-	width: ${(props) => `calc((100% - ${props.theme.size.gap.list * (props.col - 1)}px) / ${props.col})`};
-	${(props) => props.theme.layout.ratio(100)};
-	position: relative;
-	margin-right: ${(props) => `${props.isLast ? 0 : props.theme.size.gap.list}px`};
-	margin-bottom: ${(props) => `${props.theme.size.gap.list}px`};
-	cursor: pointer;
-
-	@media ${media.hover} {
-		&:hover {
-			${ContentsWrapper} {
-				opacity: 1;
-			}
-		}
-	}
 `;
 
 const BackgroundImage = styled.div<{ bg: string; active: boolean }>`
@@ -66,11 +67,11 @@ const BackgroundImage = styled.div<{ bg: string; active: boolean }>`
 			  `};
 `;
 
-const PortfolioList: React.FC<PortfolioListProps> = ({ data, col, isLast, onClick }) => {
+const PortfolioList: React.FC<PortfolioListProps> = ({ data, col, isLast, onClick, gap }) => {
 	const { load } = useImageLoad(data.thumbnail.url);
 
 	return (
-		<Wrapper col={col} isLast={isLast} onClick={() => onClick(data.id)}>
+		<Wrapper col={col} isLast={isLast} onClick={() => onClick(data.id)} gap={gap}>
 			<BackgroundImage bg={data.thumbnail.url} active={load} />
 			<ContentsWrapper>
 				<ColorOverlay color={data.category.color} />

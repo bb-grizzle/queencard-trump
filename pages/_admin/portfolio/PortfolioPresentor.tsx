@@ -6,10 +6,11 @@ import AdminTitleSection from "../../../Component/Admin/AdminTitleSection";
 import AdminForm from "../../../Component/Admin/AdminForm";
 import BtnText from "../../../Component/Btn/BtnText";
 import { AdminFormContents } from "../../../Interface/adminForm";
-import { MutableRefObject } from "react";
+import { MutableRefObject, useRef, useEffect } from "react";
 import { PortfolioDataProps } from "../../../Interface/portfolio";
 import media from "../../../Styles/media";
 import PortfolioList from "../../../Component/PortfolioList";
+import useElementSize from "../../../Hook/useElementSize";
 
 interface PortfolioPresentorProps {
 	category: string[];
@@ -27,6 +28,8 @@ interface PortfolioPresentorProps {
 const Category = styled.ul`
 	display: flex;
 	margin-bottom: ${(props) => `${props.theme.size.gap.section}px`};
+	overflow: scroll;
+	${(props) => props.theme.style.hideScroll};
 `;
 
 const CategoryList = styled.li<{ active: boolean }>`
@@ -36,6 +39,7 @@ const CategoryList = styled.li<{ active: boolean }>`
 	margin-right: 12px;
 	display: flex;
 	align-items: center;
+	flex-shrink: 0;
 	${(props) =>
 		props.active
 			? css`
@@ -68,9 +72,11 @@ const ListWrppaer = styled.ul`
 `;
 
 const PortfolioPresentor: React.FC<PortfolioPresentorProps> = ({ category, onSubmit, formContents, formRef, data, nowCategory, onCategoryClick, listCol, handleListClick, onDelete }) => {
+	const { ref, size } = useElementSize();
+
 	return (
 		<PageContainer>
-			<ContainerLayout>
+			<ContainerLayout containerRef={ref}>
 				<AdminTitleSection title="포트폴리오" />
 
 				<Category>
@@ -93,7 +99,7 @@ const PortfolioPresentor: React.FC<PortfolioPresentorProps> = ({ category, onSub
 						data
 							.filter((el) => (nowCategory !== null ? el.category.id === nowCategory : el))
 							.map((portfolio, index) => {
-								return <PortfolioList key={portfolio.id} data={portfolio} col={listCol} isLast={(index + 1) % listCol === 0} onClick={handleListClick} />;
+								return <PortfolioList gap={size * 0.03} key={portfolio.id} data={portfolio} col={listCol} isLast={(index + 1) % listCol === 0} onClick={handleListClick} />;
 							})}
 				</ListWrppaer>
 			</ContainerLayout>

@@ -4,6 +4,7 @@ import media from "../Styles/media";
 interface ContainerLayoutProps {
 	className?: string;
 	small?: boolean;
+	containerRef?: any;
 }
 const Wrapper = styled.div<{ small: boolean }>`
 	width: ${(props) => (props.small ? "640px" : "1200px")};
@@ -17,9 +18,9 @@ const Wrapper = styled.div<{ small: boolean }>`
 	}
 `;
 
-const ContainerLayout: React.FC<ContainerLayoutProps> = ({ children, className, small = false }) => {
+const ContainerLayout: React.FC<ContainerLayoutProps> = ({ children, className, small = false, containerRef }) => {
 	return (
-		<Wrapper className={className} small={small}>
+		<Wrapper className={className} small={small} ref={containerRef}>
 			{children}
 		</Wrapper>
 	);
