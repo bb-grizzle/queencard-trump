@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Submit from "./Submit";
 import BtnIcon from "../Btn/BtnIcon";
 import media from "../../Styles/media";
+import { useAdminAction, AdminActionType } from "../../Context/AdminProvider";
 interface FormDefaultProps {
 	onSubmit: () => void;
 	onDelete: () => void;
@@ -26,6 +27,7 @@ const BtnDelete = styled(BtnIcon)`
 	}
 `;
 const FormDefault: React.FC<FormDefaultProps> = ({ children, onSubmit, onDelete, icon = "arrow_right" }) => {
+	const { adminAction } = useAdminAction();
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		onSubmit();
@@ -37,7 +39,7 @@ const FormDefault: React.FC<FormDefaultProps> = ({ children, onSubmit, onDelete,
 		<Wrapper onSubmit={handleSubmit}>
 			{children}
 			<BtnWrapper>
-				<BtnDelete icon={"delete"} size={40} onClick={handleDeleteClick} />
+				{adminAction === AdminActionType.EDIT && <BtnDelete icon={"delete"} size={40} onClick={handleDeleteClick} />}
 				<BtnSubmit icon={icon} />
 			</BtnWrapper>
 		</Wrapper>

@@ -3,7 +3,7 @@ import ContainerLayout from "../Layout/ContainerLayout";
 import { useIsMenuClick, useIsAdmin } from "../Context/AppProvider";
 import { MENU, MENU_ADMIN } from "../Data/menu";
 import NavLink from "./NavLink";
-import Dim from "./Dim";
+import Dim, { DimType } from "./Dim";
 import { useState, useEffect } from "react";
 import BtnText from "./Btn/BtnText";
 import { fbSignout } from "../Firebase/firebase";
@@ -28,6 +28,7 @@ const MenuWrapper = styled.div<{ active: boolean }>`
 	transition-property: transform;
 	transform: ${(props) => `translateX(${!props.active ? "100%" : 0})`};
 	${(props) => props.theme.event.active};
+	z-index: ${(props) => props.theme.zIndex.menu};
 `;
 
 const Menu = styled.ul`
@@ -75,7 +76,7 @@ const MobileMenu = () => {
 	};
 	return (
 		<Wrapper>
-			<Dim active={isMenuClick} />
+			<Dim active={isMenuClick} type={DimType.MIN} />
 			<MenuWrapper active={isMenuClick}>
 				<ContainerLayout>
 					<Menu>
