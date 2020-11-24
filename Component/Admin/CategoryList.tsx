@@ -17,6 +17,7 @@ const Wrapper = styled.li<{ width: number; color: string }>`
 	border-radius: 8px;
 	border: 1px solid ${(props) => props.color};
 	border-width: 0px;
+	margin-bottom: 12px;
 
 	@media ${media.hover} {
 		&:hover {
