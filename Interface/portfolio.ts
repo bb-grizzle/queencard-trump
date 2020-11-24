@@ -23,6 +23,7 @@ export interface PortfolioDetailProps {
 	count_school: number;
 	area: string[];
 	media: MediaProps;
+	descript?: string;
 }
 
 export interface MediaProps {

@@ -11,6 +11,7 @@ import InputTag from "../Input/InputTag";
 import InputOption from "../Input/InputOption";
 import FormCategoryInput from "./FormCategoryInput";
 import InputColor from "../Input/InputColor";
+import EditorDefault from "../Editor/EditorDefault";
 
 interface AdminFormProps {
 	title: string;
@@ -94,6 +95,8 @@ const AdminForm: React.FC<AdminFormProps> = ({ onSubmit, contents, title, formRe
 											return <InputOption key={i} {...input} />;
 										case "category":
 											return <FormCategoryInput key={i} {...input} />;
+										case "editor":
+											return <EditorDefault key={i} {...input} />;
 										default:
 											return <InputDefault {...input} key={i} />;
 									}

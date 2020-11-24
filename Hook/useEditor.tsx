@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const useEditor = (init) => {
-	const [value, setValue] = useState(init ? init : "내용을 작성하세요! 😆");
+const useEditor = (initVal) => {
+	const [value, setValue] = useState(initVal ? initVal : "");
 
 	const onChange = (value: string) => {
 		setValue(value);
 	};
 
-	return { value, setValue, onChange };
+	const init = () => {
+		setValue(initVal);
+	};
+
+	return { value, setValue, onChange, init };
 };
 
 export default useEditor;

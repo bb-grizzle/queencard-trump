@@ -14,6 +14,7 @@ import useCol from "../../../Hook/useCol";
 import useInputOption from "../../../Hook/useInputOption";
 import { CategoryProps } from "../../../Interface/category";
 import theme from "../../../Styles/theme";
+import useEditor from "../../../Hook/useEditor";
 
 const PortfolioContainer = () => {
 	useRidrectToSignin();
@@ -34,6 +35,7 @@ const PortfolioContainer = () => {
 	const areaInput = useInputTag();
 	const mediaTextInput = useInput("");
 	const mediaLinkInput = useInput("");
+	const descriptInput = useEditor("");
 
 	const formRef = useRef<HTMLFormElement>();
 
@@ -71,6 +73,7 @@ const PortfolioContainer = () => {
 			areaInput.setValue(nowData.detail.area);
 			mediaTextInput.setValue(nowData.detail.media.title);
 			mediaLinkInput.setValue(nowData.detail.media.link);
+			descriptInput.setValue(nowData.detail.descript);
 		} else {
 			setAdminAction(null);
 		}
@@ -87,9 +90,10 @@ const PortfolioContainer = () => {
 			media: {
 				title: mediaTextInput.value,
 				link: mediaLinkInput.value
-			}
+			},
+			descript: descriptInput.value
 		});
-	}, [partnerInput.value, businessInput.value, count_studentInput.value, count_schoolInput.value, areaInput.value, mediaTextInput.value, mediaLinkInput.value]);
+	}, [partnerInput.value, businessInput.value, count_studentInput.value, count_schoolInput.value, areaInput.value, mediaTextInput.value, mediaLinkInput.value, descriptInput.value]);
 
 	useEffect(() => {
 		setForm({
@@ -192,6 +196,7 @@ const PortfolioContainer = () => {
 		thumbnailInput.init();
 		newCategoryName.init();
 		newCategoryColor.init();
+		descriptInput.init();
 
 		setNewCategory(null);
 		handleNowData(null);
@@ -228,7 +233,8 @@ const PortfolioContainer = () => {
 				{ ...count_schoolInput, placeholder: "참여학교", type: "number" },
 				{ ...areaInput, placeholder: "참여지역", type: "tag" },
 				{ ...mediaTextInput, placeholder: "언론보도 제목" },
-				{ ...mediaLinkInput, placeholder: "언론보도 링크" }
+				{ ...mediaLinkInput, placeholder: "언론보도 링크" },
+				{ ...descriptInput, placeholder: "상세 설명", type: "editor" }
 			]
 		}
 	];
