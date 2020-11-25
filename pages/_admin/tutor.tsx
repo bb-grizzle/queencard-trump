@@ -6,12 +6,15 @@ import AdminForm from "../../Component/Admin/AdminForm";
 import { useRef, useEffect } from "react";
 import useVideoInput from "../../Hook/useVideoInput";
 import useTutor from "../../Hook/useTutor";
+import { useLoading } from "../../Context/AppProvider";
+import { formCheck } from "../../util/formCheck";
 
 const tutor = () => {
 	useRidrectToSignin();
 	const { data, update } = useTutor();
 	const videoInput = useVideoInput();
 	const formRef = useRef<HTMLFormElement>();
+	const { setLoading } = useLoading();
 
 	useEffect(() => {
 		if (data && data.url) {
@@ -27,8 +30,19 @@ const tutor = () => {
 	];
 
 	const handleSubmit = async () => {
-		console.log({ youtubeId: videoInput.value, url: videoInput.url.value });
-		update({ youtubeId: videoInput.value, url: videoInput.url.value });
+		if (!videoInput.url.value) {
+			formCheck();
+			return;
+		}
+
+		try {
+			setLoading(true);
+			await update({ youtubeId: videoInput.value, url: videoInput.url.value });
+		} catch (err) {
+			console.log(err);
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	return (

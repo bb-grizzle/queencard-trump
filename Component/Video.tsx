@@ -14,7 +14,7 @@ const YoutubeVideo = styled(YouTube)`
 `;
 const Video = ({ value, size }) => {
 	return (
-		<Wrapper ratio={size && size.width && size.height ? (size.height / size.width) * 100 : 10}>
+		<Wrapper ratio={size && size.width && size.height ? (size.height / size.width) * 100 : 56}>
 			{value && (
 				<YoutubeVideo
 					videoId={value} // defaults -> null
