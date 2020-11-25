@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import BtnText from "../Btn/BtnText";
 import Paragraph, { ParagraphType } from "../Text/Paragraph";
 import useCol from "../../Hook/useCol";
+import media from "../../Styles/media";
 const Wrapper = styled.div``;
 
 const AddWrapper = styled.div`
@@ -47,6 +48,12 @@ const ContentsList = styled.li<{ col: number; isLast: boolean }>`
 	display: flex;
 	align-items: center;
 	padding: 12px;
+	cursor: pointer;
+	@media ${media.hover} {
+		&:hover {
+			border-color: ${(props) => props.theme.color.black};
+		}
+	}
 `;
 const BtnDelete = styled(BtnText)`
 	position: absolute;
@@ -66,25 +73,31 @@ const Thumbnail = styled.div<{ image: string }>`
 	background-color: ${(props) => props.theme.color.gray.light};
 `;
 
-const InputContents = ({ value, onAdd, onDelete, title, image }) => {
-	const { col } = useCol({ pc: 4 });
+const TextWrapper = styled.div`
+	/* border: 1px solid red; */
+	flex-grow: 1;
+`;
 
+const InputContents = ({ value, onAdd, onDelete, title, text, image, isText, onListClick, nowContents, onEdit }) => {
+	const { col } = useCol({ pc: 4 });
 	return (
 		<Wrapper>
 			<AddWrapper>
 				<InputWrapper>
-					<InputTitle {...title} placeholder={"제목"} />
+					<TextWrapper>
+						<InputTitle {...title} placeholder={"제목"} />
+						{isText && <InputDefault {...text} placeholder={"내용"} />}
+					</TextWrapper>
 					<InputImage {...image} />
 				</InputWrapper>
-				<BtnAdd text="추가" active={!!title.value && !!image.fileName} onClick={onAdd} />
+				<BtnAdd text={nowContents ? "수정" : "추가"} active={!!title.value && !!image.fileName} onClick={nowContents ? onEdit : onAdd} />
 			</AddWrapper>
 
 			<ContentsWrapper>
 				{value &&
 					value.map((el, index) => {
 						return (
-							<ContentsList key={index} col={col} isLast={(index + 1) % col === 0}>
-								{/* <Paragraph text={el.image.fileName ? el.image.fileName : el.image.name} /> */}
+							<ContentsList key={index} col={col} isLast={(index + 1) % col === 0} onClick={() => onListClick({ ...el, index })}>
 								<Thumbnail image={el.image.url} />
 								<Paragraph bold={true} text={`${el.title}`} />
 

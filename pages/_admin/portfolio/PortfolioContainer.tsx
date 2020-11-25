@@ -39,6 +39,7 @@ const PortfolioContainer = () => {
 	const mediaTextInput = useInput("mediaTextInput");
 	const mediaLinkInput = useInput("https://www.youtube.com/");
 	const descriptInput = useEditor("descriptInput");
+
 	// const titleInput = useInput("");
 	// const subTitleInput = useInput("");
 	// const categoryInput = useInputOption("");
@@ -54,7 +55,7 @@ const PortfolioContainer = () => {
 	// const mediaLinkInput = useInput("");
 	// const descriptInput = useEditor("");
 
-	const contentsInput = useContents();
+	const contentsInput = useContents({ isText: false });
 
 	const formRef = useRef<HTMLFormElement>();
 
