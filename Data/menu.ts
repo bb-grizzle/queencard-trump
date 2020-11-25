@@ -29,14 +29,14 @@ export const MENU: Menu[] = [
 
 export const MENU_ADMIN: Menu[] = [
 	{
+		id: "admin_home",
+		href: "/_admin/home",
+		name: "홈"
+	},
+	{
 		id: "admin_portfolio",
 		href: "/_admin/portfolio",
 		name: "포트폴리오"
-	},
-	{
-		id: "admin_category",
-		href: "/_admin/category",
-		name: "카테고리"
 	},
 	{
 		id: "admin_about",

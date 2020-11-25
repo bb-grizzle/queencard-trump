@@ -12,16 +12,29 @@ import useCol from "../../Hook/useCol";
 import { useAdminAction, AdminActionType } from "../../Context/AdminProvider";
 import useRidrectToSignin from "../../Hook/useRidrectToSignin";
 import theme from "../../Styles/theme";
+import InputFile from "../../Component/Input/inputFile";
+import useInputFile from "../../Hook/useInputFile";
+import BtnIcon from "../../Component/Btn/BtnIcon";
+import useCover from "../../Hook/useCover";
+import { useLoading } from "../../Context/AppProvider";
 
 const CategoryWrapper = styled.ul`
 	display: flex;
 	flex-wrap: wrap;
 `;
 
+const CoverInputWrapper = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 64px;
+`;
+
 const category = () => {
 	useRidrectToSignin();
 	const formRef = useRef<HTMLFormElement>();
 	const nameInput = useInput("");
+	const coverInput = useInputFile();
 	const colorInput = useInput(theme.color.main);
 	const { category, handleNowCategory, nowCategory, updateCategory } = useCategory();
 	const { adminAction, setAdminAction } = useAdminAction();
@@ -30,6 +43,14 @@ const category = () => {
 		pc: 3,
 		tablet: 2
 	});
+	const { cover, update } = useCover();
+	const { setLoading } = useLoading();
+
+	useEffect(() => {
+		if (cover) {
+			coverInput.setValue(cover.fileName);
+		}
+	}, [cover]);
 
 	useEffect(() => {
 		if (adminAction === AdminActionType.EDIT) {
@@ -42,10 +63,14 @@ const category = () => {
 
 	const handleSubmit = async () => {
 		try {
+			setLoading(true);
+
 			await updateCategory(nowCategory.id, newCategory);
 			initForm();
 		} catch (err) {
 			console.log(err);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -82,9 +107,22 @@ const category = () => {
 		}
 	];
 
+	const handleCoverSaveClick = async () => {
+		setLoading(true);
+		await update(coverInput);
+		coverInput.initFile();
+		setLoading(false);
+	};
+
 	return (
 		<PageContainer>
 			<ContainerLayout>
+				<AdminTitleSection title="홈" />
+				<CoverInputWrapper>
+					<InputFile {...coverInput} />
+					<BtnIcon icon={"check"} onClick={handleCoverSaveClick} disable={!coverInput.file} />
+				</CoverInputWrapper>
+
 				<AdminTitleSection title="카테고리" />
 
 				<CategoryWrapper>

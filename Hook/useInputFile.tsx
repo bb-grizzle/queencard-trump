@@ -23,11 +23,15 @@ const useInputFile = () => {
 		setFileName(null);
 	};
 
+	const initFile = () => {
+		setFile(null);
+	};
+
 	const setValue = (name) => {
 		setFileName(name);
 	};
 
-	return { file, url, onChange, init, setValue, fileName };
+	return { file, url, onChange, init, setValue, fileName, initFile };
 };
 
 export default useInputFile;

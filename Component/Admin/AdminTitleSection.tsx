@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Title, { TitleType } from "../Text/Title";
+import Title from "../Text/Title";
 import media from "../../Styles/media";
 interface TitleSectionProps {
 	title: string;
