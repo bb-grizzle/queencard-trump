@@ -16,12 +16,14 @@ import { CategoryProps } from "../../../Interface/category";
 import theme from "../../../Styles/theme";
 import useEditor from "../../../Hook/useEditor";
 import useContents from "../../../Hook/useContents";
+import { useLoading } from "../../../Context/AppProvider";
 
 const PortfolioContainer = () => {
 	useRidrectToSignin();
 	const { data, uploadPortfolio, category, uploadCategory, handleNowData, nowData, updatePortfolio, deletePortfolio } = usePortfolio();
 	const { setAdminAction, adminAction } = useAdminAction();
 	const [form, setForm] = useState<PortfolioProps>();
+	const { setLoading } = useLoading();
 
 	const titleInput = useInput("titleInput");
 	const subTitleInput = useInput("subTitleInput");
@@ -143,6 +145,8 @@ const PortfolioContainer = () => {
 		// FILE CHECK & UPLOAD
 		checkFile(thumbnailInput);
 
+		setLoading(true);
+
 		// 카테고리 확인
 		let categoryId: string | boolean = null;
 
@@ -188,6 +192,7 @@ const PortfolioContainer = () => {
 
 	const handleDelete = async () => {
 		if (deleteConfirm()) {
+			setLoading(true);
 			await deletePortfolio(contentsInput);
 			formInit();
 		}
@@ -221,6 +226,8 @@ const PortfolioContainer = () => {
 		setNewCategory(null);
 		setNowCategory(null);
 		handleNowData(null);
+
+		setLoading(false);
 
 		if (formRef !== undefined && formRef.current !== undefined) {
 			formRef.current.scrollTop = 0;

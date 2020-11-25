@@ -1,26 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useInput from "./useInput";
 import useInputFile from "./useInputFile";
 import { fbUploadStorage, fbDeleteStorage } from "../Firebase/firebase";
 
 const useContents = () => {
-	// 수정되었을 때
-	// - 이미지 삭제
-	// -
 	const [value, setValue] = useState([]);
 	const titleInput = useInput("");
 	const imageInput = useInputFile();
 	const [deleteFiles, setDeleteFiles] = useState([]);
 
 	const onAdd = () => {
-		setValue((prev) => [...prev, { title: titleInput.value, image: imageInput.file }]);
+		setValue((prev) => [...prev, { title: titleInput.value, image: { file: imageInput.file, url: imageInput.url, fileNmae: imageInput.fileName } }]);
 		titleInput.init();
 		imageInput.init();
 	};
 
 	const onDelete = (data, i) => {
 		setValue((prev) => prev.filter((el, index) => index !== i));
-		if (!!data.image.url) {
+		if (!!data.image.prevUrl) {
 			setDeleteFiles((prev) => (prev ? [...prev, data.image.prevUrl] : [data.image.prevUrl]));
 		}
 	};
@@ -34,7 +31,7 @@ const useContents = () => {
 	const upload = async (path) => {
 		const result = await Promise.all(
 			value.map(async (el, index) => {
-				const image = await fbUploadStorage(path, `${Date.now()}_${el.image.name}`, el.image);
+				const image = await fbUploadStorage(path, `${Date.now()}_${el.image.fileName}`, el.image.file);
 				return { ...el, image };
 			})
 		);
@@ -44,10 +41,11 @@ const useContents = () => {
 	const update = async (path) => {
 		const result = await Promise.all(
 			value.map(async (el, index) => {
-				const image = el.image.url ? el.image : await fbUploadStorage(path, `${Date.now()}_${el.image.name}`, el.image);
+				const image = el.image.prevUrl ? el.image : await fbUploadStorage(path, `${Date.now()}_${el.image.fileName}`, el.image.file);
 				return { ...el, image };
 			})
 		);
+
 		if (!!deleteFiles && !!deleteFiles[0]) {
 			await Promise.all(
 				deleteFiles.map(async (el) => {

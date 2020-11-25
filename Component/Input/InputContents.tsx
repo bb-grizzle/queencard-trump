@@ -51,7 +51,19 @@ const ContentsList = styled.li<{ col: number; isLast: boolean }>`
 const BtnDelete = styled(BtnText)`
 	position: absolute;
 	right: 12px;
-	top: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+`;
+
+const Thumbnail = styled.div<{ image: string }>`
+	${(props) => props.theme.layout.ratio(100)};
+	width: 56px;
+	margin-right: 8px;
+	background-image: ${(props) => `url('${props.image}')`};
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: ${(props) => props.theme.color.gray.light};
 `;
 
 const InputContents = ({ value, onAdd, onDelete, title, image }) => {
@@ -72,8 +84,10 @@ const InputContents = ({ value, onAdd, onDelete, title, image }) => {
 					value.map((el, index) => {
 						return (
 							<ContentsList key={index} col={col} isLast={(index + 1) % col === 0}>
-								<Paragraph bold={true} text={`${el.title} / `} />
-								<Paragraph text={el.image.fileName ? el.image.fileName : el.image.name} />
+								{/* <Paragraph text={el.image.fileName ? el.image.fileName : el.image.name} /> */}
+								<Thumbnail image={el.image.url} />
+								<Paragraph bold={true} text={`${el.title}`} />
+
 								<BtnDelete text={"삭제"} onClick={() => onDelete(el, index)} />
 							</ContentsList>
 						);

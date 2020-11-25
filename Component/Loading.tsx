@@ -14,7 +14,8 @@ const Wrapper = styled.div<{ active: boolean }>`
 	opacity: ${(props) => (props.active ? "1" : "0")};
 	z-index: ${(props) => props.theme.zIndex.loading};
 	transition: ${(props) => props.theme.transition.default};
-	${(props) => props.theme.event.disable};
+
+	${(props) => (props.active ? props.theme.event.active : props.theme.event.disable)};
 `;
 
 const Text = styled.p`
