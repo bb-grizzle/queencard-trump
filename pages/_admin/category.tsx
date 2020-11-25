@@ -10,6 +10,8 @@ import { AdminFormContents } from "../../Interface/adminForm";
 import { useRef, useEffect, useState } from "react";
 import useCol from "../../Hook/useCol";
 import { useAdminAction, AdminActionType } from "../../Context/AdminProvider";
+import useRidrectToSignin from "../../Hook/useRidrectToSignin";
+import theme from "../../Styles/theme";
 
 const CategoryWrapper = styled.ul`
 	display: flex;
@@ -17,9 +19,10 @@ const CategoryWrapper = styled.ul`
 `;
 
 const category = () => {
+	useRidrectToSignin();
 	const formRef = useRef<HTMLFormElement>();
 	const nameInput = useInput("");
-	const colorInput = useInput("");
+	const colorInput = useInput(theme.color.main);
 	const { category, handleNowCategory, nowCategory, updateCategory } = useCategory();
 	const { adminAction, setAdminAction } = useAdminAction();
 	const [newCategory, setNewCategory] = useState(null);
