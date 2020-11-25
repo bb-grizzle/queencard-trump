@@ -5,6 +5,7 @@ import BtnText from "../Btn/BtnText";
 import { useAdminAction, AdminActionType } from "../../Context/AdminProvider";
 interface TitleSectionProps {
 	title: string;
+	cancelable?: boolean;
 }
 
 const Wrapper = styled.div`
@@ -20,7 +21,7 @@ const Wrapper = styled.div`
 		align-items: center;
 	}
 `;
-const AdminFormTitle: React.FC<TitleSectionProps> = ({ title }) => {
+const AdminFormTitle: React.FC<TitleSectionProps> = ({ title, cancelable = true }) => {
 	const { setAdminAction } = useAdminAction();
 	const handleCloseClick = () => {
 		setAdminAction(null);
@@ -28,7 +29,7 @@ const AdminFormTitle: React.FC<TitleSectionProps> = ({ title }) => {
 	return (
 		<Wrapper>
 			<Title title={title} type={TitleType.MD} />
-			<BtnText text={"닫기"} onClick={handleCloseClick} />
+			{cancelable && <BtnText text={"닫기"} onClick={handleCloseClick} />}
 		</Wrapper>
 	);
 };

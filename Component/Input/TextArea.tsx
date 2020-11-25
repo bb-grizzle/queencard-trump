@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import media from "../../Styles/media";
 
 interface TextAreaProps {
 	value: string;
 	onChange: any;
 	placeholder: string;
+	className?: string;
 }
 const Wrapper = styled.div`
 	${(props) => props.theme.style.textarea};
@@ -13,9 +13,9 @@ const Wrapper = styled.div`
 
 const Input = styled.textarea``;
 
-const TextArea: React.FC<TextAreaProps> = ({ value, onChange, placeholder }) => {
+const TextArea: React.FC<TextAreaProps> = ({ value, onChange, placeholder, className }) => {
 	return (
-		<Wrapper>
+		<Wrapper className={className}>
 			<Input value={value} onChange={onChange} placeholder={placeholder} />
 		</Wrapper>
 	);

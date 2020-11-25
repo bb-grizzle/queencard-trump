@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import media from "../../Styles/media";
 interface BtnTextProps {
 	text: string;
-	onClick?: () => void;
+	onClick?: (e: any) => void;
 	className?: string;
 	opacityAction?: boolean;
 	active?: boolean;

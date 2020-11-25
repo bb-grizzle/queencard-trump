@@ -1,4 +1,5 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
+import { useRouter } from "next/router";
 
 interface AdminContextProps {
 	adminAction: AdminActionType;
@@ -14,6 +15,16 @@ export enum AdminActionType {
 
 const AdminProvider = ({ children }) => {
 	const [adminAction, setAdminAction] = useState<AdminActionType>(null);
+
+	const { pathname } = useRouter();
+
+	useEffect(() => {
+		if (pathname === "/_admin/about") {
+			setAdminAction(AdminActionType.ADD);
+		} else {
+			setAdminAction(null);
+		}
+	}, [pathname]);
 
 	return <AdminContext.Provider value={{ adminAction, setAdminAction }}>{children}</AdminContext.Provider>;
 };

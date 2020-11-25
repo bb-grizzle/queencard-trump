@@ -21,6 +21,7 @@ interface AdminFormProps {
 	contents: any;
 	formRef: any;
 	deleteDisable?: boolean;
+	cancelable?: boolean;
 }
 
 const Wrapper = styled.div<{ active: boolean }>`
@@ -67,7 +68,7 @@ const FormSection = styled.div`
 	margin-bottom: 24px;
 `;
 
-const AdminForm: React.FC<AdminFormProps> = ({ onSubmit, contents, title, formRef, onDelete, deleteDisable = false }) => {
+const AdminForm: React.FC<AdminFormProps> = ({ onSubmit, contents, title, formRef, onDelete, deleteDisable = false, cancelable }) => {
 	const { adminAction } = useAdminAction();
 
 	const handleSubmit = () => {
@@ -77,7 +78,7 @@ const AdminForm: React.FC<AdminFormProps> = ({ onSubmit, contents, title, formRe
 	return (
 		<Wrapper active={adminAction !== null} ref={formRef}>
 			<Container>
-				<AdminFormTitle title={title} />
+				<AdminFormTitle title={title} cancelable={cancelable} />
 
 				<FormDefault onSubmit={handleSubmit} icon={"check"} onDelete={onDelete} deleteDisable={deleteDisable}>
 					{contents.map((el, index) => {

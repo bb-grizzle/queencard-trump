@@ -52,12 +52,13 @@ const useContents = ({ isText }) => {
 
 	const update = async (path) => {
 		const result = await Promise.all(
-			value.map(async (el, index) => {
+			value.map(async (el) => {
 				const image = el.image.prevUrl ? el.image : await fbUploadStorage(path, `${Date.now()}_${el.image.fileName}`, el.image.file);
 				return { ...el, image };
 			})
 		);
 
+		console.log(deleteFiles);
 		if (!!deleteFiles && !!deleteFiles[0]) {
 			await Promise.all(
 				deleteFiles.map(async (el) => {
@@ -65,12 +66,13 @@ const useContents = ({ isText }) => {
 				})
 			);
 		}
+
+		setDeleteFiles([]);
 		return result;
 	};
 
 	const onEdit = () => {
 		if (imageInput.file && nowContents.image.prevUrl) {
-			console.log("");
 			setDeleteFiles((prev) => [...prev, nowContents.image.prevUrl]);
 		}
 		setValue((prev) =>
