@@ -14,6 +14,7 @@ import InputColor from "../Input/InputColor";
 import EditorDefault from "../Editor/EditorDefault";
 import InputContents from "../Input/InputContents";
 import TextArea from "../Input/TextArea";
+import InputVideo from "../Input/InputVideo";
 
 interface AdminFormProps {
 	title: string;
@@ -92,6 +93,8 @@ const AdminForm: React.FC<AdminFormProps> = ({ onSubmit, contents, title, formRe
 											return <InputColor {...input} key={i} />;
 										case "textarea":
 											return <TextArea {...input} key={i} />;
+										case "video":
+											return <InputVideo {...input} key={i} />;
 										case "contents":
 											return <InputContents {...input} key={i} />;
 										case "file":

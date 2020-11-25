@@ -19,7 +19,7 @@ const AdminProvider = ({ children }) => {
 	const { pathname } = useRouter();
 
 	useEffect(() => {
-		if (pathname === "/_admin/about") {
+		if (pathname === "/_admin/about" || pathname === "/_admin/tutor") {
 			setAdminAction(AdminActionType.ADD);
 		} else {
 			setAdminAction(null);
