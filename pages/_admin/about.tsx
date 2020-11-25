@@ -14,7 +14,6 @@ import { useLoading } from "../../Context/AppProvider";
 const about = () => {
 	useRidrectToSignin();
 	const titleInput = useInput("");
-	const subTitleInput = useInput("");
 	const contentsInput = useContents({ isText: true });
 	const { setLoading } = useLoading();
 	const { data, update } = useAbout();
@@ -23,30 +22,24 @@ const about = () => {
 	useEffect(() => {
 		if (!!data) {
 			titleInput.setValue(data.title);
-			subTitleInput.setValue(data.subTitle);
 			contentsInput.setValue(data.contents);
 		}
 	}, [data]);
 
 	useEffect(() => {
 		const title = titleInput.value;
-		const subTitle = subTitleInput.value;
 		setForm({
 			title,
-			subTitle,
 			contents: null
 		});
-	}, [titleInput.value, subTitleInput.value]);
+	}, [titleInput.value]);
 
 	const formRef = useRef();
 
 	const formContents = [
 		{
-			title: "기본 정보",
-			inputs: [
-				{ ...titleInput, placeholder: "제목" },
-				{ ...subTitleInput, placeholder: "부 제목" }
-			]
+			title: "제목",
+			inputs: [{ ...titleInput, placeholder: "제목", type: "textarea" }]
 		},
 		{
 			title: "컨텐츠 정보",

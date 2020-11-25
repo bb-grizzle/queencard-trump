@@ -7,6 +7,7 @@ interface TextAreaProps {
 	className?: string;
 }
 const Wrapper = styled.div`
+	${(props) => props.theme.style.input};
 	${(props) => props.theme.style.textarea};
 	width: 100%;
 `;
