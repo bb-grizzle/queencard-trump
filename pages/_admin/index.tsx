@@ -1,5 +1,5 @@
 import { useIsLoggedIn } from "../../Context/AppProvider";
-import Portfolio from "./portfolio";
+import Home from "./home";
 import Signin from "./signin";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
@@ -13,7 +13,7 @@ const index = () => {
 		}
 	}, [isLoggedIn]);
 
-	return isLoggedIn ? <Portfolio /> : <Signin />;
+	return isLoggedIn ? <Home /> : <Signin />;
 };
 
 export default index;

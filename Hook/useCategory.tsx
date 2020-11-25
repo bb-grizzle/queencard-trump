@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fbGetData, fbUploadData, fbUpdateData, fbDeleteData } from "../Firebase/firebase";
 import { formCheck } from "../util/formCheck";
 import { useAdminAction, AdminActionType } from "../Context/AdminProvider";
+import { CategoryDataProps } from "../Interface/category";
 const COL = "category";
 
 export interface categoryProps {
@@ -9,10 +10,10 @@ export interface categoryProps {
 	count: number;
 }
 const useCategory = () => {
-	const [category, setCategory] = useState();
-	const [categoryObj, setCategoryObj] = useState();
-	const [categoryCount, setCateogoryCount] = useState();
-	const [nowCategory, setNowCategory] = useState();
+	const [category, setCategory] = useState([]);
+	const [categoryObj, setCategoryObj] = useState({});
+	const [categoryCount, setCateogoryCount] = useState({});
+	const [nowCategory, setNowCategory] = useState<CategoryDataProps>();
 	const { setAdminAction } = useAdminAction();
 
 	useEffect(() => {

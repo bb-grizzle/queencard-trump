@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { fbGetData, fbUpdateData, fbUploadData } from "../Firebase/firebase";
+import { fbGetData, fbUpdateData } from "../Firebase/firebase";
+import { tutorDataProps } from "../Interface/tutor";
 
 const COL = "tutor";
 const useTutor = () => {
-	const [data, setData] = useState();
+	const [data, setData] = useState<tutorDataProps>();
 
 	useEffect(() => {
 		const get = async () => {

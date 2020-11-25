@@ -1,44 +1,84 @@
-import PortfolioPresentor from "./PortfolioPresentor";
-import { useAdminAction, AdminActionType } from "../../../Context/AdminProvider";
-import useInput from "../../../Hook/useInput";
-import useInputFile from "../../../Hook/useInputFile";
+import { useAdminAction, AdminActionType } from "../../Context/AdminProvider";
+import useInput from "../../Hook/useInput";
+import useInputFile from "../../Hook/useInputFile";
 import { useState, useEffect, useRef } from "react";
-import useInputTag from "../../../Hook/useInputTag";
-import { formCheck, deleteConfirm } from "../../../util/formCheck";
-import checkFile from "../../../util/filecheck";
-import { PortfolioProps, PortfolioDetailProps } from "../../../Interface/portfolio";
-import usePortfolio from "../../../Hook/usePortfolio";
-import useRidrectToSignin from "../../../Hook/useRidrectToSignin";
-import { AdminFormContents } from "../../../Interface/adminForm";
-import useCol from "../../../Hook/useCol";
-import useInputOption from "../../../Hook/useInputOption";
-import { CategoryProps } from "../../../Interface/category";
-import theme from "../../../Styles/theme";
-import useEditor from "../../../Hook/useEditor";
-import useContents from "../../../Hook/useContents";
-import { useLoading } from "../../../Context/AppProvider";
+import useInputTag from "../../Hook/useInputTag";
+import { formCheck, deleteConfirm } from "../../util/formCheck";
+import checkFile from "../../util/filecheck";
+import { PortfolioProps, PortfolioDetailProps } from "../../Interface/portfolio";
+import usePortfolio from "../../Hook/usePortfolio";
+import useRidrectToSignin from "../../Hook/useRidrectToSignin";
+import { AdminFormContents } from "../../Interface/adminForm";
+import useCol from "../../Hook/useCol";
+import useInputOption from "../../Hook/useInputOption";
+import { CategoryProps } from "../../Interface/category";
+import theme from "../../Styles/theme";
+import useEditor from "../../Hook/useEditor";
+import useContents from "../../Hook/useContents";
+import { useLoading } from "../../Context/AppProvider";
+import styled, { css } from "styled-components";
+import media from "../../Styles/media";
+import BtnText from "../../Component/Btn/BtnText";
+import PortfolioList from "../../Component/PortfolioList";
+import useElementSize from "../../Hook/useElementSize";
+import PageContainer from "../../Layout/PageLayout";
+import ContainerLayout from "../../Layout/ContainerLayout";
+import AdminTitleSection from "../../Component/Admin/AdminTitleSection";
+import AdminForm from "../../Component/Admin/AdminForm";
+import AddBtn from "../../Component/Admin/AddBtn";
 
-const PortfolioContainer = () => {
+const Category = styled.ul`
+	display: flex;
+	margin-bottom: ${(props) => `${props.theme.size.gap.section}px`};
+	overflow: scroll;
+	${(props) => props.theme.style.hideScroll};
+`;
+
+const CategoryList = styled.li<{ active: boolean }>`
+	border: 1px solid ${(props) => props.theme.color.gray.dark};
+	padding: 12px;
+	border-radius: 12px;
+	margin-right: 12px;
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+	${(props) =>
+		props.active
+			? css`
+					background-color: ${(props) => props.theme.color.gray.dark};
+					color: ${(props) => props.theme.color.white};
+			  `
+			: css`
+					background-color: transparent;
+					color: ${(props) => props.theme.color.gray.dark};
+			  `};
+
+	@media ${media.hover} {
+		&:hover {
+			cursor: pointer;
+			opacity: 0.5;
+		}
+	}
+`;
+
+const CategoryBtn = styled(BtnText)``;
+const Count = styled.p`
+	margin-left: 8px;
+	font-size: 12px;
+`;
+
+const ListWrppaer = styled.ul`
+	display: flex;
+	margin-bottom: ${(props) => `${props.theme.size.gap.section}px`};
+	flex-wrap: wrap;
+`;
+
+const portfolio = () => {
 	useRidrectToSignin();
 	const { data, uploadPortfolio, category, uploadCategory, handleNowData, nowData, updatePortfolio, deletePortfolio } = usePortfolio();
 	const { setAdminAction, adminAction } = useAdminAction();
 	const [form, setForm] = useState<PortfolioProps>();
 	const { setLoading } = useLoading();
-
-	// const titleInput = useInput("titleInput");
-	// const subTitleInput = useInput("subTitleInput");
-	// const categoryInput = useInputOption("");
-	// const thumbnailInput = useInputFile();
-
-	// const [detail, setDetail] = useState<PortfolioDetailProps>();
-	// const partnerInput = useInput("partnerInput");
-	// const businessInput = useInput("businessInput");
-	// const count_studentInput = useInput(123);
-	// const count_schoolInput = useInput(123);
-	// const areaInput = useInputTag(["areaInput", "areaInput2", "areaInput3"]);
-	// const mediaTextInput = useInput("mediaTextInput");
-	// const mediaLinkInput = useInput("https://www.youtube.com/");
-	// const descriptInput = useEditor("descriptInput");
 
 	const titleInput = useInput("");
 	const subTitleInput = useInput("");
@@ -278,20 +318,43 @@ const PortfolioContainer = () => {
 		}
 	];
 
+	const { ref, size } = useElementSize();
+
 	return (
-		<PortfolioPresentor
-			category={category}
-			onDelete={handleDelete}
-			onSubmit={handleSubmit}
-			formContents={formContents}
-			formRef={formRef}
-			data={data}
-			onCategoryClick={handleCategoryClick}
-			handleListClick={handleListClick}
-			nowCategory={nowCategory}
-			listCol={col}
-		/>
+		<PageContainer>
+			<ContainerLayout containerRef={ref}>
+				<AdminTitleSection title="포트폴리오" />
+
+				<Category>
+					<CategoryList active={nowCategory === null} onClick={() => handleCategoryClick(null)}>
+						<CategoryBtn text={"전체"} />
+					</CategoryList>
+					{category !== undefined &&
+						category.map((el) => {
+							return (
+								<CategoryList key={el.id} active={nowCategory === el.id} onClick={() => handleCategoryClick(el.id)}>
+									<CategoryBtn text={el.name} opacityAction={false} />
+									<Count>{el.count}</Count>
+								</CategoryList>
+							);
+						})}
+				</Category>
+
+				<ListWrppaer>
+					{data !== undefined &&
+						data
+							.filter((el) => (nowCategory !== null ? el.category.id === nowCategory : el))
+							.map((portfolio, index) => {
+								return <PortfolioList key={portfolio.id} data={portfolio} col={col} isLast={(index + 1) % col === 0} onClick={handleListClick} parentSize={size} />;
+							})}
+				</ListWrppaer>
+			</ContainerLayout>
+
+			<AdminForm title={"포트폴리오"} onSubmit={handleSubmit} onDelete={handleDelete} contents={formContents} formRef={formRef} />
+
+			<AddBtn />
+		</PageContainer>
 	);
 };
 
-export default PortfolioContainer;
+export default portfolio;

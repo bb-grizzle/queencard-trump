@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { fbGetData, fbUploadData, fbUploadStorage, fbUpdateData, fbDeleteStorage, fbDeleteData } from "../Firebase/firebase";
 import useCategory from "./useCategory";
+import { PortfolioDataProps } from "../Interface/portfolio";
 const COL = "portfolio";
 
 const usePortfolio = () => {
 	const { category, uploadCategory, updateCategory, categoryObj, setCateogoryCount, categoryCount, checkCategory } = useCategory();
-	const [resData, setResData] = useState();
-	const [data, setData] = useState();
-	const [categoryResult, setCategoryResult] = useState();
+	const [resData, setResData] = useState([]);
+	const [data, setData] = useState([]);
+	const [categoryResult, setCategoryResult] = useState([]);
 
-	const [nowData, setNowData] = useState();
+	const [nowData, setNowData] = useState<PortfolioDataProps>();
 
 	useEffect(() => {
 		const get = async () => {
@@ -71,7 +72,7 @@ const usePortfolio = () => {
 	};
 
 	const updatePortfolio = async (data, thumbnailInput, cont) => {
-		const id = nowData.id;
+		const id = nowData !== undefined && nowData.id ? nowData.id : "";
 		let updateData = null;
 
 		if (thumbnailInput.file) {

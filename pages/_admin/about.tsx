@@ -3,11 +3,9 @@ import useRidrectToSignin from "../../Hook/useRidrectToSignin";
 import ContainerLayout from "../../Layout/ContainerLayout";
 import AdminTitleSection from "../../Component/Admin/AdminTitleSection";
 import useContents from "../../Hook/useContents";
-import InputContents from "../../Component/Input/InputContents";
 import useInput from "../../Hook/useInput";
 import AdminForm from "../../Component/Admin/AdminForm";
 import { useRef, useEffect, useState } from "react";
-import { useAdminAction } from "../../Context/AdminProvider";
 import useAbout from "../../Hook/useAbout";
 import { useLoading } from "../../Context/AppProvider";
 
@@ -17,7 +15,7 @@ const about = () => {
 	const contentsInput = useContents({ isText: true });
 	const { setLoading } = useLoading();
 	const { data, update } = useAbout();
-	const [form, setForm] = useState();
+	const [form, setForm] = useState({});
 
 	useEffect(() => {
 		if (!!data) {

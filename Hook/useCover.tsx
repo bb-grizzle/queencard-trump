@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { fbGetData, fbUploadData, fbUpdateData, fbUploadStorage } from "../Firebase/firebase";
+import { fbGetData, fbUpdateData, fbUploadStorage } from "../Firebase/firebase";
+import { FileProps } from "../Interface/portfolio";
 
 const COL = "cover";
 const useCover = () => {
-	const [cover, setCover] = useState();
+	const [cover, setCover] = useState<FileProps | null>();
 	const [id, setId] = useState();
 
 	useEffect(() => {

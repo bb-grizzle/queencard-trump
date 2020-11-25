@@ -30,7 +30,7 @@ const Wrapper = styled.div`
 	height: 100vh;
 	position: fixed;
 	background-color: ${(props) => props.theme.color.bg};
-	z-index: ${(props) => props.theme.zIndex.supported_browsers};
+	z-index: ${(props) => props.theme.zIndex.browser_support};
 	top: 0;
 	left: 0;
 	display: flex;
@@ -110,7 +110,7 @@ const BrowserName = styled.p`
 	color: gray;
 `;
 
-const supported_browsers = () => {
+const browser_support = () => {
 	return (
 		<Wrapper>
 			<TextWrapper>
@@ -134,4 +134,4 @@ const supported_browsers = () => {
 	);
 };
 
-export default supported_browsers;
+export default browser_support;

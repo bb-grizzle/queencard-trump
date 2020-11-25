@@ -4,9 +4,9 @@ import BtnIcon from "../Btn/BtnIcon";
 import { useAdminAction, AdminActionType } from "../../Context/AdminProvider";
 interface FormDefaultProps {
 	onSubmit: () => void;
-	onDelete: () => void;
+	onDelete?: () => void;
 	icon?: string;
-	deleteDisable: boolean;
+	deleteDisable?: boolean;
 }
 const Wrapper = styled.form``;
 

@@ -1,9 +1,8 @@
 import styled, { css } from "styled-components";
 import InputDefault from "./InputDefault";
-import InputFile from "./inputFile";
-import { useEffect } from "react";
+import InputFile from "./InputFile";
 import BtnText from "../Btn/BtnText";
-import Paragraph, { ParagraphType } from "../Text/Paragraph";
+import Paragraph from "../Text/Paragraph";
 import useCol from "../../Hook/useCol";
 import media from "../../Styles/media";
 import TextArea from "./TextArea";

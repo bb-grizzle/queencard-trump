@@ -1,24 +1,25 @@
 import { CategoryDataProps } from "./category";
 export interface PortfolioProps {
 	category: CategoryDataProps;
-	thumbnail: fileProps | null;
+	thumbnail: FileProps | null;
 	subTitle: string;
 	title: string;
 	detail: PortfolioDetailProps;
-	contents?: PortfolioContentsProps[];
+	contents?: ContentsProps[];
 }
-export interface PortfolioContentsProps {
+export interface ContentsProps {
 	title: string;
-	image: fileProps | null;
+	image: FileProps | null;
+	text?: string;
 }
 export interface PortfolioDataProps extends PortfolioProps {
 	id: string;
 }
 
-export interface fileProps {
+export interface FileProps {
 	url: string;
 	fileName: string;
-	prevUrl: string;
+	prevUrl?: string;
 }
 
 export interface PortfolioDetailProps {

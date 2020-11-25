@@ -6,7 +6,7 @@ import { useAdminAction } from "../../Context/AdminProvider";
 import InputDefault from "../Input/InputDefault";
 import Title, { TitleType } from "../Text/Title";
 import FormDefault from "../Input/FormDefault";
-import InputFile from "../Input/inputFile";
+import InputFile from "../Input/InputFile";
 import InputTag from "../Input/InputTag";
 import InputOption from "../Input/InputOption";
 import FormCategoryInput from "./FormCategoryInput";

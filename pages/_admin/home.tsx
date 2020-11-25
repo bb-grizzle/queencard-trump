@@ -12,7 +12,7 @@ import useCol from "../../Hook/useCol";
 import { useAdminAction, AdminActionType } from "../../Context/AdminProvider";
 import useRidrectToSignin from "../../Hook/useRidrectToSignin";
 import theme from "../../Styles/theme";
-import InputFile from "../../Component/Input/inputFile";
+import InputFile from "../../Component/Input/InputFile";
 import useInputFile from "../../Hook/useInputFile";
 import BtnIcon from "../../Component/Btn/BtnIcon";
 import useCover from "../../Hook/useCover";
