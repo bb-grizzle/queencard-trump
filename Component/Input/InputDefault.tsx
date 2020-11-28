@@ -5,6 +5,7 @@ interface InputDefaultProps {
 	type?: string;
 	placeholder: string;
 	className?: string;
+	onEnter?: () => void;
 }
 const Wrapper = styled.div`
 	width: 100%;
@@ -15,10 +16,18 @@ const Wrapper = styled.div`
 
 const Input = styled.input``;
 
-const InputDefault: React.FC<InputDefaultProps> = ({ value, onChange, type = "text", placeholder, className }) => {
+const InputDefault: React.FC<InputDefaultProps> = ({ value, onChange, type = "text", placeholder, className, onEnter }) => {
+	const handleKeyDown = (e) => {
+		var keyCode = e.which ? e.which : e.keyCode;
+		if (keyCode === 13 || keyCode === 188) {
+			if (!!onEnter) {
+				onEnter();
+			}
+		}
+	};
 	return (
 		<Wrapper className={className}>
-			<Input type={type} value={value} onChange={onChange} placeholder={placeholder} />
+			<Input type={type} value={value} onChange={onChange} placeholder={placeholder} onKeyDown={handleKeyDown} />
 		</Wrapper>
 	);
 };

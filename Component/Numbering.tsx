@@ -4,9 +4,10 @@ interface NumberingProps {
 	number: number;
 	className?: string;
 	small?: boolean;
+	color?: string;
 }
 
-const Wrapper = styled.div<{ small: boolean }>`
+const Wrapper = styled.div<{ small: boolean; color?: string }>`
 	${(props) =>
 		props.small
 			? css`
@@ -21,7 +22,7 @@ const Wrapper = styled.div<{ small: boolean }>`
 			  `};
 
 	${(props) => props.theme.layout.center_flex};
-	background-color: ${(props) => props.theme.color.main};
+	background-color: ${(props) => (props.color ? props.color : props.theme.color.main)};
 	border-radius: 100%;
 `;
 const Number = styled.p`
@@ -29,9 +30,9 @@ const Number = styled.p`
 	color: ${(props) => props.theme.color.white};
 `;
 
-const Numbering: React.FC<NumberingProps> = ({ number, className, small = false }) => {
+const Numbering: React.FC<NumberingProps> = ({ number, className, small = false, color }) => {
 	return (
-		<Wrapper className={className} small={small}>
+		<Wrapper className={className} small={small} color={color}>
 			<Number>{number}</Number>
 		</Wrapper>
 	);

@@ -12,7 +12,8 @@ const color = {
 	div: "rgba(0,0,0,0.2)",
 	main: "#45FF7D",
 	placeholder: "#C4C4C4",
-	dim: "white"
+	dim: "white",
+	disable: "#DBDBDB"
 };
 
 const div = {
@@ -190,6 +191,9 @@ const size = {
 	padding_top_admin: {
 		pc: "200px",
 		mobile: "80px"
+	},
+	padding_top_contents: {
+		pc: "64px"
 	},
 	padding_bottom_admin: {
 		pc: "100px",

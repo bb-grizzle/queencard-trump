@@ -12,6 +12,8 @@ interface PortfolioListProps {
 	isLast: boolean;
 	onClick: (id: string) => void;
 	parentSize: number;
+	className?: string;
+	active?: boolean;
 }
 
 const ContentsWrapper = styled.div`
@@ -68,7 +70,7 @@ const BackgroundImage = styled.div<{ bg: string; active: boolean }>`
 			  `};
 `;
 
-const PortfolioList: React.FC<PortfolioListProps> = ({ data, col, isLast, onClick, parentSize }) => {
+const PortfolioList: React.FC<PortfolioListProps> = ({ data, col, isLast, onClick, parentSize, className, active }) => {
 	const { load } = useImageLoad(data.thumbnail.url);
 	const [gap, setGap] = useState(parentSize * 0.03);
 
@@ -77,7 +79,7 @@ const PortfolioList: React.FC<PortfolioListProps> = ({ data, col, isLast, onClic
 	}, [parentSize]);
 
 	return (
-		<Wrapper col={col} isLast={isLast} onClick={() => onClick(data.id)} gap={gap}>
+		<Wrapper col={col} isLast={isLast} onClick={() => onClick(data.id)} gap={gap} className={className}>
 			<BackgroundImage bg={data.thumbnail.url} active={load} />
 			<ContentsWrapper>
 				{data.category && data.category.color && <ColorOverlay color={data.category.color} />}
