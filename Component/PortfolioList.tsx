@@ -13,11 +13,24 @@ interface PortfolioListProps {
 	onClick: (id: string) => void;
 	parentSize: number;
 	className?: string;
-	active?: boolean;
+	overlay?: boolean;
 }
 
-const ContentsWrapper = styled.div`
+const Inner = styled.div`
+	${(props) => props.theme.layout.full_abs};
+
+	${(props) => props.theme.layout.center_flex};
+	flex-direction: column;
+	color: ${(props) => props.theme.color.white};
 	opacity: 0;
+	transition: ${(props) => props.theme.transition.default};
+	transition-property: opacity;
+`;
+
+const ColorOverlay = styled.div<{ color: string; active?: boolean }>`
+	${(props) => props.theme.layout.full_abs};
+	background-color: ${(props) => props.color};
+	opacity: ${(props) => (props.active ? 0.6 : 0)};
 	transition: ${(props) => props.theme.transition.default};
 	transition-property: opacity;
 `;
@@ -32,26 +45,17 @@ const Wrapper = styled.li<{ col: number; isLast: boolean; gap: number }>`
 
 	@media ${media.hover} {
 		&:hover {
-			${ContentsWrapper} {
+			${Inner} {
 				opacity: 1;
+			}
+			${ColorOverlay} {
+				opacity: 0.6;
 			}
 		}
 	}
 `;
 
-const Inner = styled.div`
-	${(props) => props.theme.layout.full_abs};
-
-	${(props) => props.theme.layout.center_flex};
-	flex-direction: column;
-	color: ${(props) => props.theme.color.white};
-`;
-
-const ColorOverlay = styled.div<{ color: string }>`
-	${(props) => props.theme.layout.full_abs};
-	background-color: ${(props) => props.color};
-	opacity: 0.6;
-`;
+const ContentsWrapper = styled.div``;
 
 const BackgroundImage = styled.div<{ bg: string; active: boolean }>`
 	${(props) => props.theme.layout.full_abs};
@@ -70,7 +74,7 @@ const BackgroundImage = styled.div<{ bg: string; active: boolean }>`
 			  `};
 `;
 
-const PortfolioList: React.FC<PortfolioListProps> = ({ data, col, isLast, onClick, parentSize, className, active }) => {
+const PortfolioList: React.FC<PortfolioListProps> = ({ data, col, isLast, onClick, parentSize, className, overlay }) => {
 	const { load } = useImageLoad(data.thumbnail.url);
 	const [gap, setGap] = useState(parentSize * 0.03);
 
@@ -82,7 +86,7 @@ const PortfolioList: React.FC<PortfolioListProps> = ({ data, col, isLast, onClic
 		<Wrapper col={col} isLast={isLast} onClick={() => onClick(data.id)} gap={gap} className={className}>
 			<BackgroundImage bg={data.thumbnail.url} active={load} />
 			<ContentsWrapper>
-				{data.category && data.category.color && <ColorOverlay color={data.category.color} />}
+				{data.category && data.category.color && <ColorOverlay color={data.category.color} active={overlay} />}
 				<Inner>
 					<Paragraph text={data.title} type={ParagraphType.LG} color={"inherit"} />
 					<Title title={data.subTitle} color={"inherit"} />

@@ -90,7 +90,12 @@ const Portfolio = () => {
 	}, [nowCategory]);
 
 	const handleCategoryClick = (id: string) => {
-		push(`?category=${id}`);
+		console.log(nowCategory);
+		if (nowCategory === id) {
+			push(``);
+		} else {
+			push(`?category=${id}`);
+		}
 	};
 
 	const handleListClick = () => {
@@ -121,10 +126,10 @@ const Portfolio = () => {
 							<PortfolioWrapper>
 								{data !== undefined &&
 									data.map((portfolio, index) => {
-										console.log(portfolio);
 										return (
 											<PortfolioList
 												// active={nowCategory === portfolio.category.id || nowCategory !== null}
+												overlay={portfolio.category.id === nowCategory}
 												key={portfolio.id}
 												data={portfolio}
 												col={col}
