@@ -79,18 +79,14 @@ const Portfolio = () => {
 
 	useEffect(() => {
 		if (data && cover && category) {
+			// loading done
 			// console.log(data);
 			// console.log(cover);
 			// console.log(category);
 		}
 	}, [data, cover, category]);
 
-	useEffect(() => {
-		console.log(nowCategory);
-	}, [nowCategory]);
-
 	const handleCategoryClick = (id: string) => {
-		console.log(nowCategory);
 		if (nowCategory === id) {
 			push(``);
 		} else {

@@ -1,8 +1,15 @@
 import ColDefault from "./ColDefault";
-import Title, { TitleType } from "../Text/Title";
 import styled from "styled-components";
 import Paragraph, { ParagraphType } from "../Text/Paragraph";
 import Search from "../Search";
+import Footer from "../Footer";
+
+const ColWrapper = styled(ColDefault)`
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+`;
 
 const ColTitle = styled(Paragraph)`
 	font-size: 24px;
@@ -10,13 +17,21 @@ const ColTitle = styled(Paragraph)`
 	margin-bottom: 40px;
 `;
 
+const CustomFooter = styled(Footer)``;
+const Row = styled.div``;
+
 const ColSidebar: React.FC = ({ children }) => {
 	return (
-		<ColDefault col={25}>
-			<ColTitle type={ParagraphType.SM} text={"School"} />
-			{children}
-			<Search />
-		</ColDefault>
+		<ColWrapper col={25}>
+			<Row>
+				<ColTitle type={ParagraphType.SM} text={"School"} />
+				{children}
+				<Search />
+			</Row>
+			<Row>
+				<CustomFooter />
+			</Row>
+		</ColWrapper>
 	);
 };
 

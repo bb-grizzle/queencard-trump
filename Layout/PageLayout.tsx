@@ -8,7 +8,7 @@ interface PageContainerProps {
 
 const Wrapper = styled.div<{ paddingTop?: boolean }>`
 	padding-top: ${(props) => (props.paddingTop ? `calc(${props.theme.size.header.pc} + 56px)` : props.theme.size.header.pc)};
-	padding-bottom: 120px;
+	padding-bottom: 100px;
 	@media ${media.tablet} {
 		padding-top: ${(props) => props.theme.size.header.mobile};
 		padding-bottom: 64px;
