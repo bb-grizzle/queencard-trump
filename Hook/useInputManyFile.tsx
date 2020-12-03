@@ -3,7 +3,7 @@ import checkFile from "../util/filecheck";
 
 const useInputManyFile = () => {
 	const [files, setFiles] = useState([]);
-	const [deleteFiles, setDeleteFiles] = useState();
+	const [deleteFiles, setDeleteFiles] = useState<string[]>();
 
 	const onChange = (e: any) => {
 		if (!checkFile(e.target)) return;

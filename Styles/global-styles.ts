@@ -20,6 +20,8 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
     overflow: hidden;
+
+    border: 1px solid red;
   }
 
   a{

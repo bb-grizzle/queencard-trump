@@ -17,7 +17,7 @@ const Menu = styled.li`
 
 const NavLink: React.FC<NavLinkProps> = ({ href, name, className, onClick }) => {
 	const { pathname } = useRouter();
-	const [filterPath, setFilterPath] = useState();
+	const [filterPath, setFilterPath] = useState<string>();
 
 	useEffect(() => {
 		setFilterPath(pathname.includes("/portfolio") ? "/" : pathname);
