@@ -19,6 +19,7 @@ const about = () => {
 
 	useEffect(() => {
 		if (!!data) {
+			setLoading(false);
 			titleInput.setValue(data.title);
 			contentsInput.setValue(data.contents);
 		}

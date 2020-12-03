@@ -18,6 +18,7 @@ const tutor = () => {
 
 	useEffect(() => {
 		if (data && data.url) {
+			setLoading(false);
 			videoInput.setInit(data.url);
 		}
 	}, [data]);

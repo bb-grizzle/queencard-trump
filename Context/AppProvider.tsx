@@ -70,6 +70,10 @@ const AppProvider = ({ children }) => {
 		}
 	}, [router]);
 
+	useEffect(() => {
+		setNowCategory(null);
+	}, [router.pathname]);
+
 	return (
 		<AppContext.Provider
 			value={{

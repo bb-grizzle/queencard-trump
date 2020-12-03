@@ -16,20 +16,8 @@ import Link from "next/link";
 import DetailList from "../../Component/DetailList";
 import useSize from "../../Hook/useSize";
 import media from "../../Styles/media";
+import PageTitleWrapper from "../../Component/PageTitleWrapper";
 
-const BtnWrapper = styled.div`
-	margin-bottom: 32px;
-`;
-const TitleWrapper = styled.div`
-	margin-bottom: 244px;
-	color: ${(props) => props.theme.color.gray.dark};
-
-	@media ${media.tablet} {
-		margin-bottom: 16px;
-		padding-bottom: 16px;
-		border-bottom: 1px solid ${(props) => props.theme.color.gray.light};
-	}
-`;
 const InfoWrapper = styled.div`
 	display: flex;
 	margin-bottom: 140px;
@@ -127,14 +115,7 @@ const portfolio = () => {
 
 						{nowPortfolio && (
 							<ColContents>
-								<BtnWrapper>
-									<BtnIcon icon={"arrow_left"} onClick={handleBackClick} />
-								</BtnWrapper>
-
-								<TitleWrapper>
-									<Title title={nowPortfolio.title} isRegular={true} />
-									<Title title={nowPortfolio.subTitle} />
-								</TitleWrapper>
+								<PageTitleWrapper handleBackClick={handleBackClick} title={nowPortfolio.title} subTitle={nowPortfolio.subTitle} />
 
 								<InfoWrapper>
 									<ColInfo>

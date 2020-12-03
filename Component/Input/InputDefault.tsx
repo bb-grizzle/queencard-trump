@@ -29,7 +29,7 @@ const InputDefault: React.FC<InputDefaultProps> = ({ value, onChange, type = "te
 	};
 
 	const handleFlocus = () => {
-		onFocus();
+		onFocus && onFocus();
 	};
 
 	return (

@@ -30,6 +30,10 @@ const signin = () => {
 	const { push } = useRouter();
 
 	useEffect(() => {
+		setLoading(false);
+	}, []);
+
+	useEffect(() => {
 		if (isLoggedIn) {
 			push("/_admin/portfolio");
 		}

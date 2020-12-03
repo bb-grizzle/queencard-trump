@@ -62,6 +62,12 @@ const category = () => {
 	const { setLoading } = useLoading();
 
 	useEffect(() => {
+		if (cover && category) {
+			setLoading(false);
+		}
+	}, [cover, category]);
+
+	useEffect(() => {
 		if (cover) {
 			coverInput.setValue(cover.fileName);
 		}
