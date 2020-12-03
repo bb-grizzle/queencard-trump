@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { useLoading } from "../Context/AppProvider";
+import { useEffect } from "react";
+import { preventScroll, activeScroll } from "../util/scroll";
 
 const Wrapper = styled.div<{ active: boolean }>`
 	position: fixed;
@@ -27,6 +29,15 @@ const Text = styled.p`
 
 const Loading: React.FC = () => {
 	const { loading } = useLoading();
+
+	useEffect(() => {
+		if (loading) {
+			preventScroll();
+		} else {
+			activeScroll();
+		}
+	}, [loading]);
+
 	return (
 		<Wrapper active={loading}>
 			<Text> loading...</Text>

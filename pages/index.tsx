@@ -44,10 +44,15 @@ const Portfolio = () => {
 
 	useEffect(() => {
 		if (data && cover && category) {
-			setLoading(false);
 			setUrl(cover.url);
 		}
 	}, [data, cover, category]);
+
+	useEffect(() => {
+		if (load) {
+			setLoading(false);
+		}
+	}, [load]);
 
 	const handleListClick = (data: PortfolioDataProps) => {
 		push(`/portfolio/[id]`, `/portfolio/${data.id}`);

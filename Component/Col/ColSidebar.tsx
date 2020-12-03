@@ -43,8 +43,6 @@ const ColSidebar: React.FC = ({ children }) => {
 
 	const handleSearch = () => {
 		if (!searchInput.value) {
-			if (!isTablet) {
-			}
 			setSearch(null);
 		} else {
 			setSearch(searchInput.value);
@@ -52,7 +50,9 @@ const ColSidebar: React.FC = ({ children }) => {
 	};
 
 	const inputClick = () => {
-		setHideChildren(true);
+		if (!isTablet) {
+			setHideChildren(true);
+		}
 	};
 	const handleFocusOut = () => {
 		setHideChildren(false);
