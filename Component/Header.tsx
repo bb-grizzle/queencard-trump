@@ -7,7 +7,6 @@ import media from "../Styles/media";
 import BtnIcon from "./Btn/BtnIcon";
 import { useIsMenuClick, useIsAdmin, useIsLoggedIn } from "../Context/AppProvider";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import BtnText from "./Btn/BtnText";
 import { fbSignout } from "../Firebase/firebase";
 

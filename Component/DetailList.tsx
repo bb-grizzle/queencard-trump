@@ -3,6 +3,7 @@ import Title from "./Text/Title";
 import Paragraph from "./Text/Paragraph";
 import Numbering from "./Numbering";
 import ImageSlider from "./ImageSlider";
+import media from "../Styles/media";
 interface DetailListProps {
 	number?: number;
 	title: string;
@@ -19,6 +20,10 @@ const Wrapper = styled.li`
 const TextWrapper = styled.div`
 	margin-bottom: 32px;
 	color: ${(props) => props.theme.color.gray.dark};
+
+	@media ${media.tablet} {
+		margin-bottom: 16px;
+	}
 `;
 
 const TitleCustome = styled(Title)<{ margin?: number }>`

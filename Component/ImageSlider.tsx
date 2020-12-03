@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { FileProps } from "../Interface/portfolio";
 import BtnIcon from "./Btn/BtnIcon";
 import useSliderCount from "../Hook/useSliderCount";
+import media from "../Styles/media";
 
 interface ImageSliderProps {
 	images: FileProps[];
@@ -40,6 +41,10 @@ const BtnWrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 	padding: 0 21px;
+
+	@media ${media.tablet} {
+		padding: 0 ${(props) => `${props.theme.size.offset.tablet / 2}px`};
+	}
 `;
 const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
 	const { slider, count, slideDown, slideUp } = useSliderCount();

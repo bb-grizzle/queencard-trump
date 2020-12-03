@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 // interface
 interface NavLinkProps {
 	href: string;
@@ -15,10 +16,15 @@ const Menu = styled.li`
 `;
 
 const NavLink: React.FC<NavLinkProps> = ({ href, name, className, onClick }) => {
-	const router = useRouter();
+	const { pathname } = useRouter();
+	const [filterPath, setFilterPath] = useState();
+
+	useEffect(() => {
+		setFilterPath(pathname.includes("/portfolio") ? "/" : pathname);
+	}, [pathname]);
 
 	return (
-		<Menu className={`${className} ${router.pathname === href ? "active " : ""}`} onClick={onClick}>
+		<Menu className={`${className} ${filterPath === href ? "active " : ""}`} onClick={onClick}>
 			<Link href={href}>
 				<a>{name}</a>
 			</Link>

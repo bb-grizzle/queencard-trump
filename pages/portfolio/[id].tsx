@@ -9,11 +9,13 @@ import BtnIcon from "../../Component/Btn/BtnIcon";
 import Title from "../../Component/Text/Title";
 import { usePortfolioData, useCategoryData } from "../../Context/AppProvider";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import Paragraph from "../../Component/Text/Paragraph";
 import Link from "next/link";
 import DetailList from "../../Component/DetailList";
+import useSize from "../../Hook/useSize";
+import media from "../../Styles/media";
 
 const BtnWrapper = styled.div`
 	margin-bottom: 32px;
@@ -21,24 +23,55 @@ const BtnWrapper = styled.div`
 const TitleWrapper = styled.div`
 	margin-bottom: 244px;
 	color: ${(props) => props.theme.color.gray.dark};
+
+	@media ${media.tablet} {
+		margin-bottom: 16px;
+		padding-bottom: 16px;
+		border-bottom: 1px solid ${(props) => props.theme.color.gray.light};
+	}
 `;
 const InfoWrapper = styled.div`
 	display: flex;
 	margin-bottom: 140px;
 	color: ${(props) => props.theme.color.gray.dark};
+
+	@media ${media.tablet} {
+		flex-direction: column;
+		margin-bottom: 80px;
+	}
 `;
 const ColInfo = styled.div`
 	width: 50%;
+
+	@media ${media.tablet} {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		margin-bottom: 16px;
+		padding-bottom: 16px;
+		border-bottom: 1px solid ${(props) => props.theme.color.gray.light};
+	}
 `;
 const RowInfo = styled.div`
 	&:not(:last-child) {
 		margin-bottom: 20px;
+	}
+	@media ${media.tablet} {
+		width: 50%;
+		margin-bottom: 16px;
+
+		&:last-child,
+		&:nth-last-child(2) {
+			margin-bottom: 0;
+		}
 	}
 `;
 
 const ColInfoDescript = styled(ColInfo)`
 	font-size: 13px;
 	color: ${(props) => props.theme.color.gray.dark};
+
+	line-height: 1.68;
 
 	a {
 		color: ${(props) => props.theme.color.link};
@@ -53,6 +86,7 @@ const portfolio = () => {
 		query: { id },
 		push
 	} = useRouter();
+	const { isTablet } = useSize();
 
 	useEffect(() => {
 		// Direct link open
@@ -70,7 +104,6 @@ const portfolio = () => {
 		if (nowPortfolio) {
 			// LOADING DONE
 			setNowCategory(nowPortfolio.category.id);
-			console.log(nowPortfolio);
 		}
 	}, [nowPortfolio]);
 
@@ -84,9 +117,11 @@ const portfolio = () => {
 			<ContentsWrapper>
 				<ContainerLayout>
 					<ColWrapper>
-						<ColSidebar>
-							<CategoryWrapper />
-						</ColSidebar>
+						{!isTablet && (
+							<ColSidebar>
+								<CategoryWrapper />
+							</ColSidebar>
+						)}
 
 						{nowPortfolio && (
 							<ColContents>
@@ -124,7 +159,7 @@ const portfolio = () => {
 										{/* area */}
 										<RowInfo>
 											<Paragraph bold={true} text={"참여지역"} />
-											<Paragraph text={nowPortfolio.detail.area.join(", ")} />
+											<Paragraph text={nowPortfolio.detail.area.length > 0 ? nowPortfolio.detail.area.join(", ") : "-"} />
 										</RowInfo>
 										{/* media */}
 										<RowInfo>
