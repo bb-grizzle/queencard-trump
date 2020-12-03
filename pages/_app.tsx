@@ -13,7 +13,7 @@ import { fbAnalytics } from "../Firebase/firebase";
 import AdminProvider from "../Context/AdminProvider";
 
 import "react-quill/dist/quill.snow.css";
-import { scrollToTarget, scrollToTop } from "../util/scroll";
+import { scrollToTop } from "../util/scroll";
 
 interface MyAppProps extends AppProps {}
 

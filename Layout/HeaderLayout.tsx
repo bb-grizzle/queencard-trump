@@ -18,13 +18,13 @@ const HeaderLayout = ({ children }) => {
 	}, [router.pathname]);
 
 	return (
-		<>
+		<div>
 			<Header />
 			<MobileMenu />
 			{isFloating && <FloatingBtn />}
 			<Loading />
 			{children}
-		</>
+		</div>
 	);
 };
 
