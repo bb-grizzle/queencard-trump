@@ -13,7 +13,8 @@ const color = {
 	main: "#45FF7D",
 	placeholder: "#C4C4C4",
 	dim: "white",
-	disable: "#DBDBDB"
+	disable: "#DBDBDB",
+	link: "#3CADFF"
 };
 
 const div = {

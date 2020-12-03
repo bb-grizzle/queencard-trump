@@ -15,11 +15,11 @@ export enum ParagraphType {
 	SM = "sm"
 }
 
-const Text = styled.p<{ bold: boolean; type: ParagraphType; color: string; size: number }>`
+const Text = styled.p<{ bold: boolean; type: ParagraphType; color?: string; size: number }>`
 	font-size: ${(props) => `${props.size ? props.size : props.theme.text.paragraph[props.type]}px`};
 	font-weight: ${(props) => (props.bold ? 700 : 400)};
 	line-height: 1.42;
-	color: ${(props) => props.color};
+	color: ${(props) => (props.color ? props.color : "inherit")};
 
 	> span {
 		display: block;
@@ -27,7 +27,7 @@ const Text = styled.p<{ bold: boolean; type: ParagraphType; color: string; size:
 	}
 `;
 
-const Paragraph: React.FC<ParagraphProps> = ({ text, className, bold = false, type = ParagraphType.MD, color = "black", size }) => {
+const Paragraph: React.FC<ParagraphProps> = ({ text, className, bold = false, type = ParagraphType.MD, color, size }) => {
 	return (
 		<Text className={className} bold={bold} type={type} color={color} size={size}>
 			{Array.isArray(text) ? text.map((t, index) => <span key={index}>{t}</span>) : text}

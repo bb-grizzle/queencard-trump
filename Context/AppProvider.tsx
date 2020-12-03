@@ -3,6 +3,9 @@ import useSize from "../Hook/useSize";
 import { preventScroll, activeScroll } from "../util/preventScroll";
 import { useRouter } from "next/router";
 import { fbAuthListener } from "../Firebase/firebase";
+import usePortfolio from "../Hook/usePortfolio";
+import { PortfolioDataProps } from "../Interface/portfolio";
+import { CategoryDataProps } from "../Interface/category";
 
 interface AppContextProps {
 	globalLoading: boolean;
@@ -12,6 +15,12 @@ interface AppContextProps {
 	isAdmin: boolean;
 	isLoggedIn: boolean;
 	setIsLoggedInt: Dispatch<SetStateAction<boolean | null>>;
+	portfolio: PortfolioDataProps[];
+	category: CategoryDataProps[];
+	nowCategory: string | null;
+	setNowCategory: Dispatch<SetStateAction<string>>;
+	nowPortfolio: PortfolioDataProps;
+	setNowPortfolio: Dispatch<SetStateAction<PortfolioDataProps>>;
 }
 
 export const AppContext = createContext({} as AppContextProps);
@@ -23,6 +32,12 @@ const AppProvider = ({ children }) => {
 	const router = useRouter();
 	const [isAdmin, setIsAdmin] = useState(false);
 	const [isLoggedIn, setIsLoggedInt] = useState(null);
+
+	// category and portfolio
+	const { data: portfolio, category } = usePortfolio();
+	const [nowCategory, setNowCategory] = useState<string>(null);
+
+	const [nowPortfolio, setNowPortfolio] = useState<PortfolioDataProps>();
 
 	useEffect(() => {
 		fbAuthListener(setIsLoggedInt);
@@ -50,7 +65,13 @@ const AppProvider = ({ children }) => {
 		}
 	}, [router]);
 
-	return <AppContext.Provider value={{ globalLoading, setGlobalLoading, isMenuClick, setIsMenuClick, isAdmin, isLoggedIn, setIsLoggedInt }}>{children}</AppContext.Provider>;
+	return (
+		<AppContext.Provider
+			value={{ nowPortfolio, setNowPortfolio, nowCategory, setNowCategory, globalLoading, setGlobalLoading, isMenuClick, setIsMenuClick, isAdmin, isLoggedIn, setIsLoggedInt, portfolio, category }}
+		>
+			{children}
+		</AppContext.Provider>
+	);
 };
 
 export const useLoading = () => {
@@ -84,6 +105,15 @@ export const useIsLoggedIn = () => {
 	};
 
 	return { isLoggedIn, setIsLoggedInt, redirectToLogin };
+};
+
+export const usePortfolioData = () => {
+	const { portfolio, nowPortfolio, setNowPortfolio } = useContext(AppContext);
+	return { portfolio, nowPortfolio, setNowPortfolio };
+};
+export const useCategoryData = () => {
+	const { category, nowCategory, setNowCategory } = useContext(AppContext);
+	return { category, nowCategory, setNowCategory };
 };
 
 export default AppProvider;

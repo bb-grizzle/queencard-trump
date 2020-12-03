@@ -15,42 +15,14 @@ import { useRouter } from "next/router";
 import PortfolioList from "../Component/PortfolioList";
 import useCol from "../Hook/useCol";
 import useElementSize from "../Hook/useElementSize";
+import { PortfolioDataProps } from "../Interface/portfolio";
+import ContentsWrapper from "../Component/ContentsWrapper";
+import CategoryWrapper from "../Component/Category/CategoryWrapper";
+import { usePortfolioData, useCategoryData } from "../Context/AppProvider";
 
 const Cover = styled.div<{ image: string }>`
 	${(props) => props.theme.layout.ratio(34)};
 	${(props) => props.theme.layout.full_image(`${props.image}`)};
-`;
-
-const Contents = styled.div`
-	margin-top: ${(props) => props.theme.size.padding_top_contents.pc};
-`;
-
-const CategoryWrapper = styled.ul`
-	margin-bottom: 16px;
-`;
-
-const CategoryText = styled(Paragraph)`
-	margin-right: 4px;
-`;
-
-const CategoryCount = styled(Numbering)``;
-const CategoryList = styled.li<{ active: boolean | null }>`
-	display: flex;
-	align-items: center;
-	&:not(:last-child) {
-		margin-bottom: 10px;
-	}
-	cursor: pointer;
-	${(props) =>
-		props.active === false &&
-		css`
-			${CategoryText} {
-				color: ${(props) => props.theme.color.disable};
-			}
-			${CategoryCount} {
-				background-color: ${(props) => props.theme.color.disable};
-			}
-		`};
 `;
 
 const PortfolioWrapper = styled.ul`
@@ -59,21 +31,11 @@ const PortfolioWrapper = styled.ul`
 	flex-wrap: wrap;
 `;
 
-const CustomePortfolioList = styled(PortfolioList)<{ active: boolean }>`
-	${(props) =>
-		props.active === false &&
-		css`
-			display: none;
-		`};
-`;
-
 const Portfolio = () => {
-	const { data, category } = usePortfolio();
+	const { portfolio: data, setNowPortfolio } = usePortfolioData();
+	const { category, nowCategory, setNowCategory } = useCategoryData();
 	const { cover } = useCover();
-	const {
-		query: { category: nowCategory },
-		push
-	} = useRouter();
+	const { push } = useRouter();
 	const { col } = useCol({ pc: 3, tablet: 3, mobile: 2 });
 	const { ref, size } = useElementSize();
 
@@ -86,37 +48,21 @@ const Portfolio = () => {
 		}
 	}, [data, cover, category]);
 
-	const handleCategoryClick = (id: string) => {
-		if (nowCategory === id) {
-			push(``);
-		} else {
-			push(`?category=${id}`);
-		}
-	};
-
-	const handleListClick = () => {
-		console.log("handleListClick");
+	const handleListClick = (data: PortfolioDataProps) => {
+		push(`/portfolio/[id]`, `/portfolio/${data.id}`);
+		setNowCategory(data.category.id);
+		setNowPortfolio(data);
 	};
 
 	return (
 		<PageContainer>
 			{cover && <Cover image={cover.url} />}
 
-			<Contents>
+			<ContentsWrapper>
 				<ContainerLayout>
 					<ColWrapper>
 						<ColSidebar>
-							<CategoryWrapper>
-								{category &&
-									category.map((el) => {
-										return (
-											<CategoryList onClick={() => handleCategoryClick(el.id)} key={el.id} active={nowCategory !== undefined ? el.id === nowCategory : null}>
-												<CategoryText text={el.name} type={ParagraphType.LG} color={el.color} />
-												<CategoryCount number={el.count} small={true} color={el.color} />
-											</CategoryList>
-										);
-									})}
-							</CategoryWrapper>
+							<CategoryWrapper />
 						</ColSidebar>
 						<ColContents refElement={ref}>
 							<PortfolioWrapper>
@@ -124,13 +70,12 @@ const Portfolio = () => {
 									data.map((portfolio, index) => {
 										return (
 											<PortfolioList
-												// active={nowCategory === portfolio.category.id || nowCategory !== null}
 												overlay={portfolio.category.id === nowCategory}
 												key={portfolio.id}
 												data={portfolio}
 												col={col}
 												isLast={(index + 1) % col === 0}
-												onClick={handleListClick}
+												onClick={() => handleListClick(portfolio)}
 												parentSize={size}
 											/>
 										);
@@ -139,7 +84,7 @@ const Portfolio = () => {
 						</ColContents>
 					</ColWrapper>
 				</ContainerLayout>
-			</Contents>
+			</ContentsWrapper>
 		</PageContainer>
 	);
 };
