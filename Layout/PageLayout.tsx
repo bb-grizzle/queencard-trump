@@ -2,6 +2,8 @@ import styled from "styled-components";
 import media from "../Styles/media";
 import Footer from "../Component/Footer";
 import useSize from "../Hook/useSize";
+import { useEffect } from "react";
+import { useLoading } from "../Context/AppProvider";
 
 interface PageContainerProps {
 	paddingTop?: boolean;
@@ -19,6 +21,10 @@ const Wrapper = styled.div<{ paddingTop?: boolean }>`
 `;
 const PageContainer: React.FC<PageContainerProps> = ({ children, paddingTop, className }) => {
 	const { isTablet } = useSize();
+	const { setLoading } = useLoading();
+	useEffect(() => {
+		setLoading(true);
+	}, []);
 	return (
 		<Wrapper paddingTop={paddingTop} className={className}>
 			{children}

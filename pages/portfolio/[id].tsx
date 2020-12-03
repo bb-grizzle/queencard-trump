@@ -7,7 +7,7 @@ import CategoryWrapper from "../../Component/Category/CategoryWrapper";
 import ColContents from "../../Component/Col/ColContents";
 import BtnIcon from "../../Component/Btn/BtnIcon";
 import Title from "../../Component/Text/Title";
-import { usePortfolioData, useCategoryData } from "../../Context/AppProvider";
+import { usePortfolioData, useCategoryData, useLoading } from "../../Context/AppProvider";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import styled from "styled-components";
@@ -87,6 +87,7 @@ const portfolio = () => {
 		push
 	} = useRouter();
 	const { isTablet } = useSize();
+	const { setLoading } = useLoading();
 
 	useEffect(() => {
 		// Direct link open
@@ -103,6 +104,7 @@ const portfolio = () => {
 	useEffect(() => {
 		if (nowPortfolio) {
 			// LOADING DONE
+			setLoading(false);
 			setNowCategory(nowPortfolio.category.id);
 		}
 	}, [nowPortfolio]);

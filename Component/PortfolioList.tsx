@@ -71,18 +71,10 @@ const ContentsWrapper = styled.div``;
 const BackgroundImage = styled.div<{ bg: string; active: boolean }>`
 	${(props) => props.theme.layout.full_abs};
 	${(props) => props.theme.layout.full_image(props.bg)};
-	transition: ${(props) => props.theme.transition.default};
-	transition-property: clip-path;
-	transition-delay: 0.5s;
 
-	${(props) =>
-		!props.active
-			? css`
-					clip-path: inset(0% 0% 100% 0%);
-			  `
-			: css`
-					clip-path: inset(0% 0% 0% 0%);
-			  `};
+	opacity: 0;
+	${(props) => props.theme.transition.load(props.active)};
+	background-color: ${(props) => props.theme.color.gray.light};
 `;
 
 const PortfolioList: React.FC<PortfolioListProps> = ({ data, col, isLast, onClick, parentSize, className, overlay }) => {

@@ -13,12 +13,15 @@ import useElementSize from "../Hook/useElementSize";
 import { PortfolioDataProps } from "../Interface/portfolio";
 import ContentsWrapper from "../Component/ContentsWrapper";
 import CategoryWrapper from "../Component/Category/CategoryWrapper";
-import { usePortfolioData, useCategoryData } from "../Context/AppProvider";
+import { usePortfolioData, useCategoryData, useLoading } from "../Context/AppProvider";
+import useImageLoad from "../Hook/useImageLoad";
 
-const Cover = styled.div<{ image: string }>`
+const Cover = styled.div<{ image: string; active: boolean }>`
 	${(props) => props.theme.layout.ratio(34)};
-	${(props) => props.theme.layout.full_image(`${props.image}`)};
+	${(props) => (props.image ? props.theme.layout.full_image(`${props.image}`) : "")};
 	background-attachment: fixed;
+
+	${(props) => props.theme.transition.load(props.active)};
 `;
 
 const PortfolioWrapper = styled.ul`
@@ -34,13 +37,13 @@ const Portfolio = () => {
 	const { push } = useRouter();
 	const { col } = useCol({ pc: 3, tablet: 3, mobile: 2 });
 	const { ref, size } = useElementSize();
+	const { setLoading } = useLoading();
+	const { load, setUrl } = useImageLoad(null);
 
 	useEffect(() => {
 		if (data && cover && category) {
-			// loading done
-			// console.log(data);
-			// console.log(cover);
-			// console.log(category);
+			setLoading(false);
+			setUrl(cover.url);
 		}
 	}, [data, cover, category]);
 
@@ -52,7 +55,7 @@ const Portfolio = () => {
 
 	return (
 		<PageContainer>
-			{cover && <Cover image={cover.url} />}
+			<Cover image={cover ? cover.url : null} active={load} />
 
 			<ContentsWrapper>
 				<ContainerLayout>

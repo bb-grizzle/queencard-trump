@@ -67,7 +67,13 @@ const div = {
 };
 
 const transition = {
-	default: `all 0.5s cubic-bezier(0.7, 0, 0.24, 0.99);`
+	default: `all 0.5s cubic-bezier(0.7, 0, 0.24, 0.99);`,
+	load: (load) => css`
+		transition: all 0.5s cubic-bezier(0.7, 0, 0.24, 0.99);
+		transition-property: opacity;
+		opacity: ${() => (load ? 1 : 0)};
+		transition-delay: 0.5s;
+	`
 };
 
 const layout = {
