@@ -11,3 +11,7 @@ export const activeScroll = () => {
 export const scrollToTarget = (dom: HTMLDivElement | HTMLUListElement, value: number) => {
 	dom.scrollLeft = value;
 };
+
+export const scrollToTop = () => {
+	window.scrollTo(0, 0);
+};

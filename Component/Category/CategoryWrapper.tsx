@@ -5,6 +5,7 @@ import Numbering from "../Numbering";
 import { useEffect } from "react";
 import media from "../../Styles/media";
 import useSize from "../../Hook/useSize";
+import { useRouter } from "next/router";
 
 const Wrapper = styled.ul`
 	margin-bottom: 16px;
@@ -56,7 +57,9 @@ const CategoryList = styled.li<{ active: boolean | null }>`
 const CategoryWrapper = () => {
 	const { category, nowCategory, setNowCategory } = useCategoryData();
 	const { isTablet } = useSize();
+	const { push } = useRouter();
 	const handleCategoryClick = (id: string) => {
+		push("/");
 		if (nowCategory === id) {
 			setNowCategory(null);
 		} else {

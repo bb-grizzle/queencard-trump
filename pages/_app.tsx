@@ -13,11 +13,12 @@ import { fbAnalytics } from "../Firebase/firebase";
 import AdminProvider from "../Context/AdminProvider";
 
 import "react-quill/dist/quill.snow.css";
+import { scrollToTarget, scrollToTop } from "../util/scroll";
 
 interface MyAppProps extends AppProps {}
 
 function MyApp({ Component, pageProps }: MyAppProps) {
-	const { push } = useRouter();
+	const { push, pathname } = useRouter();
 
 	useEffect(() => {
 		const check = async () => {
@@ -28,6 +29,11 @@ function MyApp({ Component, pageProps }: MyAppProps) {
 		};
 		check();
 	}, []);
+
+	useEffect(() => {
+		// Scroll To Top when page change
+		scrollToTop();
+	}, [pathname]);
 
 	useEffect(() => {
 		fbAnalytics();
