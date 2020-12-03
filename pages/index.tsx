@@ -15,6 +15,8 @@ import ContentsWrapper from "../Component/ContentsWrapper";
 import CategoryWrapper from "../Component/Category/CategoryWrapper";
 import { usePortfolioData, useCategoryData, useLoading } from "../Context/AppProvider";
 import useImageLoad from "../Hook/useImageLoad";
+import Paragraph from "../Component/Text/Paragraph";
+import theme from "../Styles/theme";
 
 const Cover = styled.div<{ image: string; active: boolean }>`
 	${(props) => props.theme.layout.ratio(34)};
@@ -65,7 +67,7 @@ const Portfolio = () => {
 						</ColSidebar>
 						<ColContents refElement={ref}>
 							<PortfolioWrapper>
-								{data !== undefined &&
+								{data !== undefined && data.length > 0 ? (
 									data.map((portfolio, index) => {
 										return (
 											<PortfolioList
@@ -78,7 +80,10 @@ const Portfolio = () => {
 												parentSize={size}
 											/>
 										);
-									})}
+									})
+								) : (
+									<Paragraph text={"0건의 관련 프로젝트가 있습니다. "} color={theme.color.gray.dark} />
+								)}
 							</PortfolioWrapper>
 						</ColContents>
 					</ColWrapper>

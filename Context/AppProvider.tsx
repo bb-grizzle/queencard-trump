@@ -21,6 +21,8 @@ interface AppContextProps {
 	setNowCategory: Dispatch<SetStateAction<string>>;
 	nowPortfolio: PortfolioDataProps;
 	setNowPortfolio: Dispatch<SetStateAction<PortfolioDataProps>>;
+	setSearch: Dispatch<SetStateAction<string>>;
+	search: string;
 }
 
 export const AppContext = createContext({} as AppContextProps);
@@ -38,6 +40,9 @@ const AppProvider = ({ children }) => {
 	const [nowCategory, setNowCategory] = useState<string>(null);
 
 	const [nowPortfolio, setNowPortfolio] = useState<PortfolioDataProps>();
+
+	// search
+	const [search, setSearch] = useState<string | null>(null);
 
 	useEffect(() => {
 		fbAuthListener(setIsLoggedInt);
@@ -67,7 +72,23 @@ const AppProvider = ({ children }) => {
 
 	return (
 		<AppContext.Provider
-			value={{ nowPortfolio, setNowPortfolio, nowCategory, setNowCategory, globalLoading, setGlobalLoading, isMenuClick, setIsMenuClick, isAdmin, isLoggedIn, setIsLoggedInt, portfolio, category }}
+			value={{
+				nowPortfolio,
+				setNowPortfolio,
+				nowCategory,
+				setNowCategory,
+				globalLoading,
+				setGlobalLoading,
+				isMenuClick,
+				setIsMenuClick,
+				isAdmin,
+				isLoggedIn,
+				setIsLoggedInt,
+				portfolio,
+				category,
+				setSearch,
+				search
+			}}
 		>
 			{children}
 		</AppContext.Provider>
@@ -108,12 +129,19 @@ export const useIsLoggedIn = () => {
 };
 
 export const usePortfolioData = () => {
-	const { portfolio, nowPortfolio, setNowPortfolio } = useContext(AppContext);
-	return { portfolio, nowPortfolio, setNowPortfolio };
+	const { portfolio, nowPortfolio, setNowPortfolio, search } = useContext(AppContext);
+
+	return { portfolio: !!search ? portfolio.filter((el) => el.title.includes(search) || el.subTitle.includes(search)) : portfolio, nowPortfolio, setNowPortfolio };
 };
+
 export const useCategoryData = () => {
 	const { category, nowCategory, setNowCategory } = useContext(AppContext);
 	return { category, nowCategory, setNowCategory };
+};
+
+export const useSearchValue = () => {
+	const { setSearch } = useContext(AppContext);
+	return { setSearch };
 };
 
 export default AppProvider;

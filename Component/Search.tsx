@@ -20,27 +20,13 @@ const Input = styled(InputDefault)`
 	}
 `;
 
-const CustomeBtnIcon = styled(BtnIcon)<{ active }>`
-	@media ${media.tablet} {
-		margin-left: ${(props) => props.active && "12px"};
-	}
-`;
+const CustomeBtnIcon = styled(BtnIcon)``;
 
-const BtnClose = styled(CustomeBtnIcon)<{ active }>`
-	display: ${(props) => (props.active ? `block` : `none`)};
-`;
-
-const Search = () => {
-	const searchInput = useInput("");
-
-	const handleSearch = () => {
-		console.log("searchPortfolio");
-	};
-
+const Search = ({ searchInput, onSearch, inputClick, onBlur }) => {
 	return (
 		<Wrapper>
-			<Input {...searchInput} placeholder="" onEnter={handleSearch} />
-			<CustomeBtnIcon icon={"search"} onClick={handleSearch} />
+			<Input {...searchInput} placeholder="" onEnter={onSearch} onFocus={inputClick} onBlur={onBlur} />
+			<CustomeBtnIcon icon={"search"} onClick={onSearch} />
 		</Wrapper>
 	);
 };
