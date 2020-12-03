@@ -21,7 +21,7 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 400;
     overflow: hidden;
 
-    border: 1px solid red;
+    /* border: 1px solid red; */
   }
 
   a{

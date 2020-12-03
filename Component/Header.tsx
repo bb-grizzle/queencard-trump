@@ -16,7 +16,7 @@ const Wrapper = styled.header`
 	position: fixed;
 	left: 0;
 	top: 0;
-	opacity: 0;
+	/* opacity: 0; */
 	z-index: ${(props) => props.theme.zIndex.header};
 	background-color: ${(props) => props.theme.color.white};
 
