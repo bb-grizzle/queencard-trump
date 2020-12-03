@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Title from "./Text/Title";
 import Paragraph from "./Text/Paragraph";
 import Numbering from "./Numbering";
-
+import ImageSlider from "./ImageSlider";
 interface DetailListProps {
 	number?: number;
 	title: string;
@@ -29,10 +29,6 @@ const ListNumbering = styled(Numbering)`
 	margin-bottom: 10px;
 `;
 
-const DetailImage = styled.div<{ image: string }>`
-	${(props) => props.theme.layout.ratio(54)};
-	${(props) => props.theme.layout.full_image(props.image)};
-`;
 const DetailList: React.FC<DetailListProps> = ({ title, image, text, number }) => {
 	return (
 		<Wrapper>
@@ -48,7 +44,7 @@ const DetailList: React.FC<DetailListProps> = ({ title, image, text, number }) =
 				</TextWrapper>
 			)}
 
-			<DetailImage image={image.url} />
+			<ImageSlider images={image} />
 		</Wrapper>
 	);
 };

@@ -19,6 +19,7 @@ const GlobalStyles = createGlobalStyle`
     word-break: keep-all;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
+    overflow: hidden;
   }
 
   a{

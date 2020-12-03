@@ -13,7 +13,9 @@ const Data_footer = [
 	"",
 	"매주 화요일 10:00-12:00는 회사 전체회의로 전화응대가 어려운 점 양해바랍니다."
 ];
-const Wrapper = styled.footer``;
+const Wrapper = styled.footer`
+	margin-top: 120px;
+`;
 
 const Text = styled(Paragraph)`
 	line-height: 1.46;
