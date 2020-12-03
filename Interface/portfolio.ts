@@ -9,7 +9,7 @@ export interface PortfolioProps {
 }
 export interface ContentsProps {
 	title: string;
-	image: FileProps | null;
+	image: FileProps[];
 	text?: string;
 }
 export interface PortfolioDataProps extends PortfolioProps {

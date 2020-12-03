@@ -30,6 +30,21 @@ const CoverInputWrapper = styled.div`
 	margin-bottom: 64px;
 `;
 
+const CustomeInputFile = styled(InputFile)<{ image?: string }>`
+	width: 50%;
+	${(props) => props.theme.layout.ratio(34)};
+	position: relative;
+	padding: 0;
+	${(props) => props.theme.layout.full_image(props.image)};
+
+	label {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border-color: transparent;
+	}
+`;
+
 const category = () => {
 	useRidrectToSignin();
 	const formRef = useRef<HTMLFormElement>();
@@ -119,7 +134,7 @@ const category = () => {
 			<ContainerLayout>
 				<AdminTitleSection title="홈" />
 				<CoverInputWrapper>
-					<InputFile {...coverInput} />
+					<CustomeInputFile {...coverInput} image={cover && cover.url} />
 					<BtnIcon icon={"check"} onClick={handleCoverSaveClick} disable={!coverInput.file} />
 				</CoverInputWrapper>
 

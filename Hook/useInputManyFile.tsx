@@ -3,6 +3,7 @@ import checkFile from "../util/filecheck";
 
 const useInputManyFile = () => {
 	const [files, setFiles] = useState([]);
+	const [deleteFiles, setDeleteFiles] = useState();
 
 	const onChange = (e: any) => {
 		if (!checkFile(e.target)) return;
@@ -15,12 +16,16 @@ const useInputManyFile = () => {
 			...n,
 			{
 				file,
-				url
+				url,
+				fileName: file.name
 			}
 		]);
 	};
+	const init = () => {
+		setFiles([]);
+	};
 
-	return { files, onChange, setFiles };
+	return { files, onChange, setFiles, init, deleteFiles, setDeleteFiles };
 };
 
 export default useInputManyFile;

@@ -37,12 +37,17 @@ const usePortfolio = () => {
 	}, [resData, categoryObj]);
 
 	useEffect(() => {
+		// SET CATEGORY COUNT
 		if (data && categoryObj) {
 			const categoryCount_temp = {};
+
 			data.forEach((el) => {
-				const id = el.category.id;
-				categoryCount_temp[id] = categoryCount_temp[id] ? categoryCount_temp[id] + 1 : 1;
+				if (el.category && el.category.id) {
+					const id = el.category.id;
+					categoryCount_temp[id] = categoryCount_temp[id] ? categoryCount_temp[id] + 1 : 1;
+				}
 			});
+
 			setCateogoryCount(categoryCount_temp);
 		}
 	}, [data, categoryObj]);
@@ -78,6 +83,7 @@ const usePortfolio = () => {
 		if (thumbnailInput.file) {
 			const thumbnail = await fbUploadStorage(COL, id, thumbnailInput.file);
 			const contents = await cont.update(`${COL}/${id}`);
+
 			updateData = { ...data, thumbnail, contents };
 			await fbUpdateData(COL, id, { ...data, thumbnail, contents });
 		} else {
@@ -98,8 +104,6 @@ const usePortfolio = () => {
 			await fbDeleteData(COL, nowData.id);
 			await checkCategory(nowData.category.id, undefined);
 			await cont.deleteContents();
-
-			// location.reload();
 
 			// state
 			setResData((prev) => prev.filter((el) => el.id !== nowData.id));

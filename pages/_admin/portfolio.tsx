@@ -168,6 +168,10 @@ const portfolio = () => {
 	}, [detail, titleInput.value, subTitleInput.value, categoryInput.value, contentsInput.value]);
 
 	const handleSubmit = async () => {
+		// const test = await contentsInput.upload("portfolio/test");
+		// console.log(test);
+		// return;
+
 		// 기본 정보 확인
 		if (!titleInput.value || !subTitleInput.value || !thumbnailInput.fileName) {
 			formCheck();

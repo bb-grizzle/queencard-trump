@@ -6,6 +6,7 @@ import Paragraph from "../Text/Paragraph";
 import useCol from "../../Hook/useCol";
 import media from "../../Styles/media";
 import TextArea from "./TextArea";
+import InputManyFile from "./InputManyFile";
 const Wrapper = styled.div``;
 
 const AddWrapper = styled.div``;
@@ -15,6 +16,8 @@ const InputTitle = styled(InputDefault)`
 `;
 const InputText = styled(TextArea)`
 	${(props) => props.theme.style.input};
+	margin-bottom: 0;
+	padding-bottom: 0;
 `;
 
 const InputImage = styled(InputFile)`
@@ -33,7 +36,8 @@ const ContentsList = styled.li<{ col: number; isLast: boolean }>`
 	border-radius: 8px;
 	position: relative;
 
-	width: ${(props) => `calc((100% - ${props.theme.size.gap.contents * (props.col - 1)}px) / ${props.col})`};
+	/* width: ${(props) => `calc((100% - ${props.theme.size.gap.contents * (props.col - 1)}px) / ${props.col})`}; */
+	width: 100%;
 	margin-right: ${(props) =>
 		props.isLast
 			? 0
@@ -43,6 +47,7 @@ const ContentsList = styled.li<{ col: number; isLast: boolean }>`
 	margin-bottom: ${(props) => `${props.theme.size.gap.contents}px`};
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	padding: 12px;
 	cursor: pointer;
 	@media ${media.hover} {
@@ -53,7 +58,12 @@ const ContentsList = styled.li<{ col: number; isLast: boolean }>`
 `;
 const BtnDelete = styled(BtnText)``;
 
-const Thumbnail = styled.div<{ image: string }>`
+const ImageWrapper = styled.ul`
+	margin-right: 8px;
+	display: flex;
+`;
+
+const Thumbnail = styled.li<{ image: string }>`
 	${(props) => props.theme.layout.ratio(100)};
 	width: 56px;
 	margin-right: 8px;
@@ -71,19 +81,10 @@ const AddBottomWrapper = styled.div`
 	align-items: center;
 `;
 
-const ListTextWrapper = styled.div`
-	border: 1px solid red;
-`;
-
-const ListText = styled(Paragraph)`
-	/* text-overflow: ellipsis; */
-	/* white-space: nowrap; */
-	/* overflow: hidden; */
-`;
-
 const ListContentsWrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	width: 100%;
 	flex-grow: 1;
 `;
@@ -93,11 +94,17 @@ const InputContents = ({ value, onAdd, onDelete, title, text, image, isText, onL
 	return (
 		<Wrapper>
 			<AddWrapper>
-				<InputTitle {...title} placeholder={"제목"} />
-				{isText && <InputText {...text} placeholder={"내용"} />}
+				{isText ? (
+					<>
+						<InputText {...title} placeholder={"제목"} />
+						<InputText {...text} placeholder={"내용"} />
+					</>
+				) : (
+					<InputTitle {...title} placeholder={"제목"} />
+				)}
 				<AddBottomWrapper>
-					<InputImage {...image} />
-					<BtnAdd text={nowContents ? "수정" : "추가"} active={!!title.value && !!image.fileName} onClick={nowContents ? onEdit : onAdd} />
+					<InputManyFile {...image} />
+					<BtnAdd text={nowContents ? "수정" : "추가"} active={!!title.value && image.files.length > 0} onClick={nowContents ? onEdit : onAdd} />
 				</AddBottomWrapper>
 			</AddWrapper>
 
@@ -106,20 +113,23 @@ const InputContents = ({ value, onAdd, onDelete, title, text, image, isText, onL
 					value.map((el, index) => {
 						return (
 							<ContentsList key={index} col={col} isLast={(index + 1) % col === 0} onClick={() => onListClick({ ...el, index })}>
-								<Thumbnail image={el.image.url} />
-
 								<ListContentsWrapper>
 									<Paragraph bold={true} text={`${el.title}`} />
-
-									<BtnDelete
-										text={"삭제"}
-										onClick={(e: any) => {
-											e.preventDefault();
-											e.stopPropagation();
-											onDelete(el, index);
-										}}
-									/>
+									<ImageWrapper>
+										{el.image.map((file, index) => {
+											return <Thumbnail key={index} image={file.url} />;
+										})}
+									</ImageWrapper>
 								</ListContentsWrapper>
+
+								<BtnDelete
+									text={"삭제"}
+									onClick={(e: any) => {
+										e.preventDefault();
+										e.stopPropagation();
+										onDelete(el, index);
+									}}
+								/>
 							</ContentsList>
 						);
 					})}
