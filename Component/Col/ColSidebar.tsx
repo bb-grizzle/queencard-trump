@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Paragraph, { ParagraphType } from "../Text/Paragraph";
 import Search from "../Search";
 import Footer from "../Footer";
+import useSize from "../../Hook/useSize";
+import media from "../../Styles/media";
 
 const ColWrapper = styled(ColDefault)`
 	position: relative;
@@ -20,17 +22,31 @@ const ColTitle = styled(Paragraph)`
 const CustomFooter = styled(Footer)``;
 const Row = styled.div``;
 
+const SearchRow = styled(Row)`
+	display: flex;
+	flex-direction: column;
+	@media ${media.tablet} {
+		flex-direction: column-reverse;
+		/* align-items: center; */
+		margin-bottom: 16px;
+	}
+`;
+
 const ColSidebar: React.FC = ({ children }) => {
+	const { isTablet } = useSize();
 	return (
-		<ColWrapper col={25}>
-			<Row>
-				<ColTitle type={ParagraphType.SM} text={"School"} />
+		<ColWrapper col={!isTablet ? 25 : 100}>
+			<SearchRow>
+				{!isTablet && <ColTitle type={ParagraphType.SM} text={"School"} />}
 				{children}
 				<Search />
-			</Row>
-			<Row>
-				<CustomFooter />
-			</Row>
+			</SearchRow>
+
+			{!isTablet && (
+				<Row>
+					<CustomFooter />
+				</Row>
+			)}
 		</ColWrapper>
 	);
 };

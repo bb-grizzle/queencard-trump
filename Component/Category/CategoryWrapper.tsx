@@ -3,20 +3,36 @@ import { useCategoryData } from "../../Context/AppProvider";
 import Paragraph, { ParagraphType } from "../Text/Paragraph";
 import Numbering from "../Numbering";
 import { useEffect } from "react";
+import media from "../../Styles/media";
+import useSize from "../../Hook/useSize";
 
 const Wrapper = styled.ul`
 	margin-bottom: 16px;
+
+	@media ${media.tablet} {
+		display: flex;
+		align-items: center;
+		padding: 16px 0;
+		flex-wrap: wrap;
+		${(props) => props.theme.layout.hide_scroll};
+		margin-bottom: 0;
+	}
 `;
 
 const CategoryText = styled(Paragraph)`
 	margin-right: 4px;
 `;
 
-const CategoryCount = styled(Numbering)``;
+const CategoryCount = styled(Numbering)`
+	flex-shrink: 0;
+`;
 
 const CategoryList = styled.li<{ active: boolean | null }>`
 	display: flex;
 	align-items: center;
+	padding-right: 24px;
+	flex-shrink: 0;
+
 	&:not(:last-child) {
 		margin-bottom: 10px;
 	}
@@ -31,15 +47,15 @@ const CategoryList = styled.li<{ active: boolean | null }>`
 				background-color: ${(props) => props.theme.color.disable};
 			}
 		`};
+
+	@media ${media.tablet} {
+		padding-right: 16px;
+	}
 `;
 
 const CategoryWrapper = () => {
 	const { category, nowCategory, setNowCategory } = useCategoryData();
-
-	useEffect(() => {
-		console.log("nowCategory : ", nowCategory);
-	}, [nowCategory]);
-
+	const { isTablet } = useSize();
 	const handleCategoryClick = (id: string) => {
 		if (nowCategory === id) {
 			setNowCategory(null);
@@ -54,7 +70,7 @@ const CategoryWrapper = () => {
 				category.map((el) => {
 					return (
 						<CategoryList onClick={() => handleCategoryClick(el.id)} key={el.id} active={nowCategory !== null ? el.id === nowCategory : null}>
-							<CategoryText text={el.name} type={ParagraphType.LG} color={el.color} />
+							<CategoryText text={el.name} type={!isTablet ? ParagraphType.LG : ParagraphType.MD} color={el.color} />
 							<CategoryCount number={el.count} small={true} color={el.color} />
 						</CategoryList>
 					);

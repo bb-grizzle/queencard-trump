@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import media from "../../Styles/media";
 
 interface ParagraphProps {
 	className?: string;
@@ -21,9 +22,13 @@ const Text = styled.p<{ bold: boolean; type: ParagraphType; color?: string; size
 	line-height: 1.42;
 	color: ${(props) => (props.color ? props.color : "inherit")};
 
+	@media ${media.tablet} {
+		font-size: ${(props) => `${props.size ? props.size : props.theme.text.paragraph[`${props.type}_tablet`]}px`};
+	}
+
 	> span {
 		display: block;
-		min-height: ${(props) => `${props.theme.text.paragraph[props.type] * 1.42}px`};
+		min-height: ${(props) => `${props.size ? props.size * 1.42 : props.theme.text.paragraph[props.type] * 1.42}px`};
 	}
 `;
 

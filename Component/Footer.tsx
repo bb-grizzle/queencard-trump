@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import Paragraph from "./Text/Paragraph";
+import ContainerLayout from "../Layout/ContainerLayout";
+import useSize from "../Hook/useSize";
+import media from "../Styles/media";
 interface FooterProps {
 	className?: string;
 }
@@ -15,6 +18,11 @@ const Data_footer = [
 ];
 const Wrapper = styled.footer`
 	margin-top: 120px;
+	color: ${(props) => props.theme.color.gray.dark};
+
+	@media ${media.tablet} {
+		margin-top: 64px;
+	}
 `;
 
 const Text = styled(Paragraph)`
@@ -24,9 +32,16 @@ const Text = styled(Paragraph)`
 	}
 `;
 const Footer: React.FC<FooterProps> = ({ className }) => {
+	const { isTablet } = useSize();
 	return (
 		<Wrapper className={className}>
-			<Text text={Data_footer} size={13} />
+			{isTablet ? (
+				<ContainerLayout>
+					<Text text={Data_footer} size={12} />
+				</ContainerLayout>
+			) : (
+				<Text text={Data_footer} size={13} />
+			)}
 		</Wrapper>
 	);
 };

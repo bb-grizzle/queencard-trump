@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import media from "../Styles/media";
+import Footer from "../Component/Footer";
+import useSize from "../Hook/useSize";
 
 interface PageContainerProps {
 	paddingTop?: boolean;
@@ -16,9 +18,12 @@ const Wrapper = styled.div<{ paddingTop?: boolean }>`
 	min-height: ${(props) => props.theme.layout.full_height};
 `;
 const PageContainer: React.FC<PageContainerProps> = ({ children, paddingTop, className }) => {
+	const { isTablet } = useSize();
 	return (
 		<Wrapper paddingTop={paddingTop} className={className}>
 			{children}
+
+			{isTablet && <Footer />}
 		</Wrapper>
 	);
 };

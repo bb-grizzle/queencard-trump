@@ -14,7 +14,7 @@ const Wrapper = styled.div<{ small: boolean }>`
 
 	@media ${media.tablet} {
 		max-width: initial;
-		width: ${(props) => ` calc(100% - ${props.theme.size.offset.tablet}px);`};
+		width: ${(props) => ` calc(100% - ${props.theme.size.offset.tablet * 2}px);`};
 	}
 `;
 

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import media from "../../Styles/media";
 
 interface TitleProps {
 	title: string;
@@ -19,6 +20,9 @@ const Text = styled.h3<{ type: TitleType; isRegular: boolean; color?: string }>`
 	line-height: 1.42;
 
 	color: ${(props) => (props.color ? props.color : "inherit")};
+	@media ${media.tablet} {
+		font-size: ${(props) => `${props.theme.text.title[`${props.type}_tablet`]}px`};
+	}
 `;
 
 const Title: React.FC<TitleProps> = ({ title, type = TitleType.LG, className, isRegular = false, color }) => {

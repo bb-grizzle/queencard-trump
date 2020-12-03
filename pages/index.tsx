@@ -1,16 +1,11 @@
 import PageContainer from "../Layout/PageLayout";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import ContainerLayout from "../Layout/ContainerLayout";
-import usePortfolio from "../Hook/usePortfolio";
 import useCover from "../Hook/useCover";
-import useEditor from "../Hook/useEditor";
 import { useEffect } from "react";
-import ColDefault from "../Component/Col/ColDefault";
 import ColWrapper from "../Component/Col/ColWrapper";
 import ColSidebar from "../Component/Col/ColSidebar";
 import ColContents from "../Component/Col/ColContents";
-import Numbering from "../Component/Numbering";
-import Paragraph, { ParagraphType } from "../Component/Text/Paragraph";
 import { useRouter } from "next/router";
 import PortfolioList from "../Component/PortfolioList";
 import useCol from "../Hook/useCol";
@@ -23,6 +18,7 @@ import { usePortfolioData, useCategoryData } from "../Context/AppProvider";
 const Cover = styled.div<{ image: string }>`
 	${(props) => props.theme.layout.ratio(34)};
 	${(props) => props.theme.layout.full_image(`${props.image}`)};
+	background-attachment: fixed;
 `;
 
 const PortfolioWrapper = styled.ul`
