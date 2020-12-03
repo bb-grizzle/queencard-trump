@@ -21,7 +21,6 @@ import theme from "../Styles/theme";
 const Cover = styled.div<{ image: string; active: boolean }>`
 	${(props) => props.theme.layout.ratio(34)};
 	${(props) => (props.image ? props.theme.layout.full_image(`${props.image}`) : "")};
-	background-attachment: fixed;
 
 	${(props) => props.theme.transition.load(props.active)};
 `;
