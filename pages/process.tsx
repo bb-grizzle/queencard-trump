@@ -11,10 +11,10 @@ import { useLoading } from "../Context/AppProvider";
 import SectionWrapper from "../Component/SectionWrapper";
 import styled from "styled-components";
 import { DATA_PROCESS } from "../Data/process";
-import ProcessList from "../Component/process/ProcessList";
 import media from "../Styles/media";
 import ImageSlider from "../Component/ImageSlider";
 import Paragraph from "../Component/Text/Paragraph";
+import ProcessList from "../Component/Process/ProcessList";
 
 const ProcessWrapper = styled.ul`
 	margin-bottom: 110px;
