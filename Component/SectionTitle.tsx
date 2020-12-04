@@ -12,7 +12,12 @@ interface SectionTitleProps {
 
 const TitleWrapper = styled.div`
 	color: ${(props) => props.theme.color.gray.dark};
+
+	margin-bottom: 244px;
+
 	@media ${media.tablet} {
+		padding-bottom: 16px;
+		margin-bottom: 40px;
 		border-bottom: 1px solid ${(props) => props.theme.color.gray.light};
 	}
 `;

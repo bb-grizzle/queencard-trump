@@ -23,12 +23,17 @@ const TextWrapper = styled.div`
 	max-width: 370px;
 
 	@media ${media.tablet} {
-		margin-bottom: 16px;
+		margin-bottom: 32px;
+		max-width: 100%;
 	}
 `;
 
 const TitleCustome = styled(Title)<{ margin?: number }>`
 	margin-bottom: ${(props) => (props.margin ? `${props.margin}px` : 0)};
+
+	@media ${media.tablet} {
+		margin-bottom: 12px;
+	}
 `;
 
 const ListNumbering = styled(Numbering)`

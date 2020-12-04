@@ -8,29 +8,23 @@ interface PageTitleWrapperProps {
 
 	title: string;
 	subTitle?: string;
+	className?: string;
 }
 
 const BtnWrapper = styled.div`
 	margin-bottom: 32px;
 `;
 
-const SectionTitleCustome = styled(SectionTitle)`
-	margin-bottom: 244px;
+const SectionTitleCustome = styled(SectionTitle)``;
 
-	@media ${media.tablet} {
-		margin-bottom: 16px;
-		padding-bottom: 16px;
-	}
-`;
-
-const PageTitleWrapper: React.FC<PageTitleWrapperProps> = ({ handleBackClick, title, subTitle }) => {
+const PageTitleWrapper: React.FC<PageTitleWrapperProps> = ({ handleBackClick, title, subTitle, className }) => {
 	return (
 		<>
 			<BtnWrapper>
 				<BtnIcon icon={"arrow_left"} onClick={handleBackClick} />
 			</BtnWrapper>
 
-			<SectionTitleCustome title={title} subTitle={subTitle} />
+			<SectionTitleCustome title={title} subTitle={subTitle} className={className} />
 		</>
 	);
 };

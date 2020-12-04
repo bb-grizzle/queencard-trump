@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import SectionTitle from "./SectionTitle";
+import media from "../Styles/media";
 
 interface SectionWrapperProps {
 	title: string;
@@ -9,16 +10,15 @@ interface SectionWrapperProps {
 }
 const Wrapper = styled.div`
 	padding-bottom: 140px;
-`;
-
-const Title = styled(SectionTitle)`
-	margin-bottom: 120px;
+	@media ${media.tablet} {
+		padding-bottom: 64px;
+	}
 `;
 
 const SectionWrapper: React.FC<SectionWrapperProps> = ({ title, subTitle, className, children, text }) => {
 	return (
 		<Wrapper className={className}>
-			<Title title={title} subTitle={subTitle} text={text} />
+			<SectionTitle title={title} subTitle={subTitle} text={text} />
 			{children}
 		</Wrapper>
 	);
