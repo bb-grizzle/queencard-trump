@@ -71,7 +71,7 @@ const Process = () => {
 							</ProcessWrapper>
 
 							{/* Core Value */}
-							<SectionWrapper title={DATA_PROCESS.contents.title} subTitle={DATA_PROCESS.contents.subTitle}>
+							<SectionWrapper title={DATA_PROCESS.contents.title} subTitle={DATA_PROCESS.contents.subTitle} gap={38} isLast={true}>
 								<ImageSlider images={DATA_PROCESS.contents.image} />
 								<DescritWrapper>
 									<Descrit>

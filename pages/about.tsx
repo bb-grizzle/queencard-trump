@@ -228,7 +228,7 @@ const index = () => {
 								</SectionWrapper>
 
 								{/* CONTENTS */}
-								<SectionWrapper title={data.title.split("\n")[0]} subTitle={data.title.split("\n")[1]}>
+								<SectionWrapper title={data.title.split("\n")[0]} subTitle={data.title.split("\n")[1]} isLast={true}>
 									{data.contents.map((el, index) => {
 										return <DetailList key={index} {...el} image={el.image} number={index + 1} />;
 									})}
