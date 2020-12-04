@@ -31,19 +31,13 @@ const ContentsWrapper = styled.ul`
 	flex-wrap: wrap;
 	margin-top: 32px;
 `;
-const ContentsList = styled.li<{ col: number; isLast: boolean }>`
+const ContentsList = styled.li`
 	border: 1px solid ${(props) => props.theme.color.gray.default};
 	border-radius: 8px;
 	position: relative;
 
-	/* width: ${(props) => `calc((100% - ${props.theme.size.gap.contents * (props.col - 1)}px) / ${props.col})`}; */
 	width: 100%;
-	margin-right: ${(props) =>
-		props.isLast
-			? 0
-			: css`
-					${(props) => `${props.theme.size.gap.contents}px`};
-			  `};
+
 	margin-bottom: ${(props) => `${props.theme.size.gap.contents}px`};
 	display: flex;
 	align-items: center;
@@ -90,7 +84,6 @@ const ListContentsWrapper = styled.div`
 `;
 
 const InputContents = ({ value, onAdd, onDelete, title, text, image, isText, onListClick, nowContents, onEdit }) => {
-	const { col } = useCol({ pc: 3, tablet: 2 });
 	return (
 		<Wrapper>
 			<AddWrapper>
@@ -111,14 +104,17 @@ const InputContents = ({ value, onAdd, onDelete, title, text, image, isText, onL
 			<ContentsWrapper>
 				{value &&
 					value.map((el, index) => {
+						console.log(el);
 						return (
-							<ContentsList key={index} col={col} isLast={(index + 1) % col === 0} onClick={() => onListClick({ ...el, index })}>
+							<ContentsList key={index} onClick={() => onListClick({ ...el, index })}>
 								<ListContentsWrapper>
 									<Paragraph bold={true} text={`${el.title}`} />
+
 									<ImageWrapper>
-										{el.image.map((file, index) => {
-											return <Thumbnail key={index} image={file.url} />;
-										})}
+										{el.image &&
+											el.image.map((file, index) => {
+												return <Thumbnail key={index} image={file.url} />;
+											})}
 									</ImageWrapper>
 								</ListContentsWrapper>
 

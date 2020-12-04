@@ -19,7 +19,7 @@ export enum ParagraphType {
 const Text = styled.p<{ bold: boolean; type: ParagraphType; color?: string; size: number }>`
 	font-size: ${(props) => `${props.size ? props.size : props.theme.text.paragraph[props.type]}px`};
 	font-weight: ${(props) => (props.bold ? 700 : 400)};
-	line-height: 1.42;
+	line-height: 1.46;
 	color: ${(props) => (props.color ? props.color : "inherit")};
 
 	@media ${media.tablet} {

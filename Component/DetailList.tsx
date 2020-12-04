@@ -20,6 +20,7 @@ const Wrapper = styled.li`
 const TextWrapper = styled.div`
 	margin-bottom: 32px;
 	color: ${(props) => props.theme.color.gray.dark};
+	max-width: 370px;
 
 	@media ${media.tablet} {
 		margin-bottom: 16px;
