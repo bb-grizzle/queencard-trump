@@ -18,12 +18,6 @@ import BackgroundImage from "../Component/BackgroundImage";
 import DetailList from "../Component/DetailList";
 import media from "../Styles/media";
 
-// PageTitle
-const PageTitle = styled(PageTitleWrapper)`
-	@media ${media.desktop} {
-		margin-bottom: 64px;
-	}
-`;
 // VISION
 const VisionSectionWrapper = styled.div`
 	display: flex;
@@ -196,7 +190,7 @@ const index = () => {
 
 						{data && (
 							<ColContents>
-								<PageTitle handleBackClick={handleBackClick} title={"ABOUT AWESOME"} subTitle={"어썸스쿨이 그리는 세상 "} />
+								<PageTitleWrapper handleBackClick={handleBackClick} title={"ABOUT AWESOME"} subTitle={"어썸스쿨이 그리는 세상 "} />
 								{/* VISION & MISSION */}
 								<VisionSectionWrapper>
 									{DATA_ABOUT.vmision.map((el, index) => {

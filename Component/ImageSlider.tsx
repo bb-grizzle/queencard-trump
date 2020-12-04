@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import { FileProps } from "../Interface/portfolio";
 import BtnIcon from "./Btn/BtnIcon";
 import useSliderCount from "../Hook/useSliderCount";
 import media from "../Styles/media";
 
 interface ImageSliderProps {
-	images: FileProps[];
+	images: string[];
 }
 const Wrapper = styled.div`
 	${(props) => props.theme.layout.ratio(54)};
@@ -60,7 +59,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
 		<Wrapper>
 			<Slider ref={slider}>
 				{images.map((el, index) => {
-					return <List key={index} image={el.url} />;
+					return <List key={index} image={el} />;
 				})}
 			</Slider>
 			{images.length > 1 && (

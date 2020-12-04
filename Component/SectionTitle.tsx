@@ -7,12 +7,11 @@ interface SectionTitleProps {
 	title: string;
 	subTitle?: string;
 	className?: string;
-	text?: string;
+	text?: string | string[];
 }
 
 const TitleWrapper = styled.div`
 	color: ${(props) => props.theme.color.gray.dark};
-
 	margin-bottom: 244px;
 
 	@media ${media.tablet} {
@@ -22,12 +21,18 @@ const TitleWrapper = styled.div`
 	}
 `;
 
+const Text = styled(Paragraph)`
+	margin-top: 32px;
+	@media ${media.tablet} {
+		margin-top: 16px;
+	}
+`;
 const SectionTitle: React.FC<SectionTitleProps> = ({ title, subTitle, className, text }) => {
 	return (
 		<TitleWrapper className={className}>
 			<Title title={title} isRegular={true} />
 			{subTitle && <Title title={subTitle} />}
-			{text && <Paragraph text={text} />}
+			{text && <Text text={text} />}
 		</TitleWrapper>
 	);
 };

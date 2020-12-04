@@ -4,11 +4,12 @@ import Paragraph from "./Text/Paragraph";
 import Numbering from "./Numbering";
 import ImageSlider from "./ImageSlider";
 import media from "../Styles/media";
+import { FileProps } from "../Interface/portfolio";
 interface DetailListProps {
 	number?: number;
 	title: string;
 	text?: string;
-	image: any[] | any;
+	image: FileProps[];
 }
 
 const Wrapper = styled.li`
@@ -41,12 +42,13 @@ const ListNumbering = styled(Numbering)`
 `;
 
 const DetailList: React.FC<DetailListProps> = ({ title, image, text, number }) => {
+	console.log(image);
 	return (
 		<Wrapper>
 			{!!text ? (
 				<TextWrapper>
 					<ListNumbering number={number} />
-					<TitleCustome title={title} isRegular={true} margin={26} />
+					<TitleCustome title={title.split("\n")} isRegular={true} margin={26} />
 					<Paragraph text={text} />
 				</TextWrapper>
 			) : (
@@ -55,7 +57,7 @@ const DetailList: React.FC<DetailListProps> = ({ title, image, text, number }) =
 				</TextWrapper>
 			)}
 
-			<ImageSlider images={image} />
+			<ImageSlider images={image.map((el) => el.url)} />
 		</Wrapper>
 	);
 };
