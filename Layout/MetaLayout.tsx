@@ -30,6 +30,7 @@ const HeadComponent: React.FC = ({ children }) => {
 				<meta property="og:image" content={`${headData.url}thumbnail.png`} />
 				<meta property="og:type" content="website" />
 
+				<link rel="manifest" href="manifest.json" />
 				<link rel="apple-touch-icon" href={`${headData.url}forMobile.png`}></link>
 				<link rel="shortcut icon" href={`${headData.url}favicon.ico`}></link>
 			</Head>
