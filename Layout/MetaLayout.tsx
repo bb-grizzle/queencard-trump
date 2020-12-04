@@ -14,7 +14,15 @@ const HeadComponent: React.FC = ({ children }) => {
 				<meta name="description" content={headData.description} />
 				<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet"></link>
 
-				<meta name="viewport" content="height=device-height width=device-width initial-scale=1.0 minimum-scale=1.0 maximum-scale=1.0 user-scalable=no"></meta>
+				<meta
+					name="viewport"
+					content="height=device-height, 
+				width=device-width, 
+				initial-scale=1.0, 
+				minimum-scale=1.0, 
+				maximum-scale=1.0, 
+				user-scalable=no"
+				></meta>
 				<meta property="og:title" content={headData.title} />
 				<meta property="og:site_name" content={headData.title} />
 				<meta property="og:url" content={headData.url} />

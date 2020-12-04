@@ -23,16 +23,23 @@ const ColTitle = styled(Paragraph)`
 `;
 
 const CustomFooter = styled(Footer)``;
+
 const Row = styled.div``;
 
 const SearchRow = styled(Row)`
 	display: flex;
 	flex-direction: column;
+
 	@media ${media.tablet} {
 		flex-direction: column-reverse;
-		/* align-items: center; */
 		margin-bottom: 16px;
+		position: static;
 	}
+`;
+
+const RowEmpty = styled(Row)`
+	flex-grow: 1;
+	position: initial;
 `;
 
 const ColSidebar: React.FC = ({ children }) => {
@@ -69,6 +76,7 @@ const ColSidebar: React.FC = ({ children }) => {
 				{!hideChildren && children}
 				<Search searchInput={searchInput} onSearch={handleSearch} inputClick={inputClick} onBlur={handleFocusOut} />
 			</SearchRow>
+			<RowEmpty />
 
 			{!isTablet && (
 				<Row>

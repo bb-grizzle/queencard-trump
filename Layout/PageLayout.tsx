@@ -10,8 +10,8 @@ interface PageContainerProps {
 	className?: string;
 }
 
-const Wrapper = styled.div<{ paddingTop?: boolean }>`
-	padding-top: ${(props) => (props.paddingTop ? `calc(${props.theme.size.header.pc} + 56px)` : props.theme.size.header.pc)};
+const Wrapper = styled.div`
+	padding-top: ${(props) => props.theme.size.header.pc};
 	padding-bottom: 100px;
 	@media ${media.tablet} {
 		padding-top: ${(props) => props.theme.size.header.mobile};
@@ -19,14 +19,14 @@ const Wrapper = styled.div<{ paddingTop?: boolean }>`
 	}
 	min-height: ${(props) => props.theme.layout.full_height};
 `;
-const PageContainer: React.FC<PageContainerProps> = ({ children, paddingTop, className }) => {
+const PageContainer: React.FC<PageContainerProps> = ({ children, className }) => {
 	const { isTablet } = useSize();
 	const { setLoading } = useLoading();
 	useEffect(() => {
 		setLoading(true);
 	}, []);
 	return (
-		<Wrapper paddingTop={paddingTop} className={className}>
+		<Wrapper className={className}>
 			{children}
 
 			{isTablet && <Footer />}
