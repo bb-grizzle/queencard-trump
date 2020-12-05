@@ -144,8 +144,8 @@ export const useCategoryData = () => {
 };
 
 export const useSearchValue = () => {
-	const { setSearch } = useContext(AppContext);
-	return { setSearch };
+	const { setSearch, search } = useContext(AppContext);
+	return { setSearch, search };
 };
 
 export default AppProvider;

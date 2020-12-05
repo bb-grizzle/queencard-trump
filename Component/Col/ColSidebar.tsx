@@ -8,6 +8,7 @@ import media from "../../Styles/media";
 import useInput from "../../Hook/useInput";
 import { useState, useEffect } from "react";
 import { useSearchValue } from "../../Context/AppProvider";
+import { useRouter } from "next/router";
 
 const ColWrapper = styled(ColDefault)`
 	position: relative;

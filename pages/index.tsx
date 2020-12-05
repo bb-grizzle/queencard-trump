@@ -15,8 +15,6 @@ import ContentsWrapper from "../Component/ContentsWrapper";
 import CategoryWrapper from "../Component/Category/CategoryWrapper";
 import { usePortfolioData, useCategoryData, useLoading } from "../Context/AppProvider";
 import useImageLoad from "../Hook/useImageLoad";
-import Paragraph from "../Component/Text/Paragraph";
-import theme from "../Styles/theme";
 
 const Cover = styled.div<{ image: string; active: boolean }>`
 	${(props) => props.theme.layout.ratio(34)};
@@ -25,18 +23,12 @@ const Cover = styled.div<{ image: string; active: boolean }>`
 	${(props) => props.theme.transition.load(props.active)};
 `;
 
-const PortfolioWrapper = styled.ul`
-	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
-`;
-
 const Portfolio = () => {
 	const { portfolio: data, setNowPortfolio } = usePortfolioData();
 	const { category, nowCategory, setNowCategory } = useCategoryData();
 	const { cover } = useCover();
 	const { push } = useRouter();
-	const { col } = useCol({ pc: 3, tablet: 3, mobile: 2 });
+
 	const { ref, size } = useElementSize();
 	const { setLoading } = useLoading();
 	const { load, setUrl } = useImageLoad(null);
@@ -53,12 +45,6 @@ const Portfolio = () => {
 		}
 	}, [load]);
 
-	const handleListClick = (data: PortfolioDataProps) => {
-		push(`/portfolio/[id]`, `/portfolio/${data.id}`);
-		setNowCategory(data.category.id);
-		setNowPortfolio(data);
-	};
-
 	return (
 		<PageContainer>
 			<Cover image={cover ? cover.url : null} active={load} />
@@ -69,27 +55,7 @@ const Portfolio = () => {
 						<ColSidebar>
 							<CategoryWrapper />
 						</ColSidebar>
-						<ColContents refElement={ref}>
-							<PortfolioWrapper>
-								{data !== undefined && data.length > 0 ? (
-									data.map((portfolio, index) => {
-										return (
-											<PortfolioList
-												overlay={portfolio.category.id === nowCategory}
-												key={portfolio.id}
-												data={portfolio}
-												col={col}
-												isLast={(index + 1) % col === 0}
-												onClick={() => handleListClick(portfolio)}
-												parentSize={size}
-											/>
-										);
-									})
-								) : (
-									<Paragraph text={"0건의 관련 프로젝트가 있습니다. "} color={theme.color.gray.dark} />
-								)}
-							</PortfolioWrapper>
-						</ColContents>
+						<ColContents />
 					</ColWrapper>
 				</ContainerLayout>
 			</ContentsWrapper>

@@ -31,7 +31,7 @@ const Text = styled.h3<{ type: TitleType; isRegular: boolean; color?: string }>`
 const Title: React.FC<TitleProps> = ({ title, type = TitleType.LG, className, isRegular = false, color }) => {
 	return (
 		<Text className={className} type={type} isRegular={isRegular} color={color}>
-			{Array.isArray(title) ? title.map((el) => <span>{el}</span>) : title}
+			{Array.isArray(title) ? title.map((el, index) => <span key={index}>{el}</span>) : title}
 		</Text>
 	);
 };
