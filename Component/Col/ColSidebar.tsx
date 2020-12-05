@@ -47,7 +47,7 @@ const ColSidebar: React.FC = ({ children }) => {
 	const { isTablet } = useSize();
 	const searchInput = useInput("");
 	const [hideChildren, setHideChildren] = useState(false);
-	const { setSearch } = useSearchValue();
+	const { setSearch, search } = useSearchValue();
 
 	const handleSearch = () => {
 		if (!searchInput.value) {
@@ -57,13 +57,22 @@ const ColSidebar: React.FC = ({ children }) => {
 		}
 	};
 
+	const handleOnClose = () => {
+		if (search !== null) {
+			setSearch(null);
+			setHideChildren(false);
+			searchInput.init();
+		}
+	};
+
 	const inputClick = () => {
+		console.log("inputClick");
 		if (!isTablet) {
 			setHideChildren(true);
 		}
 	};
 	const handleFocusOut = () => {
-		setHideChildren(false);
+		// setHideChildren(false);
 	};
 
 	useEffect(() => {
@@ -75,7 +84,7 @@ const ColSidebar: React.FC = ({ children }) => {
 			<SearchRow>
 				{!isTablet && <ColTitle type={ParagraphType.SM} text={"School"} />}
 				{!hideChildren && children}
-				<Search searchInput={searchInput} onSearch={handleSearch} inputClick={inputClick} onBlur={handleFocusOut} />
+				<Search searchInput={searchInput} onSearch={handleSearch} inputClick={inputClick} onBlur={handleFocusOut} onClose={handleOnClose} />
 			</SearchRow>
 			<RowEmpty />
 
