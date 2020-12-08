@@ -163,6 +163,8 @@ const style = {
 	},
 
 	textarea: css`
+		padding-top: 0;
+		border-top: 0px;
 		> textarea {
 			color: ${(props) => props.theme.color.gray.dark};
 			line-height: 1.6;

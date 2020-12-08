@@ -50,7 +50,7 @@ const tutor = () => {
 		<PageContainer>
 			<ContainerLayout>
 				<AdminTitleSection title="강사 소개" />
-				<AdminForm title={"강사 소개"} contents={formContents} onSubmit={handleSubmit} formRef={formRef} cancelable={false} />
+				<AdminForm title={"강사 소개"} contents={formContents} onSubmit={handleSubmit} formRef={formRef} cancelable={false} isFilled={true} />
 			</ContainerLayout>
 		</PageContainer>
 	);

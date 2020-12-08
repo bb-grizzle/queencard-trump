@@ -24,9 +24,10 @@ interface AdminFormProps {
 	formRef: any;
 	deleteDisable?: boolean;
 	cancelable?: boolean;
+	isFilled?: boolean;
 }
 
-const Wrapper = styled.div<{ active: boolean }>`
+const Wrapper = styled.div<{ active: boolean; isFilled?: boolean }>`
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -42,8 +43,8 @@ const Wrapper = styled.div<{ active: boolean }>`
 	${(props) => props.theme.style.hideScroll};
 
 	@media ${media.tablet} {
-		padding-top: ${(props) => props.theme.size.header.mobile};
-		padding-top: 0;
+		padding-top: 0px;
+		top: ${(props) => (props.isFilled ? props.theme.size.header.mobile : 0)};
 		z-index: ${(props) => props.theme.zIndex.adminForm.tablet};
 	}
 
@@ -70,7 +71,7 @@ const FormSection = styled.div`
 	margin-bottom: 24px;
 `;
 
-const AdminForm: React.FC<AdminFormProps> = ({ onSubmit, contents, title, formRef, onDelete, deleteDisable = false, cancelable }) => {
+const AdminForm: React.FC<AdminFormProps> = ({ isFilled, onSubmit, contents, title, formRef, onDelete, deleteDisable = false, cancelable }) => {
 	const { adminAction } = useAdminAction();
 
 	const handleSubmit = () => {
@@ -78,7 +79,7 @@ const AdminForm: React.FC<AdminFormProps> = ({ onSubmit, contents, title, formRe
 	};
 
 	return (
-		<Wrapper active={adminAction !== null} ref={formRef}>
+		<Wrapper active={adminAction !== null} ref={formRef} isFilled={isFilled}>
 			<Container>
 				<AdminFormTitle title={title} cancelable={cancelable} />
 
