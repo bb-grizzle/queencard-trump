@@ -20,7 +20,11 @@ const NavLink: React.FC<NavLinkProps> = ({ href, name, className, onClick }) => 
 	const [filterPath, setFilterPath] = useState<string>();
 
 	useEffect(() => {
-		setFilterPath(pathname.includes("/portfolio") ? "/" : pathname);
+		if (pathname === "/portfolio/[id]") {
+			setFilterPath("/");
+		} else {
+			setFilterPath(pathname);
+		}
 	}, [pathname]);
 
 	return (
