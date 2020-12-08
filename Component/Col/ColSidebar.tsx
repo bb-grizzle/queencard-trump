@@ -67,9 +67,6 @@ const ColSidebar: React.FC = ({ children }) => {
 
 	const inputClick = () => {
 		console.log("inputClick");
-		if (!isTablet) {
-			setHideChildren(true);
-		}
 	};
 	const handleFocusOut = () => {
 		// setHideChildren(false);
@@ -78,6 +75,14 @@ const ColSidebar: React.FC = ({ children }) => {
 	useEffect(() => {
 		setHideChildren(false);
 	}, [isTablet]);
+
+	useEffect(() => {
+		if (search) {
+			if (!isTablet) {
+				setHideChildren(true);
+			}
+		}
+	}, [search]);
 
 	return (
 		<ColWrapper col={!isTablet ? 25 : 100}>

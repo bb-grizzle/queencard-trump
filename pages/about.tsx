@@ -17,6 +17,7 @@ import { DATA_ABOUT } from "../Data/about";
 import BackgroundImage from "../Component/BackgroundImage";
 import DetailList from "../Component/DetailList";
 import media from "../Styles/media";
+import { useRouter } from "next/router";
 
 // VISION
 const VisionSectionWrapper = styled.div`
@@ -169,6 +170,7 @@ const index = () => {
 	const { data } = useAbout();
 	const { isTablet } = useSize();
 	const { setLoading } = useLoading();
+	const { push } = useRouter();
 
 	useEffect(() => {
 		if (data) {
@@ -179,6 +181,7 @@ const index = () => {
 
 	const handleBackClick = () => {
 		console.log("handleBackClick");
+		push("/");
 	};
 
 	return (

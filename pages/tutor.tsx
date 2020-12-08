@@ -13,6 +13,7 @@ import useTutor from "../Hook/useTutor";
 import SectionWrapper from "../Component/SectionWrapper";
 import Video from "../Component/Video";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 const PageTitleWrapperCustome = styled(PageTitleWrapper)`
 	margin-bottom: 110px;
@@ -24,13 +25,17 @@ const Tutor = () => {
 	const { setLoading } = useLoading();
 	const { isTablet } = useSize();
 	const { data } = useTutor();
+	const { push } = useRouter();
 	useEffect(() => {
 		if (data) {
 			console.log(data);
 			setLoading(false);
 		}
 	}, [data]);
-	const handleBackClick = () => {};
+
+	const handleBackClick = () => {
+		push("/");
+	};
 	return (
 		<PageContainer>
 			<ContentsWrapper>

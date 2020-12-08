@@ -15,6 +15,7 @@ import media from "../Styles/media";
 import ImageSlider from "../Component/ImageSlider";
 import Paragraph from "../Component/Text/Paragraph";
 import ProcessList from "../Component/Process/ProcessList";
+import { useRouter } from "next/router";
 
 const ProcessWrapper = styled.ul`
 	margin-bottom: 110px;
@@ -45,7 +46,10 @@ const DescriptText = styled(Paragraph)``;
 const Process = () => {
 	const { isTablet } = useSize();
 	const { setLoading } = useLoading();
-	const handleBackClick = () => {};
+	const { push } = useRouter();
+	const handleBackClick = () => {
+		push("/");
+	};
 	useEffect(() => {
 		setLoading(false);
 	}, []);

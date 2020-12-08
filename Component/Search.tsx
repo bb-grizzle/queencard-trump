@@ -14,6 +14,10 @@ const Input = styled(InputDefault)`
 	border-color: ${(props) => props.theme.color.main};
 	border-width: 1.5px;
 	margin-right: 2px;
+	border-bottom-style: solid;
+	> input {
+		color: ${(props) => props.theme.color.gray.dark};
+	}
 
 	@media ${media.tablet} {
 		width: 100%;
