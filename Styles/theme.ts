@@ -128,23 +128,48 @@ const text = {
 };
 
 const style = {
-	input: css`
-		width: 100%;
-		padding: 18px 0;
-		font-size: ${`${text.input.pc}px`};
-		line-height: 1.44;
+	input: {
+		layout: (initStyle) => css`
+			width: 100%;
+			padding: ${initStyle ? 0 : "18px"} 0;
+			font-size: ${`${text.input.pc}px`};
+			line-height: 1.44;
 
-		@media ${media.tablet} {
-			font-size: ${`${text.input.tablet}px`};
-			padding: 12px 8px;
-		}
-	`,
+			> label {
+				padding-bottom: 19px;
+				display: block;
+			}
+
+			@media ${media.tablet} {
+				margin-top: 16px;
+				font-size: ${`${text.input.tablet}px`};
+				padding: ${initStyle ? 0 : "12px 0px"};
+
+				> label {
+					padding-bottom: 8px;
+				}
+			}
+		`,
+		item: (initStyle) => css`
+			padding-top: ${initStyle ? 0 : "23px"};
+			color: ${color.main};
+
+			border-top: ${initStyle ? "0" : "1px"} solid ${(props) => props.theme.color.black};
+
+			@media ${media.tablet} {
+				padding-top: ${initStyle ? 0 : "8px"};
+			}
+		`
+	},
+
 	textarea: css`
 		> textarea {
-			background-color: ${(props) => props.theme.color.gray.light};
+			color: ${(props) => props.theme.color.gray.dark};
 			line-height: 1.6;
 			height: calc(18px * 4 * 1.6);
-			padding: 12px 8px;
+			padding: 20px;
+			border: 1px solid ${(props) => props.theme.color.gray.dark};
+			font-size: 13px;
 		}
 	`,
 

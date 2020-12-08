@@ -57,7 +57,8 @@ const FileList = styled.li<{ image: string }>`
 	background-repeat: no-repeat;
 	background-color: ${(props) => props.theme.color.gray.light};
 	margin-right: 8px;
-	width: 8%;
+	width: 6%;
+	min-width: 48px;
 	position: relative;
 `;
 const BtnClose = styled(BtnIcon)`

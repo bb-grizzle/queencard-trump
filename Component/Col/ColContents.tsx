@@ -47,33 +47,53 @@ const ColContents: React.FC<ColContentsProps> = ({ children }) => {
 		setNowPortfolio(data);
 	};
 
-	const PortfolioWrapperCustome = () => {
-		return (
-			<PortfolioWrapper>
-				{data !== undefined && data.length > 0 ? (
-					data.map((portfolio, index) => {
-						return (
-							<PortfolioList
-								overlay={portfolio.category.id === nowCategory}
-								key={portfolio.id}
-								data={portfolio}
-								col={col}
-								isLast={(index + 1) % col === 0}
-								onClick={() => handleListClick(portfolio)}
-								parentSize={size}
-							/>
-						);
-					})
-				) : (
-					<Paragraph text={"0건의 관련 프로젝트가 있습니다. "} color={theme.color.gray.dark} />
-				)}
-			</PortfolioWrapper>
-		);
-	};
-
 	return (
 		<ColWrapper col={!isTablet ? 75 : 100} refElement={ref}>
-			{!!children ? search !== null ? <PortfolioWrapperCustome /> : children : <PortfolioWrapperCustome />}
+			{!!children ? (
+				search !== null ? (
+					<PortfolioWrapper>
+						{data !== undefined && data.length > 0 ? (
+							data.map((portfolio, index) => {
+								return (
+									<PortfolioList
+										overlay={portfolio.category.id === nowCategory}
+										key={portfolio.id}
+										data={portfolio}
+										col={col}
+										isLast={(index + 1) % col === 0}
+										onClick={() => handleListClick(portfolio)}
+										parentSize={size}
+									/>
+								);
+							})
+						) : (
+							<Paragraph text={"0건의 관련 프로젝트가 있습니다. "} color={theme.color.gray.dark} />
+						)}
+					</PortfolioWrapper>
+				) : (
+					children
+				)
+			) : (
+				<PortfolioWrapper>
+					{data !== undefined && data.length > 0 ? (
+						data.map((portfolio, index) => {
+							return (
+								<PortfolioList
+									overlay={portfolio.category.id === nowCategory}
+									key={portfolio.id}
+									data={portfolio}
+									col={col}
+									isLast={(index + 1) % col === 0}
+									onClick={() => handleListClick(portfolio)}
+									parentSize={size}
+								/>
+							);
+						})
+					) : (
+						<Paragraph text={"0건의 관련 프로젝트가 있습니다. "} color={theme.color.gray.dark} />
+					)}
+				</PortfolioWrapper>
+			)}
 		</ColWrapper>
 	);
 };

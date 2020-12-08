@@ -3,25 +3,25 @@ import BtnIcon from "../Btn/BtnIcon";
 import { InputDefaultProps } from "../../Hook/useInput";
 import Paragraph from "../Text/Paragraph";
 import media from "../../Styles/media";
+import InputLayout from "./InputLayout";
 interface InputTagProps {
 	value: string[];
 	placeholder: string;
 	onAdd: (input: InputDefaultProps) => void;
 	onDelete: (id: number) => void;
 	textInput: InputDefaultProps;
+	label?: string;
 }
 const Wrapper = styled.div`
-	width: 100%;
+	${(props) => props.theme.style.input.item()};
 `;
 
 const Input = styled.input``;
 
 const WrapperInput = styled.div`
-	${(props) => props.theme.style.input};
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	border-bottom: 1px solid ${(props) => props.theme.color.black};
 `;
 
 const WrapperTag = styled.ul`
@@ -31,12 +31,14 @@ const WrapperTag = styled.ul`
 `;
 
 const Text = styled(Paragraph)``;
+
 const TagList = styled.li`
 	padding: 8px;
 	background-color: ${(props) => props.theme.color.gray.light};
 	margin-right: 8px;
 	cursor: pointer;
 	margin-bottom: 8px;
+	color: black;
 	@media ${media.hover} {
 		&:hover {
 			background-color: ${(props) => props.theme.color.black};
@@ -47,7 +49,7 @@ const TagList = styled.li`
 	}
 `;
 
-const InputTag: React.FC<InputTagProps> = ({ textInput, value, onAdd, onDelete, placeholder }) => {
+const InputTag: React.FC<InputTagProps> = ({ textInput, value, onAdd, onDelete, placeholder, label }) => {
 	const handleAddBtnClick = () => {
 		onAdd(textInput);
 	};
@@ -71,22 +73,24 @@ const InputTag: React.FC<InputTagProps> = ({ textInput, value, onAdd, onDelete, 
 	};
 
 	return (
-		<Wrapper>
-			<WrapperInput>
-				<Input type="text" placeholder={placeholder} {...textInput} onKeyDown={handleKeyDown} />
-				<BtnIcon icon="pluse" onClick={handleAddBtnClick} />
-			</WrapperInput>
+		<InputLayout label={label}>
+			<Wrapper>
+				<WrapperInput>
+					<Input type="text" placeholder={placeholder} {...textInput} onKeyDown={handleKeyDown} />
+					<BtnIcon icon="pluse" onClick={handleAddBtnClick} />
+				</WrapperInput>
 
-			<WrapperTag>
-				{value.map((el, index) => {
-					return (
-						<TagList key={index} onClick={() => handleTagClick(index)}>
-							<Text text={el} />
-						</TagList>
-					);
-				})}
-			</WrapperTag>
-		</Wrapper>
+				<WrapperTag>
+					{value.map((el, index) => {
+						return (
+							<TagList key={index} onClick={() => handleTagClick(index)}>
+								<Text text={el} />
+							</TagList>
+						);
+					})}
+				</WrapperTag>
+			</Wrapper>
+		</InputLayout>
 	);
 };
 

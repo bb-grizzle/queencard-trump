@@ -1,14 +1,18 @@
 import styled from "styled-components";
 import Paragraph, { ParagraphType } from "../Text/Paragraph";
 import media from "../../Styles/media";
+import InputLayout from "./InputLayout";
 interface InputFileProps {
 	onChange: any;
 	fileName: string;
 	className?: string;
+	label?: string;
 }
 const Wrapper = styled.div`
 	width: 100%;
-	${(props) => props.theme.style.input};
+	${(props) => props.theme.style.input.item()};
+	color: ${(props) => props.theme.color.black};
+	border-top: 0;
 `;
 
 const Input = styled.input`
@@ -33,6 +37,9 @@ const Label = styled.label`
 	}
 `;
 
+const FileName = styled(Paragraph)`
+	margin-bottom: 22px;
+`;
 const Text = styled(Paragraph)`
 	margin-top: 0 !important;
 	line-height: 1.4;
@@ -40,14 +47,17 @@ const Text = styled(Paragraph)`
 	top: -1px;
 `;
 
-const InputFile: React.FC<InputFileProps> = ({ onChange, fileName, className }) => {
+const InputFile: React.FC<InputFileProps> = ({ onChange, fileName, className, label }) => {
 	return (
-		<Wrapper className={className}>
-			<Label>
-				<Input type={"file"} onChange={onChange} />
-				<Text text={fileName ? fileName : "파일첨부"} type={ParagraphType.SM} />
-			</Label>
-		</Wrapper>
+		<InputLayout label={label}>
+			<Wrapper className={className}>
+				<FileName text={fileName ? fileName : "-"} type={ParagraphType.SM} />
+				<Label>
+					<Input type={"file"} onChange={onChange} />
+					<Text text={"파일 업로드"} type={ParagraphType.SM} />
+				</Label>
+			</Wrapper>
+		</InputLayout>
 	);
 };
 

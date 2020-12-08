@@ -8,9 +8,6 @@ interface InputOptionProps {
 }
 const Wrapper = styled.div`
 	width: 100%;
-
-	${(props) => props.theme.style.input};
-	border-bottom: 1px solid ${(props) => props.theme.color.black};
 `;
 
 const Select = styled.select<{ active: boolean }>`

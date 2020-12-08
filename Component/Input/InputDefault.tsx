@@ -1,5 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import InputLayout from "./InputLayout";
 interface InputDefaultProps {
+	label?: string;
 	value: string;
 	onChange: any;
 	type?: string;
@@ -8,17 +10,20 @@ interface InputDefaultProps {
 	onEnter?: () => void;
 	onFocus?: () => void;
 	onBlur?: () => void;
+	initStyle?: boolean;
 }
-const Wrapper = styled.div`
-	width: 100%;
 
-	${(props) => props.theme.style.input};
-	border-bottom: 1px solid ${(props) => props.theme.color.black};
+const Input = styled.input<{ isLabel?: boolean; initStyle?: boolean }>`
+	${(props) => props.theme.style.input.item(props.initStyle)};
+	${(props) =>
+		!props.isLabel &&
+		css`
+			border-width: ${props.isLabel ? "1px" : "0px"};
+			padding-top: 0 !important;
+		`};
 `;
 
-const Input = styled.input``;
-
-const InputDefault: React.FC<InputDefaultProps> = ({ value, onChange, type = "text", placeholder, className, onEnter, onFocus, onBlur }) => {
+const InputDefault: React.FC<InputDefaultProps> = ({ initStyle, label, value, onChange, type = "text", placeholder, className, onEnter, onFocus, onBlur }) => {
 	const handleKeyDown = (e) => {
 		var keyCode = e.which ? e.which : e.keyCode;
 		if (keyCode === 13 || keyCode === 188) {
@@ -33,9 +38,9 @@ const InputDefault: React.FC<InputDefaultProps> = ({ value, onChange, type = "te
 	};
 
 	return (
-		<Wrapper className={className}>
-			<Input type={type} value={value} onChange={onChange} placeholder={placeholder} onKeyDown={handleKeyDown} onFocus={handleFlocus} onBlur={onBlur} />
-		</Wrapper>
+		<InputLayout label={label} className={className} initStyle={initStyle}>
+			<Input initStyle={initStyle} type={type} value={value} onChange={onChange} placeholder={placeholder} onKeyDown={handleKeyDown} onFocus={handleFlocus} onBlur={onBlur} isLabel={!!label} />
+		</InputLayout>
 	);
 };
 

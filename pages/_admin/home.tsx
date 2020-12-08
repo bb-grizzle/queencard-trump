@@ -17,6 +17,7 @@ import useInputFile from "../../Hook/useInputFile";
 import BtnIcon from "../../Component/Btn/BtnIcon";
 import useCover from "../../Hook/useCover";
 import { useLoading } from "../../Context/AppProvider";
+import media from "../../Styles/media";
 
 const CategoryWrapper = styled.ul`
 	display: flex;
@@ -38,10 +39,19 @@ const CustomeInputFile = styled(InputFile)<{ image?: string }>`
 	${(props) => props.theme.layout.full_image(props.image)};
 
 	label {
+		left: 0;
+		top: 0;
 		position: absolute;
 		width: 100%;
 		height: 100%;
 		border-color: transparent;
+
+		@media ${media.hover} {
+			&:hover {
+				background-color: transparent;
+				opacity: 0.5;
+			}
+		}
 	}
 `;
 
@@ -122,8 +132,8 @@ const category = () => {
 		{
 			title: "-",
 			inputs: [
-				{ ...nameInput, placeholder: "이름" },
-				{ ...colorInput, placeholder: "색상", type: "color" }
+				{ ...nameInput, placeholder: "이름", label: "이름" },
+				{ ...colorInput, placeholder: "색상", label: "색상", type: "color" }
 			]
 		}
 	];

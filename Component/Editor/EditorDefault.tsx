@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import dynamic from "next/dynamic";
+import InputLayout from "../Input/InputLayout";
 interface EditorDefaultProps {
 	onChange: any;
 	value: string;
 	placeholder?: string;
+	label?: string;
 }
 const QuillNoSSRWRapper = dynamic(import("react-quill"), {
 	ssr: false,
@@ -11,8 +13,6 @@ const QuillNoSSRWRapper = dynamic(import("react-quill"), {
 });
 
 const Wrapper = styled.div`
-	margin-top: 27px;
-
 	> .quill .ql-editor {
 		p {
 			font-size: ${(props) => `${props.theme.text.paragraph.md}px`};
@@ -29,11 +29,13 @@ const Wrapper = styled.div`
 	}
 `;
 
-const EditorDefault: React.FC<EditorDefaultProps> = ({ onChange, value = "내용을 작성하세요! 😆" }) => {
+const EditorDefault: React.FC<EditorDefaultProps> = ({ label, onChange, value = "내용을 작성하세요! 😆" }) => {
 	return (
-		<Wrapper>
-			<QuillNoSSRWRapper value={value} onChange={onChange} />
-		</Wrapper>
+		<InputLayout label={label}>
+			<Wrapper>
+				<QuillNoSSRWRapper value={value} onChange={onChange} placeholder={"상세 설명"} />
+			</Wrapper>
+		</InputLayout>
 	);
 };
 

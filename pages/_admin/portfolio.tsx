@@ -283,31 +283,32 @@ const portfolio = () => {
 		{
 			title: "기본 정보",
 			inputs: [
-				{ ...titleInput, placeholder: "제목" },
-				{ ...subTitleInput, placeholder: "부 제목" },
+				{ ...titleInput, placeholder: "제목", label: "제목" },
+				{ ...subTitleInput, placeholder: "부 제목", label: "부 제목" },
 				{
 					...categoryInput,
 					placeholder: "카테고리",
+					label: "카테고리",
 					type: "category",
 					options: category,
 					nameInput: newCategoryName,
 					colorInput: newCategoryColor,
 					setNewCategory: setNewCategory
 				},
-				{ ...thumbnailInput, type: "file" }
+				{ ...thumbnailInput, type: "file", label: "썸네일" }
 			]
 		},
 		{
 			title: "상세 정보",
 			inputs: [
-				{ ...partnerInput, placeholder: "파트너" },
-				{ ...businessInput, placeholder: "사업명" },
-				{ ...count_studentInput, placeholder: "참여학생", type: "number" },
-				{ ...count_schoolInput, placeholder: "참여학교", type: "number" },
-				{ ...areaInput, placeholder: "참여지역", type: "tag" },
-				{ ...mediaTextInput, placeholder: "언론보도 제목" },
-				{ ...mediaLinkInput, placeholder: "언론보도 링크" },
-				{ ...descriptInput, placeholder: "상세 설명", type: "editor" }
+				{ ...partnerInput, placeholder: "파트너", label: "파트너" },
+				{ ...businessInput, placeholder: "사업명", label: "사업명" },
+				{ ...count_studentInput, placeholder: "참여학생", label: "참여학생", type: "number" },
+				{ ...count_schoolInput, placeholder: "참여학교", label: "참여학교", type: "number" },
+				{ ...areaInput, placeholder: "참여지역", label: "참여지역", type: "tag" },
+				{ ...mediaTextInput, placeholder: "언론보도 제목", label: "언론보도 제목" },
+				{ ...mediaLinkInput, placeholder: "언론보도 링크", label: "언론보도 링크" },
+				{ ...descriptInput, placeholder: "상세 설명", label: "상세 설명", type: "editor" }
 			]
 		},
 		{

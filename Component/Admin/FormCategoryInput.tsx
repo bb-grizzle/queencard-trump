@@ -7,6 +7,7 @@ import InputColor from "../Input/InputColor";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { CategoryProps } from "../../Interface/category";
 import theme from "../../Styles/theme";
+import InputLayout from "../Input/InputLayout";
 
 interface FormCategoryInputProps {
 	value: string;
@@ -16,18 +17,20 @@ interface FormCategoryInputProps {
 	nameInput: InputDefaultProps;
 	colorInput: InputDefaultProps;
 	setNewCategory: Dispatch<SetStateAction<CategoryProps>>;
+	label?: string;
 }
 
 const Wrapper = styled.div`
 	position: relative;
 	display: flex;
 	align-items: center;
-	border-bottom: 1px solid ${(props) => props.theme.color.black};
+
+	${(props) => props.theme.style.input.item()};
 `;
 
 const BtnAdd = styled(BtnText)`
 	flex-shrink: 0;
-	padding: 24px;
+	color: ${(props) => props.theme.color.gray.default};
 `;
 
 const Row = styled.div`
@@ -46,13 +49,14 @@ const ColorPick = styled(InputColor)`
 	padding-left: 24px;
 	padding-right: 24px;
 	border-bottom: 0px;
+	display: inline-block;
 `;
 
 const InputText = styled(InputDefault)`
-	border-bottom: 0px;
+	flex-grow: 1;
 `;
 
-const FormCategoryInput: React.FC<FormCategoryInputProps> = ({ value, onChange, options, nameInput, colorInput, setNewCategory }) => {
+const FormCategoryInput: React.FC<FormCategoryInputProps> = ({ label, value, onChange, options, nameInput, colorInput, setNewCategory }) => {
 	const [isAddClick, setIsAddClick] = useState(false);
 
 	const cleanup = () => {
@@ -94,18 +98,20 @@ const FormCategoryInput: React.FC<FormCategoryInputProps> = ({ value, onChange, 
 	}, [isAddClick, nameInput.value, colorInput.value]);
 
 	return (
-		<Wrapper>
-			{isAddClick ? (
-				<Row>
-					<ColorPick {...colorInput} />
-					<InputText {...nameInput} placeholder="이름" />
-				</Row>
-			) : (
-				<Option value={value} onChange={onChange} options={options} />
-			)}
+		<InputLayout label={label}>
+			<Wrapper>
+				{isAddClick ? (
+					<Row>
+						<ColorPick {...colorInput} initStyle={true} />
+						<InputText {...nameInput} placeholder="이름" initStyle={true} />
+					</Row>
+				) : (
+					<Option value={value} onChange={onChange} options={options} />
+				)}
 
-			{options !== undefined && !!options[0] && <BtnAdd text={!isAddClick ? "추가" : "취소"} onClick={handleBtnClick} />}
-		</Wrapper>
+				{options !== undefined && !!options[0] && <BtnAdd text={!isAddClick ? "추가" : "취소"} onClick={handleBtnClick} />}
+			</Wrapper>
+		</InputLayout>
 	);
 };
 

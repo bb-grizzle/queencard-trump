@@ -26,7 +26,7 @@ const tutor = () => {
 	const formContents = [
 		{
 			title: "청년강사 인터뷰",
-			inputs: [{ ...videoInput, type: "video" }]
+			inputs: [{ ...videoInput, type: "video", label: "링크" }]
 		}
 	];
 

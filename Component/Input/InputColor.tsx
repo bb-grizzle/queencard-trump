@@ -1,17 +1,19 @@
 import styled from "styled-components";
 import { Dispatch } from "react";
 import media from "../../Styles/media";
+import InputLayout from "./InputLayout";
 interface InputColorProps {
+	label?: string;
 	value: string;
 	onChange: Dispatch<any>;
 	className?: string;
+	initStyle?: boolean;
 }
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ initStyle?: boolean }>`
 	width: 100%;
-	${(props) => props.theme.style.input};
-	border-bottom: 1px solid ${(props) => props.theme.color.black};
 	display: flex;
 	justify-content: space-between;
+	${(props) => props.theme.style.input.item(props.initStyle)};
 `;
 
 const Input = styled.input`
@@ -37,13 +39,15 @@ const ColorPicker = styled.div`
 	cursor: pointer;
 `;
 
-const InputColor: React.FC<InputColorProps> = ({ value, onChange, className }) => {
+const InputColor: React.FC<InputColorProps> = ({ label, value, onChange, className, initStyle }) => {
 	return (
-		<Wrapper className={className}>
-			<ColorPicker>
-				<Input type={"color"} value={value} onChange={onChange} />
-			</ColorPicker>
-		</Wrapper>
+		<InputLayout label={label} initStyle={initStyle} className={className}>
+			<Wrapper initStyle={initStyle}>
+				<ColorPicker>
+					<Input type={"color"} value={value} onChange={onChange} />
+				</ColorPicker>
+			</Wrapper>
+		</InputLayout>
 	);
 };
 
