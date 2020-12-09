@@ -34,12 +34,17 @@ import CheckboxItem from "../Component/Input/CheckboxItem";
 import BtnSubmit from "../Component/Btn/BtnSubmit";
 import { getFromGoogleSheet } from "../util/googleSpreadsheet";
 import media from "../Styles/media";
+// import Popup from "../Component/Popup";
+import useElementSize from "../Hook/useElementSize";
 
 const PageTitleWrapperCustome = styled(PageTitleWrapper)`
 	margin-bottom: 118px;
 	@media ${media.tablet} {
 		margin-bottom: 64px;
 	}
+`;
+const BtnWrapper = styled.div`
+	text-align: center;
 `;
 
 const BtnSubmitCustome = styled(BtnSubmit)`
@@ -121,6 +126,12 @@ const Contact = () => {
 	const [form, setForm] = useState();
 	const [personalInfo, setPersonalInfo] = useState();
 
+	const { ref, size } = useElementSize();
+
+	useEffect(() => {
+		console.log(size);
+	}, [size]);
+
 	useEffect(() => {
 		setForm({
 			type: projectTypeInput.value,
@@ -147,15 +158,8 @@ const Contact = () => {
 		});
 	}, [personalGroupInput.value, personalWebsiteInput.value, personalNameInput.value, personalRoleInput.value, personalNumberInput.value, personalEmailInput.value]);
 
-	useEffect(() => {
-		const test = async () => {
-			await getFromGoogleSheet();
-		};
-	}, []);
-
 	const handleSubmit = async () => {
 		console.log("handleSubmit");
-		const newRow = { descript: "test" };
 	};
 
 	useEffect(() => {
@@ -167,7 +171,7 @@ const Contact = () => {
 	return (
 		<PageContainer>
 			<ContentsWrapper>
-				<ContainerLayout>
+				<ContainerLayout containerRef={ref}>
 					<ColWrapper>
 						{!isTablet && <ColSidebar />}
 
@@ -194,8 +198,12 @@ const Contact = () => {
 
 								<CheckboxItem value={"agree"} name={"개인정보 수집, 이용 및 처리위탁 동의"} onChange={() => setAgree((prev) => !prev)} />
 
-								<BtnSubmitCustome text={"신청하기"} onClick={handleSubmit} />
+								<BtnWrapper>
+									<BtnSubmitCustome text={"신청하기"} onClick={handleSubmit} />
+								</BtnWrapper>
 							</ContactForm>
+
+							{/* <Popup /> */}
 						</ColContents>
 					</ColWrapper>
 				</ContainerLayout>
