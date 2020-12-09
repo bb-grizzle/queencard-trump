@@ -13,6 +13,7 @@ const Wrapper = styled.div`
 	${(props) => props.theme.style.input.item()};
 	color: ${(props) => props.theme.color.black};
 	border-top: 0;
+	text-align: left;
 `;
 
 const Input = styled.input`
@@ -51,7 +52,7 @@ const InputFile: React.FC<InputFileProps> = ({ onChange, fileName, className, la
 	return (
 		<InputLayout label={label}>
 			<Wrapper className={className}>
-				<FileName text={fileName ? fileName : "-"} type={ParagraphType.SM} />
+				{fileName && <FileName text={fileName} type={ParagraphType.SM} />}
 				<Label>
 					<Input type={"file"} onChange={onChange} />
 					<Text text={"파일 업로드"} type={ParagraphType.SM} />

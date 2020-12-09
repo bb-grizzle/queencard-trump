@@ -30,12 +30,15 @@ const Text = styled.p<{ bold: boolean; type: ParagraphType; color?: string; size
 		display: block;
 		min-height: ${(props) => `${props.size ? props.size * 1.42 : props.theme.text.paragraph[props.type] * 1.42}px`};
 	}
+	a {
+		color: ${(props) => props.theme.color.link};
+	}
 `;
 
 const Paragraph: React.FC<ParagraphProps> = ({ text, className, bold = false, type = ParagraphType.MD, color, size }) => {
 	return (
 		<Text className={className} bold={bold} type={type} color={color} size={size}>
-			{Array.isArray(text) ? text.map((t, index) => <span key={index}>{t}</span>) : text}
+			{Array.isArray(text) ? text.map((t, index) => <span key={index} dangerouslySetInnerHTML={{ __html: t }} />) : text}
 		</Text>
 	);
 };

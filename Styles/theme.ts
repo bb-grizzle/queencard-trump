@@ -135,9 +135,8 @@ const style = {
 			font-size: ${`${text.input.pc}px`};
 			line-height: 1.44;
 
-			> label {
+			> .inputlayout-label {
 				padding-bottom: 19px;
-				display: block;
 			}
 
 			@media ${media.tablet} {
@@ -145,7 +144,7 @@ const style = {
 				font-size: ${`${text.input.tablet}px`};
 				padding: ${initStyle ? 0 : "12px 0px"};
 
-				> label {
+				.inputlayout-label {
 					padding-bottom: 8px;
 				}
 			}
@@ -179,6 +178,7 @@ const style = {
 		@media ${media.hover} {
 			&:hover {
 				opacity: 0.5;
+				cursor: pointer;
 			}
 		}
 	`,

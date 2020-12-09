@@ -17,15 +17,20 @@ const Wrapper = styled.div<{ opacityAction: boolean; active: boolean }>`
 		`};
 	${(props) => (props.opacityAction ? props.theme.style.hoverDefault : null)};
 `;
-
-const Text = styled.p``;
-
-const BtnText: React.FC<BtnTextProps> = ({ className, text, onClick, opacityAction = true, active = true }) => {
+const Submit = styled.input`
+	background-color: transparent;
+	color: inherit;
+`;
+const BtnSubmit: React.FC<BtnTextProps> = ({ className, text, onClick, opacityAction = true, active = true }) => {
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		onClick(e);
+	};
 	return (
-		<Wrapper className={className} onClick={onClick} opacityAction={opacityAction} active={active}>
-			<Text>{text}</Text>
+		<Wrapper className={className} active={active} opacityAction={opacityAction}>
+			<Submit type="submit" value={text} onClick={handleSubmit} />
 		</Wrapper>
 	);
 };
 
-export default BtnText;
+export default BtnSubmit;

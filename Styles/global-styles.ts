@@ -39,13 +39,15 @@ const GlobalStyles = createGlobalStyle`
     border: 0px;
     -webkit-appearance: none;
    -webkit-border-radius: 0;
+   background-color: transparent;
 
-   &::placeholder {
-  color: ${Theme.color.gray.default};
-
-}
+    &::placeholder {
+      color: ${Theme.color.gray.default};
+    }
 
   }
+
+
 
   textarea{
     border:none;
