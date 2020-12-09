@@ -123,8 +123,8 @@ const Contact = () => {
 	const personalEmailInput = useInput("");
 	const [agree, setAgree] = useState(false);
 
-	const [form, setForm] = useState();
-	const [personalInfo, setPersonalInfo] = useState();
+	const [form, setForm] = useState({});
+	const [personalInfo, setPersonalInfo] = useState({});
 
 	const { ref, size } = useElementSize();
 
