@@ -34,7 +34,7 @@ import CheckboxItem from "../Component/Input/CheckboxItem";
 import BtnSubmit from "../Component/Btn/BtnSubmit";
 import { getFromGoogleSheet } from "../util/googleSpreadsheet";
 import media from "../Styles/media";
-// import Popup from "../Component/Popup";
+import Popup from "../Component/Popup";
 import useElementSize from "../Hook/useElementSize";
 
 const PageTitleWrapperCustome = styled(PageTitleWrapper)`
@@ -127,6 +127,7 @@ const Contact = () => {
 	const [personalInfo, setPersonalInfo] = useState({});
 
 	const { ref, size } = useElementSize();
+	const [popupActive, setPopupActive] = useState(false);
 
 	useEffect(() => {
 		console.log(size);
@@ -160,6 +161,11 @@ const Contact = () => {
 
 	const handleSubmit = async () => {
 		console.log("handleSubmit");
+
+		setPopupActive(true);
+		setTimeout(() => {
+			setPopupActive(false);
+		}, 1500);
 	};
 
 	useEffect(() => {
@@ -203,7 +209,7 @@ const Contact = () => {
 								</BtnWrapper>
 							</ContactForm>
 
-							{/* <Popup /> */}
+							<Popup parentSize={size} active={popupActive} />
 						</ColContents>
 					</ColWrapper>
 				</ContainerLayout>
