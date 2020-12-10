@@ -32,7 +32,6 @@ import useInputFile from "../Hook/useInputFile";
 import InputFile from "../Component/Input/InputFile";
 import CheckboxItem from "../Component/Input/CheckboxItem";
 import BtnSubmit from "../Component/Btn/BtnSubmit";
-import { getFromGoogleSheet } from "../util/googleSpreadsheet";
 import media from "../Styles/media";
 import Popup from "../Component/Popup";
 import useElementSize from "../Hook/useElementSize";
@@ -128,10 +127,6 @@ const Contact = () => {
 
 	const { ref, size } = useElementSize();
 	const [popupActive, setPopupActive] = useState(false);
-
-	useEffect(() => {
-		console.log(size);
-	}, [size]);
 
 	useEffect(() => {
 		setForm({

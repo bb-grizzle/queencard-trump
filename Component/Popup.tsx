@@ -50,10 +50,10 @@ const Text = styled(Paragraph)`
 	text-align: center;
 `;
 const Popup: React.FC<PopupProps> = ({ parentSize, active }) => {
-	const [gap, setGap] = useState();
+	const [gap, setGap] = useState<number>();
 	const { width, isTablet } = useSize();
-	const [colSize, setColSize] = useState();
-	const [left, setLeft] = useState();
+	const [colSize, setColSize] = useState<number>();
+	const [left, setLeft] = useState<number>();
 
 	useEffect(() => {
 		setGap((width - parentSize) / 2);
