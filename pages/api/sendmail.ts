@@ -5,17 +5,12 @@ import smtpTransport from "nodemailer-smtp-transport";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === "POST") {
-		console.log(req.body);
-
-		const { formData, file } = req.body;
+		const { formData, file, auth } = req.body;
 		var transporter = nodemailer.createTransport(
 			smtpTransport({
 				service: "gmail",
 				host: "smtp.gmail.com",
-				auth: {
-					user: "firbigi1993@gmail.com",
-					pass: "Dbs279756*"
-				}
+				auth
 			})
 		);
 
