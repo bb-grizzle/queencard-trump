@@ -20,10 +20,13 @@ const Input = styled.textarea`
 `;
 
 const TextArea: React.FC<TextAreaProps> = ({ label, value, onChange, placeholder, className, initStyle }) => {
+	const handleChange = (e) => {
+		onChange(e.target.value);
+	};
 	return (
 		<InputLayout label={label} className={className} initStyle={initStyle}>
 			<Wrapper initStyle={initStyle}>
-				<Input value={value} onChange={onChange} placeholder={placeholder} />
+				<Input value={value} onChange={handleChange} placeholder={placeholder} />
 			</Wrapper>
 		</InputLayout>
 	);

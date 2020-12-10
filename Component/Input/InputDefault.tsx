@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import InputLayout from "./InputLayout";
 import { useEffect } from "react";
+import inputPhoneNumber from "../../util/formCheck";
 interface InputDefaultProps {
 	label?: string;
 	value: string;
@@ -14,6 +15,7 @@ interface InputDefaultProps {
 	initStyle?: boolean;
 	fontsize?: number;
 	setValue: any;
+	maxLength?: number;
 }
 
 const Input = styled.input<{ isLabel?: boolean; initStyle?: boolean; fontsize?: number }>`
@@ -32,7 +34,7 @@ const Input = styled.input<{ isLabel?: boolean; initStyle?: boolean; fontsize?: 
 		`};
 `;
 
-const InputDefault: React.FC<InputDefaultProps> = ({ initStyle, label, value, setValue, onChange, type = "text", placeholder, className, onEnter, onFocus, onBlur, fontsize }) => {
+const InputDefault: React.FC<InputDefaultProps> = ({ maxLength, initStyle, label, value, setValue, onChange, type = "text", placeholder, className, onEnter, onFocus, onBlur, fontsize }) => {
 	const handleKeyDown = (e) => {
 		var keyCode = e.which ? e.which : e.keyCode;
 		if (keyCode === 13 || keyCode === 188) {
@@ -55,6 +57,10 @@ const InputDefault: React.FC<InputDefaultProps> = ({ initStyle, label, value, se
 		onFocus && onFocus();
 	};
 
+	const handleChange = (e) => {
+		onChange(type === "tel" ? inputPhoneNumber(e.target.value) : e.target.value);
+	};
+
 	return (
 		<InputLayout label={label} className={`${className}`} initStyle={initStyle}>
 			<Input
@@ -62,12 +68,13 @@ const InputDefault: React.FC<InputDefaultProps> = ({ initStyle, label, value, se
 				initStyle={initStyle}
 				type={type}
 				value={value}
-				onChange={onChange}
+				onChange={handleChange}
 				placeholder={placeholder}
 				onKeyDown={handleKeyDown}
 				onFocus={handleFlocus}
 				onBlur={onBlur}
 				isLabel={!!label}
+				maxLength={maxLength}
 			/>
 		</InputLayout>
 	);

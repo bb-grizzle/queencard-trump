@@ -35,6 +35,9 @@ import BtnSubmit from "../Component/Btn/BtnSubmit";
 import media from "../Styles/media";
 import Popup from "../Component/Popup";
 import useElementSize from "../Hook/useElementSize";
+import { sendEmail } from "../util/sendEmail";
+import { fbUploadStorage, fbDeleteStorage } from "../Firebase/firebase";
+import { formCheck, checkWebsite, checkEmail } from "../util/formCheck";
 
 const PageTitleWrapperCustome = styled(PageTitleWrapper)`
 	margin-bottom: 118px;
@@ -121,6 +124,7 @@ const Contact = () => {
 	const personalRoleInput = useInput("");
 	const personalNumberInput = useInput("");
 	const personalEmailInput = useInput("");
+
 	const [agree, setAgree] = useState(false);
 
 	const [form, setForm] = useState({});
@@ -128,6 +132,10 @@ const Contact = () => {
 
 	const { ref, size } = useElementSize();
 	const [popupActive, setPopupActive] = useState(false);
+
+	useEffect(() => {
+		// return formInit();
+	}, []);
 
 	useEffect(() => {
 		setForm({
@@ -156,12 +164,62 @@ const Contact = () => {
 	}, [personalGroupInput.value, personalWebsiteInput.value, personalNameInput.value, personalRoleInput.value, personalNumberInput.value, personalEmailInput.value]);
 
 	const handleSubmit = async () => {
-		console.log("handleSubmit");
+		if (projectTypeInput.value.lenght === 0 || !projectDescriptInput.value || !projectReasonInput.value || !projectBudgetInput.value || !projectDateChkInput.value || !projectDateTextInput.value) {
+			formCheck();
+			return;
+		}
+
+		if (!personalGroupInput.value || !personalNameInput.value || !personalRoleInput.value || !personalNumberInput.value || !personalEmailInput.value) {
+			formCheck();
+			return;
+		}
+
+		if (!agree) {
+			formCheck();
+			return;
+		}
+
+		// validation
+		if (!checkWebsite(personalWebsiteInput.value)) {
+			formCheck("웹사이트를 다시 확인해 주세요. 🌎");
+			return;
+		} else if (!checkEmail(personalEmailInput.value)) {
+			formCheck("이메일 양식을 다시 확인해 주세요. ✉️");
+			return;
+		}
+
+		const file = projectFileInput.file ? await fbUploadStorage("contact", `${Date.now()}_${projectFileInput.fileName}`, projectFileInput.file) : "";
+		const res = await sendEmail({ formData: form, file: file ? { path: file.url, filename: file.fileName } : "" });
+		if (res.status === 200 && file) {
+			await fbDeleteStorage(file.prevUrl);
+		}
 
 		setPopupActive(true);
 		setTimeout(() => {
 			setPopupActive(false);
+			formInit();
+			push("/");
 		}, 1500);
+	};
+
+	const formInit = () => {
+		projectTypeInput.init();
+		projectDescriptInput.init();
+		projectReasonInput.init();
+		projectBudgetInput.init();
+		projectDateChkInput.init();
+		// projectDateTextInput.init();
+		projectFileInput.init();
+		personalGroupInput.init();
+		personalWebsiteInput.init();
+		personalNameInput.init();
+		personalRoleInput.init();
+		personalNumberInput.init();
+		personalEmailInput.init();
+		setAgree(false);
+		setForm({});
+		setPersonalInfo({});
+		setPopupActive(false);
 	};
 
 	useEffect(() => {
@@ -194,7 +252,7 @@ const Contact = () => {
 									<PersonalInfoList {...personalWebsiteInput} label={"웹사이트"} placeholder={"웹사이트"} />
 									<PersonalInfoList {...personalNameInput} label={"담당자 성함"} placeholder={"담당자 성함"} />
 									<PersonalInfoList {...personalRoleInput} label={"직함"} placeholder={"직함"} />
-									<PersonalInfoList {...personalNumberInput} label={"전화번호"} placeholder={"전화번호"} type={"tel"} />
+									<PersonalInfoList {...personalNumberInput} label={"전화번호"} placeholder={"전화번호"} type={"tel"} maxLength={13} />
 									<PersonalInfoList {...personalEmailInput} label={"이메일 주소"} placeholder={"이메일 주소"} type={"email"} />
 								</PersonalInfo>
 

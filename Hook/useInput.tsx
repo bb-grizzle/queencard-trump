@@ -10,8 +10,8 @@ export interface InputDefaultProps {
 const useInput = (val): InputDefaultProps => {
 	const [value, setValue] = useState(val);
 
-	const onChange = (e) => {
-		setValue(e.target.value);
+	const onChange = (value: string) => {
+		setValue(value);
 	};
 	const init = () => {
 		setValue(val);
