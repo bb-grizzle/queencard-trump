@@ -52,6 +52,7 @@ const BtnSubmitCustome = styled(BtnSubmit)`
 	color: white;
 	padding: 15px 100px;
 	display: inline-block;
+	width: 270px;
 
 	@media ${media.tablet} {
 		padding: 15px 0;
@@ -179,7 +180,7 @@ const Contact = () => {
 						<ColContents>
 							<PageTitleWrapperCustome handleBackClick={handleBackClick} title={""} subTitle={DATA_CONTACT.title} text={DATA_CONTACT.text.split("\n")} />
 
-							<ContactForm>
+							<ContactForm onSubmit={handleSubmit}>
 								<InputCheckbox {...projectTypeInput} {...DATA_FORM_PROJECT_SELECT} />
 								<TextArea {...projectDescriptInput} {...DATA_FORM_PROJECT_DESCRIPT} />
 								<TextArea {...projectReasonInput} {...DATA_FORM_REASON} />
