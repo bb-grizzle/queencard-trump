@@ -10,7 +10,7 @@ export const sendSlackMessage = async () => {
 			}
 			// data: {  }
 		});
-		console.log(res);
+		console.log("res : ", res);
 		return res;
 	} catch (err) {
 		console.dir(err);

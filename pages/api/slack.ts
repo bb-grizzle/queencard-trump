@@ -19,12 +19,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				},
 				function(err, response) {
 					console.log(response);
+					if (err) {
+						throw err;
+					} else if (response) {
+						throw new Error(response.status);
+					}
 				}
 			);
 		};
 
-		await send("test");
-		return res.status(200).end();
+		try {
+			await send("test");
+			return res.status(200).end();
+		} catch (err) {
+			console.log(err);
+			return res.json({ err });
+		}
 	}
 
 	return res.status(404).json({

@@ -188,7 +188,8 @@ const Contact = () => {
 		// }
 
 		try {
-			sendSlackMessage();
+			await sendSlackMessage();
+
 			// setLoading(true);
 			// const file = projectFileInput.file ? await fbUploadStorage("contact", `${Date.now()}_${projectFileInput.fileName}`, projectFileInput.file) : "";
 			// const res = await sendEmail({
