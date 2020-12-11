@@ -188,25 +188,34 @@ const Contact = () => {
 			return;
 		}
 
-		const file = projectFileInput.file ? await fbUploadStorage("contact", `${Date.now()}_${projectFileInput.fileName}`, projectFileInput.file) : "";
-		const res = await sendEmail({
-			formData: form,
-			file: file ? { path: file.url, filename: file.fileName } : "",
-			auth: {
-				user: process.env.NEXT_PUBLIC_GMAIL_EMAIL,
-				pass: process.env.NEXT_PUBLIC_GMAIL_PW
-			}
-		});
-		if (res.status === 200 && file) {
-			await fbDeleteStorage(file.prevUrl);
-		}
+		try {
+			setLoading(true);
+			const file = projectFileInput.file ? await fbUploadStorage("contact", `${Date.now()}_${projectFileInput.fileName}`, projectFileInput.file) : "";
+			const res = await sendEmail({
+				formData: form,
+				file: file ? { path: file.url, filename: file.fileName } : "",
+				auth: {
+					user: process.env.NEXT_PUBLIC_GMAIL_EMAIL,
+					pass: process.env.NEXT_PUBLIC_GMAIL_PW
+				}
+			});
 
-		setPopupActive(true);
-		setTimeout(() => {
-			setPopupActive(false);
-			formInit();
-			push("/");
-		}, 1500);
+			setPopupActive(true);
+
+			setTimeout(async () => {
+				setPopupActive(false);
+
+				if (res.status === 200 && file) {
+					fbDeleteStorage(file.prevUrl);
+				}
+
+				formInit();
+				push("/");
+			}, 1500);
+		} catch (err) {
+			console.log(err);
+		} finally {
+		}
 	};
 
 	const formInit = () => {

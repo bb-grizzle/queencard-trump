@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const sendEmail = async ({ formData, file, auth }) => {
-	console.log(auth);
 	try {
 		const res = await axios({
 			method: "post",

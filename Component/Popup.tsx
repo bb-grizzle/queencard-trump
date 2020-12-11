@@ -24,6 +24,7 @@ const Wrapper = styled.div<{ left: number; active: boolean }>`
 	transition-property: opacity transform;
 	opacity: 0;
 	${(props) => props.theme.event.disable};
+	z-index: ${(props) => props.theme.zIndex.popup};
 
 	${(props) =>
 		props.active &&
