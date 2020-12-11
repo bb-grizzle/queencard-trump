@@ -35,9 +35,8 @@ import BtnSubmit from "../Component/Btn/BtnSubmit";
 import media from "../Styles/media";
 import Popup from "../Component/Popup";
 import useElementSize from "../Hook/useElementSize";
-import { sendEmail } from "../util/sendEmail";
-import { fbUploadStorage, fbDeleteStorage } from "../Firebase/firebase";
 import { formCheck, checkWebsite, checkEmail } from "../util/formCheck";
+import { sendSlackMessage } from "../util/sendSlackMessage";
 
 const PageTitleWrapperCustome = styled(PageTitleWrapper)`
 	margin-bottom: 118px;
@@ -189,28 +188,21 @@ const Contact = () => {
 		// }
 
 		try {
+			sendSlackMessage();
 			// setLoading(true);
-			const file = projectFileInput.file ? await fbUploadStorage("contact", `${Date.now()}_${projectFileInput.fileName}`, projectFileInput.file) : "";
-			const res = await sendEmail({
-				formData: form,
-				file: file ? { path: file.url, filename: file.fileName } : ""
-				// auth: {
-				// 	user: process.env.NEXT_PUBLIC_GMAIL_EMAIL,
-				// 	pass: process.env.NEXT_PUBLIC_GMAIL_PW
-				// }
-			});
+			// const file = projectFileInput.file ? await fbUploadStorage("contact", `${Date.now()}_${projectFileInput.fileName}`, projectFileInput.file) : "";
+			// const res = await sendEmail({
+			// 	formData: form,
+			// 	file: file ? { path: file.url, filename: file.fileName } : ""
+			// });
 
 			setPopupActive(true);
 
 			setTimeout(async () => {
 				setPopupActive(false);
 
-				if (res.status === 200 && file) {
-					fbDeleteStorage(file.prevUrl);
-				}
-
-				// formInit();
-				// push("/");
+				formInit();
+				push("/");
 			}, 1500);
 		} catch (err) {
 			console.log(err);
