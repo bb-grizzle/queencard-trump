@@ -12,8 +12,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				service: "gmail",
 				host: "smtp.gmail.com",
 				auth: {
-					pass: process.env.NEXT_PUBLIC_GMAIL_PW,
-					user: process.env.NEXT_PUBLIC_GMAIL_EMAIL
+					pass: "firbigi1993@gmail.com",
+					user: "Dbs279756*"
 				}
 			})
 		);
