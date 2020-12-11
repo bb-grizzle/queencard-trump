@@ -7,5 +7,5 @@ interface HeadDataProps {
 export const headData: HeadDataProps = {
 	description: "Awesome School",
 	title: "어썸스쿨",
-	url: "https://awesome-school.vercel.app//"
+	url: "https://awesome-school.vercel.app/"
 };

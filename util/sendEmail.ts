@@ -1,10 +1,11 @@
 import axios from "axios";
+import { headData } from "../Data/head";
 
 export const sendEmail = async ({ formData, file, auth }) => {
 	try {
 		const res = await axios({
 			method: "post",
-			url: "/api/sendmail",
+			url: `${headData.url}/api/sendmail`,
 			headers: {
 				"Content-Type": "application/json"
 			},
