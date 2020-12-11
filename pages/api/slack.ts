@@ -6,7 +6,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === "GET") {
 		return res.status(200).json({ page: "api/slack" });
 	} else if (req.method === "POST") {
-		const webhookUri = "https://hooks.slack.com/services/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";
+		const webhookUri = process.env.NEXT_PUBLIC_SLACK_URL;
 
 		const slack = new Slack();
 		slack.setWebhook(webhookUri);
@@ -16,17 +16,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				slack.webhook(
 					{
 						channel: "#test", // 전송될 슬랙 채널
-						username: "webhookbot", //슬랙에 표시될 이름
+						username: "AwesomeSchool | WEB", //슬랙에 표시될 이름
 						text: message
 					},
 					function(err, response) {
 						if (err) {
-							console.log("test 1");
 							rej(err);
 						} else if (response) {
 							res(response);
-							// console.log("test 2");
-							// throw new Error(response.status);
 						}
 					}
 				);
@@ -34,12 +31,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		};
 
 		try {
-			const test = await send("test");
-			console.log("test : ", test);
-			return res.json({ test });
+			await send("test");
+			return res.status(200).end();
 		} catch (err) {
-			console.log(err);
-			return res.status(200).json({ err: err });
+			return res.status(405).end();
 		}
 	}
 
