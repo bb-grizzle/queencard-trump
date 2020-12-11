@@ -10,31 +10,36 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 		const slack = new Slack();
 		slack.setWebhook(webhookUri);
+
 		const send = async (message) => {
-			await slack.webhook(
-				{
-					channel: "#test", // 전송될 슬랙 채널
-					username: "webhookbot", //슬랙에 표시될 이름
-					text: message
-				},
-				function(err, response) {
-					if (err) {
-						console.log("test 1");
-						throw err;
-					} else if (response) {
-						console.log("test 2");
-						throw new Error(response.status);
+			return new Promise((res, rej) => {
+				slack.webhook(
+					{
+						channel: "#test", // 전송될 슬랙 채널
+						username: "webhookbot", //슬랙에 표시될 이름
+						text: message
+					},
+					function(err, response) {
+						if (err) {
+							console.log("test 1");
+							rej(err);
+						} else if (response) {
+							res(response);
+							// console.log("test 2");
+							// throw new Error(response.status);
+						}
 					}
-				}
-			);
+				);
+			});
 		};
 
 		try {
-			await send("test");
-			return res.json({ test: "test" });
+			const test = await send("test");
+			console.log("test : ", test);
+			return res.json({ test });
 		} catch (err) {
 			console.log(err);
-			return res.json({ err });
+			return res.status(200).json({ err: err });
 		}
 	}
 
