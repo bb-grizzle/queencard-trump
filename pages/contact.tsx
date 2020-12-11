@@ -108,6 +108,7 @@ const Contact = () => {
 	const { push } = useRouter();
 
 	// Form
+	console.log("test");
 
 	const projectTypeInput = useInputCheckbox({ initOption: options_project });
 	const projectDescriptInput = useInput("");
