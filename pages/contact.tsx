@@ -202,8 +202,8 @@ const Contact = () => {
 			setTimeout(async () => {
 				setPopupActive(false);
 
-				formInit();
-				push("/");
+				// formInit();
+				// push("/");
 			}, 1500);
 		} catch (err) {
 			console.log(err);
