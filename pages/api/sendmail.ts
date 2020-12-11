@@ -1,24 +1,22 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 import nodemailer from "nodemailer";
-import smtpTransport from "nodemailer-smtp-transport";
+import sgTransport from "nodemailer-sendgrid-transport";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === "POST") {
 		const { formData, file } = req.body;
 
 		var transporter = nodemailer.createTransport(
-			smtpTransport({
-				service: "gmail",
-				host: "smtp.gmail.com",
+			sgTransport({
 				auth: {
-					pass: "firbigi1993@gmail.com",
-					user: "Dbs279756*"
+					api_user: "taeng93",
+					api_key: "Dbs279756*"
 				}
 			})
 		);
 
-		var mailOptions = {
+		var email = {
 			from: "firbigi1993@gmail.com",
 			to: "firbigi1993@gmail.com",
 			subject: `Awesome | ${formData.personalInfo.group}, ${formData.personalInfo.name}`,
@@ -70,7 +68,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			attachments: file ? [file] : undefined
 		};
 
-		await transporter.sendMail(mailOptions, function(error, info) {
+		await transporter.sendMail(email, function(error, info) {
 			if (error) {
 				console.log(error);
 			} else {
