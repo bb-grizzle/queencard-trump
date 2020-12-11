@@ -6,16 +6,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === "GET") {
 		return res.status(200).json({ page: "api/slack" });
 	} else if (req.method === "POST") {
+		const { message } = req.body;
 		const webhookUri = process.env.NEXT_PUBLIC_SLACK_URL;
 
 		const slack = new Slack();
 		slack.setWebhook(webhookUri);
 
-		const send = async (message) => {
+		const send = async () => {
 			return new Promise((res, rej) => {
 				slack.webhook(
 					{
-						channel: "#test", // 전송될 슬랙 채널
+						channel: process.env.NEXT_PUBLIC_SLACK_CHANNEL, // 전송될 슬랙 채널
 						username: "AwesomeSchool | WEB", //슬랙에 표시될 이름
 						text: message
 					},
@@ -31,7 +32,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		};
 
 		try {
-			await send("test");
+			await send();
 			return res.status(200).end();
 		} catch (err) {
 			return res.status(405).end();

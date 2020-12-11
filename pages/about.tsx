@@ -174,13 +174,11 @@ const index = () => {
 
 	useEffect(() => {
 		if (data) {
-			console.log(data);
 			setLoading(false);
 		}
 	}, [data]);
 
 	const handleBackClick = () => {
-		console.log("handleBackClick");
 		push("/");
 	};
 

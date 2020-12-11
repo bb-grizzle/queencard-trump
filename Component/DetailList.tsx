@@ -42,7 +42,6 @@ const ListNumbering = styled(Numbering)`
 `;
 
 const DetailList: React.FC<DetailListProps> = ({ title, image, text, number }) => {
-	console.log(image);
 	return (
 		<Wrapper>
 			{!!text ? (

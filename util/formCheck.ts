@@ -14,7 +14,6 @@ export const checkWebsite = (value: string) => {
 	console.log(value);
 	if (value) {
 		if (!value.includes("http") && !value.includes("https")) {
-			console.log("here?");
 			return false;
 		} else {
 			return true;
