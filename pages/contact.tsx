@@ -107,9 +107,6 @@ const Contact = () => {
 	const { isTablet } = useSize();
 	const { push } = useRouter();
 
-	// Form
-	console.log("test");
-
 	const projectTypeInput = useInputCheckbox({ initOption: options_project });
 	const projectDescriptInput = useInput("");
 	const projectReasonInput = useInput("");
