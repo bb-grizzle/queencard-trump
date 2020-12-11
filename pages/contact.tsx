@@ -193,11 +193,11 @@ const Contact = () => {
 			const file = projectFileInput.file ? await fbUploadStorage("contact", `${Date.now()}_${projectFileInput.fileName}`, projectFileInput.file) : "";
 			const res = await sendEmail({
 				formData: form,
-				file: file ? { path: file.url, filename: file.fileName } : "",
-				auth: {
-					user: process.env.NEXT_PUBLIC_GMAIL_EMAIL,
-					pass: process.env.NEXT_PUBLIC_GMAIL_PW
-				}
+				file: file ? { path: file.url, filename: file.fileName } : ""
+				// auth: {
+				// 	user: process.env.NEXT_PUBLIC_GMAIL_EMAIL,
+				// 	pass: process.env.NEXT_PUBLIC_GMAIL_PW
+				// }
 			});
 
 			setPopupActive(true);
@@ -210,7 +210,7 @@ const Contact = () => {
 				}
 
 				// formInit();
-				push("/");
+				// push("/");
 			}, 1500);
 		} catch (err) {
 			console.log(err);

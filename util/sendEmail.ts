@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const sendEmail = async ({ formData, file, auth }) => {
+export const sendEmail = async ({ formData, file }) => {
 	try {
 		const res = await axios({
 			method: "post",
@@ -8,7 +8,7 @@ export const sendEmail = async ({ formData, file, auth }) => {
 			headers: {
 				"Content-Type": "application/json"
 			},
-			data: { formData, file, auth }
+			data: { formData, file }
 		});
 		console.log(res);
 		return res;
