@@ -164,32 +164,32 @@ const Contact = () => {
 	}, [personalGroupInput.value, personalWebsiteInput.value, personalNameInput.value, personalRoleInput.value, personalNumberInput.value, personalEmailInput.value]);
 
 	const handleSubmit = async () => {
-		if (projectTypeInput.value.lenght === 0 || !projectDescriptInput.value || !projectReasonInput.value || !projectBudgetInput.value || !projectDateChkInput.value || !projectDateTextInput.value) {
-			formCheck();
-			return;
-		}
+		// if (projectTypeInput.value.lenght === 0 || !projectDescriptInput.value || !projectReasonInput.value || !projectBudgetInput.value || !projectDateChkInput.value || !projectDateTextInput.value) {
+		// 	formCheck();
+		// 	return;
+		// }
 
-		if (!personalGroupInput.value || !personalNameInput.value || !personalRoleInput.value || !personalNumberInput.value || !personalEmailInput.value) {
-			formCheck();
-			return;
-		}
+		// if (!personalGroupInput.value || !personalNameInput.value || !personalRoleInput.value || !personalNumberInput.value || !personalEmailInput.value) {
+		// 	formCheck();
+		// 	return;
+		// }
 
-		if (!agree) {
-			formCheck();
-			return;
-		}
+		// if (!agree) {
+		// 	formCheck();
+		// 	return;
+		// }
 
-		// validation
-		if (!checkWebsite(personalWebsiteInput.value)) {
-			formCheck("웹사이트를 다시 확인해 주세요. 🌎");
-			return;
-		} else if (!checkEmail(personalEmailInput.value)) {
-			formCheck("이메일 양식을 다시 확인해 주세요. ✉️");
-			return;
-		}
+		// // validation
+		// if (!checkWebsite(personalWebsiteInput.value)) {
+		// 	formCheck("웹사이트를 다시 확인해 주세요. 🌎");
+		// 	return;
+		// } else if (!checkEmail(personalEmailInput.value)) {
+		// 	formCheck("이메일 양식을 다시 확인해 주세요. ✉️");
+		// 	return;
+		// }
 
 		try {
-			setLoading(true);
+			// setLoading(true);
 			const file = projectFileInput.file ? await fbUploadStorage("contact", `${Date.now()}_${projectFileInput.fileName}`, projectFileInput.file) : "";
 			const res = await sendEmail({
 				formData: form,
@@ -209,7 +209,7 @@ const Contact = () => {
 					fbDeleteStorage(file.prevUrl);
 				}
 
-				formInit();
+				// formInit();
 				push("/");
 			}, 1500);
 		} catch (err) {

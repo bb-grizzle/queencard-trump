@@ -67,7 +67,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			attachments: file ? [file] : undefined
 		};
 
-		transporter.sendMail(mailOptions, function(error, info) {
+		await transporter.sendMail(mailOptions, function(error, info) {
 			if (error) {
 				console.log(error);
 			} else {
