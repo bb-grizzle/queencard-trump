@@ -3,7 +3,9 @@ import { NextApiRequest } from "next";
 import Slack from "slack-node";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-	if (req.method === "POST") {
+	if (req.method === "GET") {
+		return res.status(200).json({ page: "api/slack" });
+	} else if (req.method === "POST") {
 		const webhookUri = "https://hooks.slack.com/services/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";
 
 		const slack = new Slack();
