@@ -18,7 +18,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 					text: message
 				},
 				function(err, response) {
-					console.log(response);
 					if (err) {
 						throw err;
 					} else if (response) {
@@ -30,7 +29,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 		try {
 			await send("test");
-			return res.status(200).end();
+			return res.json({ test: "test" });
 		} catch (err) {
 			console.log(err);
 			return res.json({ err });
