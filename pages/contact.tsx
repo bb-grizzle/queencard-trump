@@ -256,12 +256,12 @@ const Contact = () => {
 								<InputFile {...projectFileInput} {...DATA_FORM_FILE} />
 
 								<PersonalInfo>
-									<PersonalInfoList {...personalGroupInput} label={"소속 조직명"} placeholder={"소속 조직명"} />
-									<PersonalInfoList {...personalWebsiteInput} label={"웹사이트"} placeholder={"웹사이트"} />
-									<PersonalInfoList {...personalNameInput} label={"담당자 성함"} placeholder={"담당자 성함"} />
-									<PersonalInfoList {...personalRoleInput} label={"직함"} placeholder={"직함"} />
-									<PersonalInfoList {...personalNumberInput} label={"전화번호"} placeholder={"전화번호"} type={"tel"} maxLength={13} />
-									<PersonalInfoList {...personalEmailInput} label={"이메일 주소"} placeholder={"이메일 주소"} type={"email"} />
+									<PersonalInfoList {...personalGroupInput} placeholder={"소속 조직명"} />
+									<PersonalInfoList {...personalWebsiteInput} placeholder={"웹사이트"} />
+									<PersonalInfoList {...personalNameInput} placeholder={"담당자 성함"} />
+									<PersonalInfoList {...personalRoleInput} placeholder={"직함"} />
+									<PersonalInfoList {...personalNumberInput} placeholder={"전화번호"} type={"tel"} maxLength={13} />
+									<PersonalInfoList {...personalEmailInput} placeholder={"이메일 주소"} type={"email"} />
 								</PersonalInfo>
 
 								<CheckboxItem value={"agree"} name={"개인정보 수집, 이용 및 처리위탁 동의"} onChange={() => setAgree((prev) => !prev)} />

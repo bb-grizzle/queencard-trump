@@ -19,12 +19,14 @@ interface InputDefaultProps {
 }
 
 const Input = styled.input<{ isLabel?: boolean; initStyle?: boolean; fontsize?: number }>`
-	${(props) => props.theme.style.input.item(props.initStyle)};
+	${(props) => props.theme.style.input.item()};
+
 	${(props) =>
 		!props.isLabel &&
 		css`
-			border-width: ${props.isLabel ? "1px" : "0px"};
-			padding-top: 0 !important;
+			padding-bottom: 18px;
+			border-bottom: 1px solid ${(props) => props.theme.color.gray.dark};
+			border-top: 0px;
 		`};
 
 	${(props) =>
@@ -32,6 +34,8 @@ const Input = styled.input<{ isLabel?: boolean; initStyle?: boolean; fontsize?: 
 		css`
 			font-size: ${() => `${props.fontsize}px`};
 		`};
+
+	/* border: 1px solid red; */
 `;
 
 const InputDefault: React.FC<InputDefaultProps> = ({ maxLength, initStyle, label, value, setValue, onChange, type = "text", placeholder, className, onEnter, onFocus, onBlur, fontsize }) => {

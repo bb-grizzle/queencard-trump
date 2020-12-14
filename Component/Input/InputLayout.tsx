@@ -7,6 +7,7 @@ interface InputLayoutProps {
 	caption?: string;
 }
 const Wrapper = styled.div<{ initStyle?: boolean }>`
+	/* border: 1px solid red; */
 	display: flex;
 	flex-direction: column;
 	${(props) => props.theme.style.input.layout(props.initStyle)};

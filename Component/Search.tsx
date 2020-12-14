@@ -11,10 +11,7 @@ const Wrapper = styled.div`
 const Input = styled(InputDefault)`
 	width: 110px;
 	padding: 0;
-	border-color: ${(props) => props.theme.color.main};
-	border-width: 1.5px;
-	margin-right: 2px;
-	border-bottom-style: solid;
+	border-bottom: 1.5px solid ${(props) => props.theme.color.main};
 
 	> input {
 		color: ${(props) => props.theme.color.gray.dark};

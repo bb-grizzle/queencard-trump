@@ -26,5 +26,6 @@
 ### update
 
 - [x] change footer
+- [x] change input design
 - [ ] add contents chart image
 - [ ] send email
