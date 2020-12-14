@@ -32,6 +32,7 @@ const TitleWrapper = styled.div<{ image: boolean }>`
 		`};
 `;
 const SectionTitleCustome = styled(SectionTitle)<{ isHalf: boolean }>`
+	margin-bottom: 125px;
 	${(props) =>
 		props.isHalf
 			? css`

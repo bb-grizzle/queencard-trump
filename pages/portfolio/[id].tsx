@@ -20,7 +20,7 @@ import PageTitleWrapper from "../../Component/PageTitleWrapper";
 
 const InfoWrapper = styled.div`
 	display: flex;
-	margin-bottom: 140px;
+	margin-bottom: 125px;
 	color: ${(props) => props.theme.color.gray.dark};
 
 	@media ${media.tablet} {

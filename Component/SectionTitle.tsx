@@ -12,7 +12,7 @@ interface SectionTitleProps {
 
 const TitleWrapper = styled.div`
 	color: ${(props) => props.theme.color.gray.dark};
-	margin-bottom: 244px;
+	margin-bottom: 55px;
 
 	@media ${media.tablet} {
 		padding-bottom: 16px;
