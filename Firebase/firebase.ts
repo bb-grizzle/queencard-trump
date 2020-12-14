@@ -1,18 +1,5 @@
-// firebase
 import firebase from "firebase/app";
-import firebaseConfig from "./config";
-import "firebase/firestore";
-import "firebase/storage";
-import "firebase/auth";
-import "firebase/analytics";
-
-if (!firebase.apps.length) {
-	firebase.initializeApp(firebaseConfig);
-}
-
-const db = firebase.firestore();
-const storage = firebase.storage();
-const auth = firebase.auth();
+import { auth, db, storage } from "./firebaseApp";
 
 export const fbAuthListener = (cal) => {
 	auth.onAuthStateChanged((user) => {
