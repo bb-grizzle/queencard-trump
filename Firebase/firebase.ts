@@ -1,5 +1,4 @@
-import firebase from "firebase/app";
-import { auth, db, storage } from "./firebaseApp";
+import { auth, db, storage, firebaseModule as firebase } from "./firebaseApp";
 
 export const fbAuthListener = (cal) => {
 	auth.onAuthStateChanged((user) => {
