@@ -9,6 +9,7 @@ import { useIsMenuClick, useIsAdmin, useIsLoggedIn } from "../Context/AppProvide
 import { useState, useEffect } from "react";
 import BtnText from "./Btn/BtnText";
 import { fbSignout } from "../Firebase/firebase";
+import Logo from "./Logo";
 
 const Wrapper = styled.header`
 	width: 100%;
@@ -33,7 +34,7 @@ const Container = styled(ContainerLayout)`
 	}
 `;
 
-const LogoWrapper = styled.div`
+const LogoWrapper = styled(Logo)`
 	width: 25%;
 `;
 const Nav = styled.nav<{ isAdmin: boolean }>`
@@ -48,13 +49,6 @@ const Nav = styled.nav<{ isAdmin: boolean }>`
 
 	@media ${media.tablet} {
 		display: none;
-	}
-`;
-
-const Logo = styled.img`
-	width: 160px;
-	@media ${media.tablet} {
-		width: 100px;
 	}
 `;
 
@@ -161,13 +155,7 @@ const Header = () => {
 	return (
 		<Wrapper>
 			<Container>
-				<LogoWrapper>
-					<Link href="/">
-						<a>
-							<Logo src="/image/logo.png" />
-						</a>
-					</Link>
-				</LogoWrapper>
+				<LogoWrapper />
 
 				<BtnWrapper onClick={handleMenuClick}>
 					<BtnIcon icon="menu" />

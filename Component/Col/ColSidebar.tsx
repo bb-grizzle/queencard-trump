@@ -2,13 +2,11 @@ import ColDefault from "./ColDefault";
 import styled from "styled-components";
 import Paragraph, { ParagraphType } from "../Text/Paragraph";
 import Search from "../Search";
-import Footer from "../Footer";
 import useSize from "../../Hook/useSize";
 import media from "../../Styles/media";
 import useInput from "../../Hook/useInput";
 import { useState, useEffect } from "react";
 import { useSearchValue } from "../../Context/AppProvider";
-import { useRouter } from "next/router";
 
 const ColWrapper = styled(ColDefault)`
 	position: relative;
@@ -22,8 +20,6 @@ const ColTitle = styled(Paragraph)`
 	color: ${(props) => props.theme.color.main};
 	margin-bottom: 40px;
 `;
-
-const CustomFooter = styled(Footer)``;
 
 const Row = styled.div``;
 
@@ -92,12 +88,6 @@ const ColSidebar: React.FC = ({ children }) => {
 				<Search searchInput={searchInput} onSearch={handleSearch} inputClick={inputClick} onBlur={handleFocusOut} onClose={handleOnClose} />
 			</SearchRow>
 			<RowEmpty />
-
-			{!isTablet && (
-				<Row>
-					<CustomFooter />
-				</Row>
-			)}
 		</ColWrapper>
 	);
 };

@@ -1,5 +1,7 @@
 import styled, { StyledComponentProps } from "styled-components";
 import {} from "styled-components/";
+import Link from "next/link";
+import media from "../Styles/media";
 
 interface LogoProps {
 	color?: string;
@@ -9,18 +11,21 @@ interface LogoProps {
 
 const Wrapper = styled.div``;
 
-const Text = styled.p<{ color?: string; size?: number }>`
-	font-weight: bold;
-
-	color: ${(props) => props.color};
-	font-size: ${(props) => `${props.size}px`};
+const LogoImage = styled.img`
+	width: 160px;
+	@media ${media.tablet} {
+		width: 100px;
+	}
 `;
+
 const Logo: React.FC<LogoProps> = ({ color = "black", size = 20, className }) => {
 	return (
 		<Wrapper className={className}>
-			<Text color={color} size={size}>
-				Seohee An
-			</Text>
+			<Link href="/">
+				<a>
+					<LogoImage src="/image/logo.png" />
+				</a>
+			</Link>
 		</Wrapper>
 	);
 };

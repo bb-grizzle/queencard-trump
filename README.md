@@ -25,5 +25,6 @@
 
 ### update
 
-- [ ] web design
+- [x] change footer
+- [ ] add contents chart image
 - [ ] send email

@@ -15,12 +15,11 @@ const Wrapper = styled.div`
 	padding-bottom: 100px;
 	@media ${media.tablet} {
 		padding-top: ${(props) => props.theme.size.header.mobile};
-		padding-bottom: 64px;
+		padding-bottom: 32px;
 	}
 	min-height: ${(props) => props.theme.layout.full_height};
 `;
 const PageContainer: React.FC<PageContainerProps> = ({ children, className }) => {
-	const { isTablet } = useSize();
 	const { setLoading } = useLoading();
 	useEffect(() => {
 		setLoading(true);
@@ -29,7 +28,7 @@ const PageContainer: React.FC<PageContainerProps> = ({ children, className }) =>
 		<Wrapper className={className}>
 			{children}
 
-			{isTablet && <Footer />}
+			<Footer />
 		</Wrapper>
 	);
 };
