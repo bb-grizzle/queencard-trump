@@ -7,7 +7,7 @@ export const DATA_TUTOR = {
 								전달보다는 아이들을 믿어주고 가능성과 꿈을 이끌어 내는 일을 합니다. 
 								교육이 세상을 바꿀 수 있다고 믿으며, 자신의 역량을 바탕으로 이 믿음을 
 								함께 실현해 나가는 사람들입니다.`,
-	image: "/image/tutor/tutor_01.jpg",
+	image: "/image/tutor/tutor_01.png",
 	contents: {
 		title: "WE ARE HERO TEACHERS",
 		subTitle: "청년강사 인터뷰"

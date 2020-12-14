@@ -18,7 +18,7 @@ import ProcessList from "../Component/Process/ProcessList";
 import { useRouter } from "next/router";
 
 const ProcessWrapper = styled.ul`
-	margin-bottom: 110px;
+	margin-bottom: 125px;
 
 	@media ${media.tablet} {
 		margin-bottom: 64px;
@@ -75,7 +75,7 @@ const Process = () => {
 							</ProcessWrapper>
 
 							{/* Core Value */}
-							<SectionWrapper title={DATA_PROCESS.contents.title} subTitle={DATA_PROCESS.contents.subTitle} gap={38} isLast={true}>
+							<SectionWrapper title={DATA_PROCESS.contents.title} subTitle={DATA_PROCESS.contents.subTitle} isLast={true}>
 								<ImageSlider images={DATA_PROCESS.contents.image} />
 								<DescritWrapper>
 									<Descrit>

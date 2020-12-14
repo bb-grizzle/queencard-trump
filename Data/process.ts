@@ -24,7 +24,7 @@ export const DATA_PROCESS = {
 	contents: {
 		title: "CORE VALUE",
 		subTitle: "사업 핵심가치",
-		image: ["/image/process/contents_01.jpg"],
+		image: ["/image/process/contents_01.png"],
 		descript: [
 			{
 				title: "진정",

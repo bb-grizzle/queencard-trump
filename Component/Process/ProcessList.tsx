@@ -32,7 +32,7 @@ const ColLeft = styled(Col)`
 `;
 
 const NumberingCustome = styled(Numbering)`
-	margin-right: 21px;
+	margin-right: 11px;
 	@media ${media.tablet} {
 		margin-right: 8px;
 	}

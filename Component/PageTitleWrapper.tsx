@@ -52,7 +52,6 @@ const SectionTitleCustome = styled(SectionTitle)<{ isHalf: boolean }>`
 `;
 const TitleImage = styled.div`
 	${(props) => props.theme.layout.ratio(140)};
-	background-color: ${(props) => props.theme.color.gray.light};
 	position: relative;
 	width: 50%;
 	flex-shrink: 0;
