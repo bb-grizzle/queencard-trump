@@ -23,7 +23,7 @@ import { useRouter } from "next/router";
 const VisionSectionWrapper = styled.div`
 	display: flex;
 	justify-content: center;
-	margin-bottom: 200px;
+	margin-bottom: 125px;
 
 	@media ${media.tablet} {
 		margin-bottom: 64px;
@@ -209,7 +209,7 @@ const index = () => {
 								</VisionSectionWrapper>
 
 								{/* VALUE */}
-								<SectionWrapper title="IN AWESOME WAY" subTitle="어썸스쿨이 이뤄내는 방식 ">
+								<SectionWrapper title="IN AWESOME WAY" subTitle="어썸스쿨이 이뤄내는 방식 " gap={61}>
 									<ValueSectionWrapper>
 										{DATA_ABOUT.values.map((el, index) => {
 											return (

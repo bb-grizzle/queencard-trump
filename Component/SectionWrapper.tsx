@@ -11,7 +11,7 @@ interface SectionWrapperProps {
 	isLast?: boolean;
 }
 const Wrapper = styled.div<{ isLast: boolean }>`
-	padding-bottom: ${(props) => (props.isLast ? 0 : `140px;`)};
+	padding-bottom: ${(props) => (props.isLast ? 0 : `125px;`)};
 	@media ${media.tablet} {
 		padding-bottom: ${(props) => (props.isLast ? 0 : `64px;`)};
 	}
