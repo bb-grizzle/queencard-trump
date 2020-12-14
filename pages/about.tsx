@@ -53,15 +53,15 @@ const VisionSectionItem = styled.div`
 	}
 `;
 
-const ImageWrapper = styled.div<{ color: string }>`
+const ImageWrapper = styled.div`
 	${(props) => props.theme.layout.ratio(100)}
 	width: 270px;
 	max-width: 100%;
-	background-color: ${(props) => props.color};
 	border-radius: 100%;
 	position: relative;
 	overflow: hidden;
 	color: ${(props) => props.theme.color.white};
+	background-color: ${(props) => props.theme.color.gray.light};
 
 	@media ${media.desktop} {
 		width: 240px;
@@ -198,7 +198,7 @@ const index = () => {
 										return (
 											<VisionSectionItem key={index}>
 												<ImageWrapper color={el.color}>
-													<BackgroundImage image={el.image} opacity={0.2} />
+													<BackgroundImage image={el.image} opacity={1} />
 													<VisionTitle title={el.id} type={TitleType.SM} />
 													<VisionImageText text={el.title} />
 												</ImageWrapper>

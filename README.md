@@ -14,7 +14,7 @@
 ### admin
 
 - [x] 로그인
-- [ ] 포트폴리오
+- [x] 포트폴리오
   - [x] upload
   - [x] update
     - [x] 카테고리 동기화
@@ -22,3 +22,8 @@
     - [x] 카테고리 동기화
 - [x] 회사소개
 - [x] 강사소개
+
+### update
+
+- [ ] web design
+- [ ] send email

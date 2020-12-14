@@ -17,7 +17,7 @@ const Wrapper = styled.header`
 	left: 0;
 	top: 0;
 	z-index: ${(props) => props.theme.zIndex.header};
-	background-color: ${(props) => props.theme.color.white};
+	/* background-color: ${(props) => props.theme.color.white}; */
 
 	@media ${media.tablet} {
 		height: ${(props) => props.theme.size.header.mobile};
@@ -52,6 +52,7 @@ const Nav = styled.nav<{ isAdmin: boolean }>`
 `;
 
 const Logo = styled.img`
+	width: 160px;
 	@media ${media.tablet} {
 		width: 100px;
 	}
