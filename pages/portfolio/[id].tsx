@@ -5,8 +5,6 @@ import ColWrapper from "../../Component/Col/ColWrapper";
 import ColSidebar from "../../Component/Col/ColSidebar";
 import CategoryWrapper from "../../Component/Category/CategoryWrapper";
 import ColContents from "../../Component/Col/ColContents";
-import BtnIcon from "../../Component/Btn/BtnIcon";
-import Title from "../../Component/Text/Title";
 import { usePortfolioData, useCategoryData, useLoading } from "../../Context/AppProvider";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -160,7 +158,7 @@ const portfolio = () => {
 								<DetailContentsWrapper>
 									{nowPortfolio.contents &&
 										nowPortfolio.contents.map((el, index) => {
-											return <DetailList title={el.title} key={index} image={el.image} />;
+											return <DetailList title={el.title} key={index} image={el.image} isSlider={el.isSlider} />;
 										})}
 								</DetailContentsWrapper>
 							</ColContents>

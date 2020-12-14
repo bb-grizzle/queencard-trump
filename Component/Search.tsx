@@ -15,6 +15,9 @@ const Input = styled(InputDefault)`
 
 	> input {
 		color: ${(props) => props.theme.color.gray.dark};
+		padding: 0;
+		height: 100%;
+		border: 0px;
 	}
 
 	@media ${media.tablet} {

@@ -7,7 +7,7 @@ const useInputOption = (val) => {
 		setValue(e.target.value);
 	};
 	const init = () => {
-		setValue("");
+		setValue(val);
 	};
 
 	return { value, setValue, onChange, init };

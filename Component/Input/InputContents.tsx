@@ -9,6 +9,8 @@ import TextArea from "./TextArea";
 import InputManyFile from "./InputManyFile";
 import InputLayout from "./InputLayout";
 import { InputDefaultProps } from "../../Hook/useInput";
+import { Dispatch, SetStateAction } from "react";
+import InputToggle from "./InputToggle";
 
 interface InputContentsProps {
 	label?: string;
@@ -22,6 +24,9 @@ interface InputContentsProps {
 	onListClick: any;
 	nowContents: any;
 	onEdit: any;
+	isSlider: boolean;
+	setIsSlider: Dispatch<SetStateAction<boolean>>;
+	isChartDisable: boolean;
 }
 
 const Wrapper = styled.div``;
@@ -38,6 +43,7 @@ const InputText = styled(TextArea)`
 `;
 const BtnAdd = styled(BtnText)`
 	flex-grow: 0;
+	background-color: transparent;
 `;
 const ContentsWrapper = styled.ul`
 	display: flex;
@@ -83,6 +89,7 @@ const Thumbnail = styled.li<{ image: string }>`
 `;
 
 const AddBottomWrapper = styled.div`
+	margin-top: 32px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -96,10 +103,17 @@ const ListContentsWrapper = styled.div`
 	flex-grow: 1;
 `;
 
-const InputContents: React.FC<InputContentsProps> = ({ label, value, onAdd, onDelete, title, text, image, isText, onListClick, nowContents, onEdit }) => {
+const ToogleWrapper = styled.div``;
+
+const InputContents: React.FC<InputContentsProps> = ({ isChartDisable, label, value, onAdd, onDelete, title, text, image, isText, onListClick, nowContents, onEdit, isSlider, setIsSlider }) => {
 	return (
 		<InputLayout label={label}>
 			<Wrapper>
+				{!isChartDisable && (
+					<ToogleWrapper>
+						<InputToggle label={"슬라이더"} value={isSlider} setValue={setIsSlider} />
+					</ToogleWrapper>
+				)}
 				<AddWrapper>
 					{isText ? (
 						<>

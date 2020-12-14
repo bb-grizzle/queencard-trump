@@ -1,30 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useInput from "./useInput";
 import { fbUploadStorage, fbDeleteStorage } from "../Firebase/firebase";
 import useInputManyFile from "./useInputManyFile";
+import { ContentsProps } from "../Interface/portfolio";
 
-const useContents = ({ isText }) => {
+const useContents = ({ isText, onlySlider }) => {
 	const [value, setValue] = useState([]);
-
 	const titleInput = useInput("");
 	const textInput = useInput("");
 	const imageInput = useInputManyFile();
+	const [isSlider, setIsSlider] = useState(true);
 
 	const [nowContents, setNowContets] = useState(null);
 
 	const onAdd = () => {
 		setValue((prev) => {
-			let updateValue;
-			if (isText === true) {
-				updateValue = [...prev, { title: titleInput.value, text: textInput.value, image: imageInput.files }];
-			} else {
-				updateValue = [...prev, { title: titleInput.value, image: imageInput.files }];
+			let updateValue: ContentsProps = {
+				title: titleInput.value,
+				image: imageInput.files
+			};
+
+			if (isText) {
+				updateValue = { ...updateValue, text: textInput.value };
 			}
-			return updateValue;
+
+			if (!onlySlider) {
+				updateValue = { ...updateValue, isSlider: isSlider === undefined ? true : isSlider };
+			}
+
+			return [...prev, updateValue];
 		});
 		titleInput.init();
 		imageInput.init();
 		textInput.init();
+		setIsSlider(true);
 	};
 
 	const onDelete = (data, i) => {
@@ -44,6 +53,7 @@ const useContents = ({ isText }) => {
 		imageInput.init();
 		textInput.init();
 		imageInput.setDeleteFiles([]);
+		setIsSlider(true);
 	};
 
 	const upload = async (path) => {
@@ -67,6 +77,7 @@ const useContents = ({ isText }) => {
 	};
 
 	const update = async (path) => {
+		console.log("UPDATE");
 		const result = await Promise.all(
 			value.map(async (el) => {
 				const image = await uploadManyFiles(el.image, path);
@@ -76,6 +87,7 @@ const useContents = ({ isText }) => {
 				};
 			})
 		);
+		console.log(result);
 
 		if (!!imageInput.deleteFiles && !!imageInput.deleteFiles[0]) {
 			await Promise.all(
@@ -89,18 +101,29 @@ const useContents = ({ isText }) => {
 		return result;
 	};
 
+	useEffect(() => {
+		console.log(value);
+	}, [value]);
+
 	const onEdit = () => {
 		setValue((prev) =>
 			prev.map((el, index) => {
 				if (index === nowContents.index) {
 					const title = titleInput.value;
-					const text = titleInput.value;
+					const text = textInput.value;
 					const image = imageInput.files;
-					return {
-						title,
-						text,
-						image
-					};
+					return !onlySlider
+						? {
+								title,
+								text,
+								image,
+								isSlider: isSlider === undefined ? true : isSlider
+						  }
+						: {
+								title,
+								text,
+								image
+						  };
 				} else {
 					return el;
 				}
@@ -109,6 +132,7 @@ const useContents = ({ isText }) => {
 		titleInput.init();
 		imageInput.init();
 		textInput.init();
+		setIsSlider(false);
 		setNowContets(null);
 	};
 
@@ -125,13 +149,37 @@ const useContents = ({ isText }) => {
 	const onListClick = (data) => {
 		setNowContets(data);
 		titleInput.setValue(data.title);
+
+		if (!onlySlider) {
+			setIsSlider(data.isSlider);
+		}
+
 		if (!!data.text) {
 			textInput.setValue(data.text);
 		}
 		imageInput.setFiles(data.image);
 	};
 
-	return { value, setValue, onAdd, onDelete, init, title: titleInput, image: imageInput, text: textInput, upload, update, onEdit, deleteContents, onListClick, isText, nowContents };
+	return {
+		value,
+		setValue,
+		onAdd,
+		onDelete,
+		init,
+		title: titleInput,
+		image: imageInput,
+		text: textInput,
+		upload,
+		update,
+		onEdit,
+		deleteContents,
+		onListClick,
+		isText,
+		nowContents,
+		setIsSlider,
+		isSlider,
+		onlySlider
+	};
 };
 
 export default useContents;

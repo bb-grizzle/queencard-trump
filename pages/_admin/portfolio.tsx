@@ -95,7 +95,7 @@ const portfolio = () => {
 	const mediaLinkInput = useInput("");
 	const descriptInput = useEditor("");
 
-	const contentsInput = useContents({ isText: false });
+	const contentsInput = useContents({ isText: false, onlySlider: false });
 
 	const formRef = useRef<HTMLFormElement>();
 

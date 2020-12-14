@@ -12,7 +12,7 @@ import { useLoading } from "../../Context/AppProvider";
 const about = () => {
 	useRidrectToSignin();
 	const titleInput = useInput("");
-	const contentsInput = useContents({ isText: true });
+	const contentsInput = useContents({ isText: true, onlySlider: true });
 	const { setLoading } = useLoading();
 	const { data, update } = useAbout();
 	const [form, setForm] = useState({});

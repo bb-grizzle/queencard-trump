@@ -28,4 +28,5 @@
 - [x] change footer
 - [x] change input design
 - [ ] add contents chart image
+- [ ] change category click UX
 - [ ] send email

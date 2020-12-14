@@ -10,6 +10,7 @@ interface DetailListProps {
 	title: string;
 	text?: string;
 	image: FileProps[];
+	isSlider?: boolean;
 }
 
 const Wrapper = styled.li`
@@ -41,7 +42,15 @@ const ListNumbering = styled(Numbering)`
 	margin-bottom: 10px;
 `;
 
-const DetailList: React.FC<DetailListProps> = ({ title, image, text, number }) => {
+const ImageWrapper = styled.ul``;
+
+const ImageList = styled.li``;
+
+const ImageView = styled.img`
+	width: 100%;
+`;
+
+const DetailList: React.FC<DetailListProps> = ({ title, image, text, number, isSlider }) => {
 	return (
 		<Wrapper>
 			{!!text ? (
@@ -56,7 +65,21 @@ const DetailList: React.FC<DetailListProps> = ({ title, image, text, number }) =
 				</TextWrapper>
 			)}
 
-			<ImageSlider images={image.map((el) => el.url)} />
+			{isSlider === true && console.log(image)}
+
+			{isSlider === true || isSlider === undefined ? (
+				<ImageSlider images={image.map((el) => el.url)} />
+			) : (
+				<ImageWrapper>
+					{image.map((el) => {
+						return (
+							<ImageList>
+								<ImageView src={el.url} />
+							</ImageList>
+						);
+					})}
+				</ImageWrapper>
+			)}
 		</Wrapper>
 	);
 };

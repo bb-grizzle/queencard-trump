@@ -24,6 +24,9 @@ const GlobalStyles = createGlobalStyle`
     /* border: 1px solid red; */
   }
 
+img{
+  vertical-align: top;
+}
   a{
     color: inherit;
     text-decoration:none;

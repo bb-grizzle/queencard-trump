@@ -11,6 +11,7 @@ export interface ContentsProps {
 	title: string;
 	image: FileProps[];
 	text?: string;
+	isSlider?: boolean;
 }
 export interface PortfolioDataProps extends PortfolioProps {
 	id: string;
