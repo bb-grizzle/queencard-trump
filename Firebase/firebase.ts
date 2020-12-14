@@ -25,7 +25,7 @@ export const fbAuthListener = (cal) => {
 };
 
 export const fbAnalytics = () => {
-	if ("measurementId" in firebaseConfig) firebase.analytics();
+	// if ("measurementId" in firebaseConfig) firebase.analytics();
 };
 
 export const fbSignout = () => {

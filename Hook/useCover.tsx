@@ -9,9 +9,15 @@ const useCover = () => {
 
 	useEffect(() => {
 		const get = async () => {
-			const res = await fbGetData(COL, "timeStamp", "desc");
-			setId(res[0].id);
-			setCover(res[0].image);
+			try {
+				const res = await fbGetData(COL, "timeStamp", "desc");
+				if (res) {
+					setId(res[0].id);
+					setCover(res[0].image);
+				}
+			} catch (err) {
+				console.log(err);
+			}
 		};
 		get();
 	}, []);
