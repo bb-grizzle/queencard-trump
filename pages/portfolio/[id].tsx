@@ -105,11 +105,7 @@ const portfolio = () => {
 			<ContentsWrapper>
 				<ContainerLayout>
 					<ColWrapper>
-						{!isTablet && (
-							<ColSidebar>
-								<CategoryWrapper />
-							</ColSidebar>
-						)}
+						{!isTablet && <ColSidebar hide={true} />}
 
 						{nowPortfolio && (
 							<ColContents>

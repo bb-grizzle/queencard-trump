@@ -58,7 +58,7 @@ const Process = () => {
 			<ContentsWrapper>
 				<ContainerLayout>
 					<ColWrapper>
-						{!isTablet && <ColSidebar />}
+						{!isTablet && <ColSidebar hide={true} />}
 
 						<ColContents>
 							<PageTitleWrapper
@@ -79,9 +79,9 @@ const Process = () => {
 								<ImageSlider images={DATA_PROCESS.contents.image} />
 								<DescritWrapper>
 									<Descrit>
-										{DATA_PROCESS.contents.descript.map((el) => {
+										{DATA_PROCESS.contents.descript.map((el, index) => {
 											return (
-												<DescriptList>
+												<DescriptList key={index}>
 													<DescriptTitle text={el.title} bold={true} />
 													<DescriptText text={el.text} />
 												</DescriptList>

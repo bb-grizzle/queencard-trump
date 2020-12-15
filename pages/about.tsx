@@ -187,7 +187,7 @@ const index = () => {
 			<ContentsWrapper>
 				<ContainerLayout>
 					<ColWrapper>
-						{!isTablet && <ColSidebar />}
+						{!isTablet && <ColSidebar hide={true} />}
 
 						{data && (
 							<ColContents>

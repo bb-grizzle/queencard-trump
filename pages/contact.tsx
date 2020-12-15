@@ -241,7 +241,7 @@ const Contact = () => {
 			<ContentsWrapper>
 				<ContainerLayout containerRef={ref}>
 					<ColWrapper>
-						{!isTablet && <ColSidebar />}
+						{!isTablet && <ColSidebar hide={true} />}
 
 						<ColContents>
 							<PageTitleWrapperCustome handleBackClick={handleBackClick} title={""} subTitle={DATA_CONTACT.title} text={DATA_CONTACT.text.split("\n")} />

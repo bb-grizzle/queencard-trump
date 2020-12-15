@@ -41,7 +41,7 @@ const Tutor = () => {
 			<ContentsWrapper>
 				<ContainerLayout>
 					<ColWrapper>
-						{!isTablet && <ColSidebar />}
+						{!isTablet && <ColSidebar hide={true} />}
 
 						<ColContents>
 							<PageTitleWrapperCustome handleBackClick={handleBackClick} title={DATA_TUTOR.title} subTitle={DATA_TUTOR.subTitle} text={DATA_TUTOR.text} image={DATA_TUTOR.image} />

@@ -8,6 +8,10 @@ import useInput from "../../Hook/useInput";
 import { useState, useEffect } from "react";
 import { useSearchValue } from "../../Context/AppProvider";
 
+interface ColSidebarProps {
+	hide?: boolean;
+}
+
 const ColWrapper = styled(ColDefault)`
 	position: relative;
 	display: flex;
@@ -39,7 +43,7 @@ const RowEmpty = styled(Row)`
 	position: initial;
 `;
 
-const ColSidebar: React.FC = ({ children }) => {
+const ColSidebar: React.FC<ColSidebarProps> = ({ children, hide }) => {
 	const { isTablet } = useSize();
 	const searchInput = useInput("");
 	const [hideChildren, setHideChildren] = useState(false);
@@ -82,12 +86,13 @@ const ColSidebar: React.FC = ({ children }) => {
 
 	return (
 		<ColWrapper col={!isTablet ? 25 : 100}>
-			<SearchRow>
-				{!isTablet && <ColTitle type={ParagraphType.SM} text={"School"} />}
-				{!hideChildren && children}
-				<Search searchInput={searchInput} onSearch={handleSearch} inputClick={inputClick} onBlur={handleFocusOut} onClose={handleOnClose} />
-			</SearchRow>
-			<RowEmpty />
+			{hide !== true && (
+				<SearchRow>
+					{!isTablet && <ColTitle type={ParagraphType.SM} text={"School"} />}
+					{!hideChildren && children}
+					<Search searchInput={searchInput} onSearch={handleSearch} inputClick={inputClick} onBlur={handleFocusOut} onClose={handleOnClose} />
+				</SearchRow>
+			)}
 		</ColWrapper>
 	);
 };
