@@ -22,8 +22,6 @@ const RadioWrapper = styled.label`
 	align-items: center;
 	width: 25%;
 	margin-bottom: 22px;
-
-	border: 1px solid red;
 	${(props) => props.theme.style.hoverDefault};
 
 	@media ${media.tablet} {
