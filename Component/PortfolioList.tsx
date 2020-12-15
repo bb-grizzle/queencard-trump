@@ -27,8 +27,8 @@ const Inner = styled.div`
 	transition: ${(props) => props.theme.transition.default};
 	transition-property: opacity;
 
+	opacity: 0;
 	@media ${media.hover} {
-		opacity: 0;
 	}
 
 	@media ${media.tablet} {
@@ -54,14 +54,21 @@ const Wrapper = styled.li<{ col: number; isLast: boolean; gap: number }>`
 	margin-bottom: ${(props) => `${props.gap}px`};
 	cursor: pointer;
 
-	@media ${media.hover} {
-		&:hover {
-			${Inner} {
-				opacity: 1;
-			}
-			${ColorOverlay} {
-				opacity: 0.6;
-			}
+	&:hover {
+		${Inner} {
+			opacity: 1;
+		}
+		${ColorOverlay} {
+			opacity: 0.6;
+		}
+	}
+
+	@media ${media.tablet} {
+		${Inner} {
+			opacity: 1;
+		}
+		${ColorOverlay} {
+			/* opacity: 0.6; */
 		}
 	}
 `;

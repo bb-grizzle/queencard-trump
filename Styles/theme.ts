@@ -175,12 +175,12 @@ const style = {
 	`,
 
 	hoverDefault: css`
-		@media ${media.hover} {
+		/* @media ${media.hover} { */
 			&:hover {
 				opacity: 0.5;
 				cursor: pointer;
 			}
-		}
+		/* } */
 	`,
 	hideScroll: css`
 		-ms-overflow-style: none; /* IE and Edge */

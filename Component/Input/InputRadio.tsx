@@ -23,6 +23,7 @@ const RadioWrapper = styled.label`
 	width: 25%;
 	margin-bottom: 22px;
 
+	border: 1px solid red;
 	${(props) => props.theme.style.hoverDefault};
 
 	@media ${media.tablet} {
@@ -30,14 +31,26 @@ const RadioWrapper = styled.label`
 	}
 `;
 
-const Radio = styled.input`
+const Radio = styled.div`
 	width: 15px;
 	height: 15px;
 	border: 1px solid ${(props) => props.theme.color.gray.dark};
 	margin-right: 21px;
 	flex-shrink: 0;
 
-	:checked {
+	@media ${media.tablet} {
+		margin-right: 8px;
+	}
+`;
+
+const RadioInput = styled.input`
+	width: 15px;
+	height: 15px;
+	border: 1px solid ${(props) => props.theme.color.gray.dark};
+	margin-right: 21px;
+	flex-shrink: 0;
+	display: none;
+	:checked ~ ${Radio} {
 		background-color: ${(props) => props.theme.color.main};
 	}
 
@@ -57,7 +70,8 @@ const InputRadio: React.FC<InputRadioProps> = ({ option, onChange, label, captio
 				{option.map((el, index) => {
 					return (
 						<RadioWrapper key={index}>
-							<Radio type="Radio" value={el.name} name={label} onChange={onChange} />
+							<RadioInput type="Radio" value={el.name} name={label} onChange={onChange} />
+							<Radio />
 							<RadioText text={el.name} size={13} />
 						</RadioWrapper>
 					);
