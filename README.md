@@ -31,6 +31,6 @@
 - [x] change category click UX
 - [x] send email
 - [x] cover image ratio
-- [ ] loading logo
+- [x] loading logo
 - [ ] infinit scroll
 - [ ] IE browser
