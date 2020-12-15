@@ -37,7 +37,7 @@ const Tutor = () => {
 		push("/");
 	};
 	return (
-		<PageContainer>
+		<PageContainer loading={!!data}>
 			<ContentsWrapper>
 				<ContainerLayout>
 					<ColWrapper>

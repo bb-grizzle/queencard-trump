@@ -29,6 +29,8 @@
 - [x] change input design
 - [x] add contents chart image
 - [x] change category click UX
-- [ ] send email
-- [ ] cover image ratio
+- [x] send email
+- [x] cover image ratio
+- [ ] loading logo
+- [ ] infinit scroll
 - [ ] IE browser

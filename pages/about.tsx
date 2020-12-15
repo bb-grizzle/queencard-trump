@@ -183,7 +183,7 @@ const index = () => {
 	};
 
 	return (
-		<PageContainer>
+		<PageContainer loading={!!data}>
 			<ContentsWrapper>
 				<ContainerLayout>
 					<ColWrapper>

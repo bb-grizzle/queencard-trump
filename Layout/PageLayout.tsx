@@ -8,6 +8,7 @@ import { useLoading } from "../Context/AppProvider";
 interface PageContainerProps {
 	paddingTop?: boolean;
 	className?: string;
+	loading?: boolean;
 }
 
 const Wrapper = styled.div`
@@ -17,9 +18,9 @@ const Wrapper = styled.div`
 		padding-top: ${(props) => props.theme.size.header.mobile};
 		padding-bottom: 32px;
 	}
-	min-height: ${(props) => props.theme.layout.full_height};
+	min-height: ${(props) => props.theme.size.full_height};
 `;
-const PageContainer: React.FC<PageContainerProps> = ({ children, className }) => {
+const PageContainer: React.FC<PageContainerProps> = ({ children, className, loading }) => {
 	const { setLoading } = useLoading();
 	useEffect(() => {
 		setLoading(true);
@@ -28,7 +29,7 @@ const PageContainer: React.FC<PageContainerProps> = ({ children, className }) =>
 		<Wrapper className={className}>
 			{children}
 
-			<Footer />
+			{loading && <Footer />}
 		</Wrapper>
 	);
 };

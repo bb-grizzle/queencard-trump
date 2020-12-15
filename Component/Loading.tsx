@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useLoading } from "../Context/AppProvider";
 import { useEffect } from "react";
 import { preventScroll, activeScroll } from "../util/scroll";
+import Logo from "./Logo";
 
 const Wrapper = styled.div<{ active: boolean }>`
 	position: fixed;
@@ -20,12 +21,7 @@ const Wrapper = styled.div<{ active: boolean }>`
 	${(props) => (props.active ? props.theme.event.active : props.theme.event.disable)};
 `;
 
-const Text = styled.p`
-	color: ${(props) => props.theme.color.main};
-	font-size: 20px;
-	text-transform: uppercase;
-	font-style: italic;
-`;
+const LogoCustome = styled(Logo)``;
 
 const Loading: React.FC = () => {
 	const { loading } = useLoading();
@@ -40,7 +36,7 @@ const Loading: React.FC = () => {
 
 	return (
 		<Wrapper active={loading}>
-			<Text> loading...</Text>
+			<LogoCustome />
 		</Wrapper>
 	);
 };

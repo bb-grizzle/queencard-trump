@@ -7,29 +7,39 @@ import ColWrapper from "../Component/Col/ColWrapper";
 import ColSidebar from "../Component/Col/ColSidebar";
 import ColContents from "../Component/Col/ColContents";
 import { useRouter } from "next/router";
-import PortfolioList from "../Component/PortfolioList";
-import useCol from "../Hook/useCol";
 import useElementSize from "../Hook/useElementSize";
-import { PortfolioDataProps } from "../Interface/portfolio";
 import ContentsWrapper from "../Component/ContentsWrapper";
 import CategoryWrapper from "../Component/Category/CategoryWrapper";
 import { usePortfolioData, useCategoryData, useLoading } from "../Context/AppProvider";
 import useImageLoad from "../Hook/useImageLoad";
+import media from "../Styles/media";
 
-const Cover = styled.div<{ image: string; active: boolean }>`
-	${(props) => props.theme.layout.ratio(34)};
-	${(props) => (props.image ? props.theme.layout.full_image(`${props.image}`) : "")};
+const CoverWrapper = styled.div`
+	height: 500px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	@media ${media.tablet} {
+		height: 320px;
+	}
+
+	@media ${media.mobile} {
+		height: 160px;
+	}
+`;
+
+const Cover = styled.img<{ active: boolean }>`
+	height: 100%;
 
 	${(props) => props.theme.transition.load(props.active)};
+	background-repeat: no-repeat;
 `;
 
 const Portfolio = () => {
-	const { portfolio: data, setNowPortfolio } = usePortfolioData();
-	const { category, nowCategory, setNowCategory } = useCategoryData();
+	const { portfolio: data } = usePortfolioData();
+	const { category } = useCategoryData();
 	const { cover } = useCover();
-	const { push } = useRouter();
-
-	const { ref, size } = useElementSize();
 	const { setLoading } = useLoading();
 	const { load, setUrl } = useImageLoad(null);
 
@@ -46,8 +56,10 @@ const Portfolio = () => {
 	}, [load]);
 
 	return (
-		<PageContainer>
-			<Cover image={cover ? cover.url : null} active={load} />
+		<PageContainer loading={!!cover}>
+			<CoverWrapper>
+				<Cover src={cover ? cover.url : null} active={load} />
+			</CoverWrapper>
 
 			<ContentsWrapper>
 				<ContainerLayout>

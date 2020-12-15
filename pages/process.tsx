@@ -54,7 +54,7 @@ const Process = () => {
 		setLoading(false);
 	}, []);
 	return (
-		<PageContainer>
+		<PageContainer loading={true}>
 			<ContentsWrapper>
 				<ContainerLayout>
 					<ColWrapper>
