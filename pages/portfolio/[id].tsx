@@ -91,7 +91,6 @@ const portfolio = () => {
 		if (nowPortfolio) {
 			// LOADING DONE
 			setLoading(false);
-			setNowCategory(nowPortfolio.category.id);
 		}
 	}, [nowPortfolio]);
 
