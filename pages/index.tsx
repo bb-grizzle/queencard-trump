@@ -10,25 +10,16 @@ import ContentsWrapper from "../Component/ContentsWrapper";
 import CategoryWrapper from "../Component/Category/CategoryWrapper";
 import { usePortfolioData, useCategoryData, useLoading } from "../Context/AppProvider";
 import useImageLoad from "../Hook/useImageLoad";
-import media from "../Styles/media";
 
 const CoverWrapper = styled.div`
-	height: ${(props) => `${props.theme.size.cover.pc}px`};
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
-	@media ${media.tablet} {
-		height: ${(props) => `${props.theme.size.cover.tablet}px`};
-	}
-
-	@media ${media.mobile} {
-		height: ${(props) => `${props.theme.size.cover.mobile}px`};
-	}
 `;
 
 const Cover = styled.img<{ active: boolean }>`
-	height: 100%;
+	width: 1400px;
+	max-width: 100%;
 
 	${(props) => props.theme.transition.load(props.active)};
 	background-repeat: no-repeat;
