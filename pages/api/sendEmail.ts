@@ -5,8 +5,6 @@ import smtpTransport from "nodemailer-smtp-transport";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === "POST") {
-		console.log(req.body);
-
 		const { formData, file } = req.body;
 		var transporter = nodemailer.createTransport(
 			smtpTransport({
@@ -72,20 +70,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		};
 
 		const send = async () => {
-			return new Promise((resoluve, reject) => {
+			return new Promise((resolve, reject) => {
 				transporter.sendMail(mailOptions, function(error, info) {
 					if (error) {
 						console.log(error);
 						reject(error);
 					} else {
-						resoluve("Email sent: " + info.response);
+						console.log("Email Sent");
+						resolve("Email sent: " + info.response);
 					}
 				});
 			});
 		};
 
 		try {
-			await send();
+			const response = await send();
+			console.log(response);
 			return res.status(200).end();
 		} catch (err) {
 			return res.status(405).end();
