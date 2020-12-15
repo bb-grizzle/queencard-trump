@@ -6,6 +6,7 @@ import { fbAuthListener } from "../Firebase/firebase";
 import usePortfolio from "../Hook/usePortfolio";
 import { PortfolioDataProps } from "../Interface/portfolio";
 import { CategoryDataProps } from "../Interface/category";
+import { checkBrowser } from "../util/checkBrowser";
 
 interface AppContextProps {
 	globalLoading: boolean;
@@ -23,6 +24,7 @@ interface AppContextProps {
 	setNowPortfolio: Dispatch<SetStateAction<PortfolioDataProps>>;
 	setSearch: Dispatch<SetStateAction<string>>;
 	search: string;
+	isIe: boolean;
 }
 
 export const AppContext = createContext({} as AppContextProps);
@@ -34,6 +36,7 @@ const AppProvider = ({ children }) => {
 	const router = useRouter();
 	const [isAdmin, setIsAdmin] = useState(false);
 	const [isLoggedIn, setIsLoggedInt] = useState(null);
+	const [isIe, setIsIe] = useState(false);
 
 	// category and portfolio
 	const { data: portfolio, category } = usePortfolio();
@@ -43,6 +46,15 @@ const AppProvider = ({ children }) => {
 
 	// search
 	const [search, setSearch] = useState<string | null>(null);
+
+	useEffect(() => {
+		const result = checkBrowser();
+		if (result === "11.0" || result === "10.0" || result === "9.0") {
+			setIsIe(true);
+		} else {
+			setIsIe(false);
+		}
+	}, []);
 
 	useEffect(() => {
 		fbAuthListener(setIsLoggedInt);
@@ -91,7 +103,8 @@ const AppProvider = ({ children }) => {
 				portfolio,
 				category,
 				setSearch,
-				search
+				search,
+				isIe
 			}}
 		>
 			{children}
@@ -146,6 +159,11 @@ export const useCategoryData = () => {
 export const useSearchValue = () => {
 	const { setSearch, search } = useContext(AppContext);
 	return { setSearch, search };
+};
+
+export const useIsIe = () => {
+	const { isIe } = useContext(AppContext);
+	return { isIe };
 };
 
 export default AppProvider;

@@ -5,7 +5,7 @@ export const preventScroll = () => {
 
 export const activeScroll = () => {
 	document.body.style.height = "auto";
-	document.body.style.overflow = "initial";
+	document.body.style.overflow = "auto";
 };
 
 export const scrollToTarget = (dom: HTMLDivElement | HTMLUListElement, value: number) => {

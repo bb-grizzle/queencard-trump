@@ -33,4 +33,5 @@
 - [x] cover image ratio
 - [x] loading logo
 - [ ] infinit scroll
+- [ ] chart scroll??
 - [ ] IE browser

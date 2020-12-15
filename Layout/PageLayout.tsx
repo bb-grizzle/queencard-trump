@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 		padding-top: ${(props) => props.theme.size.header.mobile};
 		padding-bottom: 32px;
 	}
-	min-height: ${(props) => props.theme.size.full_height};
+	/* min-height: ${(props) => props.theme.size.full_height}; */
 `;
 const PageContainer: React.FC<PageContainerProps> = ({ children, className, loading }) => {
 	const { setLoading } = useLoading();

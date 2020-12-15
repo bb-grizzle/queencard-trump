@@ -20,15 +20,15 @@ interface MyAppProps extends AppProps {}
 function MyApp({ Component, pageProps }: MyAppProps) {
 	const { push, pathname } = useRouter();
 
-	useEffect(() => {
-		const check = async () => {
-			const result = checkBrowser();
-			if (result === "11.0" || result === "10.0" || result === "9.0") {
-				push("/browser_support");
-			}
-		};
-		check();
-	}, []);
+	// useEffect(() => {
+	// 	const check = async () => {
+	// 		const result = checkBrowser();
+	// 		if (result === "11.0" || result === "10.0" || result === "9.0") {
+	// 			push("/browser_support");
+	// 		}
+	// 	};
+	// 	check();
+	// }, []);
 
 	useEffect(() => {
 		// Scroll To Top when page change
