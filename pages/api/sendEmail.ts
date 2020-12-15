@@ -71,15 +71,25 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			attachments: file ? [file] : undefined
 		};
 
-		transporter.sendMail(mailOptions, function(error, info) {
-			if (error) {
-				console.log(error);
-			} else {
-				console.log("Email sent: " + info.response);
-			}
-		});
+		const send = async () => {
+			return new Promise((resoluve, reject) => {
+				transporter.sendMail(mailOptions, function(error, info) {
+					if (error) {
+						console.log(error);
+						reject(error);
+					} else {
+						resoluve("Email sent: " + info.response);
+					}
+				});
+			});
+		};
 
-		return res.status(200).end();
+		try {
+			await send();
+			return res.status(200).end();
+		} catch (err) {
+			return res.status(405).end();
+		}
 	}
 	return res.status(404).json({
 		error: {
