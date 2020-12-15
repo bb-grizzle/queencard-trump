@@ -39,6 +39,7 @@ const VisionSectionItem = styled.div`
 	padding: 0 55px;
 	text-align: center;
 	align-items: center;
+	flex-shrink: 0;
 	@media ${media.tablet} {
 		padding: 0 24px;
 		flex-shrink: 0;
@@ -54,8 +55,9 @@ const VisionSectionItem = styled.div`
 `;
 
 const ImageWrapper = styled.div`
-	${(props) => props.theme.layout.ratio(100)}
+	/* ${(props) => props.theme.layout.ratio(100)} */
 	width: 270px;
+	height: 270px;
 	max-width: 100%;
 	border-radius: 100%;
 	position: relative;
@@ -65,11 +67,13 @@ const ImageWrapper = styled.div`
 
 	@media ${media.desktop} {
 		width: 240px;
+		height: 240px;
 	}
 
 	@media ${media.tablet} {
-		width: 100%;
-		max-width: 180px;
+		width:  180px;
+		height:  180px;
+		
 	}
 `;
 const VisionTitle = styled(Title)`
@@ -146,6 +150,8 @@ const ValueImage = styled.div`
 
 const ValueTextWrapper = styled.div`
 	margin-top: 29px;
+	width: 100%;
+
 	@media ${media.mobile} {
 		margin-top: 0px;
 		padding: 16px;

@@ -20,18 +20,21 @@ const CheckboxWrapper = styled.label`
 	${(props) => props.theme.style.hoverDefault};
 `;
 
-const Checkbox = styled.input`
+const InputWrapper = styled.div`
 	width: 15px;
 	height: 15px;
-	flex-shrink: 0;
 	border: 1px solid ${(props) => props.theme.color.gray.dark};
 	margin-right: 21px;
+	flex-shrink: 0;
 
-	:checked {
-		background-color: ${(props) => props.theme.color.main};
-	}
 	@media ${media.tablet} {
 		margin-right: 8px;
+	}
+`;
+const Checkbox = styled.input`
+	display: none;
+	:checked ~ ${InputWrapper} {
+		background-color: ${(props) => props.theme.color.main};
 	}
 `;
 
@@ -40,9 +43,11 @@ const CheckboxText = styled(Paragraph)`
 `;
 
 const CheckboxItem: React.FC<CheckboxItemProps> = ({ value, name, group, onChange, className }) => {
+	console.log(value);
 	return (
 		<CheckboxWrapper className={className}>
 			<Checkbox type="checkbox" value={value} name={group} onChange={() => onChange(value)} />
+			<InputWrapper />
 			<CheckboxText text={name} size={13} />
 		</CheckboxWrapper>
 	);

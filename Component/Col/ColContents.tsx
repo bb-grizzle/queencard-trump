@@ -43,7 +43,6 @@ const ColContents: React.FC<ColContentsProps> = ({ children }) => {
 
 	const handleListClick = (data: PortfolioDataProps) => {
 		push(`/portfolio/[id]`, `/portfolio/${data.id}`);
-		setNowCategory(data.category.id);
 		setNowPortfolio(data);
 	};
 
