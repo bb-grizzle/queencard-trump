@@ -43,7 +43,6 @@ const CheckboxText = styled(Paragraph)`
 `;
 
 const CheckboxItem: React.FC<CheckboxItemProps> = ({ value, name, group, onChange, className }) => {
-	console.log(value);
 	return (
 		<CheckboxWrapper className={className}>
 			<Checkbox type="checkbox" value={value} name={group} onChange={() => onChange(value)} />
