@@ -20,8 +20,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		);
 
 		var mailOptions = {
-			from: "firbigi1993@gmail.com",
-			to: "firbigi1993@gmail.com",
+			from: process.env.NEXT_PUBLIC_GMAIL_USER,
+			to: process.env.NEXT_PUBLIC_GMAIL_USER,
 			subject: `Awesome | ${formData.personalInfo.group}, ${formData.personalInfo.name}`,
 			html: `
 				<h3>기본정보</h3>

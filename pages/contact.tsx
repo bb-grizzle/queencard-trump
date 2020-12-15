@@ -164,45 +164,46 @@ const Contact = () => {
 	}, [personalGroupInput.value, personalWebsiteInput.value, personalNameInput.value, personalRoleInput.value, personalNumberInput.value, personalEmailInput.value]);
 
 	const handleSubmit = async () => {
-		// if (projectTypeInput.value.lenght === 0 || !projectDescriptInput.value || !projectReasonInput.value || !projectBudgetInput.value || !projectDateChkInput.value || !projectDateTextInput.value) {
-		// 	formCheck();
-		// 	return;
-		// }
+		if (projectTypeInput.value.lenght === 0 || !projectDescriptInput.value || !projectReasonInput.value || !projectBudgetInput.value || !projectDateChkInput.value || !projectDateTextInput.value) {
+			formCheck();
+			return;
+		}
 
-		// if (!personalGroupInput.value || !personalNameInput.value || !personalRoleInput.value || !personalNumberInput.value || !personalEmailInput.value) {
-		// 	formCheck();
-		// 	return;
-		// }
+		if (!personalGroupInput.value || !personalNameInput.value || !personalRoleInput.value || !personalNumberInput.value || !personalEmailInput.value) {
+			formCheck();
+			return;
+		}
 
-		// if (!agree) {
-		// 	formCheck();
-		// 	return;
-		// }
+		if (!agree) {
+			formCheck();
+			return;
+		}
 
-		// // validation
-		// if (!checkWebsite(personalWebsiteInput.value)) {
-		// 	formCheck("웹사이트를 다시 확인해 주세요. 🌎");
-		// 	return;
-		// } else if (!checkEmail(personalEmailInput.value)) {
-		// 	formCheck("이메일 양식을 다시 확인해 주세요. ✉️");
-		// 	return;
-		// }
+		// validation
+		if (!checkWebsite(personalWebsiteInput.value)) {
+			formCheck("웹사이트를 다시 확인해 주세요. 🌎");
+			return;
+		} else if (!checkEmail(personalEmailInput.value)) {
+			formCheck("이메일 양식을 다시 확인해 주세요. ✉️");
+			return;
+		}
 
 		try {
-			// setLoading(true);
-
+			setLoading(true);
 			// SLACK
-			// await sendSlackMessage(`${personalGroupInput.value} | ${personalNameInput.value}`);
+			await sendSlackMessage(`${personalGroupInput.value} | ${personalNameInput.value}`);
 
 			// EMAIL
-			const fileUrl = await getDataUrl(projectFileInput.file);
+			const path = projectFileInput.file ? await getDataUrl(projectFileInput.file) : undefined;
 
 			await sendEmail({
 				formData: form,
-				file: {
-					path: fileUrl,
-					filename: projectFileInput.fileName
-				}
+				file: path
+					? {
+							path,
+							filename: projectFileInput.fileName
+					  }
+					: undefined
 			});
 
 			setPopupActive(true);
@@ -210,8 +211,8 @@ const Contact = () => {
 			setTimeout(async () => {
 				setPopupActive(false);
 
-				// formInit();
-				// push("/");
+				formInit();
+				push("/");
 			}, 1500);
 		} catch (err) {
 			console.log(err);

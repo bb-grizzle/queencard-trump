@@ -65,9 +65,7 @@ const ColSidebar: React.FC<ColSidebarProps> = ({ children, hide }) => {
 		}
 	};
 
-	const inputClick = () => {
-		console.log("inputClick");
-	};
+	const inputClick = () => {};
 	const handleFocusOut = () => {
 		// setHideChildren(false);
 	};

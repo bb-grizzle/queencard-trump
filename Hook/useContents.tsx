@@ -77,7 +77,6 @@ const useContents = ({ isText, onlySlider }) => {
 	};
 
 	const update = async (path) => {
-		console.log("UPDATE");
 		const result = await Promise.all(
 			value.map(async (el) => {
 				const image = await uploadManyFiles(el.image, path);
@@ -87,7 +86,6 @@ const useContents = ({ isText, onlySlider }) => {
 				};
 			})
 		);
-		console.log(result);
 
 		if (!!imageInput.deleteFiles && !!imageInput.deleteFiles[0]) {
 			await Promise.all(
@@ -100,10 +98,6 @@ const useContents = ({ isText, onlySlider }) => {
 		imageInput.setDeleteFiles([]);
 		return result;
 	};
-
-	useEffect(() => {
-		console.log(value);
-	}, [value]);
 
 	const onEdit = () => {
 		setValue((prev) =>

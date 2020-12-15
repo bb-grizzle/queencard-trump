@@ -153,9 +153,7 @@ export const usePortfolioData = () => {
 
 export const useCategoryData = () => {
 	const { category, nowCategory, setNowCategory } = useContext(AppContext);
-	useEffect(() => {
-		console.log("nowCategory : ", nowCategory);
-	}, [nowCategory]);
+
 	return { category, nowCategory, setNowCategory };
 };
 

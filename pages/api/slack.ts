@@ -35,6 +35,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			await send();
 			return res.status(200).end();
 		} catch (err) {
+			console.log(err);
 			return res.status(405).end();
 		}
 	}

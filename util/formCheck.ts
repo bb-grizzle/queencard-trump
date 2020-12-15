@@ -11,7 +11,6 @@ export const deleteConfirm = (message?: string) => {
 };
 
 export const checkWebsite = (value: string) => {
-	console.log(value);
 	if (value) {
 		if (!value.includes("http") && !value.includes("https")) {
 			return false;

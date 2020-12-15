@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fbGetData, fbUpdateData, fbUploadStorage } from "../Firebase/firebase";
+import { fbGetData, fbUpdateData, fbUploadStorage, fbUploadData } from "../Firebase/firebase";
 import { FileProps } from "../Interface/portfolio";
 
 const COL = "cover";
@@ -27,6 +27,7 @@ const useCover = () => {
 			image = await fbUploadStorage(COL, "cover", fileInput.file);
 		}
 		await fbUpdateData(COL, id, { image });
+		// await fbUploadData(COL, { image });
 		setCover(image);
 	};
 	return { cover, update };
