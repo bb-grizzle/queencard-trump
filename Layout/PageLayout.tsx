@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import media from "../Styles/media";
 import Footer from "../Component/Footer";
-import useSize from "../Hook/useSize";
 import { useEffect } from "react";
 import { useLoading } from "../Context/AppProvider";
 
@@ -23,7 +22,7 @@ const Wrapper = styled.div`
 const PageContainer: React.FC<PageContainerProps> = ({ children, className, loading }) => {
 	const { setLoading } = useLoading();
 	useEffect(() => {
-		setLoading(true);
+		// setLoading(true);
 	}, []);
 	return (
 		<Wrapper className={className}>

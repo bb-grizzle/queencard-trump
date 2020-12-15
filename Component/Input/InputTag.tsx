@@ -76,7 +76,7 @@ const InputTag: React.FC<InputTagProps> = ({ textInput, value, onAdd, onDelete, 
 		<InputLayout label={label}>
 			<Wrapper>
 				<WrapperInput>
-					<Input type="text" placeholder={placeholder} {...textInput} onKeyDown={handleKeyDown} />
+					<Input type="text" placeholder={placeholder} value = {textInput.value} onChange={(e) => textInput.onChange(e.target.value)} onKeyDown={handleKeyDown} />
 					<BtnIcon icon="pluse" onClick={handleAddBtnClick} />
 				</WrapperInput>
 

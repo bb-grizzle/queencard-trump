@@ -72,8 +72,9 @@ const category = () => {
 	const { setLoading } = useLoading();
 
 	useEffect(() => {
+		console.log(cover);
 		if (cover && category) {
-			setLoading(false);
+			// setLoading(false);
 		}
 	}, [cover, category]);
 

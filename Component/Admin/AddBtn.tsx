@@ -39,7 +39,7 @@ const AddBtn: React.FC<AddBtnProps> = ({ small = false }) => {
 	};
 	return (
 		<Container small={small}>
-			<Btn icon="pluse" onClick={handleAddClick} />;
+			<Btn icon="pluse" onClick={handleAddClick} />
 		</Container>
 	);
 };

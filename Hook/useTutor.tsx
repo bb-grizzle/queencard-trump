@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fbGetData, fbUpdateData } from "../Firebase/firebase";
+import { fbGetData, fbUpdateData, fbUploadData } from "../Firebase/firebase";
 import { tutorDataProps } from "../Interface/tutor";
 
 const COL = "tutor";
@@ -16,6 +16,7 @@ const useTutor = () => {
 
 	const update = async (form) => {
 		try {
+			// await fbUploadData(COL, form);
 			await fbUpdateData(COL, data.id, form);
 		} catch (err) {
 			console.log(err);

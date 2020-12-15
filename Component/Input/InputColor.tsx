@@ -44,7 +44,7 @@ const InputColor: React.FC<InputColorProps> = ({ label, value, onChange, classNa
 		<InputLayout label={label} initStyle={initStyle} className={className}>
 			<Wrapper initStyle={initStyle}>
 				<ColorPicker>
-					<Input type={"color"} value={value} onChange={onChange} />
+					<Input type={"color"} value={value} onChange={(e) => onChange(e.target.value)} />
 				</ColorPicker>
 			</Wrapper>
 		</InputLayout>

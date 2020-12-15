@@ -1,12 +1,11 @@
 import InputOption from "../Input/InputOption";
 import styled from "styled-components";
 import BtnText from "../Btn/BtnText";
-import useInput, { InputDefaultProps } from "../../Hook/useInput";
+import { InputDefaultProps } from "../../Hook/useInput";
 import InputDefault from "../Input/InputDefault";
 import InputColor from "../Input/InputColor";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { CategoryProps } from "../../Interface/category";
-import theme from "../../Styles/theme";
 import InputLayout from "../Input/InputLayout";
 
 interface FormCategoryInputProps {
@@ -54,6 +53,12 @@ const ColorPick = styled(InputColor)`
 
 const InputText = styled(InputDefault)`
 	flex-grow: 1;
+	border-bottom: 0;
+	padding: 0;
+	> input {
+		border-bottom: 0;
+		padding: 0;
+	}
 `;
 
 const FormCategoryInput: React.FC<FormCategoryInputProps> = ({ label, value, onChange, options, nameInput, colorInput, setNewCategory }) => {
