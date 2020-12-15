@@ -28,7 +28,7 @@ const Wrapper = styled.div<{ size; scaleAction; disable: boolean }>`
 		props.disable &&
 		css`
 			opacity: 0.5;
-			${(props) => props.theme.event.disBble};
+			${(props) => props.theme.event.disable};
 		`};
 `;
 

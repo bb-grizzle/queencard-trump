@@ -30,7 +30,9 @@ const Wrapper = styled.div<{ active: boolean; isIe: boolean }>`
 	${(props) => (props.active ? props.theme.event.active : props.theme.event.disable)};
 `;
 
-const LogoCustome = styled(Logo)``;
+const LogoCustome = styled(Logo)`
+	${(props) => props.theme.event.disable};
+`;
 
 const Loading: React.FC = () => {
 	const { loading } = useLoading();

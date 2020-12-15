@@ -13,7 +13,6 @@ import AdminProvider from "../Context/AdminProvider";
 
 import "react-quill/dist/quill.snow.css";
 import { scrollToTop } from "../util/scroll";
-import { polyfills } from "../util/polyfills";
 
 interface MyAppProps extends AppProps {}
 
@@ -26,10 +25,6 @@ function MyApp({ Component, pageProps }: MyAppProps) {
 
 	useEffect(() => {
 		fbAnalytics();
-	}, []);
-
-	useEffect(() => {
-		polyfills();
 	}, []);
 
 	return (

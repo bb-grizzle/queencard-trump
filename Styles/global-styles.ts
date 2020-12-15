@@ -1,6 +1,7 @@
 import Theme from "./theme";
 import reset from "styled-reset";
 import { createGlobalStyle } from "styled-components";
+import media from "./media";
 
 const GlobalStyles = createGlobalStyle`
   ${reset};
@@ -13,12 +14,19 @@ const GlobalStyles = createGlobalStyle`
     -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
 
   }
+  html{
+    ${() => Theme.style.hideScroll};
+  }
 
   body{
     position: relative;
     word-break: keep-all;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
+    
+
+    @media ${media.tablet} {
+    }
   }
 
 img{
