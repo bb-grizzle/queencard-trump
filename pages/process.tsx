@@ -16,6 +16,7 @@ import ImageSlider from "../Component/ImageSlider";
 import Paragraph from "../Component/Text/Paragraph";
 import ProcessList from "../Component/Process/ProcessList";
 import { useRouter } from "next/router";
+import Intersection from "../Component/Intersection";
 
 const ProcessWrapper = styled.ul`
 	margin-bottom: 125px;
@@ -69,26 +70,30 @@ const Process = () => {
 							/>
 
 							<ProcessWrapper>
-								{DATA_PROCESS.process.map((el, index) => {
-									return <ProcessList {...el} number={index + 1} key={index} />;
-								})}
+								<Intersection>
+									{DATA_PROCESS.process.map((el, index) => {
+										return <ProcessList {...el} number={index + 1} key={index} />;
+									})}
+								</Intersection>
 							</ProcessWrapper>
 
 							{/* Core Value */}
 							<SectionWrapper title={DATA_PROCESS.contents.title} subTitle={DATA_PROCESS.contents.subTitle} isLast={true}>
-								<ImageSlider images={DATA_PROCESS.contents.image} />
-								<DescritWrapper>
-									<Descrit>
-										{DATA_PROCESS.contents.descript.map((el, index) => {
-											return (
-												<DescriptList key={index}>
-													<DescriptTitle text={el.title} bold={true} />
-													<DescriptText text={el.text} />
-												</DescriptList>
-											);
-										})}
-									</Descrit>
-								</DescritWrapper>
+								<Intersection>
+									<ImageSlider images={DATA_PROCESS.contents.image} />
+									<DescritWrapper>
+										<Descrit>
+											{DATA_PROCESS.contents.descript.map((el, index) => {
+												return (
+													<DescriptList key={index}>
+														<DescriptTitle text={el.title} bold={true} />
+														<DescriptText text={el.text} />
+													</DescriptList>
+												);
+											})}
+										</Descrit>
+									</DescritWrapper>
+								</Intersection>
 							</SectionWrapper>
 						</ColContents>
 					</ColWrapper>

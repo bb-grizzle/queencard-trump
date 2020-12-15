@@ -7,6 +7,7 @@ import media from "../Styles/media";
 import { useEffect, useState } from "react";
 import useSize from "../Hook/useSize";
 import theme from "../Styles/theme";
+import Intersection from "./Intersection";
 
 interface PortfolioListProps {
 	data: PortfolioDataProps;
@@ -73,6 +74,11 @@ const Wrapper = styled.li<{ col: number; isLast: boolean; gap: number }>`
 	}
 `;
 
+const IntersectionCustome = styled(Intersection)<{ rand: number }>`
+	height: 100%;
+	transition-delay: ${(props) => `${props.rand}s`};
+`;
+
 const ContentsWrapper = styled.div``;
 
 const BackgroundImage = styled.div<{ bg: string; active: boolean }>`
@@ -95,14 +101,16 @@ const PortfolioList: React.FC<PortfolioListProps> = ({ data, col, isLast, onClic
 
 	return (
 		<Wrapper col={col} isLast={isLast} onClick={() => onClick(data.id)} gap={gap} className={className}>
-			<BackgroundImage bg={data.thumbnail.url} active={load} />
-			<ContentsWrapper>
-				{data.category && data.category.color && <ColorOverlay color={data.category.color} active={overlay} />}
-				<Inner>
-					<Title title={data.title} type={TitleType.SM} isRegular={true} color={"inherit"} />
-					<Title title={data.subTitle} color={"inherit"} />
-				</Inner>
-			</ContentsWrapper>
+			<IntersectionCustome rand={Math.random() * 1.5}>
+				<BackgroundImage bg={data.thumbnail.url} active={load} />
+				<ContentsWrapper>
+					{data.category && data.category.color && <ColorOverlay color={data.category.color} active={overlay} />}
+					<Inner>
+						<Title title={data.title} type={TitleType.SM} isRegular={true} color={"inherit"} />
+						<Title title={data.subTitle} color={"inherit"} />
+					</Inner>
+				</ContentsWrapper>
+			</IntersectionCustome>
 		</Wrapper>
 	);
 };

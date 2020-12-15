@@ -14,6 +14,7 @@ import SectionWrapper from "../Component/SectionWrapper";
 import Video from "../Component/Video";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import Intersection from "../Component/Intersection";
 
 const PageTitleWrapperCustome = styled(PageTitleWrapper)`
 	margin-bottom: 110px;
@@ -47,7 +48,7 @@ const Tutor = () => {
 							<PageTitleWrapperCustome handleBackClick={handleBackClick} title={DATA_TUTOR.title} subTitle={DATA_TUTOR.subTitle} text={DATA_TUTOR.text} image={DATA_TUTOR.image} />
 
 							<SectionWrapperCustome title={DATA_TUTOR.contents.title} subTitle={DATA_TUTOR.contents.subTitle} gap={38} isLast={true}>
-								{data && <Video value={data.youtubeId} size={100} />}
+								<Intersection>{data && <Video value={data.youtubeId} size={100} />}</Intersection>
 							</SectionWrapperCustome>
 						</ColContents>
 					</ColWrapper>

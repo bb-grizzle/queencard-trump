@@ -18,6 +18,7 @@ import BackgroundImage from "../Component/BackgroundImage";
 import DetailList from "../Component/DetailList";
 import media from "../Styles/media";
 import { useRouter } from "next/router";
+import Intersection from "../Component/Intersection";
 
 // VISION
 const VisionSectionWrapper = styled.div`
@@ -199,47 +200,54 @@ const index = () => {
 							<ColContents>
 								<PageTitleWrapper handleBackClick={handleBackClick} title={"ABOUT AWESOME"} subTitle={"어썸스쿨이 그리는 세상 "} />
 								{/* VISION & MISSION */}
-								<VisionSectionWrapper>
-									{DATA_ABOUT.vmision.map((el, index) => {
-										return (
-											<VisionSectionItem key={index}>
-												<ImageWrapper color={el.color}>
-													<BackgroundImage image={el.image} opacity={1} />
-													<VisionTitle title={el.id} type={TitleType.SM} />
-													<VisionImageText text={el.title} />
-												</ImageWrapper>
-												<VisionText text={el.text} type={ParagraphType.SM} />
-											</VisionSectionItem>
-										);
-									})}
-								</VisionSectionWrapper>
-
-								{/* VALUE */}
-								<SectionWrapper title="IN AWESOME WAY" subTitle="어썸스쿨이 이뤄내는 방식 " gap={61}>
-									<ValueSectionWrapper>
-										{DATA_ABOUT.values.map((el, index) => {
+								<Intersection>
+									<VisionSectionWrapper>
+										{DATA_ABOUT.vmision.map((el, index) => {
 											return (
-												<ValueSectionItem key={index}>
-													<ValueImage>
-														<BackgroundImage image={`${el.image}`} />
-													</ValueImage>
-													<ValueTextWrapper>
-														<ValueTitle title={el.title} />
-														<ValueSubtitle text={el.subTitle} size={13} bold={true} />
-														<ValueText text={el.text} size={13} />
-													</ValueTextWrapper>
-												</ValueSectionItem>
+												<VisionSectionItem key={index}>
+													<ImageWrapper color={el.color}>
+														<BackgroundImage image={el.image} opacity={1} />
+														<VisionTitle title={el.id} type={TitleType.SM} />
+														<VisionImageText text={el.title} />
+													</ImageWrapper>
+													<VisionText text={el.text} type={ParagraphType.SM} />
+												</VisionSectionItem>
 											);
 										})}
-									</ValueSectionWrapper>
-								</SectionWrapper>
+									</VisionSectionWrapper>
+								</Intersection>
+
+								{/* VALUE */}
+								<Intersection>
+									<SectionWrapper title="IN AWESOME WAY" subTitle="어썸스쿨이 이뤄내는 방식 " gap={61}>
+										<ValueSectionWrapper>
+											{DATA_ABOUT.values.map((el, index) => {
+												return (
+													<ValueSectionItem key={index}>
+														<ValueImage>
+															<BackgroundImage image={`${el.image}`} />
+														</ValueImage>
+														<ValueTextWrapper>
+															<ValueTitle title={el.title} />
+															<ValueSubtitle text={el.subTitle} size={13} bold={true} />
+															<ValueText text={el.text} size={13} />
+														</ValueTextWrapper>
+													</ValueSectionItem>
+												);
+											})}
+										</ValueSectionWrapper>
+									</SectionWrapper>
+								</Intersection>
 
 								{/* CONTENTS */}
-								<SectionWrapper title={data.title.split("\n")[0]} subTitle={data.title.split("\n")[1]} isLast={true}>
-									{data.contents.map((el, index) => {
-										return <DetailList key={index} {...el} image={el.image} number={index + 1} />;
-									})}
-								</SectionWrapper>
+
+								<Intersection>
+									<SectionWrapper title={data.title.split("\n")[0]} subTitle={data.title.split("\n")[1]} isLast={true}>
+										{data.contents.map((el, index) => {
+											return <DetailList key={index} {...el} image={el.image} number={index + 1} />;
+										})}
+									</SectionWrapper>
+								</Intersection>
 							</ColContents>
 						)}
 					</ColWrapper>

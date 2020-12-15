@@ -33,6 +33,6 @@
 - [x] cover image ratio
 - [x] loading logo
 - [x] chart view
-- [ ] infinit scroll
 - [x] multi category
-- [ ] IE browser
+- [x] IE browser
+- [x] interaction

@@ -86,6 +86,32 @@ export const fbGetData = async (col, order, desc) => {
 	}
 };
 
+export const fbGetLimitData = async (col, order, desc) => {
+	try {
+		const result = [];
+		const ref = await db.collection(col);
+
+		let arr;
+
+		arr = await ref
+			.orderBy(order, desc)
+			.limit(2)
+			.get();
+
+		arr.forEach((doc) => {
+			const obj = {
+				...doc.data(),
+				id: doc.id
+			};
+			result.push(obj);
+		});
+
+		return result;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 export const fbGetDataById = async (col, doc) => {
 	try {
 		const ref = await db

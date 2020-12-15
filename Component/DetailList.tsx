@@ -5,6 +5,7 @@ import Numbering from "./Numbering";
 import ImageSlider from "./ImageSlider";
 import media from "../Styles/media";
 import { FileProps } from "../Interface/portfolio";
+import Intersection from "./Intersection";
 interface DetailListProps {
 	number?: number;
 	title: string;
@@ -53,33 +54,35 @@ const ImageView = styled.img`
 const DetailList: React.FC<DetailListProps> = ({ title, image, text, number, isSlider }) => {
 	return (
 		<Wrapper>
-			{!!text ? (
-				<TextWrapper>
-					<ListNumbering number={number} />
-					<TitleCustome title={title.split("\n")} isRegular={true} margin={26} />
-					<Paragraph text={text} />
-				</TextWrapper>
-			) : (
-				<TextWrapper>
-					<TitleCustome title={title} />
-				</TextWrapper>
-			)}
+			<Intersection>
+				{!!text ? (
+					<TextWrapper>
+						<ListNumbering number={number} />
+						<TitleCustome title={title.split("\n")} isRegular={true} margin={26} />
+						<Paragraph text={text} />
+					</TextWrapper>
+				) : (
+					<TextWrapper>
+						<TitleCustome title={title} />
+					</TextWrapper>
+				)}
 
-			{isSlider === true && console.log(image)}
+				{isSlider === true && console.log(image)}
 
-			{isSlider === true || isSlider === undefined ? (
-				<ImageSlider images={image.map((el) => el.url)} />
-			) : (
-				<ImageWrapper>
-					{image.map((el) => {
-						return (
-							<ImageList>
-								<ImageView src={el.url} />
-							</ImageList>
-						);
-					})}
-				</ImageWrapper>
-			)}
+				{isSlider === true || isSlider === undefined ? (
+					<ImageSlider images={image.map((el) => el.url)} />
+				) : (
+					<ImageWrapper>
+						{image.map((el) => {
+							return (
+								<ImageList>
+									<ImageView src={el.url} />
+								</ImageList>
+							);
+						})}
+					</ImageWrapper>
+				)}
+			</Intersection>
 		</Wrapper>
 	);
 };

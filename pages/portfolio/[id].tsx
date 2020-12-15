@@ -15,8 +15,9 @@ import DetailList from "../../Component/DetailList";
 import useSize from "../../Hook/useSize";
 import media from "../../Styles/media";
 import PageTitleWrapper from "../../Component/PageTitleWrapper";
+import Intersection from "../../Component/Intersection";
 
-const InfoWrapper = styled.div`
+const InfoWrapper = styled(Intersection)`
 	display: flex;
 	margin-bottom: 125px;
 	color: ${(props) => props.theme.color.gray.dark};
