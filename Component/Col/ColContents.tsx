@@ -11,12 +11,12 @@ import { PortfolioDataProps } from "../../Interface/portfolio";
 import Paragraph from "../Text/Paragraph";
 import theme from "../../Styles/theme";
 import { useRouter } from "next/router";
+
 interface ColContentsProps {
 	refElement?: MutableRefObject<HTMLDivElement>;
 }
 
 const ColWrapper = styled(ColDefault)`
-	min-height: ${(props) => props.theme.size.full_height};
 	@media ${media.tablet} {
 		min-height: initial;
 	}

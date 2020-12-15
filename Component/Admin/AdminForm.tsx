@@ -35,16 +35,16 @@ const Wrapper = styled.div<{ active: boolean; isFilled?: boolean }>`
 	height: ${(props) => props.theme.size.full_height};
 	z-index: ${(props) => props.theme.zIndex.adminForm.pc};
 	background-color: ${(props) => props.theme.color.white};
-	padding-top: ${(props) => props.theme.size.header.pc};
+	padding-top: ${(props) => `${props.theme.size.header.pc}px`};
 	transition: ${(props) => props.theme.transition.default};
 	overflow: scroll;
-	padding-bottom: ${(props) => props.theme.size.header.pc};
+	padding-bottom: ${(props) => `${props.theme.size.header.pc}px`};
 	scroll-behavior: smooth;
 	${(props) => props.theme.style.hideScroll};
 
 	@media ${media.tablet} {
 		padding-top: 0px;
-		top: ${(props) => (props.isFilled ? props.theme.size.header.mobile : 0)};
+		top: ${(props) => (props.isFilled ? `${props.theme.size.header.mobile}px` : 0)};
 		z-index: ${(props) => props.theme.zIndex.adminForm.tablet};
 	}
 

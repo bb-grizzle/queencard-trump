@@ -222,30 +222,36 @@ const zIndex = {
 const size = {
 	height_input: "36px",
 	full_height: `calc(var(--vh, 1vh) * 100);`,
+	full_height_withCalc: (calculation: string) => `calc(var(--vh, 1vh) * 100 + ${calculation});`,
 
 	header: {
-		pc: "140px",
-		mobile: "64px"
+		pc: 140,
+		mobile: 64
 	},
 	offset: {
 		tablet: 16
 	},
 	padding_top_admin: {
-		pc: "200px",
-		mobile: "80px"
+		pc: 200,
+		mobile: 80
 	},
 	padding_top_contents: {
-		pc: "64px",
-		tablet: "16px"
+		pc: 64,
+		tablet: 16
 	},
 	padding_bottom_admin: {
-		pc: "100px",
-		mobile: "60px"
+		pc: 100,
+		mobile: 60
 	},
 	gap: {
 		list: 30,
 		section: 32,
 		contents: 16
+	},
+	cover: {
+		pc: 500,
+		tablet: 320,
+		mobile: 160
 	},
 
 	margin: {

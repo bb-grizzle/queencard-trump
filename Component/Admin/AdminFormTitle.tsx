@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 
 	@media ${media.tablet} {
 		margin-bottom: 20px;
-		height: ${(props) => props.theme.size.header.mobile};
+		height: ${(props) => `${props.theme.size.header.mobile}px`};
 		align-items: center;
 	}
 `;

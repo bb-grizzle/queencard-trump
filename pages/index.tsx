@@ -6,8 +6,6 @@ import { useEffect } from "react";
 import ColWrapper from "../Component/Col/ColWrapper";
 import ColSidebar from "../Component/Col/ColSidebar";
 import ColContents from "../Component/Col/ColContents";
-import { useRouter } from "next/router";
-import useElementSize from "../Hook/useElementSize";
 import ContentsWrapper from "../Component/ContentsWrapper";
 import CategoryWrapper from "../Component/Category/CategoryWrapper";
 import { usePortfolioData, useCategoryData, useLoading } from "../Context/AppProvider";
@@ -15,17 +13,17 @@ import useImageLoad from "../Hook/useImageLoad";
 import media from "../Styles/media";
 
 const CoverWrapper = styled.div`
-	height: 500px;
+	height: ${(props) => `${props.theme.size.cover.pc}px`};
 	display: flex;
 	align-items: center;
 	justify-content: center;
 
 	@media ${media.tablet} {
-		height: 320px;
+		height: ${(props) => `${props.theme.size.cover.tablet}px`};
 	}
 
 	@media ${media.mobile} {
-		height: 160px;
+		height: ${(props) => `${props.theme.size.cover.mobile}px`};
 	}
 `;
 

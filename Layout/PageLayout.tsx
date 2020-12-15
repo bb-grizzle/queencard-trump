@@ -12,10 +12,10 @@ interface PageContainerProps {
 }
 
 const Wrapper = styled.div`
-	padding-top: ${(props) => props.theme.size.header.pc};
+	padding-top: ${(props) => `${props.theme.size.header.pc}px`};
 	padding-bottom: 100px;
 	@media ${media.tablet} {
-		padding-top: ${(props) => props.theme.size.header.mobile};
+		padding-top: ${(props) => `${props.theme.size.header.mobile}px`};
 		padding-bottom: 32px;
 	}
 	/* min-height: ${(props) => props.theme.size.full_height}; */

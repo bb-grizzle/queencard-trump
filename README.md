@@ -34,5 +34,5 @@
 - [x] loading logo
 - [x] chart view
 - [ ] infinit scroll
-- [ ] multi category
+- [x] multi category
 - [ ] IE browser

@@ -13,7 +13,7 @@ import Logo from "./Logo";
 
 const Wrapper = styled.header`
 	width: 100%;
-	height: ${(props) => props.theme.size.header.pc};
+	height: ${(props) => `${props.theme.size.header.pc}px`};
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -21,7 +21,7 @@ const Wrapper = styled.header`
 	/* background-color: ${(props) => props.theme.color.white}; */
 
 	@media ${media.tablet} {
-		height: ${(props) => props.theme.size.header.mobile};
+		height: ${(props) => `${props.theme.size.header.mobile}px`};
 	}
 `;
 

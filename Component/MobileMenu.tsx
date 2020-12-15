@@ -23,7 +23,7 @@ const MenuWrapper = styled.div<{ active: boolean }>`
 	top: 0;
 	width: 100%;
 	height: 100%;
-	padding-top: ${(props) => props.theme.size.header.mobile};
+	padding-top: ${(props) => `${props.theme.size.header.mobile}px`};
 	background-color: ${(props) => props.theme.color.white};
 	transition: ${(props) => props.theme.transition.default};
 	transition-property: transform;
