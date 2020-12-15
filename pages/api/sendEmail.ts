@@ -10,9 +10,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			smtpTransport({
 				service: "gmail",
 				host: "smtp.gmail.com",
+				secure: true,
 				auth: {
-					user: "firbigi1993@gmail.com",
-					pass: "Dbs279756*"
+					user: process.env.NEXT_PUBLIC_GMAIL_USER,
+					pass: process.env.NEXT_PUBLIC_GMAIL_PASS
 				}
 			})
 		);
@@ -73,10 +74,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			return new Promise((resolve, reject) => {
 				transporter.sendMail(mailOptions, function(error, info) {
 					if (error) {
-						console.log(error);
 						reject(error);
 					} else {
-						console.log("Email Sent");
 						resolve("Email sent: " + info.response);
 					}
 				});
@@ -84,8 +83,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		};
 
 		try {
-			const response = await send();
-			console.log(response);
+			await send();
 			return res.status(200).end();
 		} catch (err) {
 			return res.status(405).end();

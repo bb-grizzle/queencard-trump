@@ -190,10 +190,9 @@ const Contact = () => {
 		try {
 			// setLoading(true);
 
-			// await sendSlackMessage(`${personalGroupInput.value} | ${personalNameInput.value}`);
-
+			await sendSlackMessage(`${personalGroupInput.value} | ${personalNameInput.value}`);
 			const file = projectFileInput.file ? await fbUploadStorage("contact", `${Date.now()}_${projectFileInput.fileName}`, projectFileInput.file) : "";
-			const res = await sendEmail({
+			await sendEmail({
 				formData: form,
 				file: file ? { path: file.url, filename: file.fileName } : ""
 			});
