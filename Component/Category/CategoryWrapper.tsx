@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 import { useCategoryData } from "../../Context/AppProvider";
 import Paragraph, { ParagraphType } from "../Text/Paragraph";
 import Numbering from "../Numbering";
-import { useEffect } from "react";
 import media from "../../Styles/media";
 import useSize from "../../Hook/useSize";
 import { useRouter } from "next/router";
@@ -57,14 +56,9 @@ const CategoryList = styled.li<{ active: boolean | null }>`
 const CategoryWrapper = () => {
 	const { category, nowCategory, setNowCategory } = useCategoryData();
 	const { isTablet } = useSize();
-	const { push } = useRouter();
+
 	const handleCategoryClick = (id: string) => {
-		push("/");
-		if (nowCategory === id) {
-			setNowCategory(null);
-		} else {
-			setNowCategory(id);
-		}
+		setNowCategory((prev) => (!prev.includes(id) ? [...prev, id] : prev.filter((el) => el !== id)));
 	};
 
 	return (
@@ -72,7 +66,7 @@ const CategoryWrapper = () => {
 			{category &&
 				category.map((el) => {
 					return (
-						<CategoryList onClick={() => handleCategoryClick(el.id)} key={el.id} active={nowCategory !== null ? el.id === nowCategory : null}>
+						<CategoryList onClick={() => handleCategoryClick(el.id)} key={el.id} active={nowCategory.length > 0 ? nowCategory.includes(el.id) : true}>
 							<CategoryText text={el.name} type={!isTablet ? ParagraphType.LG : ParagraphType.MD} color={el.color} />
 							<CategoryCount number={el.count} small={true} color={el.color} />
 						</CategoryList>

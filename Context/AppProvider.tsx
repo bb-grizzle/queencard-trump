@@ -18,8 +18,8 @@ interface AppContextProps {
 	setIsLoggedInt: Dispatch<SetStateAction<boolean | null>>;
 	portfolio: PortfolioDataProps[];
 	category: CategoryDataProps[];
-	nowCategory: string | null;
-	setNowCategory: Dispatch<SetStateAction<string>>;
+	nowCategory: string[] | null;
+	setNowCategory: Dispatch<SetStateAction<string[]>>;
 	nowPortfolio: PortfolioDataProps;
 	setNowPortfolio: Dispatch<SetStateAction<PortfolioDataProps>>;
 	setSearch: Dispatch<SetStateAction<string>>;
@@ -40,7 +40,7 @@ const AppProvider = ({ children }) => {
 
 	// category and portfolio
 	const { data: portfolio, category } = usePortfolio();
-	const [nowCategory, setNowCategory] = useState<string>(null);
+	const [nowCategory, setNowCategory] = useState<string[]>([]);
 
 	const [nowPortfolio, setNowPortfolio] = useState<PortfolioDataProps>();
 
@@ -83,7 +83,7 @@ const AppProvider = ({ children }) => {
 	}, [router]);
 
 	useEffect(() => {
-		setNowCategory(null);
+		setNowCategory([]);
 	}, [router.pathname]);
 
 	return (
@@ -153,6 +153,9 @@ export const usePortfolioData = () => {
 
 export const useCategoryData = () => {
 	const { category, nowCategory, setNowCategory } = useContext(AppContext);
+	useEffect(() => {
+		console.log("nowCategory : ", nowCategory);
+	}, [nowCategory]);
 	return { category, nowCategory, setNowCategory };
 };
 

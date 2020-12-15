@@ -32,7 +32,7 @@
 - [x] send email
 - [x] cover image ratio
 - [x] loading logo
+- [x] chart view
 - [ ] infinit scroll
-- [ ] chart scroll??
 - [ ] multi category
 - [ ] IE browser
