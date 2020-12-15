@@ -9,7 +9,7 @@
 - [x] 회사소개
 - [x] 사업과정
 - [x] 강사소개
-- [ ] 문의하기
+- [x] 문의하기
 
 ### admin
 
@@ -34,6 +34,5 @@
 - [x] loading logo
 - [x] chart view
 - [x] multi category
-- [x] IE browser
 - [x] interaction
-- [ ] change account
+- [x] change account
