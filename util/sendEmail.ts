@@ -1,6 +1,16 @@
+import axios from "axios";
+
 export const sendEmail = async ({ formData, file }) => {
 	try {
-		return true;
+		const res = await axios({
+			method: "post",
+			url: "/api/sendEmail",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			data: { formData, file }
+		});
+		return res;
 	} catch (err) {
 		console.dir(err);
 	}
