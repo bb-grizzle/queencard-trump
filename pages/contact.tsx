@@ -194,16 +194,16 @@ const Contact = () => {
 			await sendSlackMessage(`${personalGroupInput.value} 의 ${personalNameInput.value}으로 부터 프로젝트 문의신청이 있습니다.`);
 
 			// EMAIL
-			// const path = projectFileInput.file ? await getDataUrl(projectFileInput.file) : undefined;
-			// await sendEmail({
-			// 	formData: form,
-			// 	file: path
-			// 		? {
-			// 				path,
-			// 				filename: projectFileInput.fileName
-			// 		  }
-			// 		: undefined
-			// });
+			const path = projectFileInput.file ? await getDataUrl(projectFileInput.file) : undefined;
+			await sendEmail({
+				formData: form,
+				file: path
+					? {
+							path,
+							filename: projectFileInput.fileName
+					  }
+					: undefined
+			});
 
 			setPopupActive(true);
 

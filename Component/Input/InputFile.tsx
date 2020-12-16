@@ -7,6 +7,7 @@ interface InputFileProps {
 	fileName: string;
 	className?: string;
 	label?: string;
+	accept?: string;
 }
 const Wrapper = styled.div`
 	width: 100%;
@@ -48,13 +49,13 @@ const Text = styled(Paragraph)`
 	top: -1px;
 `;
 
-const InputFile: React.FC<InputFileProps> = ({ onChange, fileName, className, label }) => {
+const InputFile: React.FC<InputFileProps> = ({ onChange, fileName, className, label, accept = "image/x-png,image/gif,image/jpeg, application/pdf, .zip, .rar, .7zip" }) => {
 	return (
 		<InputLayout label={label}>
 			<Wrapper className={className}>
 				{fileName && <FileName text={fileName} type={ParagraphType.SM} />}
 				<Label>
-					<Input type={"file"} onChange={onChange} />
+					<Input type={"file"} onChange={onChange} accept={accept} />
 					<Text text={"파일 업로드"} type={ParagraphType.SM} />
 				</Label>
 			</Wrapper>

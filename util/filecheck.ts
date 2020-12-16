@@ -1,4 +1,5 @@
 function checkFile(el) {
+	// kb setting
 	var file = el.file;
 
 	if (file && file[0] && file[0].size > 1024 * 1024 * 1) {
