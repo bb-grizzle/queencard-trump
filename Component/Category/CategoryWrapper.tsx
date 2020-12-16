@@ -50,6 +50,7 @@ const CategoryList = styled.li<{ active: boolean | null }>`
 
 	@media ${media.tablet} {
 		padding-right: 16px;
+		margin-bottom: 10px;
 	}
 `;
 
