@@ -101,7 +101,7 @@ const portfolio = () => {
 	};
 
 	return (
-		<PageContainer>
+		<PageContainer loading={!!nowPortfolio}>
 			<ContentsWrapper>
 				<ContainerLayout>
 					<ColWrapper>
