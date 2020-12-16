@@ -49,7 +49,7 @@ const Text = styled(Paragraph)`
 	top: -1px;
 `;
 
-const InputFile: React.FC<InputFileProps> = ({ onChange, fileName, className, label, accept = "image/x-png,image/gif,image/jpeg, application/pdf, .zip, .rar, .7zip" }) => {
+const InputFile: React.FC<InputFileProps> = ({ onChange, fileName, className, label, accept = "image/x-png,image/gif,image/jpeg" }) => {
 	return (
 		<InputLayout label={label}>
 			<Wrapper className={className}>

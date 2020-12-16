@@ -262,7 +262,7 @@ const Contact = () => {
 								<InputRadio {...projectBudgetInput} {...DATA_FORM_BUDGET} />
 								<InputRadio {...projectDateChkInput} {...DATA_FORM_DATE_CHECKBOX} />
 								<InputDefault {...projectDateTextInput} {...DATA_FORM_DATE_TEXT} fontsize={13} type={"date"} />
-								<InputFile {...projectFileInput} {...DATA_FORM_FILE} />
+								<InputFile {...projectFileInput} {...DATA_FORM_FILE} accept={`image/x-png,image/gif,image/jpeg, application/pdf, .zip, .rar, .7zip`} />
 
 								<PersonalInfo>
 									<PersonalInfoList {...personalGroupInput} placeholder={"소속 조직명"} />

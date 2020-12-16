@@ -72,9 +72,8 @@ const category = () => {
 	const { setLoading } = useLoading();
 
 	useEffect(() => {
-		console.log(cover);
 		if (cover && category) {
-			// setLoading(false);
+			setLoading(false);
 		}
 	}, [cover, category]);
 
@@ -151,7 +150,7 @@ const category = () => {
 			<ContainerLayout>
 				<AdminTitleSection title="홈" />
 				<CoverInputWrapper>
-					<CustomeInputFile {...coverInput} image={cover && cover.url} />
+					{cover && <CustomeInputFile {...coverInput} image={cover && coverInput.url ? coverInput.url : cover.url} />}
 					<BtnIcon icon={"check"} onClick={handleCoverSaveClick} disable={!coverInput.file} />
 				</CoverInputWrapper>
 
