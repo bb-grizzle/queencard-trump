@@ -11,7 +11,6 @@ const useAbout = () => {
 		const get = async () => {
 			try {
 				const res = await fbGetData(COL, "timeStamp", "desc");
-				console.log(res);
 				if (!!res && Array.isArray(res) && res.length > 0) {
 					setId(res[0].id);
 					setData(res[0]);

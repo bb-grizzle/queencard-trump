@@ -1,8 +1,6 @@
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import { checkBrowser } from "../util/checkBrowser";
-import { useIsIe } from "../Context/AppProvider";
 interface IntersectionProps {
 	className?: string;
 }
@@ -24,7 +22,7 @@ const Wrapper = styled.div<{ active }>`
 const Intersection: React.FC<IntersectionProps> = ({ children, className }) => {
 	const [active, setActive] = useState(false);
 
-	const { ref, inView, entry } = useInView({
+	const { ref, inView } = useInView({
 		/* Optional options */
 		threshold: 0.2
 	});

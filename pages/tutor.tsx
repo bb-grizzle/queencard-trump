@@ -29,7 +29,6 @@ const Tutor = () => {
 	const { push } = useRouter();
 	useEffect(() => {
 		if (data) {
-			console.log(data);
 			setLoading(false);
 		}
 	}, [data]);
