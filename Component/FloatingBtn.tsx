@@ -15,9 +15,12 @@ const Container = styled(ContainerLayout)`
 const Btn = styled.div`
 	position: absolute;
 	right: 0;
-	top: 64px;
-	width: 120px;
-	height: 120px;
+	/* top: 64px; */
+	top: 0;
+	top: ${(props) => `${props.theme.size.header.pc / 2}px`};
+	transform: translateY(-50%);
+	width: 88px;
+	height: 88px;
 	border-radius: 100%;
 	background-color: ${(props) => props.theme.color.main};
 	${(props) => props.theme.layout.center_flex};

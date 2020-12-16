@@ -55,7 +55,7 @@ const ColContents: React.FC<ColContentsProps> = ({ children }) => {
 							data.map((portfolio, index) => {
 								return (
 									<PortfolioList
-										overlay={nowCategory.includes(portfolio.category.id)}
+										overlay={nowCategory ? nowCategory.includes(portfolio.category.id) : false}
 										key={portfolio.id}
 										data={portfolio}
 										col={col}
@@ -78,7 +78,7 @@ const ColContents: React.FC<ColContentsProps> = ({ children }) => {
 						data.map((portfolio, index) => {
 							return (
 								<PortfolioList
-									overlay={nowCategory.includes(portfolio.category.id)}
+									overlay={nowCategory ? nowCategory.includes(portfolio.category.id) : false}
 									key={portfolio.id}
 									data={portfolio}
 									col={col}

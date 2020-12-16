@@ -66,7 +66,7 @@ const CategoryWrapper = () => {
 			{category &&
 				category.map((el) => {
 					return (
-						<CategoryList onClick={() => handleCategoryClick(el.id)} key={el.id} active={nowCategory.length > 0 ? nowCategory.includes(el.id) : true}>
+						<CategoryList onClick={() => handleCategoryClick(el.id)} key={el.id} active={nowCategory && nowCategory.length > 0 ? nowCategory.includes(el.id) : true}>
 							<CategoryText text={el.name} type={!isTablet ? ParagraphType.LG : ParagraphType.MD} color={el.color} />
 							<CategoryCount number={el.count} small={true} color={el.color} />
 						</CategoryList>
