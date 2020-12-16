@@ -3,6 +3,7 @@ import media from "../Styles/media";
 import Footer from "../Component/Footer";
 import { useEffect } from "react";
 import { useLoading } from "../Context/AppProvider";
+import { useRouter } from "next/router";
 
 interface PageContainerProps {
 	paddingTop?: boolean;
@@ -21,8 +22,12 @@ const Wrapper = styled.div`
 `;
 const PageContainer: React.FC<PageContainerProps> = ({ children, className, loading }) => {
 	const { setLoading } = useLoading();
+	const { pathname } = useRouter();
+
 	useEffect(() => {
-		// setLoading(true);
+		if (!pathname.includes("_admin")) {
+			setLoading(true);
+		}
 	}, []);
 	return (
 		<Wrapper className={className}>

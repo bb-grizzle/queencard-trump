@@ -23,9 +23,9 @@ const Wrapper = styled.div<{ active }>`
 `;
 const Intersection: React.FC<IntersectionProps> = ({ children, className }) => {
 	const [active, setActive] = useState(false);
-	const { isIe } = useIsIe();
+	// const { isIe } = useIsIe();
 
-	const { ref, inView, entry } = useInView({
+	const { ref, inView } = useInView({
 		/* Optional options */
 		threshold: 0.2
 	});
@@ -36,9 +36,7 @@ const Intersection: React.FC<IntersectionProps> = ({ children, className }) => {
 		}
 	}, [inView]);
 
-	return isIe ? (
-		<>{children}</>
-	) : (
+	return (
 		<Wrapper ref={ref} active={active} className={className}>
 			{children}
 		</Wrapper>
