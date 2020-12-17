@@ -4,7 +4,6 @@ import Paragraph, { ParagraphType } from "../Text/Paragraph";
 import Numbering from "../Numbering";
 import media from "../../Styles/media";
 import useSize from "../../Hook/useSize";
-import { useRouter } from "next/router";
 
 const Wrapper = styled.ul`
 	margin-bottom: 16px;
@@ -65,11 +64,11 @@ const CategoryWrapper = () => {
 	return (
 		<Wrapper>
 			{category &&
-				category.map((el) => {
+				category.map((el, index) => {
 					return (
 						<CategoryList onClick={() => handleCategoryClick(el.id)} key={el.id} active={nowCategory && nowCategory.length > 0 ? nowCategory.includes(el.id) : true}>
 							<CategoryText text={el.name} type={!isTablet ? ParagraphType.LG : ParagraphType.MD} color={el.color} />
-							<CategoryCount number={el.count} small={true} color={el.color} />
+							<CategoryCount number={index + 1} small={true} color={el.color} />
 						</CategoryList>
 					);
 				})}

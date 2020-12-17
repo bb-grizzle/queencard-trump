@@ -14,7 +14,6 @@ import polyfill from "../polyfill";
 
 import "react-quill/dist/quill.snow.css";
 import { scrollToTop } from "../util/scroll";
-import polyfill from "../polyfill";
 
 interface MyAppProps extends AppProps {}
 
