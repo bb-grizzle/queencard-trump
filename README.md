@@ -38,3 +38,4 @@
 - [x] change account
 - [ ] update floating button
 - [ ] delete contact checkbox inputs
+- [ ] contents table view
