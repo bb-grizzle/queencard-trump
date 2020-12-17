@@ -33,6 +33,7 @@ const HeadComponent: React.FC = ({ children }) => {
 				<link rel="manifest" href="/manifest.json" />
 				<link rel="apple-touch-icon" href={`${headData.url}forMobile.png`}></link>
 				<link rel="shortcut icon" href={`${headData.url}favicon.ico`}></link>
+				<link rel="icon" href={`${headData.url}favicon.ico`} type="image/x-icon"></link>
 			</Head>
 			{children}
 		</>
