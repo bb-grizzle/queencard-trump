@@ -114,7 +114,6 @@ const Contact = () => {
 	const projectDescriptInput = useInput("");
 	const projectReasonInput = useInput("");
 	const projectBudgetInput = useInputOption("");
-	const projectDateChkInput = useInputOption("");
 	const projectDateTextInput = useInput("");
 	const projectFileInput = useInputFile();
 
@@ -143,14 +142,13 @@ const Contact = () => {
 			descript: projectDescriptInput.value,
 			reason: projectReasonInput.value,
 			budget: projectBudgetInput.value,
-			dateChk: projectDateChkInput.value,
 			dateText: projectDateTextInput.value,
 			file: null,
 			personalInfo,
 			agree
 		});
 		// console.log(form);
-	}, [agree, personalInfo, projectTypeInput.value, projectDescriptInput.value, projectReasonInput.value, projectBudgetInput.value, projectDateChkInput.value, projectDateTextInput.value]);
+	}, [agree, personalInfo, projectTypeInput.value, projectDescriptInput.value, projectReasonInput.value, projectBudgetInput.value, projectDateTextInput.value]);
 
 	useEffect(() => {
 		setPersonalInfo({
@@ -164,7 +162,7 @@ const Contact = () => {
 	}, [personalGroupInput.value, personalWebsiteInput.value, personalNameInput.value, personalRoleInput.value, personalNumberInput.value, personalEmailInput.value]);
 
 	const handleSubmit = async () => {
-		if (projectTypeInput.value.lenght === 0 || !projectDescriptInput.value || !projectReasonInput.value || !projectBudgetInput.value || !projectDateChkInput.value || !projectDateTextInput.value) {
+		if (projectTypeInput.value.lenght === 0 || !projectDescriptInput.value || !projectReasonInput.value || !projectBudgetInput.value || !projectDateTextInput.value) {
 			formCheck();
 			return;
 		}
@@ -224,7 +222,6 @@ const Contact = () => {
 		projectDescriptInput.init();
 		projectReasonInput.init();
 		projectBudgetInput.init();
-		projectDateChkInput.init();
 		// projectDateTextInput.init();
 		projectFileInput.init();
 		personalGroupInput.init();
@@ -260,7 +257,6 @@ const Contact = () => {
 								<TextArea {...projectDescriptInput} {...DATA_FORM_PROJECT_DESCRIPT} />
 								<TextArea {...projectReasonInput} {...DATA_FORM_REASON} />
 								<InputRadio {...projectBudgetInput} {...DATA_FORM_BUDGET} />
-								<InputRadio {...projectDateChkInput} {...DATA_FORM_DATE_CHECKBOX} />
 								<InputDefault {...projectDateTextInput} {...DATA_FORM_DATE_TEXT} fontsize={13} type={"date"} />
 								<InputFile {...projectFileInput} {...DATA_FORM_FILE} accept={`image/x-png,image/gif,image/jpeg, application/pdf, .zip, .rar, .7zip`} />
 

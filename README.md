@@ -37,6 +37,6 @@
 - [x] interaction
 - [x] change account
 - [x] category count to index number
+- [x] delete contact checkbox inputs
 - [ ] update floating button
-- [ ] delete contact checkbox inputs
 - [ ] contents table view
