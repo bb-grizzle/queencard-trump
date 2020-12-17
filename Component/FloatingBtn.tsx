@@ -15,12 +15,10 @@ const Container = styled(ContainerLayout)`
 const Btn = styled.div`
 	position: absolute;
 	right: 0;
-	/* top: 64px; */
-	top: 0;
 	top: ${(props) => `${props.theme.size.header.pc / 2}px`};
-	transform: translateY(-50%);
-	width: 88px;
-	height: 88px;
+	transform: translateY(-50%) translateY(6px);
+	width: 100px;
+	height: 100px;
 	border-radius: 100%;
 	background-color: ${(props) => props.theme.color.main};
 	${(props) => props.theme.layout.center_flex};
@@ -31,7 +29,7 @@ const Btn = styled.div`
 
 	@media ${media.hover} {
 		&:hover {
-			transform: scale(1.1);
+			transform: translateY(-50%) translateY(6px) scale(1.1);
 		}
 	}
 
@@ -50,7 +48,7 @@ const Btn = styled.div`
 const Text = styled.p`
 	text-align: center;
 	font-weight: 700;
-	font-size: 18px;
+	font-size: 17px;
 	line-height: 1.44;
 	color: ${(props) => props.theme.color.white};
 
