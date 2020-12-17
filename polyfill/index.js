@@ -1,7 +1,7 @@
 import "./intersectionObserver";
 
-const polyfill = () => {
+const polyfill = async () => {
 
-}
+};
 
 export default polyfill;

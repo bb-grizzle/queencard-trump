@@ -10,6 +10,7 @@ import { useRouter } from "next/dist/client/router";
 import HeaderLayout from "../Layout/HeaderLayout";
 import { fbAnalytics } from "../Firebase/firebase";
 import AdminProvider from "../Context/AdminProvider";
+import polyfill from "../polyfill";
 
 import "react-quill/dist/quill.snow.css";
 import { scrollToTop } from "../util/scroll";

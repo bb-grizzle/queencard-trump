@@ -21,6 +21,7 @@ const Wrapper = styled.div<{ active }>`
 `;
 const Intersection: React.FC<IntersectionProps> = ({ children, className }) => {
 	const [active, setActive] = useState(false);
+	// const { isIe } = useIsIe();
 
 	const { ref, inView } = useInView({
 		/* Optional options */
