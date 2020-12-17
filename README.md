@@ -39,4 +39,3 @@
 - [ ] update floating button
 - [ ] delete contact checkbox inputs
 - [ ] contents table view
-- [ ] test
