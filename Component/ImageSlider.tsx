@@ -2,6 +2,7 @@ import styled from "styled-components";
 import BtnIcon from "./Btn/BtnIcon";
 import useSliderCount from "../Hook/useSliderCount";
 import media from "../Styles/media";
+import { useEffect } from "react";
 
 interface ImageSliderProps {
 	images: string[];
@@ -47,6 +48,10 @@ const BtnWrapper = styled.div`
 `;
 const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
 	const { slider, count, slideDown, slideUp } = useSliderCount();
+
+	useEffect(() => {
+		console.log(count);
+	}, [count]);
 
 	const handleRightClick = () => {
 		slideDown();

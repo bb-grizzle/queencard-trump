@@ -9,7 +9,10 @@ export const activeScroll = () => {
 };
 
 export const scrollToTarget = (dom: HTMLDivElement | HTMLUListElement, value: number) => {
-	dom.scrollLeft = value;
+	dom.scrollTo({
+		left: value,
+		behavior: "smooth"
+	});
 };
 
 export const scrollToTop = () => {
