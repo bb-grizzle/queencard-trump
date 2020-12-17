@@ -36,3 +36,5 @@
 - [x] multi category
 - [x] interaction
 - [x] change account
+- [ ] update floating button
+- [ ] delete contact checkbox inputs
