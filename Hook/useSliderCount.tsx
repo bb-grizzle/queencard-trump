@@ -3,11 +3,19 @@ import { scrollToTarget } from "../util/scroll";
 
 const useSliderCount = () => {
 	const [count, setCount] = useState(0);
+	const [isScrolling, setIsScrolling] = useState(false);
 	const slider = useRef<HTMLUListElement>(null);
+	let scrollTimeout = setTimeout(() => {}, 0);
 
 	const handleScroll = (e: any) => {
 		const count = Math.round(e.target.scrollLeft / e.target.clientWidth);
 		setCount(count);
+		setIsScrolling(true);
+
+		clearTimeout(scrollTimeout);
+		scrollTimeout = setTimeout(() => {
+			setIsScrolling(false);
+		}, 100);
 	};
 
 	const indecatorClicked = (id: number) => {
@@ -36,7 +44,7 @@ const useSliderCount = () => {
 		}
 	}, [slider]);
 
-	return { count, slider, indecatorClicked, slideUp, slideDown };
+	return { count, slider, indecatorClicked, slideUp, slideDown, isScrolling };
 };
 
 export default useSliderCount;

@@ -3,6 +3,7 @@ import BtnIcon from "./Btn/BtnIcon";
 import useSliderCount from "../Hook/useSliderCount";
 import media from "../Styles/media";
 import { useEffect } from "react";
+import { useIsIe } from "../Context/AppProvider";
 
 interface ImageSliderProps {
 	images: string[];
@@ -47,11 +48,14 @@ const BtnWrapper = styled.div`
 	}
 `;
 const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
-	const { slider, count, slideDown, slideUp } = useSliderCount();
+	const { slider, count, slideDown, slideUp, isScrolling, indecatorClicked } = useSliderCount();
+	const { isIe } = useIsIe();
 
 	useEffect(() => {
-		console.log(count);
-	}, [count]);
+		if (!isScrolling && isIe) {
+			indecatorClicked(count);
+		}
+	}, [isScrolling, isIe]);
 
 	const handleRightClick = () => {
 		slideDown();
