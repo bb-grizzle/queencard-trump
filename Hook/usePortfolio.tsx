@@ -81,7 +81,7 @@ const usePortfolio = () => {
 		let updateData = null;
 
 		if (thumbnailInput.file) {
-			const thumbnail = await fbUploadStorage(COL, id, thumbnailInput.file);
+			const thumbnail = await fbUploadStorage(`${COL}/${id}`, "thumbnail", thumbnailInput.file);
 			const contents = await cont.update(`${COL}/${id}`);
 
 			updateData = { ...data, thumbnail, contents };
