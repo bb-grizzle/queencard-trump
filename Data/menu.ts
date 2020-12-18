@@ -23,7 +23,7 @@ export const MENU: Menu[] = [
 	{
 		id: "tutor",
 		href: "/tutor",
-		name: "강사소개"
+		name: "코치소개"
 	}
 ];
 
