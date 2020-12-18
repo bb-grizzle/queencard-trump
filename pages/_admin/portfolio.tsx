@@ -62,10 +62,6 @@ const CategoryList = styled.li<{ active: boolean }>`
 `;
 
 const CategoryBtn = styled(BtnText)``;
-const Count = styled.p`
-	margin-left: 8px;
-	font-size: 12px;
-`;
 
 const ListWrppaer = styled.ul`
 	display: flex;
@@ -339,7 +335,6 @@ const portfolio = () => {
 							return (
 								<CategoryList key={el.id} active={nowCategory === el.id} onClick={() => handleCategoryClick(el.id)}>
 									<CategoryBtn text={el.name} opacityAction={false} />
-									<Count>{el.count}</Count>
 								</CategoryList>
 							);
 						})}
