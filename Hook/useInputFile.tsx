@@ -7,6 +7,7 @@ const useInputFile = () => {
 	const [url, setUrl] = useState("");
 
 	const onChange = (e: any) => {
+		console.log(checkFile(e.target));
 		if (!checkFile(e.target)) return;
 
 		if (e.target.files && e.target.files[0] !== undefined) {
