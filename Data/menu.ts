@@ -46,6 +46,6 @@ export const MENU_ADMIN: Menu[] = [
 	{
 		id: "admin_tutor",
 		href: "/_admin/tutor",
-		name: "강사소개"
+		name: "코치소개"
 	}
 ];

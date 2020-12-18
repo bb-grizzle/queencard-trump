@@ -25,7 +25,7 @@ const tutor = () => {
 
 	const formContents = [
 		{
-			title: "청년강사 인터뷰",
+			title: "코치 인터뷰",
 			inputs: [{ ...videoInput, type: "video", label: "링크" }]
 		}
 	];
@@ -49,8 +49,8 @@ const tutor = () => {
 	return (
 		<PageContainer>
 			<ContainerLayout>
-				<AdminTitleSection title="강사 소개" />
-				<AdminForm title={"강사 소개"} contents={formContents} onSubmit={handleSubmit} formRef={formRef} cancelable={false} isFilled={true} />
+				<AdminTitleSection title="코치 소개" />
+				<AdminForm title={"코치 소개"} contents={formContents} onSubmit={handleSubmit} formRef={formRef} cancelable={false} isFilled={true} />
 			</ContainerLayout>
 		</PageContainer>
 	);
