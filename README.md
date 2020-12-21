@@ -1,41 +1,18 @@
-# Awesome School
+# Next js Setup
 
-## todo
+next js with type script
 
-### Page
+## update 2020.12.21
 
-- [x] 포트폴리오
-- [x] 포트폴리오 상세
-- [x] 회사소개
-- [x] 사업과정
-- [x] 강사소개
-- [x] 문의하기
+- [ ] input style
+- [ ] interface check
 
-### admin
+## init project
 
-- [x] 로그인
-- [x] 포트폴리오
-  - [x] upload
-  - [x] update
-    - [x] 카테고리 동기화
-  - [x] delete
-    - [x] 카테고리 동기화
-- [x] 회사소개
-- [x] 강사소개
-
-### update
-
-- [x] change footer
-- [x] change input design
-- [x] add contents chart image
-- [x] change category click UX
-- [x] send email
-- [x] cover image ratio
-- [x] loading logo
-- [x] chart view
-- [x] multi category
-- [x] interaction
-- [x] change account
-- [x] category count to index number
-- [x] delete contact checkbox inputs
-- [x] update floating button
+- [x] styled component
+  - [x] global style
+  - [x] theme
+  - [x] media
+- [x] favicon
+- [x] head / meta
+- [x] 404

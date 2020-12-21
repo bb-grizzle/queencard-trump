@@ -1,9 +1,6 @@
 import styled from "styled-components";
 import media from "../Styles/media";
-import Footer from "../Component/Footer";
-import { useEffect } from "react";
-import { useLoading } from "../Context/AppProvider";
-import { useRouter } from "next/router";
+import Footer from "../Component/Default/Footer";
 
 interface PageContainerProps {
 	paddingTop?: boolean;
@@ -18,21 +15,12 @@ const Wrapper = styled.div`
 		padding-top: ${(props) => `${props.theme.size.header.mobile}px`};
 		padding-bottom: 32px;
 	}
-	/* min-height: ${(props) => props.theme.size.full_height}; */
 `;
 const PageContainer: React.FC<PageContainerProps> = ({ children, className, loading }) => {
-	const { setLoading } = useLoading();
-	const { pathname } = useRouter();
-	useEffect(() => {
-		if (!pathname.includes("_admin")) {
-			setLoading(true);
-		}
-	}, []);
 	return (
 		<Wrapper className={className}>
 			{children}
-
-			{loading && <Footer />}
+			<Footer />
 		</Wrapper>
 	);
 };

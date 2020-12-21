@@ -3,11 +3,9 @@ import media from "../Styles/media";
 
 interface ContainerLayoutProps {
 	className?: string;
-	small?: boolean;
-	containerRef?: any;
 }
-const Wrapper = styled.div<{ small: boolean }>`
-	width: ${(props) => (props.small ? "640px" : "1200px")};
+const Wrapper = styled.div`
+	width: ${(props) => props.theme.size.container.pc};
 	margin: auto;
 	max-width: 90%;
 	height: 100%;
@@ -18,12 +16,8 @@ const Wrapper = styled.div<{ small: boolean }>`
 	}
 `;
 
-const ContainerLayout: React.FC<ContainerLayoutProps> = ({ children, className, small = false, containerRef }) => {
-	return (
-		<Wrapper className={className} small={small} ref={containerRef}>
-			{children}
-		</Wrapper>
-	);
+const ContainerLayout: React.FC<ContainerLayoutProps> = ({ children, className }) => {
+	return <Wrapper className={className}>{children}</Wrapper>;
 };
 
 export default ContainerLayout;

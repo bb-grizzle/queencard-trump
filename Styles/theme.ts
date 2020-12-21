@@ -18,7 +18,7 @@ const color = {
 };
 
 const div = {
-	top: (color?: string, size?: number) => `
+	top: (color?: string, size?: number) => css`
 		&:after {
 			content: "";
 			position: absolute;
@@ -29,7 +29,7 @@ const div = {
 			background-color: ${color ? color : theme.color.black};
 		}
 	`,
-	bottom: (color?: string, size?: number, width?: string) => `
+	bottom: (color?: string, size?: number, width?: string) => css`
 		&:after {
 			content: "";
 			position: absolute;
@@ -40,8 +40,7 @@ const div = {
 			background-color: ${color ? color : theme.color.black};
 		}
 	`,
-	left: (color?: string, size?: number) => `
-		
+	left: (color?: string, size?: number) => css`
 		&:after {
 			content: "";
 			position: absolute;
@@ -52,18 +51,17 @@ const div = {
 			background-color: ${color ? color : theme.color.black};
 		}
 	`,
-	right: (color?: string, size?: number) => `
-		
-	&:after {
-		content: "";
-		position: absolute;
-		width: ${size ? `${size}px` : `2px`};
-		height: 100%;
-		top: 0;
-		right: 0;
-		background-color: ${color ? color : theme.color.black};
-	}
-`
+	right: (color?: string, size?: number) => css`
+		&:after {
+			content: "";
+			position: absolute;
+			width: ${size ? `${size}px` : `2px`};
+			height: 100%;
+			top: 0;
+			right: 0;
+			background-color: ${color ? color : theme.color.black};
+		}
+	`
 };
 
 const transition = {
@@ -77,9 +75,9 @@ const transition = {
 };
 
 const layout = {
-	full_abs: `
-	position: absolute;
-		left:0;
+	full_abs: css`
+		position: absolute;
+		left: 0;
 		top: 0;
 		right: 0;
 		bottom: 0;
@@ -223,7 +221,9 @@ const size = {
 	height_input: "36px",
 	full_height: `calc(var(--vh, 1vh) * 100);`,
 	full_height_withCalc: (calculation: string) => `calc(var(--vh, 1vh) * 100 + ${calculation});`,
-
+	container: {
+		pc: "1200px"
+	},
 	header: {
 		pc: 140,
 		mobile: 64

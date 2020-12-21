@@ -9,10 +9,8 @@ import FormDefault from "../Input/FormDefault";
 import InputFile from "../Input/InputFile";
 import InputTag from "../Input/InputTag";
 import InputOption from "../Input/InputOption";
-import FormCategoryInput from "./FormCategoryInput";
 import InputColor from "../Input/InputColor";
 import EditorDefault from "../Editor/EditorDefault";
-import InputContents from "../Input/InputContents";
 import TextArea from "../Input/TextArea";
 import InputVideo from "../Input/InputVideo";
 
@@ -96,16 +94,12 @@ const AdminForm: React.FC<AdminFormProps> = ({ isFilled, onSubmit, contents, tit
 											return <TextArea {...input} key={i} />;
 										case "video":
 											return <InputVideo {...input} key={i} />;
-										case "contents":
-											return <InputContents {...input} key={i} />;
 										case "file":
 											return <InputFile {...input} key={i} />;
 										case "tag":
 											return <InputTag key={i} {...input} />;
 										case "option":
 											return <InputOption key={i} {...input} />;
-										case "category":
-											return <FormCategoryInput key={i} {...input} />;
 										case "editor":
 											return <EditorDefault key={i} {...input} />;
 										default:

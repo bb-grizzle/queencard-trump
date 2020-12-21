@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Title, { TitleType } from "../Text/Title";
 import media from "../../Styles/media";
 import BtnText from "../Btn/BtnText";
-import { useAdminAction, AdminActionType } from "../../Context/AdminProvider";
+import { useAdminAction } from "../../Context/AdminProvider";
 interface TitleSectionProps {
 	title: string;
 	cancelable?: boolean;

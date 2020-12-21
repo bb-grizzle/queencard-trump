@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BREAKPOINT_TABLET } from "../Styles/media";
 
 const useSize = () => {

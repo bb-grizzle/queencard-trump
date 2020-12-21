@@ -38,7 +38,7 @@ const AddBtn: React.FC<AddBtnProps> = ({ small = false }) => {
 		setAdminAction(AdminActionType.ADD);
 	};
 	return (
-		<Container small={small}>
+		<Container>
 			<Btn icon="pluse" onClick={handleAddClick} />
 		</Container>
 	);

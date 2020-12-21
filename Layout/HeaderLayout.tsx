@@ -1,27 +1,12 @@
-import Header from "../Component/Header";
-import MobileMenu from "../Component/MobileMenu";
-import FloatingBtn from "../Component/FloatingBtn";
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
-import Loading from "../Component/Loading";
+import Header from "../Component/Default/Header";
+import MobileMenu from "../Component/Default/MobileMenu";
+import Loading from "../Component/Default/Loading";
 
 const HeaderLayout = ({ children }) => {
-	const router = useRouter();
-	const [isFloating, setIsFloating] = useState(true);
-
-	useEffect(() => {
-		if (router.pathname === "/contact" || router.pathname.includes("_admin")) {
-			setIsFloating(false);
-		} else {
-			setIsFloating(true);
-		}
-	}, [router.pathname]);
-
 	return (
 		<div>
 			<Header />
 			<MobileMenu />
-			{isFloating && <FloatingBtn />}
 			<Loading />
 			{children}
 		</div>

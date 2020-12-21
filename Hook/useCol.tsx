@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useSize from "./useSize";
-import { BREAKPOINT_DESKTOP, BREAKPOINT_TABLET, BREAKPOINT_MOBILE } from "../Styles/media";
+import { BREAKPOINT_TABLET, BREAKPOINT_MOBILE } from "../Styles/media";
 interface useColProps {
 	pc: number;
 	tablet?: number;

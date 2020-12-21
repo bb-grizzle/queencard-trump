@@ -1,11 +1,7 @@
 import { createContext, useState, useContext, useEffect, SetStateAction, Dispatch } from "react";
 import useSize from "../Hook/useSize";
-import { preventScroll, activeScroll } from "../util/preventScroll";
+import { preventScroll, activeScroll } from "../util/scroll";
 import { useRouter } from "next/router";
-import { fbAuthListener } from "../Firebase/firebase";
-import usePortfolio from "../Hook/usePortfolio";
-import { PortfolioDataProps } from "../Interface/portfolio";
-import { CategoryDataProps } from "../Interface/category";
 import { checkBrowser } from "../util/checkBrowser";
 
 interface AppContextProps {
@@ -14,16 +10,6 @@ interface AppContextProps {
 	isMenuClick: boolean;
 	setIsMenuClick: Dispatch<SetStateAction<boolean>>;
 	isAdmin: boolean;
-	isLoggedIn: boolean;
-	setIsLoggedInt: Dispatch<SetStateAction<boolean | null>>;
-	portfolio: PortfolioDataProps[];
-	category: CategoryDataProps[];
-	nowCategory: string[] | null;
-	setNowCategory: Dispatch<SetStateAction<string[]>>;
-	nowPortfolio: PortfolioDataProps;
-	setNowPortfolio: Dispatch<SetStateAction<PortfolioDataProps>>;
-	setSearch: Dispatch<SetStateAction<string>>;
-	search: string;
 	isIe: boolean;
 }
 
@@ -35,17 +21,7 @@ const AppProvider = ({ children }) => {
 	const { isTablet } = useSize();
 	const router = useRouter();
 	const [isAdmin, setIsAdmin] = useState(false);
-	const [isLoggedIn, setIsLoggedInt] = useState(null);
 	const [isIe, setIsIe] = useState(false);
-
-	// category and portfolio
-	const { data: portfolio, category } = usePortfolio();
-	const [nowCategory, setNowCategory] = useState<string[]>([]);
-
-	const [nowPortfolio, setNowPortfolio] = useState<PortfolioDataProps>();
-
-	// search
-	const [search, setSearch] = useState<string | null>(null);
 
 	useEffect(() => {
 		const result = checkBrowser();
@@ -54,10 +30,6 @@ const AppProvider = ({ children }) => {
 		} else {
 			setIsIe(false);
 		}
-	}, []);
-
-	useEffect(() => {
-		fbAuthListener(setIsLoggedInt);
 	}, []);
 
 	// make ismenuclick false when media changed
@@ -82,28 +54,14 @@ const AppProvider = ({ children }) => {
 		}
 	}, [router]);
 
-	useEffect(() => {
-		setNowCategory([]);
-	}, [router.pathname]);
-
 	return (
 		<AppContext.Provider
 			value={{
-				nowPortfolio,
-				setNowPortfolio,
-				nowCategory,
-				setNowCategory,
 				globalLoading,
 				setGlobalLoading,
 				isMenuClick,
 				setIsMenuClick,
 				isAdmin,
-				isLoggedIn,
-				setIsLoggedInt,
-				portfolio,
-				category,
-				setSearch,
-				search,
 				isIe
 			}}
 		>
@@ -129,37 +87,6 @@ export const useIsMenuClick = () => {
 export const useIsAdmin = () => {
 	const isAdmin = useContext(AppContext).isAdmin;
 	return { isAdmin };
-};
-
-export const useIsLoggedIn = () => {
-	const isLoggedIn = useContext(AppContext).isLoggedIn;
-	const setIsLoggedInt = useContext(AppContext).setIsLoggedInt;
-	const { push } = useRouter();
-
-	const redirectToLogin = () => {
-		if (isLoggedIn === false) {
-			push("/_admin/signin");
-		}
-	};
-
-	return { isLoggedIn, setIsLoggedInt, redirectToLogin };
-};
-
-export const usePortfolioData = () => {
-	const { portfolio, nowPortfolio, setNowPortfolio, search } = useContext(AppContext);
-
-	return { portfolio: !!search ? portfolio.filter((el) => el.title.includes(search) || el.subTitle.includes(search)) : portfolio, nowPortfolio, setNowPortfolio };
-};
-
-export const useCategoryData = () => {
-	const { category, nowCategory, setNowCategory } = useContext(AppContext);
-
-	return { category, nowCategory, setNowCategory };
-};
-
-export const useSearchValue = () => {
-	const { setSearch, search } = useContext(AppContext);
-	return { setSearch, search };
 };
 
 export const useIsIe = () => {

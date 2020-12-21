@@ -10,7 +10,7 @@ export const deleteConfirm = (message?: string) => {
 	}
 };
 
-export const checkWebsite = (value: string) => {
+export const checkLink = (value: string) => {
 	if (value) {
 		if (!value.includes("http") && !value.includes("https")) {
 			return false;
@@ -22,7 +22,7 @@ export const checkWebsite = (value: string) => {
 	}
 };
 
-export default function inputPhoneNumber(value) {
+export default function checkPhoneNumber(value) {
 	var number = value.replace(/[^0-9]/g, "");
 	var phone = "";
 
