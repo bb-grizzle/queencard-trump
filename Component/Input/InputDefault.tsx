@@ -1,10 +1,10 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import InputLayout from "./InputLayout";
 import { useEffect } from "react";
 import inputPhoneNumber from "../../util/formCheck";
 interface InputDefaultProps {
 	label?: string;
-	value: string;
+	value: string | number;
 	onChange: any;
 	type?: string;
 	placeholder: string;
@@ -18,24 +18,8 @@ interface InputDefaultProps {
 	maxLength?: number;
 }
 
-const Input = styled.input<{ isLabel?: boolean; initStyle?: boolean; fontsize?: number }>`
-	${(props) => props.theme.style.input.item()};
-
-	${(props) =>
-		!props.isLabel &&
-		css`
-			padding-bottom: 18px;
-			border-bottom: 1px solid ${(props) => props.theme.color.gray.dark};
-			border-top: 0px;
-		`};
-
-	${(props) =>
-		props.fontsize &&
-		css`
-			font-size: ${() => `${props.fontsize}px`};
-		`};
-
-	/* border: 1px solid red; */
+const Input = styled.input<{ initStyle?: boolean; fontsize?: number }>`
+	${(props) => props.theme.style.input.item};
 `;
 
 const InputDefault: React.FC<InputDefaultProps> = ({ maxLength, initStyle, label, value, setValue, onChange, type = "text", placeholder, className, onEnter, onFocus, onBlur, fontsize }) => {
@@ -65,6 +49,8 @@ const InputDefault: React.FC<InputDefaultProps> = ({ maxLength, initStyle, label
 		onChange(type === "tel" ? inputPhoneNumber(e.target.value) : e.target.value);
 	};
 
+	console.log(value);
+
 	return (
 		<InputLayout label={label} className={`${className}`} initStyle={initStyle}>
 			<Input
@@ -77,7 +63,6 @@ const InputDefault: React.FC<InputDefaultProps> = ({ maxLength, initStyle, label
 				onKeyDown={handleKeyDown}
 				onFocus={handleFlocus}
 				onBlur={onBlur}
-				isLabel={!!label}
 				maxLength={maxLength}
 			/>
 		</InputLayout>

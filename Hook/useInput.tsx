@@ -1,23 +1,30 @@
 import { useState, Dispatch } from "react";
 
-export interface InputDefaultProps {
+export interface OptionProps {
+	placeholder: string;
+	label?: string;
+	type?: string;
+}
+export interface InputDefaultProps extends OptionProps {
 	value: any;
 	setValue: Dispatch<any>;
 	onChange: (e: any) => void;
 	init: () => void;
 }
 
-const useInput = (val): InputDefaultProps => {
-	const [value, setValue] = useState(val);
+type useInputType = (initVal?: string | number, option?: OptionProps) => InputDefaultProps;
+
+const useInput: useInputType = (initVal, option) => {
+	const [value, setValue] = useState(initVal ? initVal : "");
 
 	const onChange = (value: string) => {
 		setValue(value);
 	};
 	const init = () => {
-		setValue(val);
+		setValue(initVal);
 	};
 
-	return { value, setValue, onChange, init };
+	return { ...option, value, setValue, onChange, init };
 };
 
 export default useInput;

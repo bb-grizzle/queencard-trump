@@ -4,8 +4,8 @@ next js with type script
 
 ## update 2020.12.21
 
-- [ ] input style
-- [ ] interface check
+- [x] input default refactory
+- [x] editor update
 
 ## init project
 

@@ -127,34 +127,21 @@ const text = {
 
 const style = {
 	input: {
-		layout: (initStyle) => css`
+		layout: css`
 			width: 100%;
-			padding: ${initStyle ? 0 : "18px"} 0;
-			font-size: ${`${text.input.pc}px`};
-			line-height: 1.44;
-
-			> .inputlayout-label {
-				padding-bottom: 19px;
-			}
 
 			@media ${media.tablet} {
-				margin-top: 16px;
 				font-size: ${`${text.input.tablet}px`};
-				padding: ${initStyle ? 0 : "12px 0px"};
-
-				.inputlayout-label {
-					padding-bottom: 8px;
-				}
 			}
 		`,
-		item: (initStyle) => css`
-			padding-top: ${initStyle ? 0 : "23px"};
-			color: ${color.main};
-
-			border-top: ${initStyle ? "0" : "1px"} solid ${(props) => props.theme.color.black};
+		label: css`
+			padding-top: 8px;
+		`,
+		item: css`
+			font-size: ${`${text.input.pc}px`};
+			padding: 16px 0;
 
 			@media ${media.tablet} {
-				padding-top: ${initStyle ? 0 : "8px"};
 			}
 		`
 	},

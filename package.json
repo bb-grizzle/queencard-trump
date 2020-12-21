@@ -8,6 +8,7 @@
 		"start": "next start"
 	},
 	"dependencies": {
+		"@toast-ui/react-editor": "^2.5.1",
 		"@types/firebase": "3.2.1",
 		"axios": "0.21.0",
 		"css-scroll-snap-polyfill": "0.1.2",

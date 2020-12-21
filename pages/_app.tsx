@@ -14,6 +14,8 @@ import polyfill from "../polyfill";
 import "react-quill/dist/quill.snow.css";
 import { scrollToTop } from "../util/scroll";
 import { makeFullHeight } from "../util/fullHeight";
+import "@toast-ui/editor/dist/toastui-editor.css";
+import "codemirror/lib/codemirror.css";
 
 interface MyAppProps extends AppProps {}
 
