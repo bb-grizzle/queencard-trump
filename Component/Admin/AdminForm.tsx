@@ -10,7 +10,6 @@ import InputFile from "../Input/InputFile";
 import InputTag from "../Input/InputTag";
 import InputOption from "../Input/InputOption";
 import InputColor from "../Input/InputColor";
-import EditorDefault from "../Editor/EditorDefault";
 import TextArea from "../Input/TextArea";
 import InputVideo from "../Input/InputVideo";
 
@@ -100,8 +99,6 @@ const AdminForm: React.FC<AdminFormProps> = ({ isFilled, onSubmit, contents, tit
 											return <InputTag key={i} {...input} />;
 										case "option":
 											return <InputOption key={i} {...input} />;
-										case "editor":
-											return <EditorDefault key={i} {...input} />;
 										default:
 											return <InputDefault {...input} key={i} />;
 									}

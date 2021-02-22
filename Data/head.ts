@@ -5,7 +5,7 @@ interface HeadDataProps {
 }
 
 export const headData: HeadDataProps = {
-	description: "Awesome School",
-	title: "어썸스쿨",
+	description: "description",
+	title: "title",
 	url: process.env.NEXT_PUBLIC_URL
 };

@@ -11,11 +11,8 @@ import HeaderLayout from "../Layout/HeaderLayout";
 import AdminProvider from "../Context/AdminProvider";
 import polyfill from "../polyfill";
 
-import "react-quill/dist/quill.snow.css";
 import { scrollToTop } from "../util/scroll";
 import { makeFullHeight } from "../util/fullHeight";
-import "@toast-ui/editor/dist/toastui-editor.css";
-import "codemirror/lib/codemirror.css";
 
 interface MyAppProps extends AppProps {}
 
@@ -34,7 +31,6 @@ function MyApp({ Component, pageProps }: MyAppProps) {
 	return (
 		<MetaLayout>
 			<GlobalStyles />
-
 			<AppProvider>
 				<AdminProvider>
 					<ThemeProvider theme={theme}>
