@@ -1,12 +1,16 @@
 import PageContainer from "../Layout/PageLayout";
 import ContainerLayout from "../Layout/ContainerLayout";
-import Title from "../Component/Text/Title";
 
 const index = () => {
 	return (
 		<PageContainer>
 			<ContainerLayout>
-				<Title title={"input"} />
+				test
+				<ul>
+					<li>test1</li>
+					<li>test2</li>
+					<li>test3</li>
+				</ul>
 			</ContainerLayout>
 		</PageContainer>
 	);

@@ -7,14 +7,14 @@ const color = {
 	gray: {
 		dark: "#2E233E",
 		default: "#878787",
-		light: "rgba(0,0,0,0.05)"
+		light: `rgba(0,0,0,0.05)`,
 	},
 	div: "rgba(0,0,0,0.2)",
-	main: "#45FF7D",
+	main: "blue",
 	placeholder: "#C4C4C4",
 	dim: "white",
 	disable: "#DBDBDB",
-	link: "#3CADFF"
+	link: "#3CADFF",
 };
 
 const div = {
@@ -61,7 +61,7 @@ const div = {
 			right: 0;
 			background-color: ${color ? color : theme.color.black};
 		}
-	`
+	`,
 };
 
 const transition = {
@@ -71,7 +71,7 @@ const transition = {
 		transition-property: opacity;
 		opacity: ${() => (load ? opacity : 0)};
 		transition-delay: 0.5s;
-	`
+	`,
 };
 
 const layout = {
@@ -85,7 +85,8 @@ const layout = {
 	full_image: (url) => css`
 		background-image: url("${url}");
 		background-size: cover;
-		background-position: center;`,
+		background-position: center;
+	`,
 	center_flex: css`
 		display: flex;
 		align-items: center;
@@ -97,7 +98,7 @@ const layout = {
 			padding-top: ${ratio ? ratio : 100}%;
 			display: block;
 		}
-	`
+	`,
 };
 
 const text = {
@@ -108,7 +109,7 @@ const text = {
 
 		lg_tablet: 18,
 		md_tablet: 16,
-		sm_tablet: 16
+		sm_tablet: 16,
 	},
 	paragraph: {
 		lg: 18,
@@ -117,12 +118,12 @@ const text = {
 
 		lg_mobile: 18,
 		md_mobile: 16,
-		sm_mobile: 12
+		sm_mobile: 12,
 	},
 	input: {
 		pc: 18,
-		tablet: 16
-	}
+		tablet: 16,
+	},
 };
 
 const style = {
@@ -143,7 +144,7 @@ const style = {
 
 			@media ${media.tablet} {
 			}
-		`
+		`,
 	},
 
 	textarea: css`
@@ -161,10 +162,10 @@ const style = {
 
 	hoverDefault: css`
 		/* @media ${media.hover} { */
-			&:hover {
-				opacity: 0.5;
-				cursor: pointer;
-			}
+		&:hover {
+			opacity: 0.5;
+			cursor: pointer;
+		}
 		/* } */
 	`,
 	hideScroll: css`
@@ -174,7 +175,7 @@ const style = {
 		&::-webkit-scrollbar {
 			display: none;
 		}
-	`
+	`,
 };
 
 const event = {
@@ -185,23 +186,23 @@ const event = {
 	active: css`
 		user-select: auto;
 		pointer-events: auto;
-	`
+	`,
 };
 
 const zIndex = {
 	adminForm: {
 		pc: 50,
-		tablet: 100
+		tablet: 100,
 	},
 	dim: {
 		min: 50,
-		max: 200
+		max: 200,
 	},
 	menu: 80,
 	header: 90,
 	floating: 120,
 	loading: 150,
-	popup: 200
+	popup: 200,
 };
 
 const size = {
@@ -209,41 +210,41 @@ const size = {
 	full_height: `calc(var(--vh, 1vh) * 100);`,
 	full_height_withCalc: (calculation: string) => `calc(var(--vh, 1vh) * 100 + ${calculation});`,
 	container: {
-		pc: "1200px"
+		pc: "1200px",
 	},
 	header: {
 		pc: 140,
-		mobile: 64
+		mobile: 64,
 	},
 	offset: {
-		tablet: 16
+		tablet: 16,
 	},
 	padding_top_admin: {
 		pc: 200,
-		mobile: 80
+		mobile: 80,
 	},
 	padding_top_contents: {
 		pc: 64,
-		tablet: 16
+		tablet: 16,
 	},
 	padding_bottom_admin: {
 		pc: 100,
-		mobile: 60
+		mobile: 60,
 	},
 	gap: {
 		list: 30,
 		section: 32,
-		contents: 16
+		contents: 16,
 	},
 	cover: {
 		pc: 500,
 		tablet: 320,
-		mobile: 160
+		mobile: 160,
 	},
 
 	margin: {
-		submit_top: 56
-	}
+		submit_top: 56,
+	},
 };
 
 const theme = {
@@ -255,7 +256,7 @@ const theme = {
 	size,
 	event,
 	text,
-	style
+	style,
 };
 
 export type Theme = typeof theme;

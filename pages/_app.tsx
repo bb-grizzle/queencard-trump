@@ -10,7 +10,6 @@ import { useRouter } from "next/dist/client/router";
 import HeaderLayout from "../Layout/HeaderLayout";
 import AdminProvider from "../Context/AdminProvider";
 import polyfill from "../polyfill";
-
 import { scrollToTop } from "../util/scroll";
 import { makeFullHeight } from "../util/fullHeight";
 
