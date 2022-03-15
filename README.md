@@ -8,7 +8,7 @@ next js with type script
 
 - [x] next.config.js : svgr viewbox setting
 - [x] Default/Div
-- [ ] bablerc : babel-plugin-styled-components
+- [x] UPDATE | bablerc:babel-plugin-styled-components
 
 ## 2022.03.11
 
