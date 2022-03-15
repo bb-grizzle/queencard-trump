@@ -10,7 +10,7 @@ export const div = {
 			height: ${size ? `${size}px` : `2px`};
 			top: 0;
 			left: 0;
-			background-color: ${color ? color : theme.color.black};
+			background-color: ${color ? color : theme.color.div};
 		}
 	`,
 	bottom: (color?: string, size?: number, width?: string) => css`
@@ -21,7 +21,7 @@ export const div = {
 			height: ${size ? `${size}px` : `2px`};
 			bottom: 0;
 			left: 0;
-			background-color: ${color ? color : theme.color.black};
+			background-color: ${color ? color : theme.color.div};
 		}
 	`,
 	left: (color?: string, size?: number) => css`
@@ -32,7 +32,7 @@ export const div = {
 			height: 100%;
 			top: 0;
 			left: 0;
-			background-color: ${color ? color : theme.color.black};
+			background-color: ${color ? color : theme.color.div};
 		}
 	`,
 	right: (color?: string, size?: number) => css`
@@ -43,7 +43,7 @@ export const div = {
 			height: 100%;
 			top: 0;
 			right: 0;
-			background-color: ${color ? color : theme.color.black};
+			background-color: ${color ? color : theme.color.div};
 		}
 	`,
 };

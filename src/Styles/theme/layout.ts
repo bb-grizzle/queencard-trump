@@ -1,4 +1,5 @@
 import { css } from "styled-components";
+import { size } from "./size";
 
 export const layout = {
 	full_abs: css`
@@ -8,7 +9,11 @@ export const layout = {
 		right: 0;
 		bottom: 0;
 	`,
-	full_image: (url) => css`
+	full_height: css`
+		height: 100vh;
+		${size.full_height}
+	`,
+	full_image: (url: string) => css`
 		background-image: url("${url}");
 		background-size: cover;
 		background-position: center;
@@ -18,7 +23,7 @@ export const layout = {
 		align-items: center;
 		justify-content: center;
 	`,
-	ratio: (ratio) => css`
+	ratio: (ratio: number) => css`
 		&:after {
 			content: "";
 			padding-top: ${ratio ? ratio : 100}%;

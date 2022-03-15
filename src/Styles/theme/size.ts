@@ -10,11 +10,11 @@ export const size = {
 		mobile: 20,
 	},
 	header: {
-		pc: 192,
-		mobile: 110,
+		pc: 80,
+		mobile: 56,
 	},
 	offset: {
-		tablet: 20,
+		tablet: 16,
 	},
 	padding_top_admin: {
 		pc: 200,

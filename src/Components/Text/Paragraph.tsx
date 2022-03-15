@@ -17,18 +17,18 @@ export enum ParagraphType {
 }
 
 const Text = styled.p<{ bold: boolean; type: ParagraphType; color?: string; size: number }>`
-	font-size: ${(props) => `${props.size ? props.size : props.theme.fontstyle.paragraph[props.type]}px`};
+	font-size: ${(props) => `${props.size ? props.size : props.theme.fontStyle.paragraph[props.type]}px`};
 	font-weight: ${(props) => (props.bold ? 700 : 400)};
 	line-height: 1.46;
 	color: ${(props) => (props.color ? props.color : "inherit")};
 
 	@media ${media.tablet} {
-		font-size: ${(props) => `${props.size ? props.size : props.theme.fontstyle.paragraph[`${props.type}_tablet`]}px`};
+		font-size: ${(props) => `${props.size ? props.size : props.theme.fontStyle.paragraph[`${props.type}_tablet`]}px`};
 	}
 
 	> span {
 		display: block;
-		min-height: ${(props) => `${props.size ? props.size * 1.42 : props.theme.fontstyle.paragraph[props.type] * 1.42}px`};
+		min-height: ${(props) => `${props.size ? props.size * 1.42 : props.theme.fontStyle.paragraph[props.type] * 1.42}px`};
 	}
 	a {
 		color: ${(props) => props.theme.color.link};

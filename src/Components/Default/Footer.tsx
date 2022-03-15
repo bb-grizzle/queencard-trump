@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import media from "../../Styles/media";
+
 interface FooterProps {
 	className?: string;
 }
 
 const Wrapper = styled.footer`
 	margin-top: 120px;
-	color: ${(props) => props.theme.color.gray[500]};
+	color: ${(props) => props.theme.colorPalette.bw[500]};
 
 	@media ${media.tablet} {
 		margin-top: 64px;

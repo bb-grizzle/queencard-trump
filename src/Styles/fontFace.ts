@@ -4,11 +4,11 @@ import { createGlobalStyle } from "styled-components";
 // noto sans cjk
 
 // create font family
-const FontStyle = createGlobalStyle`
+const FontFace = createGlobalStyle`
   /* @font-face {
     font-family: "GreyLL";
     src: url('font/GreyLL/GreyLLWeb-Medium.woff') format("woff");
   } */
 `;
 
-export default FontStyle;
+export default FontFace;

@@ -3,6 +3,7 @@ import reset from "styled-reset";
 import { createGlobalStyle } from "styled-components";
 import media from "./media";
 import theme from "./theme";
+import { fontFamily } from "./theme/fontFamily";
 
 const GlobalStyles = createGlobalStyle`
   ${reset};
@@ -17,17 +18,15 @@ const GlobalStyles = createGlobalStyle`
   }
   html{
     ${() => theme.layout.hideScroll};
+    background-color: ${theme.colorPalette.bw[900]};
   }
 
   body{
+    ${fontFamily.noto_sans_kr};
+    background-color: ${theme.colorPalette.sub.bg};
     position: relative;
     word-break: keep-all;
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
-    
-
-    @media ${media.tablet} {
-    }
   }
 
 img{
@@ -51,7 +50,7 @@ img{
     background-color: transparent;
 
     &::placeholder {
-      color: ${Theme.color.gray[500]};
+      color: ${theme.color.placeholder};
     }
   }
 

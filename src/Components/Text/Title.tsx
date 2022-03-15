@@ -9,13 +9,13 @@ interface TitleProps {
 	color?: string;
 }
 export enum TitleType {
-	LG = "lg",
-	MD = "md",
-	SM = "sm",
+	h1 = "h1",
+	h2 = "h2",
+	h3 = "h3",
 }
 
 const Text = styled.h3<{ type: TitleType; isRegular: boolean; color?: string }>`
-	font-size: ${(props) => `${props.theme.fontstyle.title[props.type]}px`};
+	font-size: ${(props) => `${props.theme.fontStyle.title[props.type]}px`};
 	font-weight: ${(props) => (props.isRegular ? 400 : 700)};
 	line-height: 1.44;
 
@@ -23,12 +23,9 @@ const Text = styled.h3<{ type: TitleType; isRegular: boolean; color?: string }>`
 	span {
 		display: block;
 	}
-	@media ${media.tablet} {
-		font-size: ${(props) => `${props.theme.fontstyle.title[`${props.type}_tablet`]}px`};
-	}
 `;
 
-const Title: React.FC<TitleProps> = ({ title, type = TitleType.LG, className, isRegular = false, color }) => {
+const Title: React.FC<TitleProps> = ({ title, type = TitleType.h1, className, isRegular = false, color }) => {
 	return (
 		<Text className={className} type={type} isRegular={isRegular} color={color}>
 			{Array.isArray(title) ? title.map((el, index) => <span key={index}>{el}</span>) : title}

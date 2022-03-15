@@ -2,7 +2,16 @@
 
 next js with type script
 
-## update 2022.03.11
+# Update
+
+## 2022.03.15
+
+- [x] next.config.js : svgr viewbox setting
+- [ ] Default/Nav
+- [ ] Default/Div
+- [ ] bablerc : babel-plugin-styled-components
+
+## 2022.03.11
 
 - [x] update next
 - [x] src folder
@@ -13,7 +22,7 @@ next js with type script
 - [x] eslint
 - [x] svg import
 
-## update 2020.12.21
+## 2020.12.21
 
 - [x] input default refactory
 - [x] editor update
