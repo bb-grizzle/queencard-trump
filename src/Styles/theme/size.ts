@@ -20,4 +20,8 @@ export const size = {
 		pc: 180,
 		tablet: 120,
 	},
+
+	btn: {
+		icon: 32,
+	},
 };

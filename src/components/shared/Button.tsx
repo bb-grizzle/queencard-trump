@@ -1,18 +1,16 @@
-import { ButtonHTMLAttributes, HTMLAttributes, MouseEvent } from "react";
+import { ButtonHTMLAttributes, MouseEvent } from "react";
 import styled, { css } from "styled-components";
 import { colorPalette } from "@/styles/theme/colorPalette";
-// import IonIcon from "@reacticons/ionicons";
-// import IconList from "@reacticons/ionicons/lib/components/iconList.json";
-
+import { IconName } from "@/types/icon";
+import Icon from "./Icon";
+import IconLoading from "../../assets/icon/loading.svg";
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	text?: string;
 	reverse?: boolean;
-	// iconOption?: HTMLAttributes<HTMLDivElement> & {
-	// 	name: keyof typeof IconList;
-	// 	size?: "small" | "large";
-	// };
+	iconName?: IconName;
 	btnType?: BtnTypeEnum;
 	mainColor?: string;
+	loading?: boolean;
 }
 
 export enum BtnTypeEnum {
@@ -21,35 +19,45 @@ export enum BtnTypeEnum {
 	TRANSPARENTS,
 }
 
-const ButtonWrapper = styled.button<{ btnType: BtnTypeEnum; reverse: boolean; mainColor: string; disabled?: boolean }>`
+const ButtonWrapper = styled.button<{ isIconOnly: boolean; btnType: BtnTypeEnum; mainColor: string; disabled?: boolean; loading: boolean }>`
+	position: relative;
 	padding: 8px 14px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	border-radius: 8px;
-	gap: 8px;
 	${(props) => props.theme.fontStyle.body.medium};
-	flex-direction: ${(props) => (props.reverse ? "row-reverse" : "row")};
+
+	${(props) => {
+		if (props.disabled) {
+			return css`
+				opacity: 0.3;
+				cursor: not-allowed;
+			`;
+		} else if (props.loading) {
+			return css`
+				cursor: progress;
+			`;
+		} else {
+			return css`
+				cursor: pointer;
+				&:hover {
+					opacity: 0.7;
+				}
+			`;
+		}
+	}}
 
 	${(props) =>
-		props.disabled
-			? css`
-					opacity: 0.3;
-					cursor: not-allowed;
-			  `
-			: css`
-					cursor: pointer;
-					&:hover {
-						opacity: 0.7;
-					}
-			  `};
+		props.isIconOnly &&
+		css`
+			width: ${props.theme.size.btn.icon}px;
+			height: ${props.theme.size.btn.icon}px;
+			padding: 0;
+		`};
 
 	${(props) => {
 		switch (props.btnType) {
 			case BtnTypeEnum.TRANSPARENTS:
 				return css`
 					color: ${props.mainColor};
-					stroke: ${props.mainColor};
 					border: none;
 					background-color: ${props.theme.colorPalette.sub.transparents};
 				`;
@@ -58,31 +66,59 @@ const ButtonWrapper = styled.button<{ btnType: BtnTypeEnum; reverse: boolean; ma
 					background-color: ${props.mainColor};
 					color: ${props.theme.color.white};
 					border: none;
-					stroke: ${props.theme.color.white};
 				`;
 			case BtnTypeEnum.LINE:
 				return css`
 					border: 1px solid ${props.mainColor};
 					color: ${props.mainColor};
-					stroke: ${props.mainColor};
 				`;
 		}
 	}};
 `;
 
+const Item = styled.div<{ loading: boolean; reverse: boolean }>`
+	display: flex;
+	opacity: ${(props) => (props.loading ? 0 : 1)};
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+	flex-direction: ${(props) => (props.reverse ? "row-reverse" : "row")};
+`;
+
 const Text = styled.p``;
 
-// const Button: React.FC<ButtonProps> = ({ text, reverse = false, iconOption, btnType = BtnTypeEnum.TRANSPARENTS, mainColor = colorPalette.bw[700], onClick, type = "button", ...rest }) => {
-const Button: React.FC<ButtonProps> = ({ text, reverse = false, btnType = BtnTypeEnum.TRANSPARENTS, mainColor = colorPalette.bw[700], onClick, type = "button", ...rest }) => {
+const LoadingWrapper = styled.div`
+	${(props) => props.theme.layout.full_abs};
+	${(props) => props.theme.layout.center_flex};
+`;
+
+const Button: React.FC<ButtonProps> = ({
+	text,
+	reverse = false,
+	iconName,
+	btnType = BtnTypeEnum.TRANSPARENTS,
+	mainColor = colorPalette.bw[700],
+	onClick,
+	type = "button",
+	loading = false,
+	...rest
+}) => {
 	const onButtonClick = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
 		e.preventDefault();
 		onClick?.(e);
 	};
 
 	return (
-		<ButtonWrapper btnType={btnType} reverse={reverse} mainColor={mainColor} onClick={onButtonClick} type={type} {...rest}>
-			{/* {iconOption && <IonIcon {...iconOption} size={"large"} />} */}
-			{text && <Text>{text}</Text>}
+		<ButtonWrapper isIconOnly={!text && !!iconName} loading={loading} btnType={btnType} mainColor={mainColor} onClick={onButtonClick} type={type} {...rest}>
+			<Item loading={loading} reverse={reverse}>
+				{iconName && <Icon name={iconName} />}
+				{text && <Text>{text}</Text>}
+			</Item>
+			{loading && (
+				<LoadingWrapper>
+					<IconLoading />
+				</LoadingWrapper>
+			)}
 		</ButtonWrapper>
 	);
 };

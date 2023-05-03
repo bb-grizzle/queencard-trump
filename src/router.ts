@@ -1,7 +1,7 @@
 export const ROUTER = {
 	HOME: "/",
-	COMPONENT: "/_components",
-	COMPONENT_ICON: "/_components/icon",
-	COMPONENT_INPUT: "/_components/input",
-	COMPONENT_BUTTON: "/_components/button",
+	INTRO: "/_intro",
+	INTRO_ICON: "/_intro/icon",
+	INTRO_INPUT: "/_intro/input",
+	INTRO_BUTTON: "/_intro/button",
 };

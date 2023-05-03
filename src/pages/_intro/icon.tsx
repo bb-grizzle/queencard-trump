@@ -6,6 +6,7 @@ import styled from "styled-components";
 const Wrapper = styled.ul`
 	display: flex;
 	gap: 16px;
+	flex-wrap: wrap;
 `;
 
 const List = styled.li`
