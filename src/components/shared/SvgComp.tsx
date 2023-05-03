@@ -1,7 +1,7 @@
 import { useDynamicSVGImport } from "@/hook/useDynamicSVGImport";
 import { useCallback } from "react";
-import IconLoading from "../../asset/icon/loading.svg";
-import IconError from "../../asset/icon/error.svg";
+import IconLoading from "../../assets/icon/loading.svg";
+import IconError from "../../assets/icon/error.svg";
 import theme from "@/styles/theme";
 
 export interface SvgCompProps {
@@ -21,7 +21,7 @@ const SvgComp: React.FC<SvgCompProps> = ({ name, path, svgProps }) => {
 		} else if (SvgIcon) {
 			return <SvgIcon {...svgProps} />;
 		} else {
-			return <IconLoading />;
+			return <>else</>;
 		}
 	}, [error, loading, SvgIcon, svgProps]);
 
