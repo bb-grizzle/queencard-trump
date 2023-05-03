@@ -1,8 +1,7 @@
 export const ROUTER = {
-	home: "/",
-	about: "/about",
-	signin: "/signin",
-	signup: "/signup",
-	setting: "/setting",
-	profile: "/profile/[id]",
+	HOME: "/",
+	COMPONENT: "/_components",
+	COMPONENT_ICON: "/_components/icon",
+	COMPONENT_INPUT: "/_components/input",
+	COMPONENT_BUTTON: "/_components/button",
 };

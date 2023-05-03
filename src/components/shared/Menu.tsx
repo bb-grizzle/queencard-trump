@@ -85,7 +85,7 @@ const Menu = () => {
 				<Top>{/* <CloseBtn name="close" onClick={closeMenu} size="large" /> */}</Top>
 				<Nav>
 					<LinkWrapper>
-						<LinkCustom href={ROUTER.home}>home</LinkCustom>
+						<LinkCustom href={ROUTER.HOME}>home</LinkCustom>
 						<LinkCustom href={ROUTER.about}>about</LinkCustom>
 						<LinkCustom href={ROUTER.setting}>setting</LinkCustom>
 					</LinkWrapper>

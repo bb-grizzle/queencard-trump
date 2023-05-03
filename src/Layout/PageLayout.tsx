@@ -1,27 +1,30 @@
+import DATA_META from "@/data/metaData";
 import media from "@/styles/media";
 import Head from "next/head";
 import { ReactNode } from "react";
 import styled from "styled-components";
+
 interface PageLayoutProps {
 	children: ReactNode;
 	title: string;
+	includeHeader?: boolean;
 }
 
-const Main = styled.main`
-	padding-top: ${(props) => props.theme.size.header.pc}px;
-	height: ${(props) => props.theme.size.full_height};
+const Main = styled.main<{ includeHeader: boolean }>`
+	padding-top: ${(props) => (!props.includeHeader ? props.theme.size.header.pc : 0)}px;
+
 	@media ${media.tablet} {
-		padding-top: ${(props) => props.theme.size.header.tablet}px;
+		padding-top: ${(props) => (!props.includeHeader ? props.theme.size.header.tablet : 0)}px;
 	}
 `;
 
-const PageLayout: React.FC<PageLayoutProps> = ({ children, title }) => {
+const PageLayout: React.FC<PageLayoutProps> = ({ children, title, includeHeader = false }) => {
 	return (
 		<>
 			<Head>
-				<title>{`me?ME! | ${title}`}</title>
+				<title>{`${DATA_META.site_name} | ${title}`}</title>
 			</Head>
-			<Main>{children}</Main>
+			<Main includeHeader={includeHeader}>{children}</Main>
 		</>
 	);
 };

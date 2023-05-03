@@ -9,6 +9,7 @@ const HeaderComp = styled.header`
 	width: 100%;
 	height: ${(props) => props.theme.size.header.pc}px;
 	z-index: ${(props) => props.theme.zIndex.header};
+	border-bottom: 1px solid ${(props) => props.theme.colorPalette.bw[200]};
 	@media ${media.tablet} {
 		height: ${(props) => props.theme.size.header.tablet}px;
 	}
