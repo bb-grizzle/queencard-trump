@@ -19,7 +19,7 @@ export enum BtnTypeEnum {
 	TRANSPARENTS,
 }
 
-const ButtonWrapper = styled.button<{ isIconOnly: boolean; btnType: BtnTypeEnum; mainColor: string; disabled?: boolean; loading: boolean }>`
+const ButtonWrapper = styled.button<{ isIconOnly: boolean; btnType: BtnTypeEnum; mainColor: string; disabled?: boolean; isloading: boolean }>`
 	position: relative;
 	padding: 8px 14px;
 	border-radius: 8px;
@@ -31,7 +31,7 @@ const ButtonWrapper = styled.button<{ isIconOnly: boolean; btnType: BtnTypeEnum;
 				opacity: 0.3;
 				cursor: not-allowed;
 			`;
-		} else if (props.loading) {
+		} else if (props.isloading) {
 			return css`
 				cursor: progress;
 			`;
@@ -76,9 +76,9 @@ const ButtonWrapper = styled.button<{ isIconOnly: boolean; btnType: BtnTypeEnum;
 	}};
 `;
 
-const Item = styled.div<{ loading: boolean; reverse: boolean }>`
+const Item = styled.div<{ isloading: boolean; reverse: boolean }>`
 	display: flex;
-	opacity: ${(props) => (props.loading ? 0 : 1)};
+	opacity: ${(props) => (props.isloading ? 0 : 1)};
 	justify-content: center;
 	align-items: center;
 	gap: 8px;
@@ -109,8 +109,8 @@ const Button: React.FC<ButtonProps> = ({
 	};
 
 	return (
-		<ButtonWrapper isIconOnly={!text && !!iconName} loading={loading} btnType={btnType} mainColor={mainColor} onClick={onButtonClick} type={type} {...rest}>
-			<Item loading={loading} reverse={reverse}>
+		<ButtonWrapper isIconOnly={!text && !!iconName} isloading={loading} btnType={btnType} mainColor={mainColor} onClick={onButtonClick} type={type} {...rest}>
+			<Item isloading={loading} reverse={reverse}>
 				{iconName && <Icon name={iconName} />}
 				{text && <Text>{text}</Text>}
 			</Item>
