@@ -1,98 +1,88 @@
 import { css } from "styled-components";
 
 export const fontStyle = {
-	title: {
-		h1: css`
-			font-weight: 700;
-			font-size: 48px;
-			line-height: 70px;
+	display: {
+		large: css`
+			font-size: 57px;
+			line-height: 64px;
 		`,
-		h2: css`
-			font-weight: 400;
-			font-size: 24px;
-			line-height: 35px;
+		medium: css`
+			font-size: 45px;
+			line-height: 72px;
 		`,
-		h3: css`
-			font-weight: 400;
-			font-size: 20px;
-			line-height: 29px;
+		small: css`
+			font-size: 36px;
+			line-height: 44px;
 		`,
 	},
-
-	logo: css`
-		font-weight: 350;
-		font-size: 20px;
-		line-height: 29px;
-	`,
-
-	// nav
-	nav: {
-		light: css`
-			font-weight: 300;
-			font-size: 16px;
-			line-height: 23px;
+	headline: {
+		large: css`
+			font-size: 32px;
+			line-height: 40px;
 		`,
-		default: css`
-			font-weight: 400;
-			font-size: 16px;
-			line-height: 23px;
+		medium: css`
+			font-size: 28px;
+			line-height: 36px;
+		`,
+		small: css`
+			font-size: 24px;
+			line-height: 32px;
+		`,
+	},
+	title: {
+		large: css`
+			font-size: 22px;
+			line-height: 28px;
 		`,
 		medium: css`
 			font-weight: 500;
 			font-size: 16px;
-			line-height: 23px;
-		`,
-	},
-
-	// input
-	input: {
-		default: css`
-			font-weight: 400;
-			font-size: 16px;
-			line-height: 23px;
-		`,
-	},
-
-	// btn
-	btn: {
-		default: css`
-			/* 🖥 pc/btn/default */
-			font-weight: 400;
-			font-size: 16px;
-			line-height: 23px;
+			line-height: 24px;
+			letter-spacing: 0.15px;
 		`,
 		small: css`
-			/* 🖥 pc/btn/small */
-			font-weight: 400;
+			font-weight: 500;
 			font-size: 14px;
 			line-height: 20px;
+			letter-spacing: 0.1px;
 		`,
 	},
-
-	// /* paragraph */
-	paragraph: {
-		default: css`
-			font-weight: 400;
-			font-size: 16px;
-			line-height: 23px;
+	label: {
+		large: css`
+			font-weight: 500;
+			font-size: 14px;
+			line-height: 20px;
+			letter-spacing: 0.1px;
 		`,
-
-		bold: css`
-			font-weight: 700;
-			font-size: 16px;
-			line-height: 23px;
+		medium: css`
+			font-weight: 500;
+			font-size: 12px;
+			line-height: 16px;
+			letter-spacing: 0.5px;
+		`,
+		small: css`
+			font-weight: 500;
+			font-size: 11px;
+			line-height: 16px;
+			letter-spacing: 0.5px;
 		`,
 	},
+	body: {
+		large: css`
+			font-size: 16px;
+			line-height: 24px;
+			letter-spacing: 0.5px;
+		`,
+		medium: css`
+			font-size: 14px;
+			line-height: 20px;
+			letter-spacing: 0.25px;
+		`,
 
-	caption: css`
-		font-weight: 400;
-		font-size: 12px;
-		line-height: 17px;
-	`,
-
-	label: css`
-		font-weight: 400;
-		font-size: 13px;
-		line-height: 19px;
-	`,
+		small: css`
+			font-size: 12px;
+			line-height: 16px;
+			letter-spacing: 0.4px;
+		`,
+	},
 };

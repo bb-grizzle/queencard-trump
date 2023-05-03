@@ -1,4 +1,4 @@
-import theme from "../Styles/theme";
+import theme from "@/styles/theme";
 
 export const preventScroll = () => {
 	document.body.style.height = theme.size.full_height;
@@ -10,13 +10,18 @@ export const activeScroll = () => {
 	document.body.style.overflow = "auto";
 };
 
-export const scrollToTarget = (dom: HTMLDivElement | HTMLUListElement, value: number) => {
+export const scrollToTarget = (dom: HTMLDivElement | HTMLUListElement, option: ScrollToOptions) => {
 	dom.scrollTo({
-		left: value,
-		behavior: "smooth"
+		left: 0,
+		top: 0,
+		behavior: "smooth",
+		...option,
 	});
 };
 
 export const scrollToTop = () => {
-	window.scrollTo(0, 0);
+	window.scrollTo({
+		top: 0,
+		behavior: "smooth",
+	});
 };

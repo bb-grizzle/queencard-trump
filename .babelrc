@@ -1,14 +1,4 @@
 {
-	"presets": [
-		[
-			"next/babel",
-			{
-				// "preset-env": {
-				//   "useBuiltIns": "entry",
-				//   "corejs": "3.0.0",
-				// },
-			}
-		]
-	],
-	"plugins": [["babel-plugin-styled-components", { "ssr": true, "fileName": true, "displayName": true, "preprocess": false }]]
+	"presets": ["next/babel"],
+	"plugins": ["styled-components"]
 }

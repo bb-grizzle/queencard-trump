@@ -4,6 +4,10 @@ next js with type script
 
 # Update
 
+## 2023.05.03
+
+- [x] UPDATE | upgrade package to latest
+
 ## 2022.03.15
 
 - [x] next.config.js : svgr viewbox setting

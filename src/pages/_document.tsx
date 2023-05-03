@@ -1,11 +1,11 @@
-import Document, { Html, Main, NextScript, DocumentContext } from "next/document";
+import Document, { DocumentContext, DocumentInitialProps } from "next/document";
 import { ServerStyleSheet } from "styled-components";
-import Head from "../Components/Default/Head";
 
-class MyDocument extends Document {
-	static async getInitialProps(ctx: DocumentContext) {
+export default class MyDocument extends Document {
+	static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
 		const sheet = new ServerStyleSheet();
 		const originalRenderPage = ctx.renderPage;
+
 		try {
 			ctx.renderPage = () =>
 				originalRenderPage({
@@ -13,11 +13,15 @@ class MyDocument extends Document {
 				});
 
 			const initialProps = await Document.getInitialProps(ctx);
-
 			return {
 				...initialProps,
 				styles: (
 					<>
+						{/* google font */}
+						{/* <link rel="preconnect" href="https://fonts.googleapis.com" />
+						<link rel="preconnect" href="https://fonts.gstatic.com" />
+						<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;900&display=swap" rel="stylesheet" /> */}
+
 						{initialProps.styles}
 						{sheet.getStyleElement()}
 					</>
@@ -27,19 +31,4 @@ class MyDocument extends Document {
 			sheet.seal();
 		}
 	}
-
-	render() {
-		return (
-			<Html lang="ko">
-				<Head />
-
-				<body>
-					<Main />
-					<NextScript />
-				</body>
-			</Html>
-		);
-	}
 }
-
-export default MyDocument;

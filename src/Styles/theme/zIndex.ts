@@ -1,16 +1,23 @@
 export const zIndex = {
-	adminForm: {
-		pc: 50,
-		tablet: 100,
-	},
-	dim: {
-		min: 50,
-		max: 200,
-	},
-	header: 100,
-	menu: 110,
-	floating: 120,
+	bgLine: 10,
+	main: 20,
+
+	header: 90,
+	menu: 100,
+	dim: 120,
 	loading: 150,
 	popup: 200,
 	browser_support: 300,
+
+	home: {
+		search: 10,
+		tag: 5,
+		viewTags: 90,
+		applyBtn: 100,
+	},
+
+	// plan page
+	plan: {
+		sticker: 5,
+	},
 };

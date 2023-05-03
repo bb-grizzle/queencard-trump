@@ -1,7 +1,7 @@
+import { container } from "./container";
 import { shadow } from "./shadow";
 import { color } from "./color";
 import { colorPalette } from "./colorPalette";
-import { componentStyle } from "./componentStyle";
 import { div } from "./div";
 import { event } from "./event";
 import { fontFamily } from "./fontFamily";
@@ -10,6 +10,7 @@ import { layout } from "./layout";
 import { size } from "./size";
 import { transition } from "./transition";
 import { zIndex } from "./zIndex";
+import { style } from "./style";
 
 const theme = {
 	color,
@@ -21,9 +22,10 @@ const theme = {
 	size,
 	event,
 	fontStyle,
-	componentStyle,
 	fontFamily,
 	shadow,
+	container,
+	style,
 };
 
 export default theme;

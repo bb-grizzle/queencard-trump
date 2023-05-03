@@ -1,28 +1,29 @@
+import media from "@/styles/media";
+import Head from "next/head";
+import { ReactNode } from "react";
 import styled from "styled-components";
-import media from "../Styles/media";
-import Footer from "../Components/Default/Footer";
-
-interface PageContainerProps {
-	paddingTop?: boolean;
-	className?: string;
-	loading?: boolean;
+interface PageLayoutProps {
+	children: ReactNode;
+	title: string;
 }
 
-const Wrapper = styled.div`
-	padding-top: ${(props) => `${props.theme.size.header.pc}px`};
-	padding-bottom: 100px;
+const Main = styled.main`
+	padding-top: ${(props) => props.theme.size.header.pc}px;
+	height: ${(props) => props.theme.size.full_height};
 	@media ${media.tablet} {
-		padding-top: ${(props) => `${props.theme.size.header.mobile}px`};
-		padding-bottom: 32px;
+		padding-top: ${(props) => props.theme.size.header.tablet}px;
 	}
 `;
-const PageContainer: React.FC<PageContainerProps> = ({ children, className, loading }) => {
+
+const PageLayout: React.FC<PageLayoutProps> = ({ children, title }) => {
 	return (
-		<Wrapper className={className}>
-			{children}
-			<Footer />
-		</Wrapper>
+		<>
+			<Head>
+				<title>{`me?ME! | ${title}`}</title>
+			</Head>
+			<Main>{children}</Main>
+		</>
 	);
 };
 
-export default PageContainer;
+export default PageLayout;

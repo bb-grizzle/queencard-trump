@@ -1,46 +1,24 @@
-import { AppProps } from "next/app";
-import MetaLayout from "../Layout/MetaLayout";
-import GlobalStyles from "../Styles/global-styles";
+import HeadMeta from "@/components/shared/HeadMeta";
+import AppLayout from "@/layout/AppLayout";
+import MetaLayout from "@/layout/MetaLayout";
+import AppProvider from "@/provider/AppProvider";
+import GlobalStyles from "@/styles/global-styles";
+import theme from "@/styles/theme";
+import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
-import theme from "../Styles/theme";
 
-import AppProvider from "../Context/AppProvider";
-import { useEffect } from "react";
-import { useRouter } from "next/dist/client/router";
-import TotalWrapperLayout from "../Layout/TotalWrapperLayout";
-import AdminProvider from "../Context/AdminProvider";
-import polyfill from "../polyfill";
-import { scrollToTop } from "../util/scroll";
-import { makeFullHeight } from "../util/fullHeight";
-
-interface MyAppProps extends AppProps {}
-
-function MyApp({ Component, pageProps }: MyAppProps) {
-	const { pathname } = useRouter();
-
-	useEffect(() => {
-		scrollToTop();
-	}, [pathname]);
-
-	useEffect(() => {
-		polyfill();
-		makeFullHeight();
-	}, []);
-
+export default function App({ Component, pageProps }: AppProps) {
 	return (
 		<MetaLayout>
-			<GlobalStyles />
 			<AppProvider>
-				<AdminProvider>
-					<ThemeProvider theme={theme}>
-						<TotalWrapperLayout>
-							<Component {...pageProps} />
-						</TotalWrapperLayout>
-					</ThemeProvider>
-				</AdminProvider>
+				<ThemeProvider theme={theme}>
+					<HeadMeta />
+					<GlobalStyles />
+					<AppLayout>
+						<Component {...pageProps} />
+					</AppLayout>
+				</ThemeProvider>
 			</AppProvider>
 		</MetaLayout>
 	);
 }
-
-export default MyApp;

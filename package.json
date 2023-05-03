@@ -1,35 +1,27 @@
 {
-	"name": "project",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
-		"lint": "next lint"
-	},
-	"dependencies": {
-		"@svgr/webpack": "^6.2.1",
-		"css-scroll-snap-polyfill": "0.1.2",
-		"date-input-polyfill": "2.14.0",
-		"global": "4.4.0",
-		"next": "^12.1.0",
-		"react": "17.0.2",
-		"react-dom": "17.0.2",
-		"react-intersection-observer": "8.31.0",
-		"scroll-behavior-polyfill": "2.0.13",
-		"smoothscroll-polyfill": "0.4.4",
-		"styled-components": "5.2.3"
-	},
-	"devDependencies": {
-		"@types/node": "14.14.37",
-		"@types/react": "17.0.3",
-		"@types/styled-components": "5.1.9",
-		"babel-eslint": "^10.1.0",
-		"babel-plugin-styled-components": "1.12.0",
-		"eslint-config-next": "12.1.0",
-		"eslint-plugin-react-hooks": "^4.3.0",
-		"styled-reset": "4.3.4",
-		"typescript": "^4.6.2"
-	}
+  "name": "vegatiety-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@types/node": "18.16.3",
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.1",
+    "eslint": "8.39.0",
+    "eslint-config-next": "13.3.4",
+    "next": "13.3.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "styled-components": "^5.3.10",
+    "styled-reset": "^4.4.6",
+    "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26"
+  }
 }

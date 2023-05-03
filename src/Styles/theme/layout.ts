@@ -11,8 +11,9 @@ export const layout = {
 	`,
 	full_height: css`
 		height: 100vh;
-		${size.full_height}
+		height: ${size.full_height};
 	`,
+	full_height_with_calc: (calc: string) => `calc(${size.full_height} ${calc})`,
 	full_image: (url: string) => css`
 		background-image: url("${url}");
 		background-size: cover;
@@ -23,6 +24,12 @@ export const layout = {
 		align-items: center;
 		justify-content: center;
 	`,
+	center_abs: css`
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	`,
 	ratio: (ratio: number) => css`
 		&:after {
 			content: "";
@@ -31,9 +38,8 @@ export const layout = {
 		}
 	`,
 	hideScroll: css`
-		-ms-overflow-style: none; /* IE and Edge */
-		scrollbar-width: none; /* Firefox */
-		/* Hide scrollbar for Chrome, Safari and Opera */
+		-ms-overflow-style: none;
+		scrollbar-width: none;
 		&::-webkit-scrollbar {
 			display: none;
 		}

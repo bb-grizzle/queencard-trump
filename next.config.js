@@ -1,27 +1,11 @@
-module.exports = {
-	webpack(config) {
-		config.module.rules.push({
-			test: /\.svg$/i,
-			use: [
-				{
-					loader: "@svgr/webpack",
-					options: {
-						svgoConfig: {
-							plugins: [
-								{
-									name: "removeViewBox",
-									active: false,
-								},
-							],
-						},
-					},
-				},
-			],
-		});
-
-		return config;
-	},
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+	reactStrictMode: false,
+	trailingSlash: true,
 	images: {
-		domains: ["images.unsplash.com"],
+		loader: "akamai",
+		path: "/",
 	},
 };
+
+module.exports = nextConfig;

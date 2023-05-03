@@ -1,49 +1,42 @@
 import { css } from "styled-components";
 import theme from ".";
 
+export type DivProps = {
+	color?: string, size?: number, width?: string, dir?: "bottom" | "top" | "left" | "right"
+}
+
 export const div = {
-	top: (color?: string, size?: number) => css`
+	default: ({ color, size, width, dir }: DivProps) => css`
 		&:after {
 			content: "";
 			position: absolute;
-			width: 100%;
-			height: ${size ? `${size}px` : `2px`};
-			top: 0;
-			left: 0;
 			background-color: ${color ? color : theme.color.div};
+
+			${(dir === "top" || dir === "bottom") ? css`
+				width: ${width ? width : "100%"};
+				height: ${size ? `${size}px` : `1px`};
+				`: css`
+				height: ${width ? width : "100%"};
+				width: ${size ? `${size}px` : `1px`};
+			`};
+
+			${() => {
+			switch (dir) {
+				case "bottom": return css`
+					bottom: 0;
+					`
+				case "top": return css`
+					top: 0;
+					`
+				case "right": return css`
+					right: 0;
+					`
+				case "left": return css`
+					left: 0;
+					`
+			}
+		}};
 		}
 	`,
-	bottom: (color?: string, size?: number, width?: string) => css`
-		&:after {
-			content: "";
-			position: absolute;
-			width: ${width ? width : "100%"};
-			height: ${size ? `${size}px` : `2px`};
-			bottom: 0;
-			left: 0;
-			background-color: ${color ? color : theme.color.div};
-		}
-	`,
-	left: (color?: string, size?: number) => css`
-		&:after {
-			content: "";
-			position: absolute;
-			width: ${size ? `${size}px` : `2px`};
-			height: 100%;
-			top: 0;
-			left: 0;
-			background-color: ${color ? color : theme.color.div};
-		}
-	`,
-	right: (color?: string, size?: number) => css`
-		&:after {
-			content: "";
-			position: absolute;
-			width: ${size ? `${size}px` : `2px`};
-			height: 100%;
-			top: 0;
-			right: 0;
-			background-color: ${color ? color : theme.color.div};
-		}
-	`,
+
 };
