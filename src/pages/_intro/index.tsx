@@ -18,7 +18,7 @@ const LinkCustom = styled(Link)`
 
 const Components = () => {
 	return (
-		<IntroLayout title="components">
+		<IntroLayout title="components" backBtn={false}>
 			<ListWrapper>
 				<List>
 					<LinkCustom href={ROUTER.INTRO_ICON}>icon</LinkCustom>
