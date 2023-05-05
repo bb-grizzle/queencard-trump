@@ -6,4 +6,7 @@ export enum IconName {
 	MENU = "menu",
 	REFRESH = "refresh",
 	CLOSE = "close",
+	TRASH = "trash",
+	PENCIL = "pencil",
+	LINK = "link",
 }
