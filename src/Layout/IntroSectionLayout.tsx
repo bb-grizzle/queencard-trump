@@ -13,7 +13,9 @@ const Section = styled.section`
 	border-bottom: 1px solid ${(props) => props.theme.colorPalette.bw[200]};
 `;
 
-const SectionTitle = styled.h2``;
+const SectionTitle = styled.h2`
+	text-transform: uppercase;
+`;
 
 const ItemWrapper = styled.div`
 	display: flex;

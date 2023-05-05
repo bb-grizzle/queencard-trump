@@ -3,6 +3,7 @@ import InputDuration from "@/components/shared/Input/InputDuration";
 import InputEditor from "@/components/shared/Input/InputEditor";
 import InputImage from "@/components/shared/Input/InputImage";
 import useInputDefault from "@/hook/input/useInputDefault";
+import useInputDuration from "@/hook/input/useInputDuration";
 import useInputImage from "@/hook/input/useInputImage";
 import IntroLayout from "@/layout/IntroLayout";
 import IntroSectionLayout from "@/layout/IntroSectionLayout";
@@ -29,6 +30,11 @@ const ComponentInput = () => {
 			placeholder: "input default",
 		},
 	});
+	const inputDurationHook = useInputDuration({
+		layout: {
+			label: "input duration",
+		},
+	});
 
 	// RENDER
 	return (
@@ -43,7 +49,7 @@ const ComponentInput = () => {
 			</IntroSectionLayout>
 			{/* duration */}
 			<IntroSectionLayout title="duration">
-				<InputDuration />
+				<InputDuration {...inputDurationHook} />
 			</IntroSectionLayout>
 			{/* editor */}
 			<IntroSectionLayout title="editor">
