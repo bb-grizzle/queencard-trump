@@ -12,7 +12,7 @@ const Wrapper = styled.label`
 `;
 
 const Label = styled.p`
-	margin-bottom: 4px;
+	margin-bottom: 12px;
 	font-weight: 500;
 	font-size: 13px;
 	color: ${(props) => props.theme.colorPalette.bw[900]};

@@ -1,5 +1,9 @@
 import InputDefault from "@/components/shared/Input";
+import InputDuration from "@/components/shared/Input/InputDuration";
+import InputEditor from "@/components/shared/Input/InputEditor";
+import InputImage from "@/components/shared/Input/InputImage";
 import useInputDefault from "@/hook/input/useInputDefault";
+import useInputImage from "@/hook/input/useInputImage";
 import IntroLayout from "@/layout/IntroLayout";
 import IntroSectionLayout from "@/layout/IntroSectionLayout";
 import { IconName } from "@/types/icon";
@@ -12,10 +16,17 @@ const ComponentInput = () => {
 		formating: FormatType.TEST,
 		option: {
 			placeholder: "input default",
+			value: "init value",
 		},
 		button: {
 			iconName: IconName.ADD,
 			onClick: () => console.log("button clicked"),
+		},
+	});
+	const inputImageHook = useInputImage({
+		layout: { label: "input default" },
+		option: {
+			placeholder: "input default",
 		},
 	});
 
@@ -27,11 +38,17 @@ const ComponentInput = () => {
 				<InputDefault {...inputHook} />
 			</IntroSectionLayout>
 			{/* image */}
-			<IntroSectionLayout title="file">image</IntroSectionLayout>
+			<IntroSectionLayout title="image">
+				<InputImage {...inputImageHook} />
+			</IntroSectionLayout>
 			{/* duration */}
-			<IntroSectionLayout title="duration">duration</IntroSectionLayout>
+			<IntroSectionLayout title="duration">
+				<InputDuration />
+			</IntroSectionLayout>
 			{/* editor */}
-			<IntroSectionLayout title="editor">editor</IntroSectionLayout>
+			<IntroSectionLayout title="editor">
+				<InputEditor />
+			</IntroSectionLayout>
 		</IntroLayout>
 	);
 };

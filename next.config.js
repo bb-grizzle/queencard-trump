@@ -25,8 +25,9 @@ const nextConfig = {
 	reactStrictMode: false,
 	trailingSlash: true,
 	images: {
-		loader: "akamai",
-		path: "/",
+		// loader: "akamai",
+		// path: "/",
+		domains: ["/"],
 	},
 };
 
