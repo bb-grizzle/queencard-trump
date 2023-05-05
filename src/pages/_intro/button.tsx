@@ -4,7 +4,7 @@ import IntroSectionLayout from "@/layout/IntroSectionLayout";
 import { colorPalette } from "@/styles/theme/colorPalette";
 import { IconName } from "@/types/icon";
 
-const ComponentButton = () => {
+const IntroButton = () => {
 	return (
 		<IntroLayout title="button">
 			{/* type */}
@@ -46,4 +46,4 @@ const ComponentButton = () => {
 	);
 };
 
-export default ComponentButton;
+export default IntroButton;

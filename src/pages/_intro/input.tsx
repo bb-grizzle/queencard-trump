@@ -12,7 +12,7 @@ import IntroSectionLayout from "@/layout/IntroSectionLayout";
 import { IconName } from "@/types/icon";
 import { FormatType } from "@/util/formating";
 
-const ComponentInput = () => {
+const IntroInput = () => {
 	// FIELD
 	const inputHook = useInputDefault({
 		layout: { label: "input default" },
@@ -77,4 +77,4 @@ const ComponentInput = () => {
 	);
 };
 
-export default ComponentInput;
+export default IntroInput;

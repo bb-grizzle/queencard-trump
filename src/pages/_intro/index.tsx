@@ -29,6 +29,9 @@ const Components = () => {
 				<List>
 					<LinkCustom href={ROUTER.INTRO_INPUT}>input</LinkCustom>
 				</List>
+				<List>
+					<LinkCustom href={ROUTER.INTRO_ADMIN}>admin</LinkCustom>
+				</List>
 			</ListWrapper>
 		</IntroLayout>
 	);

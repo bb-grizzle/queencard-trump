@@ -18,7 +18,7 @@ const List = styled.li`
 	border: 1px solid ${(props) => props.theme.colorPalette.bw[200]};
 `;
 
-const ComponentIcon = () => {
+const IntroIcon = () => {
 	return (
 		<IntroLayout title="icons">
 			<Wrapper>
@@ -34,4 +34,4 @@ const ComponentIcon = () => {
 	);
 };
 
-export default ComponentIcon;
+export default IntroIcon;
