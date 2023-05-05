@@ -1,4 +1,4 @@
-import { ChangeEvent, InputHTMLAttributes, useState } from "react";
+import { ChangeEvent, InputHTMLAttributes, useEffect, useState } from "react";
 import useInputLayout, { UseInputLayoutPropsType, UseInputLayoutResultType } from "./useInputLayout";
 import { ValidationType } from "@/util/validation";
 
@@ -24,6 +24,21 @@ const useInputDuration: UseInputDurationType = ({ layout, ...rest }) => {
 	const layoutHook = useInputLayout(layout);
 	const [startValue, setStartValue] = useState<string>("");
 	const [endValue, setEndValue] = useState<string>("");
+
+	// STATE
+	// : init start
+	useEffect(() => {
+		if (rest.startOption?.value) {
+			setStartValue(rest.startOption?.value.toString());
+		}
+	}, [rest.startOption]);
+
+	// init end
+	useEffect(() => {
+		if (rest.endOption?.value) {
+			setEndValue(rest.endOption?.value.toString());
+		}
+	}, [rest.endOption]);
 
 	// METHOD
 	const onStartChange = (e: ChangeEvent<HTMLInputElement>) => {
