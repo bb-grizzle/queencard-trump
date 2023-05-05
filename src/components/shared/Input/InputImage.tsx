@@ -3,7 +3,6 @@ import InputLayout from "@/layout/InputLayout";
 import styled from "styled-components";
 import Button, { BtnTypeEnum } from "../Button";
 import Image from "next/image";
-import SampleImage from "@/assets/image/sample.jpg";
 import { IconName } from "@/types/icon";
 
 interface InputImageProps extends UseInputImageResultType {}
@@ -11,6 +10,7 @@ interface InputImageProps extends UseInputImageResultType {}
 const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
+	${(props) => props.theme.event.active};
 `;
 
 const ImageWrapper = styled.ul`
@@ -50,10 +50,10 @@ const ImageCustom = styled(Image)`
 
 const InputImage: React.FC<InputImageProps> = ({ layout, fileRef, onUpload, onChange, files, onDelete }) => {
 	return (
-		<InputLayout {...layout}>
+		<InputLayout {...layout} labelDisable={true}>
 			<Wrapper>
 				<ImageWrapper>
-					<InputFile type="file" ref={fileRef} onChange={onChange} multiple={true} />
+					<InputFile type="file" accept="image/png, image/gif, image/jpeg" ref={fileRef} onChange={onChange} multiple={true} />
 					<ButtonUpload text="upload" btnType={BtnTypeEnum.LINE} iconName={IconName.ADD} onClick={onUpload} />
 					{files?.map((el, index) => {
 						return (

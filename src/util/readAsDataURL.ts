@@ -7,6 +7,7 @@ export const readAsDataURL: ReadAsDataURLType = (file) => {
 		let fileReader = new FileReader();
 		fileReader.onload = function () {
 			const base64 = fileReader.result;
+
 			if (base64) {
 				return resolve({ base64: base64 ?? null, name: file.name, file });
 			}

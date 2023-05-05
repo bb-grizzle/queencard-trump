@@ -1,7 +1,51 @@
+import { DimensionLimitType, SizeLimitType, SizeUnit } from "@/hook/input/useInputImage";
+
 export enum ValidationType {
 	EMAIL = "email",
 	PW = "password",
+	FILE = "file",
 }
+
+export const checkFileSize = (value: number, limit: SizeLimitType) => {
+	const { unit, size } = limit;
+	let limitSize = 500;
+	if (unit === SizeUnit.KB) {
+		limitSize = size * 1000;
+	} else if (unit === SizeUnit.MB) {
+		limitSize = size * 1e6;
+	} else if (unit === SizeUnit.GB) {
+		limitSize = size * 1e9;
+	} else {
+		return false;
+	}
+
+	return value < limitSize;
+};
+
+export const checkFileDimension = (file: File, limit: DimensionLimitType) => {
+	return new Promise((resolve, reject) => {
+		const fileReader = new FileReader();
+		fileReader.onload = function () {
+			if (!fileReader.result) return;
+			const img = new Image();
+			img.src = fileReader.result.toString();
+
+			img.onload = (e: any) => {
+				resolve({
+					width: e.target.width,
+					height: e.target.height,
+					result: limit.width > e.target.width && limit.height > e.target.height,
+				});
+			};
+		};
+		fileReader.onerror = function (error) {
+			return reject(error);
+		};
+		fileReader.readAsDataURL(file);
+	});
+};
+
+export const checkFileDimention = () => {};
 
 export const inputValidation: { [key: string]: { reg: RegExp; error: string } } = {
 	[ValidationType.EMAIL]: {

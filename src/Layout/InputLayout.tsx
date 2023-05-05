@@ -5,9 +5,10 @@ import styled from "styled-components";
 export interface InputLayoutProps extends UseInputLayoutResultType {
 	className?: string;
 	children: ReactNode;
+	labelDisable?: boolean;
 }
 
-const Wrapper = styled.label`
+const Wrapper = styled.div`
 	width: 100%;
 `;
 

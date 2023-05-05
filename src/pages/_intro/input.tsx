@@ -4,7 +4,7 @@ import InputEditor from "@/components/shared/Input/InputEditor";
 import InputImage from "@/components/shared/Input/InputImage";
 import useInputDefault from "@/hook/input/useInputDefault";
 import useInputDuration from "@/hook/input/useInputDuration";
-import useInputImage from "@/hook/input/useInputImage";
+import useInputImage, { SizeUnit } from "@/hook/input/useInputImage";
 import IntroLayout from "@/layout/IntroLayout";
 import IntroSectionLayout from "@/layout/IntroSectionLayout";
 import { IconName } from "@/types/icon";
@@ -29,10 +29,21 @@ const ComponentInput = () => {
 		option: {
 			placeholder: "input default",
 		},
+		sizeLimit: {
+			size: 500,
+			unit: SizeUnit.MB,
+		},
+		dimensionLimit: {
+			width: 1921,
+			height: 1080,
+		},
 	});
 	const inputDurationHook = useInputDuration({
 		layout: {
 			label: "input duration",
+		},
+		startOption: {
+			value: "2022-02-02",
 		},
 	});
 
