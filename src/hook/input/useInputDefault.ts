@@ -1,4 +1,4 @@
-import { ChangeEvent, HTMLAttributes, InputHTMLAttributes, useState } from "react";
+import { ChangeEvent, InputHTMLAttributes, useState } from "react";
 import useInputLayout, { UseInputLayoutPropsType, UseInputLayoutResultType } from "./useInputLayout";
 import { inputValidation, ValidationType } from "@/util/validation";
 import { FormatType, inputFormating } from "@/util/formating";
@@ -10,7 +10,6 @@ type UseInputDefaultType = (props: UseInputDefaultPropsType) => UseInputDefaultR
 type UseInputDefaultPropsType = {
 	layout: UseInputLayoutPropsType;
 	option?: InputHTMLAttributes<HTMLInputElement>;
-	init?: ValueType;
 	validation?: ValidationType;
 	formating?: FormatType;
 	button?: ButtonProps;
@@ -24,12 +23,12 @@ export type UseInputDefaultResultType = UseInputDefaultPropsType & {
 	checkValidation: () => void;
 };
 
-type ValueType = string | number;
+type ValueType = string | number | readonly string[];
 
-const useInputDefault: UseInputDefaultType = ({ layout, init, validation, formating, ...rest }) => {
+const useInputDefault: UseInputDefaultType = ({ layout, validation, formating, ...rest }) => {
 	// FIELD
 	const layoutHook = useInputLayout(layout);
-	const [value, setValue] = useState<ValueType>(init ?? "");
+	const [value, setValue] = useState(rest.option?.value ?? "");
 
 	// STATE
 
@@ -46,27 +45,28 @@ const useInputDefault: UseInputDefaultType = ({ layout, init, validation, format
 	};
 
 	const clearValue = () => {
-		setValue(init ?? "");
+		setValue(rest.option?.value ?? "");
 		layoutHook.changeErrorMessage(null);
 	};
 
 	const checkValidation = () => {
-		if (!validation) return;
-		if (!value || !(typeof value === "string")) return;
-
 		// require validation
-		if (rest.option?.required && !value) {
-			layoutHook.changeErrorMessage(DATA_ERROR.validation.required);
+		if (!!value && rest.option?.required) {
+			if (!value) {
+				layoutHook.changeErrorMessage(DATA_ERROR.validation.required);
+				return;
+			}
+		}
+
+		if (validation && !!value && typeof value === "string") {
+			// custom validation
+			const validationObj = inputValidation[validation];
+			const check = validationObj.reg.test(value);
+			if (!check) {
+				layoutHook.changeErrorMessage(validationObj.error);
+			}
 			return;
 		}
-
-		// custom validation
-		const validationObj = inputValidation[validation];
-		const check = validationObj.reg.test(value);
-		if (!check) {
-			layoutHook.changeErrorMessage(validationObj.error);
-		}
-		return;
 	};
 
 	return { layout: layoutHook, value, onChange, clearValue, checkValidation, ...rest };
