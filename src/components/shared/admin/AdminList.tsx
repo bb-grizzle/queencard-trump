@@ -67,9 +67,9 @@ const AdminList: React.FC<AdminListProps> = ({ className, title, fields, id, onD
 				</BtnWrapper>
 			</ListHeader>
 			<FieldUl>
-				{fields.map((el) => {
+				{fields.map((el, index) => {
 					return (
-						<FieldList>
+						<FieldList key={index}>
 							<FieldText>
 								{el.field} : <ValueText>{el.value}</ValueText>
 							</FieldText>
