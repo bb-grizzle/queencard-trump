@@ -1,9 +1,11 @@
+import EditorView from "@/components/shared/EditorView";
 import InputDefault from "@/components/shared/Input";
 import InputDuration from "@/components/shared/Input/InputDuration";
 import InputEditor from "@/components/shared/Input/InputEditor";
 import InputImage from "@/components/shared/Input/InputImage";
 import useInputDefault from "@/hook/input/useInputDefault";
 import useInputDuration from "@/hook/input/useInputDuration";
+import useInputEditor from "@/hook/input/useInputEditor";
 import useInputImage, { SizeUnit } from "@/hook/input/useInputImage";
 import IntroLayout from "@/layout/IntroLayout";
 import IntroSectionLayout from "@/layout/IntroSectionLayout";
@@ -47,6 +49,10 @@ const ComponentInput = () => {
 		},
 	});
 
+	const inputEditorHook = useInputEditor({
+		layout: { label: "input editor" },
+	});
+
 	// RENDER
 	return (
 		<IntroLayout title="input">
@@ -64,7 +70,8 @@ const ComponentInput = () => {
 			</IntroSectionLayout>
 			{/* editor */}
 			<IntroSectionLayout title="editor">
-				<InputEditor />
+				<InputEditor {...inputEditorHook} />
+				<EditorView value={inputEditorHook.value} />
 			</IntroSectionLayout>
 		</IntroLayout>
 	);
