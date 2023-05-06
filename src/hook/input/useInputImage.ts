@@ -1,61 +1,25 @@
-import { ChangeEvent, InputHTMLAttributes, RefObject, useEffect, useRef, useState } from "react";
-import useInputLayout, { UseInputLayoutPropsType, UseInputLayoutResultType } from "./useInputLayout";
-import { ValidationType, checkFileDimension, checkFileSize } from "@/util/validation";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import useInputLayout from "./useInputLayout";
+import { checkFileDimension, checkFileSize } from "@/util/validation";
 import { readAsDataURL } from "@/util/readAsDataURL";
 import { DATA_ERROR } from "@/data/error";
 import { filesize } from "filesize";
-
-type UseInputImageType = (props: UseInputImagePropsType) => UseInputImageResultType;
-
-type UseInputImagePropsType = {
-	layout: UseInputLayoutPropsType;
-	option?: InputHTMLAttributes<HTMLInputElement>;
-	init?: FileType[];
-	validation?: ValidationType;
-	sizeLimit?: SizeLimitType;
-	dimensionLimit?: DimensionLimitType;
-};
-
-export type UseInputImageResultType = UseInputImagePropsType & {
-	layout: UseInputLayoutResultType;
-	fileRef: RefObject<HTMLInputElement>;
-	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-	clearValue: () => void;
-	checkValidation: () => void;
-	onUpload: () => void;
-	files: FileType[] | null;
-	onDelete: (index: number) => void;
-};
-
-export type DimensionLimitType = { width: number; height: number };
-
-export type SizeLimitType = { size: number; unit: SizeUnit };
-
-export enum SizeUnit {
-	KB = "kb",
-	MB = "mb",
-	GB = "gb",
-}
-
-export type FileType = {
-	url?: string;
-	base64?: string | ArrayBuffer;
-	file?: File;
-	name: string;
-};
+import { FileType, UseInputImageType } from "@/types/input/image";
 
 const useInputImage: UseInputImageType = ({ layout, validation, init, sizeLimit, dimensionLimit, ...rest }) => {
 	// FIELD
-	const fileRef = useRef<HTMLInputElement>(null);
 	const layoutHook = useInputLayout(layout);
-	const [files, setFiles] = useState<FileType[] | null>(null);
+	const [value, setValue] = useState<FileType[] | null>(null);
+	const [isError, setIsError] = useState(false);
+
+	const fileRef = useRef<HTMLInputElement>(null);
 
 	// STATE
 	// iinit files
 	useEffect(() => {
 		if (!init) return;
 
-		setFiles(init);
+		setValue(init);
 	}, [init]);
 
 	// METHOD
@@ -95,12 +59,13 @@ const useInputImage: UseInputImageType = ({ layout, validation, init, sizeLimit,
 					return readFile;
 				})
 			);
-			setFiles((prev) => (prev ? [...prev, ...images] : images));
+			setValue((prev) => (prev ? [...prev, ...images] : images));
 			e.target.value = "";
 		}
 	};
 
 	const clearValue = () => {
+		setValue(null);
 		layoutHook.changeErrorMessage(null);
 	};
 
@@ -109,18 +74,21 @@ const useInputImage: UseInputImageType = ({ layout, validation, init, sizeLimit,
 	};
 
 	const onDelete = (index: number) => {
-		setFiles((prev) => (prev ? prev?.filter((_, fileIndex) => fileIndex !== index) : null));
+		setValue((prev) => (prev ? prev?.filter((_, fileIndex) => fileIndex !== index) : null));
 	};
 
 	const checkValidation = () => {
 		// requried
-		if (rest.option?.required && files === null) {
+		if (rest.option?.required && value === null) {
 			layoutHook.changeErrorMessage(DATA_ERROR.validation.required);
+			setIsError(true);
 			return;
 		}
+
+		setIsError(false);
 	};
 
-	return { layout: layoutHook, fileRef, onUpload, onChange, clearValue, checkValidation, onDelete, files, ...rest };
+	return { layout: layoutHook, fileRef, onUpload, onChange, clearValue, checkValidation, onDelete, value, isError, ...rest };
 };
 
 export default useInputImage;

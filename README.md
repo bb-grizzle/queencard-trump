@@ -7,6 +7,16 @@ next js with type script
 ## 2023.05.03
 
 - [x] UPDATE | upgrade package to latest
+- [x] ADD | shared component
+  - [x] icon
+  - [x] button
+  - [x] input
+    - [ ] check validation
+  - [x] admin
+  - [ ] form
+- [ ] ADD | header
+- [ ] ADD | mobile menu
+- [ ] ADD | admin page
 
 ## 2022.03.15
 

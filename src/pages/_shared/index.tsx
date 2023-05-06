@@ -18,19 +18,19 @@ const LinkCustom = styled(Link)`
 
 const Components = () => {
 	return (
-		<IntroLayout title="components" backBtn={false}>
+		<IntroLayout title="shared components" backBtn={false}>
 			<ListWrapper>
 				<List>
-					<LinkCustom href={ROUTER.INTRO_ICON}>icon</LinkCustom>
+					<LinkCustom href={ROUTER.SHARED_ICON}>icon</LinkCustom>
 				</List>
 				<List>
-					<LinkCustom href={ROUTER.INTRO_BUTTON}>button</LinkCustom>
+					<LinkCustom href={ROUTER.SHARED_BUTTON}>button</LinkCustom>
 				</List>
 				<List>
-					<LinkCustom href={ROUTER.INTRO_INPUT}>input</LinkCustom>
+					<LinkCustom href={ROUTER.SHARED_INPUT}>input</LinkCustom>
 				</List>
 				<List>
-					<LinkCustom href={ROUTER.INTRO_ADMIN}>admin</LinkCustom>
+					<LinkCustom href={ROUTER.SHARED_ADMIN}>admin</LinkCustom>
 				</List>
 			</ListWrapper>
 		</IntroLayout>

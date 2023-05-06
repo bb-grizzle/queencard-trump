@@ -1,7 +1,7 @@
-import { UseInputDurationResultType } from "@/hook/input/useInputDuration";
 import InputLayout from "@/layout/InputLayout";
 import InputItemWrapper from "./InputItemWrapper";
 import styled from "styled-components";
+import { UseInputDurationResultType } from "@/types/input/duration";
 
 interface InputDurationProps extends UseInputDurationResultType {}
 

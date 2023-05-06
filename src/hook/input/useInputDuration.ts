@@ -1,29 +1,14 @@
-import { ChangeEvent, InputHTMLAttributes, useEffect, useState } from "react";
-import useInputLayout, { UseInputLayoutPropsType, UseInputLayoutResultType } from "./useInputLayout";
-import { ValidationType } from "@/util/validation";
-
-type UseInputDurationType = (props: UseInputDurationPropsType) => UseInputDurationResultType;
-
-type UseInputDurationPropsType = {
-	layout: UseInputLayoutPropsType;
-	startOption?: InputHTMLAttributes<HTMLInputElement>;
-	endOption?: InputHTMLAttributes<HTMLInputElement>;
-	validation?: ValidationType;
-};
-
-export type UseInputDurationResultType = UseInputDurationPropsType & {
-	layout: UseInputLayoutResultType;
-	startValue: string;
-	onStartChange: (e: ChangeEvent<HTMLInputElement>) => void;
-	endValue: string;
-	onEndChange: (e: ChangeEvent<HTMLInputElement>) => void;
-	clearValue: () => void;
-};
+import { ChangeEvent, useEffect, useState } from "react";
+import useInputLayout from "./useInputLayout";
+import { DurationValueType, UseInputDurationType } from "@/types/input/duration";
+import { DATA_ERROR } from "@/data/error";
 
 const useInputDuration: UseInputDurationType = ({ layout, ...rest }) => {
 	const layoutHook = useInputLayout(layout);
 	const [startValue, setStartValue] = useState<string>("");
 	const [endValue, setEndValue] = useState<string>("");
+	const [value, setValue] = useState<DurationValueType>(null);
+	const [isError, setIsError] = useState(false);
 
 	// STATE
 	// : init start
@@ -31,14 +16,21 @@ const useInputDuration: UseInputDurationType = ({ layout, ...rest }) => {
 		if (rest.startOption?.value) {
 			setStartValue(rest.startOption?.value.toString());
 		}
-	}, [rest.startOption]);
+	}, []);
 
 	// init end
 	useEffect(() => {
 		if (rest.endOption?.value) {
 			setEndValue(rest.endOption?.value.toString());
 		}
-	}, [rest.endOption]);
+	}, []);
+
+	useEffect(() => {
+		setValue({
+			start: startValue,
+			end: endValue,
+		});
+	}, [startValue, endValue]);
 
 	// METHOD
 	const onStartChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +47,20 @@ const useInputDuration: UseInputDurationType = ({ layout, ...rest }) => {
 		layoutHook.changeErrorMessage(null);
 	};
 
-	return { layout: layoutHook, startValue, onStartChange, endValue, onEndChange, clearValue, ...rest };
+	const checkValidation = () => {
+		// required
+		if (rest.option?.required && (startValue || endValue)) {
+			setIsError(true);
+			layoutHook.changeErrorMessage(DATA_ERROR.validation.required);
+			return;
+		}
+
+		// true
+		setIsError(false);
+		layoutHook.changeErrorMessage(null);
+	};
+
+	return { layout: layoutHook, value, startValue, onStartChange, endValue, onEndChange, clearValue, checkValidation, isError, ...rest };
 };
 
 export default useInputDuration;

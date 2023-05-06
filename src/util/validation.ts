@@ -1,4 +1,4 @@
-import { DimensionLimitType, SizeLimitType, SizeUnit } from "@/hook/input/useInputImage";
+import { DimensionLimitType, SizeLimitType, SizeUnit } from "@/types/input/image";
 
 export enum ValidationType {
 	EMAIL = "email",

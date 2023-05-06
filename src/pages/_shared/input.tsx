@@ -1,16 +1,21 @@
+import Button, { BtnTypeEnum } from "@/components/shared/Button";
 import EditorView from "@/components/shared/EditorView";
 import InputDefault from "@/components/shared/Input";
 import InputDuration from "@/components/shared/Input/InputDuration";
 import InputEditor from "@/components/shared/Input/InputEditor";
 import InputImage from "@/components/shared/Input/InputImage";
+import TextKeyPair from "@/components/shared/TextKeyPair";
+import useForm from "@/hook/input/useForm";
 import useInputDefault from "@/hook/input/useInputDefault";
 import useInputDuration from "@/hook/input/useInputDuration";
 import useInputEditor from "@/hook/input/useInputEditor";
-import useInputImage, { SizeUnit } from "@/hook/input/useInputImage";
+import useInputImage from "@/hook/input/useInputImage";
 import IntroLayout from "@/layout/IntroLayout";
 import IntroSectionLayout from "@/layout/IntroSectionLayout";
 import { IconName } from "@/types/icon";
+import { SizeUnit } from "@/types/input/image";
 import { FormatType } from "@/util/formating";
+import { useEffect } from "react";
 
 const IntroInput = () => {
 	// FIELD
@@ -18,8 +23,10 @@ const IntroInput = () => {
 		layout: { label: "input default" },
 		formating: FormatType.TEST,
 		option: {
+			name: "text",
 			placeholder: "input default",
-			value: "init value",
+			// value: "init value",
+			required: true,
 		},
 		button: {
 			iconName: IconName.ADD,
@@ -29,6 +36,7 @@ const IntroInput = () => {
 	const inputImageHook = useInputImage({
 		layout: { label: "input default" },
 		option: {
+			name: "image",
 			placeholder: "input default",
 		},
 		sizeLimit: {
@@ -44,14 +52,29 @@ const IntroInput = () => {
 		layout: {
 			label: "input duration",
 		},
+		option: {},
 		startOption: {
+			name: "start-date",
 			value: "2022-02-02",
 		},
+		endOption: {
+			name: "end-date",
+		},
 	});
-
 	const inputEditorHook = useInputEditor({
+		option: { name: "editor" },
 		layout: { label: "input editor" },
 	});
+	const { validation, form, checkForm, getForm } = useForm({ hooks: [inputHook, inputImageHook, inputDurationHook, inputEditorHook] });
+
+	// STATE
+	useEffect(() => {
+		console.log("✅ validation : ", validation);
+	}, [validation]);
+
+	useEffect(() => {
+		console.log("✅ form : ", form);
+	}, [form]);
 
 	// RENDER
 	return (
@@ -72,6 +95,11 @@ const IntroInput = () => {
 			<IntroSectionLayout title="editor">
 				<InputEditor {...inputEditorHook} />
 				<EditorView value={inputEditorHook.value} />
+			</IntroSectionLayout>
+			{/* form */}
+			<IntroSectionLayout title="form">
+				<Button text="get form" onClick={getForm} btnType={BtnTypeEnum.SOLID} />
+				<Button text="check form" onClick={checkForm} btnType={BtnTypeEnum.SOLID} />
 			</IntroSectionLayout>
 		</IntroLayout>
 	);

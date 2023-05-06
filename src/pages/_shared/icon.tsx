@@ -25,7 +25,7 @@ const IntroIcon = () => {
 				{Object.values(IconName).map((icon) => {
 					return (
 						<List key={icon}>
-							<Icon name={icon} svgProps={{ stroke: "black" }} />
+							<Icon name={icon} svgProps={{ stroke: "red" }} />
 						</List>
 					);
 				})}

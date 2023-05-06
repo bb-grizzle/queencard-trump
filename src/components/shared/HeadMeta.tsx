@@ -1,10 +1,11 @@
+import DATA_META from "@/data/metaData";
 import Head from "next/head";
 
 const HeadMeta = () => {
 	return (
 		<Head>
 			{/* title */}
-			<title>me?ME!</title>
+			<title>{DATA_META.title}</title>
 
 			{/* meta */}
 			<meta name="description" content="What makes me ME" />

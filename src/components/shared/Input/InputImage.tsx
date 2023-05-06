@@ -1,9 +1,9 @@
-import { UseInputImageResultType } from "@/hook/input/useInputImage";
 import InputLayout from "@/layout/InputLayout";
 import styled from "styled-components";
 import Button, { BtnTypeEnum } from "../Button";
 import Image from "next/image";
 import { IconName } from "@/types/icon";
+import { UseInputImageResultType } from "@/types/input/image";
 
 interface InputImageProps extends UseInputImageResultType {}
 
@@ -48,14 +48,14 @@ const ImageCustom = styled(Image)`
 	object-fit: cover;
 `;
 
-const InputImage: React.FC<InputImageProps> = ({ layout, fileRef, onUpload, onChange, files, onDelete }) => {
+const InputImage: React.FC<InputImageProps> = ({ layout, fileRef, onUpload, onChange, value, onDelete }) => {
 	return (
 		<InputLayout {...layout} labelDisable={true}>
 			<Wrapper>
 				<ImageWrapper>
 					<InputFile type="file" accept="image/png, image/gif, image/jpeg" ref={fileRef} onChange={onChange} multiple={true} />
 					<ButtonUpload text="upload" btnType={BtnTypeEnum.LINE} iconName={IconName.ADD} onClick={onUpload} />
-					{files?.map((el, index) => {
+					{value?.map((el, index) => {
 						return (
 							<ImageList key={el.name}>
 								<BtnClose iconName={IconName.CLOSE} onClick={() => onDelete(index)} />

@@ -1,33 +1,14 @@
-import { ChangeEvent, InputHTMLAttributes, useState } from "react";
-import useInputLayout, { UseInputLayoutPropsType, UseInputLayoutResultType } from "./useInputLayout";
-import { inputValidation, ValidationType } from "@/util/validation";
-import { FormatType, inputFormating } from "@/util/formating";
+import { ChangeEvent, useState } from "react";
+import useInputLayout from "./useInputLayout";
+import { inputValidation } from "@/util/validation";
+import { inputFormating } from "@/util/formating";
 import { DATA_ERROR } from "@/data/error";
-import { ButtonProps } from "@/components/shared/Button";
-
-type UseInputDefaultType = (props: UseInputDefaultPropsType) => UseInputDefaultResultType;
-
-type UseInputDefaultPropsType = {
-	layout: UseInputLayoutPropsType;
-	option?: InputHTMLAttributes<HTMLInputElement>;
-	validation?: ValidationType;
-	formating?: FormatType;
-	button?: ButtonProps;
-};
-
-export type UseInputDefaultResultType = UseInputDefaultPropsType & {
-	layout: UseInputLayoutResultType;
-	value: ValueType;
-	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-	clearValue: () => void;
-	checkValidation: () => void;
-};
-
-type ValueType = string | number | readonly string[];
+import { UseInputDefaultType } from "@/types/input/default";
 
 const useInputDefault: UseInputDefaultType = ({ layout, validation, formating, ...rest }) => {
 	// FIELD
 	const layoutHook = useInputLayout(layout);
+	const [isError, setIsError] = useState(false);
 	const [value, setValue] = useState(rest.option?.value ?? "");
 
 	// STATE
@@ -51,11 +32,10 @@ const useInputDefault: UseInputDefaultType = ({ layout, validation, formating, .
 
 	const checkValidation = () => {
 		// require validation
-		if (!!value && rest.option?.required) {
-			if (!value) {
-				layoutHook.changeErrorMessage(DATA_ERROR.validation.required);
-				return;
-			}
+		if (!value && rest.option?.required) {
+			layoutHook.changeErrorMessage(DATA_ERROR.validation.required);
+			setIsError(true);
+			return;
 		}
 
 		if (validation && !!value && typeof value === "string") {
@@ -64,12 +44,15 @@ const useInputDefault: UseInputDefaultType = ({ layout, validation, formating, .
 			const check = validationObj.reg.test(value);
 			if (!check) {
 				layoutHook.changeErrorMessage(validationObj.error);
+				setIsError(true);
 			}
 			return;
 		}
+
+		setIsError(false);
 	};
 
-	return { layout: layoutHook, value, onChange, clearValue, checkValidation, ...rest };
+	return { layout: layoutHook, value, onChange, clearValue, checkValidation, isError, ...rest };
 };
 
 export default useInputDefault;

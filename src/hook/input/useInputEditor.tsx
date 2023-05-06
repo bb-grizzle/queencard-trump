@@ -1,32 +1,37 @@
-import { ReactQuillProps } from "react-quill";
-import useInputLayout, { UseInputLayoutPropsType, UseInputLayoutResultType } from "./useInputLayout";
+import useInputLayout from "./useInputLayout";
 import { useState } from "react";
-
-type UseInputEditorType = (props: UseInputEditorPropsType) => UseInputEditorResultType;
-
-type UseInputEditorPropsType = {
-	layout: UseInputLayoutPropsType;
-	option?: ReactQuillProps;
-};
-
-export type UseInputEditorResultType = UseInputEditorPropsType & {
-	layout: UseInputLayoutResultType;
-	value: string;
-	onChange: (value: string) => void;
-	clearValue: () => void;
-};
+import { UseInputEditorType } from "@/types/input/editor";
+import { DATA_ERROR } from "@/data/error";
 
 const useInputEditor: UseInputEditorType = ({ layout, ...rest }) => {
 	const layoutHook = useInputLayout(layout);
 	const [value, setValue] = useState("");
+	const [isError, setIsError] = useState(false);
 
 	const onChange = (value: string) => {
 		setValue(value);
 	};
 
-	const clearValue = () => {};
+	const clearValue = () => {
+		setValue("");
+		setIsError(false);
+		layoutHook.changeErrorMessage(null);
+	};
 
-	return { layout: layoutHook, value, onChange, clearValue, ...rest };
+	const checkValidation = () => {
+		// required
+		if (rest.option?.required && !value) {
+			setIsError(true);
+			layoutHook.changeErrorMessage(DATA_ERROR.validation.required);
+			return;
+		}
+
+		// true
+		layoutHook.changeErrorMessage(null);
+		setIsError(false);
+	};
+
+	return { layout: layoutHook, value, onChange, clearValue, checkValidation, isError, ...rest };
 };
 
 export default useInputEditor;
