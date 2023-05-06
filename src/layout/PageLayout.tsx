@@ -2,7 +2,7 @@ import DATA_META from "@/data/metaData";
 import media from "@/styles/media";
 import Head from "next/head";
 import { ReactNode } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 interface PageLayoutProps {
 	children: ReactNode;
@@ -11,10 +11,15 @@ interface PageLayoutProps {
 }
 
 const Main = styled.main<{ includeHeader: boolean }>`
-	padding-top: ${(props) => (!props.includeHeader ? props.theme.size.header.pc : 0)}px;
+	padding: ${(props) => props.theme.size.header.pc + props.theme.size.page.padding.pc}px 0;
+	${(props) =>
+		props.includeHeader &&
+		css`
+			padding-top: 0;
+		`};
 
 	@media ${media.tablet} {
-		padding-top: ${(props) => (!props.includeHeader ? props.theme.size.header.tablet : 0)}px;
+		padding: ${(props) => props.theme.size.header.tablet + props.theme.size.page.padding.tablet}px;
 	}
 `;
 

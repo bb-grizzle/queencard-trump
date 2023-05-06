@@ -17,6 +17,7 @@ next js with type script
 - [x] ADD | header
 - [x] ADD | mobile menu
 - [ ] ADD | admin page
+- [ ] ADD | pagenation
 
 ## 2022.03.15
 

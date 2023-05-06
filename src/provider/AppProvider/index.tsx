@@ -10,7 +10,8 @@ export const AppContext = createContext({} as AppContextProps);
 
 const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 	// FIELD
-	const isLoggedInState = useState<boolean | null>(false);
+	// const isLoggedInState = useState<boolean | null>(true);
+	const isLoggedInState = useState<boolean | null>(true);
 	const globalDimState = useState<boolean>(false);
 	const globalDimOnClick = useRef<any>(null);
 	const isMenuClickState = useState(false);

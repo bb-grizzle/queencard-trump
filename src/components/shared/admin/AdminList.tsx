@@ -18,6 +18,10 @@ const List = styled.li`
 	border-radius: 8px;
 	background-color: ${(props) => props.theme.color.white};
 	width: 100%;
+	cursor: pointer;
+	&:hover {
+		border-color: ${(props) => props.theme.color.black};
+	}
 `;
 
 const ListHeader = styled.div`
@@ -55,9 +59,9 @@ const ValueText = styled.span`
 	color: ${(props) => props.theme.colorPalette.bw[700]};
 `;
 
-const AdminList: React.FC<AdminListProps> = ({ className, title, fields, id, onDeleteClick, onEditClick, onLinkClick }) => {
+const AdminList: React.FC<AdminListProps> = ({ className, title, fields, onDeleteClick, onEditClick, onLinkClick }) => {
 	return (
-		<List className={className}>
+		<List className={className} onClick={onEditClick}>
 			<ListHeader>
 				<ListTitle>{title}</ListTitle>
 				<BtnWrapper>

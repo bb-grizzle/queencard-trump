@@ -6,6 +6,10 @@ export const size = {
 		tablet: 16,
 	},
 
+	page: {
+		padding: { pc: 32, tablet: 24 },
+	},
+
 	container: {
 		pc: `calc(100% - ${64}px * 2)`,
 		tablet: `calc(100% - ${16}px * 2)`,

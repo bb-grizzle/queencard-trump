@@ -2,16 +2,18 @@ import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import useGlobalDim from "./useGlobalDim";
 import { AppContext } from ".";
+import useSize from "@/hook/useSize";
 
 const useMenu = () => {
 	const { isMenuClickState } = useContext(AppContext);
 	const [isActive, setIsClicked] = isMenuClickState;
 	const { pathname } = useRouter();
 	const { hideDim, activeDim, setDimClick } = useGlobalDim();
+	const { isTablet } = useSize();
 
 	useEffect(() => {
-		setIsClicked(false);
-	}, [pathname]);
+		closeMenu();
+	}, [pathname, isTablet]);
 
 	const closeMenu = () => {
 		hideDim();
