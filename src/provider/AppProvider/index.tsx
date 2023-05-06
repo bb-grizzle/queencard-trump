@@ -1,23 +1,26 @@
-import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
+import { createContext, ReactNode, useRef, useState } from "react";
 import useInitAppContext from "./useInitAppContext";
+import { AppContextProps } from "@/types/provider/appProvider";
 
 interface AppProviderProps {
 	children: ReactNode;
 }
 
-export type AppContextProps = {
-	isMenuClickedState: [boolean, Dispatch<SetStateAction<boolean>>];
-};
-
 export const AppContext = createContext({} as AppContextProps);
 
 const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 	// FIELD
-	const isMenuClickedState = useState(false);
+	const isLoggedInState = useState<boolean | null>(false);
+	const globalDimState = useState<boolean>(false);
+	const globalDimOnClick = useRef<any>(null);
+	const isMenuClickState = useState(false);
 
 	// VALUE
 	const value: AppContextProps = {
-		isMenuClickedState,
+		isLoggedInState,
+		globalDimState,
+		globalDimOnClick,
+		isMenuClickState,
 	};
 
 	// INIT

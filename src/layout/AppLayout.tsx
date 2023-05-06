@@ -1,5 +1,6 @@
+import GlobalDim from "@/components/shared/GlobalDim";
 import Header from "@/components/shared/Header";
-import Menu from "@/components/shared/Menu";
+import MobileMenu from "@/components/shared/MobileMenu";
 import { ReactNode } from "react";
 import styled from "styled-components";
 
@@ -13,7 +14,8 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
 	return (
 		<Wrapper>
 			<Header />
-			<Menu />
+			<GlobalDim />
+			<MobileMenu />
 			{children}
 		</Wrapper>
 	);

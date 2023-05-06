@@ -1,29 +1,30 @@
-import { activeScroll, preventScroll } from "./../../util/scroll";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
+import useGlobalDim from "./useGlobalDim";
 import { AppContext } from ".";
+
 const useMenu = () => {
-	const { isMenuClickedState } = useContext(AppContext);
-	const [isMenuClicked, setIsMenuClicked] = isMenuClickedState;
+	const { isMenuClickState } = useContext(AppContext);
+	const [isActive, setIsClicked] = isMenuClickState;
 	const { pathname } = useRouter();
+	const { hideDim, activeDim, setDimClick } = useGlobalDim();
 
 	useEffect(() => {
-		closeMenu();
-		// eslint-disable-next-line
+		setIsClicked(false);
 	}, [pathname]);
 
-	useEffect(() => {
-		if (isMenuClicked) {
-			preventScroll();
-		} else {
-			activeScroll();
-		}
-	}, [isMenuClicked]);
+	const closeMenu = () => {
+		hideDim();
+		setIsClicked(false);
+	};
 
-	const openMenu = () => setIsMenuClicked(true);
-	const closeMenu = () => setIsMenuClicked(false);
+	const openMenu = () => {
+		activeDim();
+		setIsClicked(true);
+		setDimClick(closeMenu);
+	};
 
-	return { isMenuClicked, openMenu, closeMenu };
+	return { isActive, closeMenu, openMenu };
 };
 
 export default useMenu;
