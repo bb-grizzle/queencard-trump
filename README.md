@@ -13,6 +13,9 @@ next js with type script
   - [x] input
     - [x] check validation
   - [x] admin
+  - [x] loading
+    - [x] component
+    - [x] layout
 - [x] ADD | hook : form
 - [x] ADD | header
 - [x] ADD | mobile menu
