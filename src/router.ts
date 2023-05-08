@@ -1,15 +1,13 @@
 const ROUTER_USER = {
 	HOME: "/",
-	TEST_1: "/test1",
-	TEST_2: "/test2",
-	TEST_3: "/test3",
+	USER: "/user",
+	ARTICLE: "/article",
 };
 
 const ROUTER_ADMIN = {
 	ADMIN: "/_admin",
-	ADMIN_TEST_1: `/_admin${ROUTER_USER.TEST_1}`,
-	ADMIN_TEST_2: `/_admin${ROUTER_USER.TEST_2}`,
-	ADMIN_TEST_3: `/_admin${ROUTER_USER.TEST_3}`,
+	ADMIN_USER: `/_admin${ROUTER_USER.USER}`,
+	ADMIN_ARTICLE: `/_admin${ROUTER_USER.ARTICLE}`,
 };
 
 const ROUTER_SHARED = {

@@ -42,7 +42,7 @@ const ChildrenWrapper = styled.div<{ active: boolean }>`
 `;
 
 const LoadingLayout: React.FC<LoadingLayoutProps> = ({ children, loading }) => {
-	const [currentLoading, setCurrentLoading] = useState<boolean>(true);
+	const [currentLoading, setCurrentLoading] = useState<boolean>(loading);
 
 	useEffect(() => {
 		clearTimeout(timeout);

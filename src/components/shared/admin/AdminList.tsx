@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Button from "../Button";
 import { IconName } from "@/types/icon";
+import moment from "moment";
 
 interface AdminListProps {
 	id: number;
@@ -72,10 +73,14 @@ const AdminList: React.FC<AdminListProps> = ({ className, title, fields, onDelet
 			</ListHeader>
 			<FieldUl>
 				{fields.map((el, index) => {
+					let value = el.value;
+					if (el.field === "createdAt" || el.field === "updatedAt") {
+						value = moment(Number(el.value)).format("YYYY.MM.DD | h:mm:ss a");
+					}
 					return (
 						<FieldList key={index}>
 							<FieldText>
-								{el.field} : <ValueText>{el.value}</ValueText>
+								{el.field} : <ValueText>{value}</ValueText>
 							</FieldText>
 						</FieldList>
 					);

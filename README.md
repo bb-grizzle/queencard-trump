@@ -19,7 +19,13 @@ next js with type script
 - [x] ADD | hook : form
 - [x] ADD | header
 - [x] ADD | mobile menu
-- [ ] ADD | admin page
+- [ ] ADD | Apollo
+  - [ ] get lists
+  - [ ] create
+  - [ ] update
+  - [ ] remove
+- [ ] ADD | admin page - signin
+- [ ] ADD | admin page - list
 - [ ] ADD | pagenation
 
 ## 2022.03.15

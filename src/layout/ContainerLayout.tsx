@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 	width: 1024px;
 	max-width: 90%;
 	margin: auto;
-	height: 100%;
+	min-height: 100%;
 
 	@media ${media.tablet} {
 		width: calc(100% - ${(props) => props.theme.size.offset.tablet * 2}px);

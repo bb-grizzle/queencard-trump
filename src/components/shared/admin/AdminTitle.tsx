@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import Button from "../Button";
+import Title, { TitleProps } from "../Title";
+import useAdminAction from "@/provider/AdminProvider/useAdminAction";
 import { IconName } from "@/types/icon";
 
-interface AdminTitleProps {
-	text: string;
-}
+interface AdminTitleProps extends TitleProps {}
 
 const Wrapper = styled.section`
 	display: flex;
@@ -17,13 +16,9 @@ const Text = styled.h1`
 	${(props) => props.theme.fontStyle.display.small};
 `;
 
-const AdminTitle: React.FC<AdminTitleProps> = ({ text }) => {
-	return (
-		<Wrapper>
-			<Text>{text}</Text>
-			<Button iconName={IconName.ADD} />
-		</Wrapper>
-	);
+const AdminTitle: React.FC<AdminTitleProps> = ({ text, button }) => {
+	const { actionToAdd } = useAdminAction();
+	return <Title text={text} button={{ ...button, onClick: actionToAdd, iconName: IconName.ADD }} />;
 };
 
 export default AdminTitle;
