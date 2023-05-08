@@ -6,6 +6,19 @@ const useForm: UseFormType = ({ hooks }) => {
 	const [validation, setValidation] = useState(false);
 
 	// STATE
+	// : set value
+	useEffect(() => {
+		const form = hooks.reduce((prev, currnet) => {
+			if ("startOption" in currnet) {
+				prev = { ...prev, [currnet.startOption?.name ?? "start"]: currnet.startValue, [currnet.endOption?.name ?? "end"]: currnet.endValue };
+			} else {
+				prev = { ...prev, [currnet.option?.name ?? currnet.layout.label]: currnet.value };
+			}
+
+			return prev;
+		}, {});
+		setForm(form);
+	}, [...hooks.map((el) => el.value)]);
 
 	// : check validation
 	useEffect(
