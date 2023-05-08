@@ -12,11 +12,13 @@ const AdminProvider: React.FC<AdminProviderProps> = ({ children }) => {
 	const actionState = useState<AdminActionEnum>(AdminActionEnum.NONE);
 	const formState = useState<object>({});
 	const formValidationState = useState<boolean>();
+	const currentDataState = useState<{ [key: string]: any } | null>(null);
 
 	const value: AdminContextType = {
 		actionState,
 		formState,
 		formValidationState,
+		currentDataState,
 	};
 
 	useAdminInit(value);

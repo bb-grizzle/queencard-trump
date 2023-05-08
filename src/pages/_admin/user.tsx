@@ -8,6 +8,7 @@ import AdminPopup from "@/components/shared/admin/AdminPopup";
 import { getUsersQUery } from "@/lib/apollo/users/getUsers";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { createUserMutaion } from "@/lib/apollo/users/createUser";
+import { updateUserMutation } from "@/lib/apollo/users/updateUser";
 
 const Container = styled(ContainerLayout)``;
 
@@ -42,6 +43,35 @@ const Page = () => {
 			});
 		},
 	});
+	const [updateMutation] = useMutation(updateUserMutation, {
+		update(
+			cache,
+			{
+				data: {
+					updateUser: { user },
+				},
+			}
+		) {
+			cache.modify({
+				fields: {
+					getUsers(prev = []) {
+						const newUser = cache.writeFragment({
+							data: { __typename: "User", ...user },
+							fragment: gql`
+								fragment NewUser on User {
+									id
+									email
+									createdAt
+									updatedAt
+								}
+							`,
+						});
+						return prev.map((el: any) => (el.id === user.id ? newUser : el));
+					},
+				},
+			});
+		},
+	});
 
 	return (
 		<AdminProvider>
@@ -50,10 +80,10 @@ const Page = () => {
 					<AdminTitle text="admin user" />
 
 					{/* list */}
-					{<AdminLists data={data?.getUsers} titleKey={"email"} fields={["id", "createdAt", "updatedAt"]} />}
+					{<AdminLists data={data?.getUsers} titleKey={"email"} fields={["id", "name", "createdAt", "updatedAt"]} />}
 
 					{/* popup */}
-					<AdminPopup title="user" createMutation={createMutation} createMutationName="createUser" />
+					<AdminPopup title="user" createMutation={createMutation} createMutationName="createUser" updateMutation={updateMutation} updateMutationName="updateUser" />
 				</Container>
 			</PageLayout>
 		</AdminProvider>

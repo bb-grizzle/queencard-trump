@@ -3,39 +3,11 @@ import { AdminContext } from ".";
 import useAdminAction from "./useAdminAction";
 
 const useAdminForm = () => {
-	const { formState, formValidationState } = useContext(AdminContext);
+	const { formState, formValidationState, currentDataState } = useContext(AdminContext);
 	const { actionToNone, action } = useAdminAction();
 	const [form, setForm] = formState;
 	const [formValidation, setFormValidation] = formValidationState;
-	// const [createMutation] = useMutation(createUserMutaion, {
-	// 	update(
-	// 		cache,
-	// 		{
-	// 			data: {
-	// 				createUser: { user },
-	// 			},
-	// 		}
-	// 	) {
-	// 		cache.modify({
-	// 			fields: {
-	// 				getUsers(prev = []) {
-	// 					const newUser = cache.writeFragment({
-	// 						data: { __typename: "User", ...user },
-	// 						fragment: gql`
-	// 							fragment NewUser on User {
-	// 								id
-	// 								email
-	// 								createdAt
-	// 								updatedAt
-	// 							}
-	// 						`,
-	// 					});
-	// 					return [...prev, newUser];
-	// 				},
-	// 			},
-	// 		});
-	// 	},
-	// });
+	const [currentData, setCurrentData] = currentDataState;
 
 	const changeForm = (form: Object) => {
 		setForm(form);
@@ -45,7 +17,15 @@ const useAdminForm = () => {
 		setFormValidation(val);
 	};
 
-	return { changeForm, form, changeFormValidation, formValidation };
+	const changeCurrentData = (data: Object) => {
+		setCurrentData(data);
+	};
+
+	const clearCurrentData = () => {
+		setCurrentData(null);
+	};
+
+	return { changeForm, form, changeFormValidation, formValidation, changeCurrentData, currentData, clearCurrentData };
 };
 
 export default useAdminForm;

@@ -53,7 +53,11 @@ const useInputDefault: UseInputDefaultType = ({ layout, validation, formating, .
 		layoutHook.changeErrorMessage(null);
 	};
 
-	return { layout: layoutHook, value, onChange, clearValue, checkValidation, isError, ...rest };
+	const changeValue = (value: string) => {
+		setValue(value);
+	};
+
+	return { layout: layoutHook, value, onChange, clearValue, checkValidation, changeValue, isError, ...rest };
 };
 
 export default useInputDefault;

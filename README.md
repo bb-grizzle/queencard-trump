@@ -23,7 +23,7 @@ next js with type script
 - [ ] ADD | Apollo
   - [x] get lists
   - [x] create
-  - [ ] update
+  - [x] update
   - [ ] remove
 - [ ] ADD | admin page - signin
 - [ ] ADD | admin page - list

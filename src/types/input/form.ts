@@ -13,4 +13,5 @@ type UseFormResultType = {
 	form: { [name: string]: [value: any] };
 	validation: boolean;
 	checkForm: () => void;
+	changeForm: (currentForm: { [key: string]: any }) => void;
 };

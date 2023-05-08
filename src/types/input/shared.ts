@@ -5,5 +5,6 @@ export type UseInputSharedResultType = {
 	value: any;
 	clearValue: () => void;
 	checkValidation: () => void;
+	changeValue: (value: any) => void;
 	isError: boolean;
 };

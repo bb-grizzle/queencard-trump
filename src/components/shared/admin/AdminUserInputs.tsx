@@ -22,7 +22,6 @@ const InputWrapper = styled.div`
 
 const AdminUserInputs = () => {
 	// FIELD
-	const { changeForm, changeFormValidation } = useAdminForm();
 	const emailHook = useInputDefault({
 		layout: { label: "email" },
 		option: {
@@ -32,22 +31,27 @@ const AdminUserInputs = () => {
 			type: "email",
 		},
 	});
-	const pwHook = useInputDefault({
-		layout: { label: "pw" },
-		formating: FormatType.TEST,
+
+	const nameHook = useInputDefault({
+		layout: { label: "name" },
 		option: {
-			name: "password",
-			placeholder: "password",
-			required: true,
-			type: "password",
+			name: "name",
+			placeholder: "name",
 		},
 	});
 
-	const { validation, form } = useForm({ hooks: [emailHook, pwHook] });
+	const { validation, form, changeForm } = useForm({ hooks: [emailHook, nameHook] });
+	const { changeForm: changeAdminForm, changeFormValidation, currentData } = useAdminForm();
 
 	useEffect(() => {
-		changeForm(form);
+		changeAdminForm(form);
 	}, [form]);
+
+	useEffect(() => {
+		if (currentData) {
+			changeForm(currentData);
+		}
+	}, [currentData]);
 
 	useEffect(() => {
 		changeFormValidation(validation);
@@ -56,7 +60,7 @@ const AdminUserInputs = () => {
 	return (
 		<InputWrapper>
 			<InputDefault {...emailHook} />
-			<InputDefault {...pwHook} />
+			<InputDefault {...nameHook} />
 		</InputWrapper>
 	);
 };

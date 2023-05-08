@@ -4,10 +4,13 @@ import useAdminAction from "@/provider/AdminProvider/useAdminAction";
 import { AdminActionEnum } from "@/types/provider/adminProvider";
 import useAdminForm from "@/provider/AdminProvider/useAdminForm";
 import { DATA_MESSAGE } from "@/data/message";
+import { DATA_ERROR } from "@/data/error";
 
 export interface AdminPopupBtnProps {
-	createMutationName: string;
 	createMutation: any;
+	createMutationName: string;
+	updateMutation: any;
+	updateMutationName: string;
 }
 
 const BtnWrapper = styled.div`
@@ -15,22 +18,15 @@ const BtnWrapper = styled.div`
 	justify-content: flex-end;
 `;
 
-const AdminPopupBtn: React.FC<AdminPopupBtnProps> = ({ createMutationName, createMutation }) => {
+const AdminPopupBtn: React.FC<AdminPopupBtnProps> = ({ createMutationName, createMutation, updateMutation, updateMutationName }) => {
 	const { action, actionToNone } = useAdminAction();
-	const { form } = useAdminForm();
+	const { form, currentData } = useAdminForm();
 
 	const onConfirmClick = async () => {
-		let error, ok;
-		if (action === AdminActionEnum.ADD) {
-			const { error: createError, ok: createOk } = await createData();
-			error = createError;
-			ok = createOk;
-		} else if (action === AdminActionEnum.EDIT) {
-			updateData();
-		}
+		const { error, ok } = action === AdminActionEnum.ADD ? await createData() : await updateData();
 
 		if (error) {
-			alert(error);
+			alert(error ?? DATA_ERROR.default.server);
 			return;
 		}
 
@@ -55,8 +51,25 @@ const AdminPopupBtn: React.FC<AdminPopupBtnProps> = ({ createMutationName, creat
 		return { ok, error };
 	};
 
-	const updateData = () => {
-		console.log("updateData");
+	const updateData = async () => {
+		if (!currentData || !currentData?.id) {
+			return {
+				ok: false,
+				error: DATA_ERROR.default.id,
+			};
+		}
+		const {
+			data: {
+				[updateMutationName]: { ok, error },
+			},
+		} = await updateMutation({
+			variables: {
+				id: Number(currentData.id),
+				...form,
+			},
+		});
+
+		return { ok, error };
 	};
 
 	return (

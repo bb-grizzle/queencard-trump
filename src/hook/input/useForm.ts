@@ -36,7 +36,14 @@ const useForm: UseFormType = ({ hooks }) => {
 		});
 	};
 
-	return { form, validation, checkForm };
+	const changeForm = (currentForm: { [key: string]: any }) => {
+		Object.keys(currentForm).map((key) => {
+			const newValue = currentForm[key];
+			hooks.find((el) => el.option?.name === key)?.changeValue(newValue);
+		});
+	};
+
+	return { form, validation, checkForm, changeForm };
 };
 
 export default useForm;

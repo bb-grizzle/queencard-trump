@@ -5,6 +5,7 @@ export const getUsersQUery = gql`
 		getUsers {
 			id
 			email
+			name
 			createdAt
 			updatedAt
 		}

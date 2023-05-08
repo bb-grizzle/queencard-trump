@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import AdminList from "./AdminList";
+import useAdminAction from "@/provider/AdminProvider/useAdminAction";
+import useAdminForm from "@/provider/AdminProvider/useAdminForm";
 
 interface AdminListsProps {
 	data: any[];
@@ -14,6 +16,15 @@ const ListUl = styled.ul`
 `;
 
 const AdminLists: React.FC<AdminListsProps> = ({ data, titleKey, fields }) => {
+	const { actionToEdit } = useAdminAction();
+	const { changeCurrentData } = useAdminForm();
+
+	const onEditClick = (id: string) => {
+		actionToEdit();
+		const currentData = data.find((el) => el.id === id);
+		changeCurrentData(currentData);
+	};
+
 	return (
 		<ListUl>
 			{data.map((el) => {
@@ -23,7 +34,7 @@ const AdminLists: React.FC<AdminListsProps> = ({ data, titleKey, fields }) => {
 						id={el.id}
 						title={el[titleKey]}
 						fields={fields.map((field) => ({ field, value: el[field] }))}
-						onEditClick={() => null}
+						onEditClick={() => onEditClick(el.id)}
 						onDeleteClick={() => null}
 						onLinkClick={() => null}
 					/>
