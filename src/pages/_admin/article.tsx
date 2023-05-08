@@ -5,15 +5,22 @@ import styled from "styled-components";
 import AdminLists from "@/components/shared/admin/AdminLists";
 import AdminProvider from "@/provider/AdminProvider";
 import AdminPopup from "@/components/shared/admin/AdminPopup";
-import { getUsersQUery } from "@/lib/apollo/users/getUsers";
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql, useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { createUserMutaion } from "@/lib/apollo/users/createUser";
 import { updateUserMutation } from "@/lib/apollo/users/updateUser";
+import { ROUTER } from "@/router";
+import { deleteUserMutation } from "@/lib/apollo/users/deleteUser";
+import { getArticlesQuery } from "@/lib/apollo/articles/getArticles";
+import { getArticleQuery } from "@/lib/apollo/articles/getArticle";
 
 const Container = styled(ContainerLayout)``;
 
+const TITLE = "article";
+const QUERY_NAME = "getArticles";
+
 const Page = () => {
-	const { data, loading } = useQuery(getUsersQUery);
+	const { data, loading } = useQuery(getArticlesQuery);
+	const [getDetailQuery] = useLazyQuery(getArticleQuery);
 	const [createMutation] = useMutation(createUserMutaion, {
 		update(
 			cache,
@@ -72,18 +79,49 @@ const Page = () => {
 			});
 		},
 	});
+	const [deleteMutation] = useMutation(deleteUserMutation, {
+		update(
+			cache,
+			{
+				data: {
+					deleteUser: { user },
+				},
+			}
+		) {
+			const normalizedId = cache.identify({ id: user.id, __typename: "User" });
+			cache.evict({ id: normalizedId });
+			cache.gc();
+		},
+	});
 
 	return (
 		<AdminProvider>
-			<PageLayout title="admin user" loading={loading} error={!data?.getUsers} errorMessage={data?.getUsers === null ? "로그인이 필요합니다. " : ""}>
+			<PageLayout title={`admin ${TITLE}`} loading={loading} error={!data?.[QUERY_NAME]} errorMessage={data?.[QUERY_NAME].error}>
 				<Container>
-					<AdminTitle text="admin user" />
+					<AdminTitle text={`admin ${TITLE}`} />
 
 					{/* list */}
-					{<AdminLists data={data?.getUsers} titleKey={"email"} fields={["id", "name", "createdAt", "updatedAt"]} />}
+					{
+						<AdminLists
+							path={ROUTER.ARTICLE}
+							data={data?.[QUERY_NAME]}
+							titleKey={"title"}
+							fields={["id", "text", "createdAt", "updatedAt"]}
+							deleteMutation={deleteMutation}
+							deleteMutationName={"deleteUser"}
+						/>
+					}
 
 					{/* popup */}
-					<AdminPopup title="user" createMutation={createMutation} createMutationName="createUser" updateMutation={updateMutation} updateMutationName="updateUser" />
+					<AdminPopup
+						title={TITLE}
+						createMutation={createMutation}
+						createMutationName="createUser"
+						updateMutation={updateMutation}
+						updateMutationName="updateUser"
+						getDetailQuery={getDetailQuery}
+						getDetailQueryName="getArticle"
+					/>
 				</Container>
 			</PageLayout>
 		</AdminProvider>

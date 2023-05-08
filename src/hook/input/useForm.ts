@@ -18,7 +18,6 @@ const useForm: UseFormType = ({ hooks }) => {
 			return prev;
 		}, {});
 		setForm(form);
-		checkForm();
 	}, [...hooks.map((el) => el.value)]);
 
 	// : check validation

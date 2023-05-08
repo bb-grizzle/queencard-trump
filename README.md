@@ -20,14 +20,14 @@ next js with type script
 - [x] ADD | header
 - [x] ADD | mobile menu
 - [x] ADD | request header with token
-- [ ] ADD | Apollo
+- [x] ADD | Apollo
   - [x] get lists
   - [x] create
   - [x] update
-  - [ ] remove
+  - [x] remove
 - [ ] ADD | admin page - signin
-- [ ] ADD | admin page - list
 - [ ] ADD | pagenation
+- [ ] ADD | input single image
 
 ## 2022.03.15
 

@@ -1,13 +1,12 @@
 import { useContext } from "react";
 import { AdminContext } from ".";
-import useAdminAction from "./useAdminAction";
 
 const useAdminForm = () => {
-	const { formState, formValidationState, currentDataState } = useContext(AdminContext);
-	const { actionToNone, action } = useAdminAction();
+	const { formState, formValidationState, currentDataState, currentIdState } = useContext(AdminContext);
 	const [form, setForm] = formState;
 	const [formValidation, setFormValidation] = formValidationState;
 	const [currentData, setCurrentData] = currentDataState;
+	const [currentId, setCurrentId] = currentIdState;
 
 	const changeForm = (form: Object) => {
 		setForm(form);
@@ -17,15 +16,19 @@ const useAdminForm = () => {
 		setFormValidation(val);
 	};
 
-	const changeCurrentData = (data: Object) => {
-		setCurrentData(data);
+	const changeCurrentData = (obj: any) => {
+		setCurrentData(obj);
+	};
+
+	const changeCurrentId = (id: number) => {
+		setCurrentId(id);
 	};
 
 	const clearCurrentData = () => {
-		setCurrentData(null);
+		setCurrentId(null);
 	};
 
-	return { changeForm, form, changeFormValidation, formValidation, changeCurrentData, currentData, clearCurrentData };
+	return { changeForm, form, changeFormValidation, formValidation, changeCurrentId, changeCurrentData, currentData, clearCurrentData, currentId };
 };
 
 export default useAdminForm;

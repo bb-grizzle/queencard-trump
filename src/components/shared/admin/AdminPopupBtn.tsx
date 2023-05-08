@@ -20,7 +20,7 @@ const BtnWrapper = styled.div`
 
 const AdminPopupBtn: React.FC<AdminPopupBtnProps> = ({ createMutationName, createMutation, updateMutation, updateMutationName }) => {
 	const { action, actionToNone } = useAdminAction();
-	const { form, currentData } = useAdminForm();
+	const { form, currentData, clearCurrentData } = useAdminForm();
 
 	const onConfirmClick = async () => {
 		const { error, ok } = action === AdminActionEnum.ADD ? await createData() : await updateData();
@@ -35,6 +35,8 @@ const AdminPopupBtn: React.FC<AdminPopupBtnProps> = ({ createMutationName, creat
 			actionToNone();
 			return;
 		}
+
+		clearCurrentData();
 	};
 
 	const createData = async () => {

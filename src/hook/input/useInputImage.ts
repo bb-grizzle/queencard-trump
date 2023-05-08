@@ -88,7 +88,11 @@ const useInputImage: UseInputImageType = ({ layout, validation, init, sizeLimit,
 		setIsError(false);
 	};
 
-	return { layout: layoutHook, fileRef, onUpload, onChange, clearValue, checkValidation, onDelete, value, isError, ...rest };
+	const changeValue = (value: any) => {
+		console.log("value : ", value);
+	};
+
+	return { layout: layoutHook, fileRef, onUpload, onChange, clearValue, checkValidation, onDelete, value, isError, changeValue, ...rest };
 };
 
 export default useInputImage;

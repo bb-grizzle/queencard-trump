@@ -31,7 +31,11 @@ const useInputEditor: UseInputEditorType = ({ layout, ...rest }) => {
 		setIsError(false);
 	};
 
-	return { layout: layoutHook, value, onChange, clearValue, checkValidation, isError, ...rest };
+	const changeValue = (value: string) => {
+		setValue(value);
+	};
+
+	return { layout: layoutHook, value, onChange, clearValue, checkValidation, isError, changeValue, ...rest };
 };
 
 export default useInputEditor;

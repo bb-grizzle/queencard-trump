@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Button from "../Button";
 import { IconName } from "@/types/icon";
 import moment from "moment";
+import { MouseEvent } from "react";
 
 interface AdminListProps {
 	id: number;
@@ -61,14 +62,21 @@ const ValueText = styled.span`
 `;
 
 const AdminList: React.FC<AdminListProps> = ({ className, title, fields, onDeleteClick, onEditClick, onLinkClick }) => {
+	const preventBubble = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>, fn: () => void) => {
+		e.preventDefault();
+		e.stopPropagation();
+
+		fn();
+	};
+
 	return (
 		<List className={className} onClick={onEditClick}>
 			<ListHeader>
 				<ListTitle>{title}</ListTitle>
 				<BtnWrapper>
-					<Button iconName={IconName.LINK} onClick={onLinkClick} />
-					<Button iconName={IconName.PENCIL} onClick={onEditClick} />
-					<Button iconName={IconName.TRASH} onClick={onDeleteClick} />
+					<Button iconName={IconName.LINK} onClick={(e) => preventBubble(e, onLinkClick)} />
+					<Button iconName={IconName.PENCIL} onClick={(e) => preventBubble(e, onEditClick)} />
+					<Button iconName={IconName.TRASH} onClick={(e) => preventBubble(e, onDeleteClick)} />
 				</BtnWrapper>
 			</ListHeader>
 			<FieldUl>

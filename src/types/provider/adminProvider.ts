@@ -14,6 +14,7 @@ export type AdminContextType = {
 			} | null>
 		>
 	];
+	currentIdState: [number | null, Dispatch<SetStateAction<number | null>>];
 };
 
 export enum AdminActionEnum {

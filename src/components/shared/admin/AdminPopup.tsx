@@ -5,12 +5,15 @@ import { IconName } from "@/types/icon";
 import useAdminAction from "@/provider/AdminProvider/useAdminAction";
 import { AdminActionEnum } from "@/types/provider/adminProvider";
 import Title from "../Title";
-import { useCallback } from "react";
-import AdminUserInputs from "./AdminUserInputs";
+import { useCallback, useEffect } from "react";
+import AdminArticleInputs from "./inputs/AdminArticleInputs";
 import AdminPopupBtn, { AdminPopupBtnProps } from "./AdminPopupBtn";
+import useAdminForm from "@/provider/AdminProvider/useAdminForm";
 
 interface AdminPopupProps extends AdminPopupBtnProps {
 	title: string;
+	getDetailQuery: any;
+	getDetailQueryName: string;
 }
 
 const Section = styled.section<{ active: boolean }>`
@@ -38,13 +41,26 @@ const ContainerCustom = styled(Container)`
 	gap: 32px;
 `;
 
-const AdminPopup: React.FC<AdminPopupProps> = ({ title, ...rest }) => {
+const AdminPopup: React.FC<AdminPopupProps> = ({ title, getDetailQuery, getDetailQueryName, ...rest }) => {
 	const { action, actionToNone } = useAdminAction();
+	const { currentId, changeCurrentData } = useAdminForm();
+
+	useEffect(() => {
+		const getDetail = async () => {
+			if (currentId) {
+				const { data, loading } = await getDetailQuery({ variables: { id: currentId } });
+				if (!loading) {
+					changeCurrentData(data[getDetailQueryName]);
+				}
+			}
+		};
+		getDetail();
+	}, [currentId]);
 
 	const renderInputs = useCallback(() => {
 		switch (title) {
-			case "user":
-				return <AdminUserInputs />;
+			case "article":
+				return <AdminArticleInputs />;
 			default:
 				return null;
 		}
