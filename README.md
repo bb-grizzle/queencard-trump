@@ -19,8 +19,9 @@ next js with type script
 - [x] ADD | hook : form
 - [x] ADD | header
 - [x] ADD | mobile menu
+- [x] ADD | request header with token
 - [ ] ADD | Apollo
-  - [ ] get lists
+  - [x] get lists
   - [ ] create
   - [ ] update
   - [ ] remove

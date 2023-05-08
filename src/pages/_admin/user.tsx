@@ -15,12 +15,12 @@ const Page = () => {
 
 	return (
 		<AdminProvider>
-			<PageLayout title="admin user" loading={loading}>
+			<PageLayout title="admin user" loading={loading} error={!data?.getUsers} errorMessage={data?.getUsers === null ? "로그인이 필요합니다. " : ""}>
 				<Container>
 					<AdminTitle text="admin user" />
 
 					{/* list */}
-					<AdminLists data={data?.getUsers} titleKey={"email"} fields={["id", "createdAt", "updatedAt"]} />
+					{<AdminLists data={data?.getUsers} titleKey={"email"} fields={["id", "createdAt", "updatedAt"]} />}
 
 					{/* popup */}
 					<AdminPopup title="user" />

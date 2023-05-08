@@ -9,4 +9,5 @@ export enum IconName {
 	TRASH = "trash",
 	PENCIL = "pencil",
 	LINK = "link",
+	ERROR = "error",
 }
