@@ -22,7 +22,7 @@ next js with type script
 - [x] ADD | request header with token
 - [ ] ADD | Apollo
   - [x] get lists
-  - [ ] create
+  - [x] create
   - [ ] update
   - [ ] remove
 - [ ] ADD | admin page - signin

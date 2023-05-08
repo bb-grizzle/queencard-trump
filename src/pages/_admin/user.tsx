@@ -6,12 +6,42 @@ import AdminLists from "@/components/shared/admin/AdminLists";
 import AdminProvider from "@/provider/AdminProvider";
 import AdminPopup from "@/components/shared/admin/AdminPopup";
 import { getUsersQUery } from "@/lib/apollo/users/getUsers";
-import { useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
+import { createUserMutaion } from "@/lib/apollo/users/createUser";
 
 const Container = styled(ContainerLayout)``;
 
 const Page = () => {
 	const { data, loading } = useQuery(getUsersQUery);
+	const [createMutation] = useMutation(createUserMutaion, {
+		update(
+			cache,
+			{
+				data: {
+					createUser: { user },
+				},
+			}
+		) {
+			cache.modify({
+				fields: {
+					getUsers(prev = []) {
+						const newUser = cache.writeFragment({
+							data: { __typename: "User", ...user },
+							fragment: gql`
+								fragment NewUser on User {
+									id
+									email
+									createdAt
+									updatedAt
+								}
+							`,
+						});
+						return [newUser, ...prev];
+					},
+				},
+			});
+		},
+	});
 
 	return (
 		<AdminProvider>
@@ -23,7 +53,7 @@ const Page = () => {
 					{<AdminLists data={data?.getUsers} titleKey={"email"} fields={["id", "createdAt", "updatedAt"]} />}
 
 					{/* popup */}
-					<AdminPopup title="user" />
+					<AdminPopup title="user" createMutation={createMutation} createMutationName="createUser" />
 				</Container>
 			</PageLayout>
 		</AdminProvider>

@@ -1,33 +1,38 @@
 {
-  "name": "vegatiety-web",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@apollo/client": "^3.7.14",
-    "@types/node": "18.16.3",
-    "@types/react": "18.2.0",
-    "@types/react-dom": "18.2.1",
-    "eslint": "8.39.0",
-    "eslint-config-next": "13.3.4",
-    "filesize": "^10.0.7",
-    "graphql": "^16.6.0",
-    "next": "13.3.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-quill": "^2.0.0",
-    "styled-components": "^5.3.10",
-    "styled-reset": "^4.4.6",
-    "typescript": "5.0.4"
-  },
-  "devDependencies": {
-    "@svgr/webpack": "^7.0.0",
-    "@types/styled-components": "^5.1.26",
-    "moment": "^2.29.4"
-  }
+	"name": "vegatiety-web",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"codegen": "graphql-codegen --config src/codegen.ts"
+	},
+	"dependencies": {
+		"@apollo/client": "^3.7.14",
+		"@types/node": "18.16.3",
+		"@types/react": "18.2.0",
+		"@types/react-dom": "18.2.1",
+		"eslint": "8.39.0",
+		"eslint-config-next": "13.3.4",
+		"filesize": "^10.0.7",
+		"graphql": "^16.6.0",
+		"next": "13.3.4",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"react-quill": "^2.0.0",
+		"styled-components": "^5.3.10",
+		"styled-reset": "^4.4.6",
+		"typescript": "5.0.4"
+	},
+	"devDependencies": {
+		"@graphql-codegen/cli": "3.3.0",
+		"@graphql-codegen/introspection": "3.0.1",
+		"@graphql-codegen/typescript": "3.0.3",
+		"@graphql-codegen/typescript-resolvers": "3.2.0",
+		"@svgr/webpack": "^7.0.0",
+		"@types/styled-components": "^5.1.26",
+		"moment": "^2.29.4"
+	}
 }

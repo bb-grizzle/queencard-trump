@@ -6,10 +6,10 @@ import useAdminAction from "@/provider/AdminProvider/useAdminAction";
 import { AdminActionEnum } from "@/types/provider/adminProvider";
 import Title from "../Title";
 import { useCallback } from "react";
-import AdminTest1Inputs from "./AdminTest1Inputs";
-import AdminPopupBtn from "./AdminPopupBtn";
+import AdminUserInputs from "./AdminUserInputs";
+import AdminPopupBtn, { AdminPopupBtnProps } from "./AdminPopupBtn";
 
-interface AdminPopupProps {
+interface AdminPopupProps extends AdminPopupBtnProps {
 	title: string;
 }
 
@@ -38,13 +38,13 @@ const ContainerCustom = styled(Container)`
 	gap: 32px;
 `;
 
-const AdminPopup: React.FC<AdminPopupProps> = ({ title }) => {
+const AdminPopup: React.FC<AdminPopupProps> = ({ title, ...rest }) => {
 	const { action, actionToNone } = useAdminAction();
 
 	const renderInputs = useCallback(() => {
 		switch (title) {
-			case "test":
-				return <AdminTest1Inputs />;
+			case "user":
+				return <AdminUserInputs />;
 			default:
 				return null;
 		}
@@ -60,7 +60,7 @@ const AdminPopup: React.FC<AdminPopupProps> = ({ title }) => {
 				{renderInputs()}
 
 				{/* button */}
-				<AdminPopupBtn />
+				<AdminPopupBtn {...rest} />
 			</ContainerCustom>
 		</Section>
 	);

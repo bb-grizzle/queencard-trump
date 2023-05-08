@@ -50,6 +50,7 @@ const useInputDefault: UseInputDefaultType = ({ layout, validation, formating, .
 		}
 
 		setIsError(false);
+		layoutHook.changeErrorMessage(null);
 	};
 
 	return { layout: layoutHook, value, onChange, clearValue, checkValidation, isError, ...rest };

@@ -18,6 +18,7 @@ const useForm: UseFormType = ({ hooks }) => {
 			return prev;
 		}, {});
 		setForm(form);
+		checkForm();
 	}, [...hooks.map((el) => el.value)]);
 
 	// : check validation
@@ -35,38 +36,7 @@ const useForm: UseFormType = ({ hooks }) => {
 		});
 	};
 
-	const getForm = () => {
-		// 01. reformat input
-		const reducedHooks = hooks.reduce<any[]>((prev, current) => {
-			if ("startOption" in current) {
-				const start = {
-					...current,
-					option: current.startOption,
-					value: current.startValue,
-				};
-				const end = {
-					...current,
-					option: current.endOption,
-					value: current.endValue,
-				};
-				prev = [...prev, start, end];
-			} else {
-				prev = [...prev, current];
-			}
-
-			return prev;
-		}, []);
-
-		// 02. get name, value
-		let form: any = {};
-		reducedHooks.forEach((el) => {
-			form[el.option.name ?? el.layout.label] = el.value;
-		});
-
-		setForm(form);
-	};
-
-	return { form, validation, checkForm, getForm };
+	return { form, validation, checkForm };
 };
 
 export default useForm;
