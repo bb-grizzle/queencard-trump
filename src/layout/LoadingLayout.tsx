@@ -1,3 +1,4 @@
+import ErrorDisplay from "@/components/shared/ErrorDisplay";
 import Loading from "@/components/shared/Loading";
 import { transition } from "@/styles/theme/transition";
 import { ReactNode, useEffect, useState } from "react";
@@ -5,9 +6,11 @@ import styled, { keyframes } from "styled-components";
 
 let timeout = setTimeout(() => {}, 0);
 
-interface LoadingLayoutProps {
+export interface LoadingLayoutProps {
 	children: ReactNode;
 	loading: boolean;
+	error: boolean;
+	errorMessage?: string;
 }
 
 const Wrapper = styled.section``;
@@ -41,7 +44,7 @@ const ChildrenWrapper = styled.div<{ active: boolean }>`
 	transition-property: opacity;
 `;
 
-const LoadingLayout: React.FC<LoadingLayoutProps> = ({ children, loading }) => {
+const LoadingLayout: React.FC<LoadingLayoutProps> = ({ children, loading, error, errorMessage }) => {
 	const [currentLoading, setCurrentLoading] = useState<boolean>(loading);
 
 	useEffect(() => {
@@ -51,7 +54,7 @@ const LoadingLayout: React.FC<LoadingLayoutProps> = ({ children, loading }) => {
 		}, transition.default_time * 1000);
 	}, [loading]);
 
-	return <Wrapper>{currentLoading ? <LoadingCustom active={loading} /> : <ChildrenWrapper active={!loading}>{children}</ChildrenWrapper>}</Wrapper>;
+	return <Wrapper>{currentLoading ? <LoadingCustom active={loading} /> : <ChildrenWrapper active={!loading}>{error ? <ErrorDisplay text={errorMessage} /> : children}</ChildrenWrapper>}</Wrapper>;
 };
 
 export default LoadingLayout;

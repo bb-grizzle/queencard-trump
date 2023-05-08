@@ -3,13 +3,12 @@ import media from "@/styles/media";
 import Head from "next/head";
 import { ReactNode } from "react";
 import styled, { css } from "styled-components";
-import LoadingLayout from "./LoadingLayout";
+import LoadingLayout, { LoadingLayoutProps } from "./LoadingLayout";
 
-interface PageLayoutProps {
+interface PageLayoutProps extends LoadingLayoutProps {
 	children: ReactNode;
 	title: string;
 	includeHeader?: boolean;
-	loading?: boolean;
 }
 
 const Main = styled.main<{ includeHeader: boolean }>`
@@ -25,14 +24,16 @@ const Main = styled.main<{ includeHeader: boolean }>`
 	}
 `;
 
-const PageLayout: React.FC<PageLayoutProps> = ({ children, title, includeHeader = false, loading = false }) => {
+const PageLayout: React.FC<PageLayoutProps> = ({ children, title, includeHeader = false, loading = false, error = false, errorMessage }) => {
 	return (
 		<>
 			<Head>
 				<title>{`${DATA_META.site_name} | ${title}`}</title>
 			</Head>
 			<Main includeHeader={includeHeader}>
-				<LoadingLayout loading={loading}>{children}</LoadingLayout>
+				<LoadingLayout loading={loading} error={error} errorMessage={errorMessage}>
+					{children}
+				</LoadingLayout>
 			</Main>
 		</>
 	);
