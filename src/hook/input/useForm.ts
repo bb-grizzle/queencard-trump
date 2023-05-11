@@ -18,6 +18,7 @@ const useForm: UseFormType = ({ hooks }) => {
 			return prev;
 		}, {});
 		setForm(form);
+		// eslint-disable-next-line
 	}, [...hooks.map((el) => el.value)]);
 
 	// : check validation
@@ -26,6 +27,7 @@ const useForm: UseFormType = ({ hooks }) => {
 			const check = hooks.some((hook) => hook.isError);
 			setValidation(!check);
 		},
+		// eslint-disable-next-line
 		hooks.map((hook) => hook.isError)
 	);
 

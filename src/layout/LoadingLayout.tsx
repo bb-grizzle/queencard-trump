@@ -4,12 +4,12 @@ import { transition } from "@/styles/theme/transition";
 import { ReactNode, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 
-let timeout = setTimeout(() => {}, 0);
+let timeout = setTimeout(() => { }, 0);
 
 export interface LoadingLayoutProps {
 	children: ReactNode;
-	loading: boolean;
-	error: boolean;
+	loading?: boolean;
+	error?: boolean;
 	errorMessage?: string;
 }
 
@@ -24,7 +24,7 @@ const fadeInAnimation = keyframes`
   }
 `;
 
-const LoadingCustom = styled(Loading)<{ active: boolean }>`
+const LoadingCustom = styled(Loading) <{ active: boolean }>`
 	${(props) => props.theme.layout.center_abs};
 	animation-name: ${fadeInAnimation};
 	animation-duration: ${(props) => props.theme.transition.default_time}s;
@@ -44,7 +44,7 @@ const ChildrenWrapper = styled.div<{ active: boolean }>`
 	transition-property: opacity;
 `;
 
-const LoadingLayout: React.FC<LoadingLayoutProps> = ({ children, loading, error, errorMessage }) => {
+const LoadingLayout: React.FC<LoadingLayoutProps> = ({ children, loading = false, error, errorMessage }) => {
 	const [currentLoading, setCurrentLoading] = useState<boolean>(loading);
 
 	useEffect(() => {

@@ -55,6 +55,7 @@ const AdminPopup: React.FC<AdminPopupProps> = ({ title, getDetailQuery, getDetai
 			}
 		};
 		getDetail();
+		// eslint-disable-next-line
 	}, [currentId]);
 
 	const renderInputs = useCallback(() => {

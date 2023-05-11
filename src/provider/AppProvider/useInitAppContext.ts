@@ -22,6 +22,7 @@ const useInitAppContext = (ctx: AppContextProps) => {
 		} else {
 			setIsLoggedIn(false);
 		}
+		// eslint-disable-next-line
 	}, []);
 
 	return;

@@ -48,6 +48,7 @@ const AdminArticleInputs = () => {
 
 	useEffect(() => {
 		changeAdminForm(form);
+		// eslint-disable-next-line
 	}, [form]);
 
 	useEffect(() => {
@@ -55,10 +56,12 @@ const AdminArticleInputs = () => {
 			console.log(currentData);
 			changeForm(currentData);
 		}
+		// eslint-disable-next-line
 	}, [currentData]);
 
 	useEffect(() => {
 		changeFormValidation(validation);
+		// eslint-disable-next-line
 	}, [validation]);
 
 	return (

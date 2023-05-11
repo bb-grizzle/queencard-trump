@@ -13,6 +13,7 @@ const useMenu = () => {
 
 	useEffect(() => {
 		closeMenu();
+		// eslint-disable-next-line
 	}, [pathname, isTablet]);
 
 	const closeMenu = () => {

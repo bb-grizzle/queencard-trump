@@ -1,12 +1,12 @@
-import { UseInputEditorResultType } from "@/hook/input/useInputEditor";
 import InputLayout from "@/layout/InputLayout";
+import { UseInputEditorResultType } from "@/types/input/editor";
 import dynamic from "next/dynamic";
 import { useMemo } from "react";
 import { ReactQuillProps } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
 
-interface InputEditorProps extends UseInputEditorResultType {}
+interface InputEditorProps extends UseInputEditorResultType { }
 
 const ReactQuill = dynamic<ReactQuillProps>(async () => import("react-quill"), {
 	ssr: false,

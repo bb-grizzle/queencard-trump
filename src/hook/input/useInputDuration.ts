@@ -16,6 +16,7 @@ const useInputDuration: UseInputDurationType = ({ layout, ...rest }) => {
 		if (rest.startOption?.value) {
 			setStartValue(rest.startOption?.value.toString());
 		}
+		// eslint-disable-next-line
 	}, []);
 
 	// init end
@@ -23,6 +24,7 @@ const useInputDuration: UseInputDurationType = ({ layout, ...rest }) => {
 		if (rest.endOption?.value) {
 			setEndValue(rest.endOption?.value.toString());
 		}
+		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
@@ -60,7 +62,15 @@ const useInputDuration: UseInputDurationType = ({ layout, ...rest }) => {
 		layoutHook.changeErrorMessage(null);
 	};
 
-	return { layout: layoutHook, value, startValue, onStartChange, endValue, onEndChange, clearValue, checkValidation, isError, ...rest };
+	// : change value
+	const changeValue = (value: DurationValueType) => {
+		if (value) {
+			setStartValue(value.start);
+			setEndValue(value.end);
+		}
+	};
+
+	return { layout: layoutHook, value, startValue, onStartChange, endValue, onEndChange, clearValue, checkValidation, changeValue, isError, ...rest };
 };
 
 export default useInputDuration;

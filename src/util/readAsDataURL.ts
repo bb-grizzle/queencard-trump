@@ -1,4 +1,4 @@
-import { FileType } from "@/hook/input/useInputImage";
+import { FileType } from "@/types/input/image";
 
 type ReadAsDataURLType = (file: File) => Promise<FileType>;
 
