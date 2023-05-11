@@ -32,6 +32,13 @@ export type CreateUserResponse = MutationResponseIc & {
   user?: Maybe<User>;
 };
 
+export type DeleteUserMutationResponse = MutationResponseIc & {
+  __typename?: 'DeleteUserMutationResponse';
+  error?: Maybe<Scalars['String']>;
+  ok: Scalars['Boolean'];
+  user?: Maybe<User>;
+};
+
 export type File = {
   __typename?: 'File';
   createdAt: Scalars['String'];
@@ -61,12 +68,13 @@ export type Mutation = {
   createArticle: MutationArticleResponse;
   createUser: CreateUserResponse;
   deleteArticle: MutationResponse;
-  deleteUser: MutationResponse;
+  deleteUser: DeleteUserMutationResponse;
   fileDelete: MutationResponse;
   fileUpdate: FileUploadResponse;
   fileUpload: FileUploadResponse;
   loginUser?: Maybe<LoginUserResponse>;
   updateArticle: MutationArticleResponse;
+  updateUser: UpdateUserResponse;
 };
 
 
@@ -79,6 +87,7 @@ export type MutationCreateArticleArgs = {
 
 export type MutationCreateUserArgs = {
   email: Scalars['String'];
+  name?: InputMaybe<Scalars['String']>;
   password: Scalars['String'];
 };
 
@@ -124,6 +133,12 @@ export type MutationUpdateArticleArgs = {
   title?: InputMaybe<Scalars['String']>;
 };
 
+
+export type MutationUpdateUserArgs = {
+  id: Scalars['Int'];
+  name?: InputMaybe<Scalars['String']>;
+};
+
 export type MutationArticleResponse = MutationResponseIc & {
   __typename?: 'MutationArticleResponse';
   data?: Maybe<Article>;
@@ -144,12 +159,18 @@ export type MutationResponseIc = {
 
 export type Query = {
   __typename?: 'Query';
-  getArticle?: Maybe<Array<Maybe<Article>>>;
+  getArticle: Article;
+  getArticles?: Maybe<Array<Maybe<Article>>>;
   getUsers?: Maybe<Array<Maybe<User>>>;
 };
 
 
 export type QueryGetArticleArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type QueryGetArticlesArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   take?: InputMaybe<Scalars['Int']>;
 };
@@ -159,11 +180,19 @@ export type QueryGetUsersArgs = {
   email?: InputMaybe<Scalars['String']>;
 };
 
+export type UpdateUserResponse = MutationResponseIc & {
+  __typename?: 'UpdateUserResponse';
+  error?: Maybe<Scalars['String']>;
+  ok: Scalars['Boolean'];
+  user?: Maybe<User>;
+};
+
 export type User = {
   __typename?: 'User';
   createdAt: Scalars['String'];
   email: Scalars['String'];
   id: Scalars['Int'];
+  name?: Maybe<Scalars['String']>;
   password: Scalars['String'];
   updatedAt: Scalars['String'];
 };
@@ -242,6 +271,7 @@ export type ResolversTypes = {
   Article: ResolverTypeWrapper<Article>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   CreateUserResponse: ResolverTypeWrapper<CreateUserResponse>;
+  DeleteUserMutationResponse: ResolverTypeWrapper<DeleteUserMutationResponse>;
   File: ResolverTypeWrapper<File>;
   FileUploadResponse: ResolverTypeWrapper<FileUploadResponse>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -249,9 +279,10 @@ export type ResolversTypes = {
   Mutation: ResolverTypeWrapper<{}>;
   MutationArticleResponse: ResolverTypeWrapper<MutationArticleResponse>;
   MutationResponse: ResolverTypeWrapper<MutationResponse>;
-  MutationResponseIc: ResolversTypes['CreateUserResponse'] | ResolversTypes['FileUploadResponse'] | ResolversTypes['LoginUserResponse'] | ResolversTypes['MutationArticleResponse'];
+  MutationResponseIc: ResolversTypes['CreateUserResponse'] | ResolversTypes['DeleteUserMutationResponse'] | ResolversTypes['FileUploadResponse'] | ResolversTypes['LoginUserResponse'] | ResolversTypes['MutationArticleResponse'] | ResolversTypes['UpdateUserResponse'];
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  UpdateUserResponse: ResolverTypeWrapper<UpdateUserResponse>;
   Upload: ResolverTypeWrapper<Scalars['Upload']>;
   User: ResolverTypeWrapper<User>;
 };
@@ -261,6 +292,7 @@ export type ResolversParentTypes = {
   Article: Article;
   Boolean: Scalars['Boolean'];
   CreateUserResponse: CreateUserResponse;
+  DeleteUserMutationResponse: DeleteUserMutationResponse;
   File: File;
   FileUploadResponse: FileUploadResponse;
   Int: Scalars['Int'];
@@ -268,9 +300,10 @@ export type ResolversParentTypes = {
   Mutation: {};
   MutationArticleResponse: MutationArticleResponse;
   MutationResponse: MutationResponse;
-  MutationResponseIc: ResolversParentTypes['CreateUserResponse'] | ResolversParentTypes['FileUploadResponse'] | ResolversParentTypes['LoginUserResponse'] | ResolversParentTypes['MutationArticleResponse'];
+  MutationResponseIc: ResolversParentTypes['CreateUserResponse'] | ResolversParentTypes['DeleteUserMutationResponse'] | ResolversParentTypes['FileUploadResponse'] | ResolversParentTypes['LoginUserResponse'] | ResolversParentTypes['MutationArticleResponse'] | ResolversParentTypes['UpdateUserResponse'];
   Query: {};
   String: Scalars['String'];
+  UpdateUserResponse: UpdateUserResponse;
   Upload: Scalars['Upload'];
   User: User;
 };
@@ -286,6 +319,13 @@ export type ArticleResolvers<ContextType = any, ParentType extends ResolversPare
 };
 
 export type CreateUserResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreateUserResponse'] = ResolversParentTypes['CreateUserResponse']> = {
+  error?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DeleteUserMutationResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeleteUserMutationResponse'] = ResolversParentTypes['DeleteUserMutationResponse']> = {
   error?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
@@ -320,12 +360,13 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createArticle?: Resolver<ResolversTypes['MutationArticleResponse'], ParentType, ContextType, RequireFields<MutationCreateArticleArgs, 'text' | 'thumbnail' | 'title'>>;
   createUser?: Resolver<ResolversTypes['CreateUserResponse'], ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'email' | 'password'>>;
   deleteArticle?: Resolver<ResolversTypes['MutationResponse'], ParentType, ContextType, RequireFields<MutationDeleteArticleArgs, 'id'>>;
-  deleteUser?: Resolver<ResolversTypes['MutationResponse'], ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
+  deleteUser?: Resolver<ResolversTypes['DeleteUserMutationResponse'], ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
   fileDelete?: Resolver<ResolversTypes['MutationResponse'], ParentType, ContextType, RequireFields<MutationFileDeleteArgs, 'id'>>;
   fileUpdate?: Resolver<ResolversTypes['FileUploadResponse'], ParentType, ContextType, RequireFields<MutationFileUpdateArgs, 'file' | 'id' | 'path'>>;
   fileUpload?: Resolver<ResolversTypes['FileUploadResponse'], ParentType, ContextType, RequireFields<MutationFileUploadArgs, 'file' | 'path'>>;
   loginUser?: Resolver<Maybe<ResolversTypes['LoginUserResponse']>, ParentType, ContextType, RequireFields<MutationLoginUserArgs, 'email' | 'password'>>;
   updateArticle?: Resolver<ResolversTypes['MutationArticleResponse'], ParentType, ContextType, RequireFields<MutationUpdateArticleArgs, 'id'>>;
+  updateUser?: Resolver<ResolversTypes['UpdateUserResponse'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'id'>>;
 };
 
 export type MutationArticleResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['MutationArticleResponse'] = ResolversParentTypes['MutationArticleResponse']> = {
@@ -342,14 +383,22 @@ export type MutationResponseResolvers<ContextType = any, ParentType extends Reso
 };
 
 export type MutationResponseIcResolvers<ContextType = any, ParentType extends ResolversParentTypes['MutationResponseIc'] = ResolversParentTypes['MutationResponseIc']> = {
-  __resolveType: TypeResolveFn<'CreateUserResponse' | 'FileUploadResponse' | 'LoginUserResponse' | 'MutationArticleResponse', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'CreateUserResponse' | 'DeleteUserMutationResponse' | 'FileUploadResponse' | 'LoginUserResponse' | 'MutationArticleResponse' | 'UpdateUserResponse', ParentType, ContextType>;
   error?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  getArticle?: Resolver<Maybe<Array<Maybe<ResolversTypes['Article']>>>, ParentType, ContextType, Partial<QueryGetArticleArgs>>;
+  getArticle?: Resolver<ResolversTypes['Article'], ParentType, ContextType, RequireFields<QueryGetArticleArgs, 'id'>>;
+  getArticles?: Resolver<Maybe<Array<Maybe<ResolversTypes['Article']>>>, ParentType, ContextType, Partial<QueryGetArticlesArgs>>;
   getUsers?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, Partial<QueryGetUsersArgs>>;
+};
+
+export type UpdateUserResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['UpdateUserResponse'] = ResolversParentTypes['UpdateUserResponse']> = {
+  error?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Upload'], any> {
@@ -360,6 +409,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -368,6 +418,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 export type Resolvers<ContextType = any> = {
   Article?: ArticleResolvers<ContextType>;
   CreateUserResponse?: CreateUserResponseResolvers<ContextType>;
+  DeleteUserMutationResponse?: DeleteUserMutationResponseResolvers<ContextType>;
   File?: FileResolvers<ContextType>;
   FileUploadResponse?: FileUploadResponseResolvers<ContextType>;
   LoginUserResponse?: LoginUserResponseResolvers<ContextType>;
@@ -376,6 +427,7 @@ export type Resolvers<ContextType = any> = {
   MutationResponse?: MutationResponseResolvers<ContextType>;
   MutationResponseIc?: MutationResponseIcResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  UpdateUserResponse?: UpdateUserResponseResolvers<ContextType>;
   Upload?: GraphQLScalarType;
   User?: UserResolvers<ContextType>;
 };

@@ -5,7 +5,8 @@ const useLogin = () => {
 	const { isLoggedInState } = useContext(AppContext);
 	const [isLoggedIn, setIsLoggedIn] = isLoggedInState;
 
-	const clientLogin = () => {
+	const clientLogin = (token: string) => {
+		window.localStorage.setItem("token", token);
 		setIsLoggedIn(true);
 	};
 

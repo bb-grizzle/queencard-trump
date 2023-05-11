@@ -1,6 +1,6 @@
+import { AppContextProps } from "@/types/provider/appProvider";
 import { setFullHeight } from "@/util/setFullHeight";
 import { useEffect } from "react";
-import { AppContextProps } from ".";
 
 const useInitAppContext = (ctx: AppContextProps) => {
 	// STATE

@@ -4,7 +4,7 @@ import InputItemWrapper from "./InputItemWrapper";
 import Button from "../Button";
 import { UseInputDefaultResultType } from "@/types/input/default";
 
-interface InputDefaultProps extends UseInputDefaultResultType {}
+interface InputDefaultProps extends UseInputDefaultResultType { }
 
 const Input = styled.input`
 	width: 100%;
@@ -19,7 +19,7 @@ const InputDefault: React.FC<InputDefaultProps> = ({ layout, option, value, butt
 		<InputLayout {...layout}>
 			<ItemCustom>
 				<Input {...option} value={value} onChange={onChange} />
-				<Button {...button} />
+				{button && <Button {...button} />}
 			</ItemCustom>
 		</InputLayout>
 	);

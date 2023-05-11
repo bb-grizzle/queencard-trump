@@ -45,8 +45,6 @@ export const checkFileDimension = (file: File, limit: DimensionLimitType) => {
 	});
 };
 
-export const checkFileDimention = () => {};
-
 export const inputValidation: { [key: string]: { reg: RegExp; error: string } } = {
 	[ValidationType.EMAIL]: {
 		reg: /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
