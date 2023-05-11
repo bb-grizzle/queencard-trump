@@ -12,6 +12,8 @@ import { ROUTER } from "@/router";
 import { deleteUserMutation } from "@/lib/apollo/users/deleteUser";
 import { getArticlesQuery } from "@/lib/apollo/articles/getArticles";
 import { getArticleQuery } from "@/lib/apollo/articles/getArticle";
+import useLogin from "@/provider/AppProvider/useLogin";
+import useRedirect from "@/hook/useRedirect";
 
 const Container = styled(ContainerLayout)``;
 
@@ -19,6 +21,13 @@ const TITLE = "article";
 const QUERY_NAME = "getArticles";
 
 const Page = () => {
+	const { isLoggedIn } = useLogin()
+
+	useRedirect({
+		condition: isLoggedIn === false,
+		path: ROUTER.ADMIN
+	})
+
 	const { data, loading } = useQuery(getArticlesQuery);
 	const [getDetailQuery] = useLazyQuery(getArticleQuery);
 	const [createMutation] = useMutation(createUserMutaion, {
@@ -101,16 +110,14 @@ const Page = () => {
 					<AdminTitle text={`admin ${TITLE}`} />
 
 					{/* list */}
-					{
-						<AdminLists
-							path={ROUTER.ARTICLE}
-							data={data?.[QUERY_NAME]}
-							titleKey={"title"}
-							fields={["id", "text", "createdAt", "updatedAt"]}
-							deleteMutation={deleteMutation}
-							deleteMutationName={"deleteUser"}
-						/>
-					}
+					<AdminLists
+						path={ROUTER.ARTICLE}
+						data={data?.[QUERY_NAME]}
+						titleKey={"title"}
+						fields={["id", "text", "createdAt", "updatedAt"]}
+						deleteMutation={deleteMutation}
+						deleteMutationName={"deleteUser"}
+					/>
 
 					{/* popup */}
 					<AdminPopup
