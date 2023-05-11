@@ -14,6 +14,11 @@ import { getArticlesQuery } from "@/lib/apollo/articles/getArticles";
 import { getArticleQuery } from "@/lib/apollo/articles/getArticle";
 import useLogin from "@/provider/AppProvider/useLogin";
 import useRedirect from "@/hook/useRedirect";
+import Pagenation from "@/components/shared/pagenation/Pagenation";
+import { useRouter } from "next/router";
+
+const ITEM_TAKE = 1;
+const PAGENATION_RANGE = 5;
 
 const Container = styled(ContainerLayout)``;
 
@@ -21,6 +26,7 @@ const TITLE = "article";
 const QUERY_NAME = "getArticles";
 
 const Page = () => {
+	const { query: { page }, push, pathname } = useRouter()
 	const { isLoggedIn } = useLogin()
 
 	useRedirect({
@@ -28,7 +34,12 @@ const Page = () => {
 		path: ROUTER.ADMIN
 	})
 
-	const { data, loading } = useQuery(getArticlesQuery);
+	const { data, loading } = useQuery(getArticlesQuery, {
+		variables: {
+			take: ITEM_TAKE,
+			skip: ITEM_TAKE * ((page && Number(page) > 0) ? Number(page) - 1 : 0)
+		}
+	});
 	const [getDetailQuery] = useLazyQuery(getArticleQuery);
 	const [createMutation] = useMutation(createUserMutaion, {
 		update(
@@ -103,6 +114,16 @@ const Page = () => {
 		},
 	});
 
+	const onPageClick = (page: number) => {
+		push(`${pathname}?page=${page}`)
+	}
+	const onNextClick = () => {
+		push(`${pathname}?page=${Number(page) + 1}`)
+	}
+	const onPrevClick = () => {
+		push(`${pathname}?page=${Number(page) - 1}`)
+	}
+
 	return (
 		<AdminProvider>
 			<PageLayout title={`admin ${TITLE}`} loading={loading} error={!data?.[QUERY_NAME]} errorMessage={data?.[QUERY_NAME].error}>
@@ -112,11 +133,20 @@ const Page = () => {
 					{/* list */}
 					<AdminLists
 						path={ROUTER.ARTICLE}
-						data={data?.[QUERY_NAME]}
+						data={data?.[QUERY_NAME].data}
 						titleKey={"title"}
 						fields={["id", "text", "createdAt", "updatedAt"]}
 						deleteMutation={deleteMutation}
 						deleteMutationName={"deleteUser"}
+					/>
+
+					<Pagenation
+						current={page ? Number(page) : 1}
+						total={Math.ceil(data?.[QUERY_NAME].count / ITEM_TAKE)}
+						range={PAGENATION_RANGE}
+						onPageClick={onPageClick}
+						onNextClick={onNextClick}
+						onPrevClick={onPrevClick}
 					/>
 
 					{/* popup */}
