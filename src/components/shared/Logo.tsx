@@ -1,3 +1,4 @@
+import useLogin from "@/provider/AppProvider/useLogin";
 import { ROUTER } from "@/router";
 import Link from "next/link";
 import styled from "styled-components";
@@ -9,9 +10,10 @@ const Text = styled.span`
 `;
 
 const Logo = () => {
+	const { isLoggedIn } = useLogin()
 	return (
 		<Text>
-			<Link href={ROUTER.HOME}>logo</Link>
+			<Link href={isLoggedIn ? ROUTER.ADMIN : ROUTER.HOME}>logo</Link>
 		</Text>
 	);
 };

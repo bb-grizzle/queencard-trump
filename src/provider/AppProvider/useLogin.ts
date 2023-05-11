@@ -11,6 +11,7 @@ const useLogin = () => {
 	};
 
 	const clientLogout = () => {
+		window.localStorage.removeItem("token");
 		setIsLoggedIn(false);
 	};
 

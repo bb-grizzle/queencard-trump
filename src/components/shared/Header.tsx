@@ -8,6 +8,8 @@ import Link from "next/link";
 import Button from "./Button";
 import useMenu from "@/provider/AppProvider/useMenu";
 import { IconName } from "@/types/icon";
+import { useRouter } from "next/router";
+import { ROUTER } from "@/router";
 
 const HeaderComp = styled.header`
 	position: absolute;
@@ -36,6 +38,14 @@ const MenuWrapper = styled.ul`
 
 const MenuList = styled.li``;
 
+const LogoutBtn = styled(Button)`
+	padding: 0;
+	font-size: inherit;
+	border-left: 1px solid ${props => props.theme.color.div};
+	border-radius: 0;
+	padding-left: 12px;
+`;
+
 const MenuBtn = styled(Button)`
 	display: none;
 	@media ${media.tablet} {
@@ -43,15 +53,19 @@ const MenuBtn = styled(Button)`
 	}
 `;
 
+
+
 const Header = () => {
-	const { isLoggedIn } = useLogin();
+	const { isLoggedIn, clientLogout } = useLogin();
 	const { openMenu } = useMenu();
+	const { pathname } = useRouter()
+
 	return (
 		<HeaderComp>
 			<ContainerCustom>
 				<Logo />
 				<MenuWrapper>
-					{isLoggedIn !== null &&
+					{isLoggedIn !== null && pathname !== ROUTER.ADMIN &&
 						(isLoggedIn ? DATA_MENU_ADMIN : DATA_MENU_USER).map((el) => {
 							return (
 								<MenuList key={el.href}>
@@ -59,6 +73,7 @@ const Header = () => {
 								</MenuList>
 							);
 						})}
+					{isLoggedIn === true && <MenuList><LogoutBtn text="logout" onClick={clientLogout} /></MenuList>}
 				</MenuWrapper>
 				<MenuBtn iconName={IconName.MENU} onClick={openMenu} />
 			</ContainerCustom>

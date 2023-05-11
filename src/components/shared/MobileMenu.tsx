@@ -7,7 +7,7 @@ import useLogin from "@/provider/AppProvider/useLogin";
 import { DATA_MENU_ADMIN, DATA_MENU_USER } from "@/data/menu";
 import useMenu from "@/provider/AppProvider/useMenu";
 
-interface MenuProps {}
+interface MenuProps { }
 
 const MenuWrapper = styled.div<{ active: boolean }>`
 	height: ${(props) => props.theme.size.full_height};
@@ -63,13 +63,26 @@ const LinkList = styled.li`
 	border-radius: 4px;
 `;
 
+
+
 const LinkCustom = styled(Link)`
 	${(props) => props.theme.style.hoverStyle};
 `;
 
+const LogoutList = styled(LinkList)`
+	border-top: 1px solid ${props => props.theme.color.div};
+`;
+
+
+const LogoutBtn = styled(Button)`
+	padding: 0;
+	font-size: inherit;
+	border-radius: 0;
+`;
+
 const MobileMenu: React.FC<MenuProps> = () => {
 	const { isActive, closeMenu } = useMenu();
-	const { isLoggedIn } = useLogin();
+	const { isLoggedIn, clientLogout } = useLogin();
 	return (
 		<MenuWrapper active={isActive}>
 			<Top>
@@ -85,8 +98,11 @@ const MobileMenu: React.FC<MenuProps> = () => {
 								</LinkList>
 							);
 						})}
+					{isLoggedIn === true &&
+						<LogoutList>
+							<LogoutBtn text="logout" onClick={clientLogout} />
+						</LogoutList>}
 				</LinkWrapper>
-				{/* {isLogin === true ? <Button text="logout" onClick={fbSignout} /> : <Button text="signin" onClick={() => push(ROUTER.signin)} />} */}
 			</Nav>
 		</MenuWrapper>
 	);
