@@ -5,7 +5,7 @@ import Image from "next/image";
 import { IconName } from "@/types/icon";
 import { UseInputImageResultType } from "@/types/input/image";
 
-interface InputImageProps extends UseInputImageResultType {}
+interface InputImageProps extends UseInputImageResultType { }
 
 const Wrapper = styled.div`
 	display: flex;
@@ -48,12 +48,12 @@ const ImageCustom = styled(Image)`
 	object-fit: cover;
 `;
 
-const InputImage: React.FC<InputImageProps> = ({ layout, fileRef, onUpload, onChange, value, onDelete }) => {
+const InputImage: React.FC<InputImageProps> = ({ layout, option, fileRef, onUpload, onChange, value, onDelete }) => {
 	return (
 		<InputLayout {...layout} labelDisable={true}>
 			<Wrapper>
 				<ImageWrapper>
-					<InputFile type="file" accept="image/png, image/gif, image/jpeg" ref={fileRef} onChange={onChange} multiple={true} />
+					<InputFile type="file" accept="image/png, image/gif, image/jpeg" ref={fileRef} onChange={onChange} {...option} />
 					<ButtonUpload text="upload" btnType={BtnTypeEnum.LINE} iconName={IconName.ADD} onClick={onUpload} />
 					{value?.map((el, index) => {
 						return (

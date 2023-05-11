@@ -14,10 +14,6 @@ export const DATA_MENU_USER: MenuType[] = [
 
 export const DATA_MENU_ADMIN: MenuType[] = [
 	{
-		text: "user",
-		href: ROUTER.ADMIN_USER,
-	},
-	{
 		text: "article",
 		href: ROUTER.ADMIN_ARTICLE,
 	},

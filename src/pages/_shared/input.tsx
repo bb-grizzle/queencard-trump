@@ -4,7 +4,6 @@ import InputDefault from "@/components/shared/Input";
 import InputDuration from "@/components/shared/Input/InputDuration";
 import InputEditor from "@/components/shared/Input/InputEditor";
 import InputImage from "@/components/shared/Input/InputImage";
-import TextKeyPair from "@/components/shared/TextKeyPair";
 import useForm from "@/hook/input/useForm";
 import useInputDefault from "@/hook/input/useInputDefault";
 import useInputDuration from "@/hook/input/useInputDuration";
@@ -34,7 +33,7 @@ const IntroInput = () => {
 		},
 	});
 	const inputImageHook = useInputImage({
-		layout: { label: "input default" },
+		layout: { label: "input image" },
 		option: {
 			name: "image",
 			placeholder: "input default",
@@ -65,7 +64,7 @@ const IntroInput = () => {
 		option: { name: "editor" },
 		layout: { label: "input editor" },
 	});
-	const { validation, form, checkForm, getForm } = useForm({ hooks: [inputHook, inputImageHook, inputDurationHook, inputEditorHook] });
+	const { validation, form, checkForm } = useForm({ hooks: [inputHook, inputImageHook, inputDurationHook, inputEditorHook] });
 
 	// STATE
 	useEffect(() => {
@@ -83,8 +82,8 @@ const IntroInput = () => {
 			<IntroSectionLayout title="default">
 				<InputDefault {...inputHook} />
 			</IntroSectionLayout>
-			{/* image */}
-			<IntroSectionLayout title="image">
+			{/* images */}
+			<IntroSectionLayout title="images">
 				<InputImage {...inputImageHook} />
 			</IntroSectionLayout>
 			{/* duration */}
@@ -98,7 +97,6 @@ const IntroInput = () => {
 			</IntroSectionLayout>
 			{/* form */}
 			<IntroSectionLayout title="form">
-				<Button text="get form" onClick={getForm} btnType={BtnTypeEnum.SOLID} />
 				<Button text="check form" onClick={checkForm} btnType={BtnTypeEnum.SOLID} />
 			</IntroSectionLayout>
 		</IntroLayout>

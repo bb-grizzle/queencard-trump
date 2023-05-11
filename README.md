@@ -27,7 +27,6 @@ next js with type script
   - [x] remove
 - [ ] ADD | admin page - signin
 - [ ] ADD | pagenation
-- [ ] ADD | input single image
 
 ## 2022.03.15
 

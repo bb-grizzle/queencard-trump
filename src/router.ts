@@ -6,7 +6,6 @@ const ROUTER_USER = {
 
 const ROUTER_ADMIN = {
 	ADMIN: "/_admin",
-	ADMIN_USER: `/_admin${ROUTER_USER.USER}`,
 	ADMIN_ARTICLE: `/_admin${ROUTER_USER.ARTICLE}`,
 };
 

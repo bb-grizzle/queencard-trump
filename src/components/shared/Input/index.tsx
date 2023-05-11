@@ -1,8 +1,8 @@
-import { UseInputDefaultResultType } from "@/hook/input/useInputDefault";
 import InputLayout from "@/layout/InputLayout";
 import styled from "styled-components";
 import InputItemWrapper from "./InputItemWrapper";
 import Button from "../Button";
+import { UseInputDefaultResultType } from "@/types/input/default";
 
 interface InputDefaultProps extends UseInputDefaultResultType {}
 
