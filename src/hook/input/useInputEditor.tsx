@@ -1,19 +1,23 @@
 import useInputLayout from "./useInputLayout";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { UseInputEditorType } from "@/types/input/editor";
 import { DATA_ERROR } from "@/data/error";
+import Editor, { API, OutputData } from '@editorjs/editorjs';
 
 const useInputEditor: UseInputEditorType = ({ layout, ...rest }) => {
+	const editorRef = useRef<Editor>()
 	const layoutHook = useInputLayout(layout);
-	const [value, setValue] = useState("");
+	const [value, setValue] = useState<OutputData | null>(null);
 	const [isError, setIsError] = useState(false);
 
-	const onChange = (value: string) => {
+	// STATE
+	const onChange = async (api: API, event: CustomEvent<any>) => {
+		const value = await api.saver.save()
 		setValue(value);
 	};
 
 	const clearValue = () => {
-		setValue("");
+		setValue(null);
 		setIsError(false);
 		layoutHook.changeErrorMessage(null);
 	};
@@ -32,10 +36,12 @@ const useInputEditor: UseInputEditorType = ({ layout, ...rest }) => {
 	};
 
 	const changeValue = (value: string) => {
-		setValue(value);
+		if (editorRef.current) {
+			editorRef.current?.render(JSON.parse(value))
+		}
 	};
 
-	return { layout: layoutHook, value, onChange, clearValue, checkValidation, isError, changeValue, ...rest };
+	return { layout: layoutHook, value, onChange, clearValue, checkValidation, isError, changeValue, editorRef, ...rest };
 };
 
 export default useInputEditor;

@@ -11,6 +11,8 @@
 	},
 	"dependencies": {
 		"@apollo/client": "^3.7.14",
+		"@editorjs/editorjs": "^2.26.5",
+		"@editorjs/header": "^2.7.0",
 		"@types/node": "18.16.3",
 		"@types/react": "18.2.0",
 		"@types/react-dom": "18.2.1",
@@ -21,7 +23,6 @@
 		"next": "13.3.4",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
-		"react-quill": "^2.0.0",
 		"styled-components": "^5.3.10",
 		"styled-reset": "^4.4.6",
 		"typescript": "5.0.4"
@@ -32,6 +33,7 @@
 		"@graphql-codegen/typescript": "3.0.3",
 		"@graphql-codegen/typescript-resolvers": "3.2.0",
 		"@svgr/webpack": "^7.0.0",
+		"@types/editorjs__header": "^2.6.0",
 		"@types/styled-components": "^5.1.26",
 		"moment": "^2.29.4"
 	}
