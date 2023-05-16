@@ -7,7 +7,7 @@ interface EditorViewProps {
 }
 
 const Wrapper = styled.div`
-	
+	${props => props.theme.style.editor};
 `;
 
 const EditorView: React.FC<EditorViewProps> = ({ data }) => {

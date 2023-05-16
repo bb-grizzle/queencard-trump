@@ -30,6 +30,8 @@ const Wrapper = styled.div`
     }
   }
 
+  ${props => props.theme.style.editor};
+
 `;
 
 const Editorjs: React.FC<EditorjsProps> = ({ editorRef, option, onChange }) => {
