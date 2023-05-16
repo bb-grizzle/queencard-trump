@@ -1,5 +1,4 @@
 import Button, { BtnTypeEnum } from "@/components/shared/Button";
-import EditorView from "@/components/shared/EditorView";
 import InputDefault from "@/components/shared/Input";
 import InputDuration from "@/components/shared/Input/InputDuration";
 import InputEditor from "@/components/shared/Input/InputEditor";
@@ -15,6 +14,7 @@ import { IconName } from "@/types/icon";
 import { SizeUnit } from "@/types/input/image";
 import { FormatType } from "@/util/formating";
 import { useEffect } from "react";
+import EditorViewRender from "@/components/editorjs/EditorViewRender";
 
 const IntroInput = () => {
 	// FIELD
@@ -93,7 +93,7 @@ const IntroInput = () => {
 			{/* editor */}
 			<IntroSectionLayout title="editor">
 				<InputEditor {...inputEditorHook} />
-				<EditorView value={inputEditorHook.value} />
+				<EditorViewRender data={inputEditorHook.value} />
 			</IntroSectionLayout>
 			{/* form */}
 			<IntroSectionLayout title="form">

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Editor, { LogLevels } from '@editorjs/editorjs';
 import { UseInputEditorResultType } from '@/types/input/editor';
 import media from '@/styles/media';
+import { EDITOR_JS_TOOLS } from '@/lib/editorjs/tools';
 
 interface EditorjsProps extends Omit<UseInputEditorResultType, "layout"> {
 
@@ -43,6 +44,7 @@ const Editorjs: React.FC<EditorjsProps> = ({ editorRef, option, onChange }) => {
       logLevel: "ERROR" as LogLevels,
       sanitizer: { p: true },
       minHeight: 0,
+      tools: EDITOR_JS_TOOLS,
       onChange,
       ...option
     });
