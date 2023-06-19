@@ -28,4 +28,9 @@ export const size = {
 	btn: {
 		icon: 32,
 	},
+
+	camera_btn: {
+		size: 80,
+		padding: 40,
+	},
 };

@@ -13,7 +13,7 @@ const Logo = () => {
 	const { isLoggedIn } = useLogin()
 	return (
 		<Text>
-			<Link href={isLoggedIn ? ROUTER.ADMIN : ROUTER.HOME}>logo</Link>
+			<Link href={ROUTER.HOME}>logo</Link>
 		</Text>
 	);
 };

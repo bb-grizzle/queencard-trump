@@ -8,29 +8,20 @@ import LoadingLayout, { LoadingLayoutProps } from "./LoadingLayout";
 interface PageLayoutProps extends LoadingLayoutProps {
 	children: ReactNode;
 	title: string;
-	includeHeader?: boolean;
 }
 
-const Main = styled.main<{ includeHeader: boolean }>`
-	padding: ${(props) => props.theme.size.header.pc + props.theme.size.page.padding.pc}px 0;
-	${(props) =>
-		props.includeHeader &&
-		css`
-			padding-top: 0;
-		`};
-
-	@media ${media.tablet} {
-		padding: ${(props) => props.theme.size.header.tablet + props.theme.size.page.padding.tablet}px 0;
-	}
+const Main = styled.main`
+	height: ${props => props.theme.size.full_height};
+	overflow: hidden;
 `;
 
-const PageLayout: React.FC<PageLayoutProps> = ({ children, title, includeHeader = false, loading = false, error = false, errorMessage }) => {
+const PageLayout: React.FC<PageLayoutProps> = ({ children, title, loading = false, error = false, errorMessage }) => {
 	return (
 		<>
 			<Head>
 				<title>{`${DATA_META.site_name} | ${title}`}</title>
 			</Head>
-			<Main includeHeader={includeHeader}>
+			<Main>
 				<LoadingLayout loading={loading} error={error} errorMessage={errorMessage}>
 					{children}
 				</LoadingLayout>

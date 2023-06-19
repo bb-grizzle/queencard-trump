@@ -16,7 +16,6 @@ const HeaderComp = styled.header`
 	width: 100%;
 	height: ${(props) => props.theme.size.header.pc}px;
 	z-index: ${(props) => props.theme.zIndex.header};
-	border-bottom: 1px solid ${(props) => props.theme.colorPalette.bw[200]};
 	@media ${media.tablet} {
 		height: ${(props) => props.theme.size.header.tablet}px;
 	}
@@ -65,8 +64,9 @@ const Header = () => {
 			<ContainerCustom>
 				<Logo />
 				<MenuWrapper>
-					{isLoggedIn !== null && pathname !== ROUTER.ADMIN &&
+					{isLoggedIn !== null && pathname &&
 						(isLoggedIn ? DATA_MENU_ADMIN : DATA_MENU_USER).map((el) => {
+							console.log(el)
 							return (
 								<MenuList key={el.href}>
 									<Link href={el.href}>{el.text}</Link>

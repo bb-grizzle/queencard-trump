@@ -4,6 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
+		"dev:https": "node server.js",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
@@ -14,6 +15,9 @@
 		"@editorjs/editorjs": "^2.26.5",
 		"@editorjs/header": "^2.7.0",
 		"@editorjs/paragraph": "^2.9.0",
+		"@tensorflow-models/body-pix": "^2.2.0",
+		"@tensorflow/tfjs": "^4.7.0",
+		"@tensorflow/tfjs-core": "^4.7.0",
 		"@types/node": "18.16.3",
 		"@types/react": "18.2.0",
 		"@types/react-dom": "18.2.1",
@@ -24,6 +28,7 @@
 		"next": "13.3.4",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
+		"react-webcam": "^7.1.1",
 		"styled-components": "^5.3.10",
 		"styled-reset": "^4.4.6",
 		"typescript": "5.0.4"

@@ -1,20 +1,6 @@
 import { ROUTER } from "@/router";
 import { MenuType } from "@/types/menu";
 
-export const DATA_MENU_USER: MenuType[] = [
-	{
-		text: "user",
-		href: ROUTER.USER,
-	},
-	{
-		text: "article",
-		href: ROUTER.ARTICLE,
-	},
-];
+export const DATA_MENU_USER: MenuType[] = [];
 
-export const DATA_MENU_ADMIN: MenuType[] = [
-	{
-		text: "article",
-		href: ROUTER.ADMIN_ARTICLE,
-	},
-];
+export const DATA_MENU_ADMIN: MenuType[] = [];

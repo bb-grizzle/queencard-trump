@@ -1,12 +1,6 @@
 const ROUTER_USER = {
 	HOME: "/",
-	USER: "/user",
-	ARTICLE: "/article",
-};
-
-const ROUTER_ADMIN = {
-	ADMIN: "/_admin",
-	ADMIN_ARTICLE: `/_admin${ROUTER_USER.ARTICLE}`,
+	RESULT: "/result",
 };
 
 const ROUTER_SHARED = {
@@ -19,9 +13,6 @@ const ROUTER_SHARED = {
 
 export const ROUTER = {
 	...ROUTER_USER,
-
-	// ADMIN
-	...ROUTER_ADMIN,
 
 	// SHARED
 	...ROUTER_SHARED,

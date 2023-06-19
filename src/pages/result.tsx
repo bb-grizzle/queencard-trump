@@ -1,7 +1,7 @@
 import PageLayout from "@/layout/PageLayout";
 
 const Page = () => {
-	return <PageLayout title="test 2">test 2</PageLayout>;
+	return <PageLayout title="result">result</PageLayout>;
 };
 
 export default Page;
