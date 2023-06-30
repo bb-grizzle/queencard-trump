@@ -3,6 +3,8 @@ import useHomeStep from '@/provider/HomeProvider/useHomeStep';
 import { HTMLAttributes, useCallback } from 'react';
 import styled from 'styled-components';
 import FadeLoader from 'react-spinners/FadeLoader'
+import { GrPowerReset, GrDownload } from 'react-icons/gr';
+import useHomeDownload from '@/provider/HomeProvider/useHomeDownload';
 
 interface HomeCameraBtnProps extends HTMLAttributes<HTMLButtonElement> {
 
@@ -13,7 +15,7 @@ const Wrapper = styled.div`
   height: 80px;
 `;
 
-const CameraBtnWrapper = styled.button`
+const Btn = styled.button`
   ${props => props.theme.layout.center_abs};
   width: 100%;
   height: 100%;
@@ -48,50 +50,54 @@ const BtnLoading = styled.div`
   left: 4px;
 `;
 
-const ResetText = styled.p`
+const DoneBtnWrapper = styled.div`
   width: 100%;
-  height: 100%;
-  text-align: center;
-  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+`;
+
+const DoneBtn = styled.button`
+  border: none;
+  width: 80px;
+  height: 80px;
+  background-color: transparent;
+  border: 1px solid black;
   border-radius: 100%;
-  ${props => props.theme.layout.center_flex};
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 900;
-  font-family: ${props => props.theme.fontFamily.oranienbaum};
+  ${props => props.theme.style.hoverStyle};
 `;
 
 const HomeBtn: React.FC<HomeCameraBtnProps> = (props) => {
   const { currentStep } = useHomeStep();
+  const { onDownloadClick } = useHomeDownload()
 
   const renderBtn = useCallback(() => {
     switch (currentStep) {
       case StepEnum.READY: {
-        return <CameraBtnWrapper  {...props} type="button" >
+        return <Wrapper><Btn  {...props} type="button" >
           <CameraButton />
           <Line />
-        </CameraBtnWrapper>
+        </Btn>
+        </Wrapper>
       }
       case StepEnum.LOADING: {
-        return <BtnLoading>
+        return <Wrapper><BtnLoading>
           <FadeLoader />
-        </BtnLoading>
+        </BtnLoading></Wrapper>
       }
       case StepEnum.DONE: {
-        return <CameraBtnWrapper  {...props} type="button">
-          <ResetText>
-            Reset!
-          </ResetText>
-        </CameraBtnWrapper>
+        return <DoneBtnWrapper>
+          <DoneBtn {...props}><GrPowerReset /></DoneBtn>
+          <DoneBtn onClick={onDownloadClick}><GrDownload /></DoneBtn>
+        </DoneBtnWrapper>
       }
       default: return null
     }
-  }, [currentStep, props])
+  }, [currentStep, props, onDownloadClick])
 
   return (
-    <Wrapper>
-      {renderBtn()}
-    </Wrapper>
+    renderBtn()
   );
 }
 

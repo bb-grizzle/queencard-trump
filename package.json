@@ -20,6 +20,7 @@
 		"@types/node": "18.16.3",
 		"@types/react": "18.2.0",
 		"@types/react-dom": "18.2.1",
+		"dom-to-image": "^2.6.0",
 		"eslint": "8.39.0",
 		"eslint-config-next": "13.3.4",
 		"filesize": "^10.0.7",
@@ -27,6 +28,7 @@
 		"next": "13.3.4",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
+		"react-icons": "^4.10.1",
 		"react-spinners": "^0.13.8",
 		"react-webcam": "^7.1.1",
 		"styled-components": "^5.3.10",
@@ -39,6 +41,7 @@
 		"@graphql-codegen/typescript": "3.0.3",
 		"@graphql-codegen/typescript-resolvers": "3.2.0",
 		"@svgr/webpack": "^7.0.0",
+		"@types/dom-to-image": "^2.6.4",
 		"@types/editorjs__header": "^2.6.0",
 		"@types/styled-components": "^5.1.26",
 		"moment": "^2.29.4"

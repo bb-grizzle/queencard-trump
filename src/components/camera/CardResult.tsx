@@ -6,6 +6,7 @@ import CardTop from '../card/CardTop';
 import Loading from '../shared/Loading';
 import useHomeStep from '@/provider/HomeProvider/useHomeStep';
 import { StepEnum } from '@/provider/HomeProvider';
+import useHomeDownload from '@/provider/HomeProvider/useHomeDownload';
 
 const CLIP_GAP = 8;
 const STROKE_WIDTH_BLACK = 0.4;
@@ -17,9 +18,8 @@ interface CardResutlProps {
 const Wrapper = styled.div`
   position: relative;
   height: 100%;
+  background-color: ${props => props.theme.color.white};
 `;
-
-
 
 const CardBottom = styled(CardTop)`
   transform: rotate(180deg);
@@ -48,6 +48,7 @@ const Canvas = styled.canvas`
 
 
 const CardResult: React.FC<CardResutlProps> = ({ src }) => {
+  const { cardRef } = useHomeDownload()
   const CanvasRef = useRef<HTMLCanvasElement>(null)
   const [filteredSrc, setFilteredSrc] = useState<string>("")
   const [symbolIndex] = useState(Math.floor(Math.random() * 4))
@@ -132,7 +133,7 @@ const CardResult: React.FC<CardResutlProps> = ({ src }) => {
   }, [filteredSrc])
 
   return (
-    <Wrapper>
+    <Wrapper ref={cardRef}>
       <Canvas ref={CanvasRef} />
       {filteredSrc ? <>
         <CardTop src={src} filteredSrc={filteredSrc} symbolIndex={symbolIndex} />

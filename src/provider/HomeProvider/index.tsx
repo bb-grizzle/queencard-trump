@@ -1,11 +1,12 @@
-import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
+import { createContext, Dispatch, ReactNode, RefObject, SetStateAction, useRef, useState } from "react";
 
 interface HomeProviderProps {
 	children: ReactNode;
 }
 
 export type HomeContextProps = {
-	currentStepState: [StepEnum, Dispatch<SetStateAction<StepEnum>>]
+	currentStepState: [StepEnum, Dispatch<SetStateAction<StepEnum>>],
+	cardRef: RefObject<HTMLDivElement>
 };
 
 export enum StepEnum {
@@ -18,9 +19,11 @@ export const HomeContext = createContext({} as HomeContextProps);
 
 const HomeProvider: React.FC<HomeProviderProps> = ({ children }) => {
 	const currentStepState = useState<StepEnum>(StepEnum.READY)
+	const cardRef = useRef<HTMLDivElement>(null)
 
 	const value: HomeContextProps = {
-		currentStepState
+		currentStepState,
+		cardRef
 	};
 
 	return <HomeContext.Provider value={value}>{children}</HomeContext.Provider>;

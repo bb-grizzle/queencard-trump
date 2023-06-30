@@ -1,7 +1,5 @@
-import { useState } from "react";
 import SvgComp from "../shared/SvgComp";
 import styled from 'styled-components';
-import { color } from "@/styles/theme/color";
 import { colorPalette } from "@/styles/theme/colorPalette";
 
 interface CardSymbolProps {
@@ -38,19 +36,6 @@ const Text = styled.p`
   font-family: ${props => props.theme.fontFamily.oranienbaum};
 `;
 
-const SmallSymbol = styled.div`
-  position: absolute;
-  left: ${props => props.theme.size.card.offset.pc / 2 + 6}px; 
-  top: ${props => props.theme.size.card.offset.pc / 2 + 6}px;  
-  width: ${props => props.theme.size.card.offset.pc / 2}px;
-  height: ${props => props.theme.size.card.offset.pc / 2}px;
-
-  svg{
-    width: 100%;
-    height: 100%;
-  }
-`;
-
 const CardSymbole: React.FC<CardSymbolProps> = ({ symbol }) => {
   const getColor = () => {
     if (symbol === SymbolEnum.DIAMONDS || symbol === SymbolEnum.HEARTS) {
@@ -66,10 +51,6 @@ const CardSymbole: React.FC<CardSymbolProps> = ({ symbol }) => {
         <Text>Q</Text>
         <SvgComp path="trump" name={symbol} />
       </SymboleWrapper>
-
-      <SmallSymbol>
-        <SvgComp path="trump" name={symbol} />
-      </SmallSymbol>
     </Wrapper>
   );
 }

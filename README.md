@@ -6,5 +6,5 @@
 - [x] result
 - [x] loading
 - [x] reset
-- [ ] download
+- [x] download
 - [ ] animation
