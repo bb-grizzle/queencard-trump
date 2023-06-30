@@ -33,4 +33,10 @@ export const size = {
 		size: 80,
 		padding: 40,
 	},
+
+	card: {
+		offset: {
+			pc: 120,
+		},
+	},
 };

@@ -1,12 +1,11 @@
 import * as bodyPix from '@tensorflow-models/body-pix';
 import * as tfjs from '@tensorflow/tfjs';
-import NextImage from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import CardLine from '../card/CardLine';
-import CardSymbole from '../card/CardSymbole';
+import CardTop from '../card/CardTop';
+
 const CLIP_GAP = 8;
-const STROKE_WIDTH_BLACK = 0;
+const STROKE_WIDTH_BLACK = 0.4;
 
 interface CardResutlProps {
   src: string;
@@ -15,14 +14,11 @@ interface CardResutlProps {
 const Wrapper = styled.div`
   position: relative;
   height: 100%;
-  filter: grayscale();
 `;
 
-const ImageClip = styled(NextImage)`
-  clip-path: ${`polygon(0 0, 100% 0%, 100% ${50 - CLIP_GAP}%, 0 ${50 + CLIP_GAP}%);`}; 
-`;
 
-const ImageBottom = styled(ImageClip)`
+
+const CardBottom = styled(CardTop)`
   transform: rotate(180deg);
 `;
 
@@ -33,7 +29,10 @@ const ImageMiddleLine = styled.div`
   height: 100%;
   transform: translateX(-50%) translateY(-50%);
   background-color: ${props => props.theme.color.black};
-  clip-path: ${`polygon(0 ${50 + CLIP_GAP - STROKE_WIDTH_BLACK}%, 100% ${50 - CLIP_GAP - STROKE_WIDTH_BLACK}%, 100% ${50 - CLIP_GAP + STROKE_WIDTH_BLACK}%, 0 ${50 + CLIP_GAP + STROKE_WIDTH_BLACK}%);`}; 
+  clip-path: ${`polygon(0 ${50 + CLIP_GAP - STROKE_WIDTH_BLACK}%, 
+    100% ${50 - CLIP_GAP - STROKE_WIDTH_BLACK}%, 
+    100% ${50 - CLIP_GAP + STROKE_WIDTH_BLACK}%, 
+    0 ${50 + CLIP_GAP + STROKE_WIDTH_BLACK}%);`}; 
 `;
 
 const Canvas = styled.canvas`
@@ -48,6 +47,7 @@ const Canvas = styled.canvas`
 const CardResult: React.FC<CardResutlProps> = ({ src }) => {
   const CanvasRef = useRef<HTMLCanvasElement>(null)
   const [filteredSrc, setFilteredSrc] = useState<string>("")
+  const [symbolIndex] = useState(Math.floor(Math.random() * 4))
 
   useEffect(() => {
     const init = async () => {
@@ -62,7 +62,9 @@ const CardResult: React.FC<CardResutlProps> = ({ src }) => {
       // 02. set image
       const image = new Image();
       image.src = src;
+      image.addEventListener("load", () => {
 
+      })
 
       // 03. load bodypix
       await tfjs.getBackend()
@@ -86,7 +88,7 @@ const CardResult: React.FC<CardResutlProps> = ({ src }) => {
 
       const foreground = { r: 0, g: 0, b: 0, a: 0 }
       const background = { r: 255, g: 0, b: 0, a: 255 }
-      const blur = 0;
+      const blur = 0.1;
       const backgroundDarkeningMask = bodyPix.toMask(personSegmentation, foreground, background);
       bodyPix.drawMask(CanvasRef.current, image, backgroundDarkeningMask, 1, blur)
 
@@ -120,11 +122,9 @@ const CardResult: React.FC<CardResutlProps> = ({ src }) => {
     <Wrapper>
       <Canvas ref={CanvasRef} />
       {filteredSrc && <>
-        <CardLine />
-        <ImageClip src={filteredSrc} fill={true} alt='card' />
-        <ImageBottom src={filteredSrc} fill={true} alt='card' />
+        <CardTop src={src} filteredSrc={filteredSrc} symbolIndex={symbolIndex} />
+        <CardBottom src={src} filteredSrc={filteredSrc} symbolIndex={symbolIndex} />
         <ImageMiddleLine />
-        <CardSymbole />
       </>}
     </Wrapper>
   );

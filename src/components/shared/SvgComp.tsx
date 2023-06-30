@@ -5,7 +5,7 @@ import IconError from "../../assets/icon/error.svg";
 import theme from "@/styles/theme";
 
 export interface SvgCompProps {
-	path: "icon" | "shared";
+	path: "icon" | "shared" | "trump";
 	name: string;
 	svgProps?: React.SVGProps<SVGSVGElement>;
 }

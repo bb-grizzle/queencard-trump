@@ -1,5 +1,4 @@
-import useSize from "@/hook/useSize";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import styled from 'styled-components';
 import HomeCameraBtn from "./HomeCameraBtn";
@@ -9,7 +8,6 @@ import media from "@/styles/media";
 const CAMERA_WIDTH = 320;
 const CAMERA_WIDTH_MB = 240;
 const CAMERA_RATIO_PORTRAIT = 9 / 16;
-const CAMERA_RATIO_LANDSCAPE = 16 / 9;
 
 const Wrapper = styled.div`
   position: relative;
