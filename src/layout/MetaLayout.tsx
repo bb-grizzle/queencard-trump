@@ -26,7 +26,7 @@ const MetaLayout: React.FC<MetaLayoutProps> = ({ children }) => {
 				<meta property="og:title" content={DATA_META.title} />
 				<meta property="og:image" content={`${DATA_META.url}og-image.png`} />
 				<meta property="og:image:width" content="1200" />
-				<meta property="og:image:height" content="630" />
+				<meta property="og:image:height" content="640" />
 				<meta property="og:description" content={DATA_META.description} />
 				<meta property="og:site_name" content={DATA_META.site_name} />
 

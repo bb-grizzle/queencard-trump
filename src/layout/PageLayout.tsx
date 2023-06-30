@@ -19,7 +19,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children, title, loading = fals
 	return (
 		<>
 			<Head>
-				<title>{`${DATA_META.site_name} | ${title}`}</title>
+				<title>{`${DATA_META.site_name}`}</title>
 			</Head>
 			<Main>
 				<LoadingLayout loading={loading} error={error} errorMessage={errorMessage}>
