@@ -29,7 +29,7 @@ const TitleCustom = styled(Title)`
 const IntroLayout: React.FC<IntroLayoutProps> = ({ children, title, backBtn = true }) => {
 	const { back } = useRouter();
 	return (
-		<PageLayout title={title} includeHeader={false}>
+		<PageLayout title={title} >
 			<Wrapper>
 				{backBtn && <BackBtn text="back" iconName={IconName.ARROW_LEFT} onClick={back} />}
 				<TitleCustom text={title} />

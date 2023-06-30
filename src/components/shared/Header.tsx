@@ -75,7 +75,7 @@ const Header = () => {
 						})}
 					{isLoggedIn === true && <MenuList><LogoutBtn text="logout" onClick={clientLogout} /></MenuList>}
 				</MenuWrapper>
-				<MenuBtn iconName={IconName.MENU} onClick={openMenu} />
+				{/* <MenuBtn iconName={IconName.MENU} onClick={openMenu} /> */}
 			</ContainerCustom>
 		</HeaderComp>
 	);
