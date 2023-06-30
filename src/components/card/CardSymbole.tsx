@@ -1,5 +1,8 @@
+import { useState } from "react";
 import SvgComp from "../shared/SvgComp";
 import styled from 'styled-components';
+import { color } from "@/styles/theme/color";
+import { colorPalette } from "@/styles/theme/colorPalette";
 
 interface CardSymbolProps {
   symbol: SymbolEnum
@@ -12,8 +15,8 @@ export enum SymbolEnum {
   SPADES = "spades"
 }
 
-const Wrapper = styled.div`
-  color: red;
+const Wrapper = styled.div<{ textColor: string }>`
+  color: ${props => props.textColor};
 `;
 
 const SymboleWrapper = styled.div`
@@ -49,8 +52,16 @@ const SmallSymbol = styled.div`
 `;
 
 const CardSymbole: React.FC<CardSymbolProps> = ({ symbol }) => {
+  const getColor = () => {
+    if (symbol === SymbolEnum.DIAMONDS || symbol === SymbolEnum.HEARTS) {
+      return colorPalette.sub.warn
+    } else {
+      return colorPalette.bw[900]
+    }
+  }
+
   return (
-    <Wrapper>
+    <Wrapper textColor={getColor()}>
       <SymboleWrapper>
         <Text>Q</Text>
         <SvgComp path="trump" name={symbol} />

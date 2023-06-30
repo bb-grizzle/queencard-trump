@@ -2,5 +2,9 @@
 
 ## page
 
-- [ ] camera
-- [ ] result
+- [x] camera
+- [x] result
+- [x] loading
+- [ ] reset
+- [ ] download
+- [ ] animation

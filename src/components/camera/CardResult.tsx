@@ -3,6 +3,7 @@ import * as tfjs from '@tensorflow/tfjs';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import CardTop from '../card/CardTop';
+import Loading from '../shared/Loading';
 
 const CLIP_GAP = 8;
 const STROKE_WIDTH_BLACK = 0.4;
@@ -121,11 +122,11 @@ const CardResult: React.FC<CardResutlProps> = ({ src }) => {
   return (
     <Wrapper>
       <Canvas ref={CanvasRef} />
-      {filteredSrc && <>
+      {filteredSrc ? <>
         <CardTop src={src} filteredSrc={filteredSrc} symbolIndex={symbolIndex} />
         <CardBottom src={src} filteredSrc={filteredSrc} symbolIndex={symbolIndex} />
         <ImageMiddleLine />
-      </>}
+      </> : <Loading />}
     </Wrapper>
   );
 }
