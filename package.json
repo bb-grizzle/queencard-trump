@@ -8,7 +8,8 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"codegen": "graphql-codegen --config src/codegen.ts"
+		"codegen": "graphql-codegen --config src/codegen.ts",
+		"deploy": "git push deploy master"
 	},
 	"dependencies": {
 		"@apollo/client": "^3.7.14",
