@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import CardTop from '../card/CardTop';
 import Loading from '../shared/Loading';
+import useHomeStep from '@/provider/HomeProvider/useHomeStep';
+import { StepEnum } from '@/provider/HomeProvider';
 
 const CLIP_GAP = 8;
 const STROKE_WIDTH_BLACK = 0.4;
@@ -49,6 +51,7 @@ const CardResult: React.FC<CardResutlProps> = ({ src }) => {
   const CanvasRef = useRef<HTMLCanvasElement>(null)
   const [filteredSrc, setFilteredSrc] = useState<string>("")
   const [symbolIndex] = useState(Math.floor(Math.random() * 4))
+  const { changeStep } = useHomeStep()
 
   useEffect(() => {
     const init = async () => {
@@ -102,7 +105,6 @@ const CardResult: React.FC<CardResutlProps> = ({ src }) => {
         // If its white then change it
         if (r == 255 && g == 0 && b == 0 && a === 255) {
           // Change the white to whatever.
-          console.log("change color")
           pix[i] = 0;
           pix[i + 1] = 0;
           pix[i + 2] = 0;
@@ -116,8 +118,18 @@ const CardResult: React.FC<CardResutlProps> = ({ src }) => {
       setFilteredSrc(newSrc)
     }
 
-    init();
+    if (src) {
+      init();
+    } else {
+      setFilteredSrc("")
+    }
   }, [src])
+
+  useEffect(() => {
+    if (filteredSrc) {
+      changeStep(StepEnum.DONE)
+    }
+  }, [filteredSrc])
 
   return (
     <Wrapper>

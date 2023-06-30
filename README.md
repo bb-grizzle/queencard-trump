@@ -5,6 +5,6 @@
 - [x] camera
 - [x] result
 - [x] loading
-- [ ] reset
+- [x] reset
 - [ ] download
 - [ ] animation
