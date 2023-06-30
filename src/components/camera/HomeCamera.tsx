@@ -28,6 +28,7 @@ const CardWrapper = styled.div`
   overflow: hidden;
   isolation: isolate;
   ${props => props.theme.shadow.popup};
+  background-color: ${props => props.theme.color.white};
 
   @media ${media.tablet} {
     width: ${CAMERA_WIDTH_MB}px;
