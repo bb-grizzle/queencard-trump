@@ -7,13 +7,15 @@ const Text = styled.span`
 	font-weight: 900;
 	font-size: 24px;
 	font-style: italic;
+	font-family: ${props => props.theme.fontFamily.oranienbaum};
+	text-decoration: underline;
 `;
 
 const Logo = () => {
-	const { isLoggedIn } = useLogin()
+	// const { isLoggedIn } = useLogin()
 	return (
 		<Text>
-			<Link href={ROUTER.HOME}>logo</Link>
+			<Link href={ROUTER.HOME}>👑 YOUR QUEEN</Link>
 		</Text>
 	);
 };
