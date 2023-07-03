@@ -8,6 +8,7 @@ const useInitAppContext = (ctx: AppContextProps) => {
 	// STATE
 	// : set full height
 	useEffect(() => {
+		setFullHeight();
 		window.addEventListener("resize", setFullHeight);
 		return () => {
 			window.removeEventListener("resize", setFullHeight);

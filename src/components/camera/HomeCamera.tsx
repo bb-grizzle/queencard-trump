@@ -10,7 +10,7 @@ import { FadeLoader } from "react-spinners";
 import { color } from "@/styles/theme/color";
 
 const CAMERA_WIDTH = 320;
-const CAMERA_WIDTH_MB = 240;
+const CAMERA_WIDTH_MB = 220;
 const CAMERA_RATIO_PORTRAIT = 9 / 16;
 
 const Wrapper = styled.div`
@@ -21,14 +21,19 @@ const Wrapper = styled.div`
   justify-content: center;
   gap: 32px;
   height: ${props => props.theme.size.full_height};
+  
+  @media ${media.tablet} {
+    gap: 16px;
+  }
 `;
 
-const CardWrapper = styled.div`
+const CardWrapper = styled.div`  
   width: ${CAMERA_WIDTH}px;
   aspect-ratio: ${CAMERA_RATIO_PORTRAIT};
   border-radius: 16px;
   overflow: hidden;
   isolation: isolate;
+  position: relative;
   ${props => props.theme.shadow.popup};
   background-color: ${props => props.theme.color.white};
 
@@ -41,6 +46,7 @@ const Video = styled(Webcam)`
   filter: grayscale();
   width: 100%;
   height: 100%;
+  object-fit: cover;
 `;
 
 const VideoLoading = styled.div<{ active: boolean }>`
@@ -53,10 +59,17 @@ const VideoLoading = styled.div<{ active: boolean }>`
 `;
 
 const HomeCamera = () => {
+  const ref = useRef<HTMLDivElement>(null)
   const webcamRef = useRef<any>(null);
   const [capture, setCapture] = useState("")
   const { changeStep, currentStep } = useHomeStep();
-  const [videoReady, setVideoReady] = useState(false)
+  const [videoReady, setVideoReady] = useState(false);
+
+  useEffect(() => {
+    if (!capture) {
+      // setVideoReady(false)
+    }
+  }, [capture])
 
   const onCapture = useCallback(
     () => {
@@ -73,15 +86,11 @@ const HomeCamera = () => {
     [webcamRef, currentStep]
   );
 
-  useEffect(() => {
-    if (!capture) {
-      setVideoReady(false)
-    }
-  }, [capture])
+
 
   return (
-    <Wrapper>
-      <CardWrapper>
+    <Wrapper >
+      <CardWrapper ref={ref}>
         {capture ?
           <CardResult
             src={capture}
@@ -94,8 +103,7 @@ const HomeCamera = () => {
             mirrored={true}
             videoConstraints={{
               facingMode: "user",
-              // aspectRatio: CAMERA_RATIO_LANDSCAPE
-              aspectRatio: CAMERA_RATIO_PORTRAIT
+              // aspectRatio: cameraRatio
             }}
             onLoadStart={() => {
               console.log("onLoadStart")

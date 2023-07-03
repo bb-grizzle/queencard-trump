@@ -72,6 +72,7 @@ const CardResult: React.FC<CardResutlProps> = ({ src }) => {
       })
 
       // 03. load bodypix
+      await tfjs.setBackend("cpu")
       await tfjs.getBackend()
       const net = await bodyPix.load(
         {
@@ -102,7 +103,6 @@ const CardResult: React.FC<CardResutlProps> = ({ src }) => {
 
       for (var i = 0, n = pix.length; i < n; i += 4) {
         const [r, g, b, a] = [pix[i], pix[i + 1], pix[i + 2], pix[i + 3]];
-
         // If its white then change it
         if (r == 255 && g == 0 && b == 0 && a === 255) {
           // Change the white to whatever.

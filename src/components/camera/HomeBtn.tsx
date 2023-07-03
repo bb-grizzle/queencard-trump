@@ -5,14 +5,27 @@ import styled from 'styled-components';
 import FadeLoader from 'react-spinners/FadeLoader'
 import { GrPowerReset, GrDownload } from 'react-icons/gr';
 import useHomeDownload from '@/provider/HomeProvider/useHomeDownload';
+import media from '@/styles/media';
 
 interface HomeCameraBtnProps extends HTMLAttributes<HTMLButtonElement> {
 
 }
 
 const Wrapper = styled.div`
+  @media ${media.tablet} {
+    position: absolute;
+    bottom: 32px;
+  }
+`;
+
+const BtnWrapper = styled.div`
   width: 80px;
   height: 80px;
+
+  @media ${media.tablet} {
+    width: 56px;
+    height: 56px;
+  }
 `;
 
 const Btn = styled.button`
@@ -56,6 +69,10 @@ const DoneBtnWrapper = styled.div`
   align-items: center;
   justify-content: center;
   gap: 32px;
+
+  @media ${media.tablet} {
+    gap: 8px;
+  }
 `;
 
 const DoneBtn = styled.button`
@@ -66,6 +83,11 @@ const DoneBtn = styled.button`
   border: 1px solid black;
   border-radius: 100%;
   ${props => props.theme.style.hoverStyle};
+
+  @media ${media.tablet} {
+    width: 56px;
+    height: 56px;
+  }
 `;
 
 const HomeBtn: React.FC<HomeCameraBtnProps> = (props) => {
@@ -75,16 +97,16 @@ const HomeBtn: React.FC<HomeCameraBtnProps> = (props) => {
   const renderBtn = useCallback(() => {
     switch (currentStep) {
       case StepEnum.READY: {
-        return <Wrapper><Btn  {...props} type="button" >
+        return <BtnWrapper><Btn  {...props} type="button" >
           <CameraButton />
           <Line />
         </Btn>
-        </Wrapper>
+        </BtnWrapper>
       }
       case StepEnum.LOADING: {
-        return <Wrapper><BtnLoading>
+        return <BtnWrapper><BtnLoading>
           <FadeLoader />
-        </BtnLoading></Wrapper>
+        </BtnLoading></BtnWrapper>
       }
       case StepEnum.DONE: {
         return <DoneBtnWrapper>
@@ -97,7 +119,9 @@ const HomeBtn: React.FC<HomeCameraBtnProps> = (props) => {
   }, [currentStep, props, onDownloadClick])
 
   return (
-    renderBtn()
+    <Wrapper>
+      {renderBtn()}
+    </Wrapper>
   );
 }
 
